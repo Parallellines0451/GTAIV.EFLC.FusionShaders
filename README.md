@@ -43,8 +43,8 @@ Various shader fixes for GTA IV 1.0.7.0, 1.0.8.0 and Complete Edition. The goal 
 [![2023-06-19-34.png](https://i.postimg.cc/P5SY1XwM/2023-06-19-34.png)](https://postimg.cc/jDJDbrvW)
 
 # Notes
-Most shaders are commented; feel free to include any of them in your projects or to improve upon them, which there will definitely be room for.
-Use the C++ version of [RAGE Shader Editor](https://gtaforums.com/topic/984675-rage-shader-editor/) to reassemble the shaders.
+Most shaders are commented; feel free to include any of them in your projects or to improve upon them, which there will definitely be room for. Use the C++ version of [RAGE Shader Editor](https://gtaforums.com/topic/984675-rage-shader-editor/) to reassemble the shaders.<br>
+
 Special thanks to my friends Vaani, AssaultKifle47 and RaphaelK12 for their support and contributions!
 
 # To-do:
