@@ -45,8 +45,9 @@ Various shader fixes for GTA IV 1.0.7.0, 1.0.8.0 and Complete Edition. The goal 
 # Notes
 Most shaders are commented; feel free to include any of them in your projects or to improve upon them, which there will definitely be room for.
 Use the C++ version of [RAGE Shader Editor](https://gtaforums.com/topic/984675-rage-shader-editor/) to reassemble the shaders.
+Special thanks to my friends Vaani, AssaultKifle47 and RaphaelK12 for their support and contributions!
 
 # To-do:
 - Port the Xbox screen droplet shader to PC
 - Fix the water foam, which is somehow tied to the camera height
-- Fix the 1.0.7.0+ fake tree shadows, which move according to the sun angle instead of stretching
+- Fix the 1.0.7.0+ fake tree shadows, which move according to the sun angle instead of stretching (ideally they'd behave like the 1.0.4.0 fake tree shadows)
