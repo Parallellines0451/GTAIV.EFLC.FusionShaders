@@ -21,8 +21,8 @@ Includes
 - Fixed incorrect reflection mipmap dimming which makes ambient reflections weaker than they're supposed to be
 - Reduced z-fighting/clipping on some objects like the BAWSAQ sign and glass (disabled by default to avoid more issues)
 
-Most shaders are commented; feel free to include any of them in your mod or to improve upon them, which there will definitely be room for.
-Use the C++ version of [Rage Shader Editor](https://gtaforums.com/topic/984675-rage-shader-editor/) to reassemble the shaders.
+Most shaders are commented; feel free to include any of them in your projects or to improve upon them, which there will definitely be room for.
+Use the C++ version of [RAGE Shader Editor](https://gtaforums.com/topic/984675-rage-shader-editor/) to reassemble the shaders.
 
 To-do:
 - Port the Xbox screen droplet shader to PC
