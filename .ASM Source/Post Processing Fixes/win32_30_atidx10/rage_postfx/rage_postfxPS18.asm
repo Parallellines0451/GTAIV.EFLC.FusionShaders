@@ -72,9 +72,9 @@
     def c24, 0.25, 1.5, 4, 12
     def c25, 1, 0, -1, -2
 	def c26, 0.298999995, 0.587000012, 0.114, 0
-	def c27, 1, 0, 0, 0			// FXAA Toggle
+	def c27, 1, 0, 88, 99		// FXAA Toggle
 	
-	def c28, 0, 0, 0, 0			// Console Gamma Toggle
+	def c28, 0, 0, 88, 99		// Console Gamma Toggle
 	
 	// Circular Kernel from GPU Zen 'Practical Gather-based Bokeh Depth of Field' by Wojciech Sterna
 	// first ring
