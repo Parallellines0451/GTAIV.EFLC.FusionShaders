@@ -33,7 +33,7 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 [![bloom.png](https://i.postimg.cc/pTBLRDmP/bloom.png)](https://postimg.cc/8JjSbfdY)
 # Restored and improved stippled transparency
 [![2023-06-19-31.png](https://i.postimg.cc/RVCWd1d7/2023-06-19-31.png)](https://postimg.cc/c6j14nVC)
-[![2023-06-21-1.png](https://i.postimg.cc/rpGZ4tG8/2023-06-21-1.png)](https://postimg.cc/p9TBbr17)
+[![2023-06-21-1.png](https://i.postimg.cc/nrn1tdN7/2023-06-21-1.png)](https://postimg.cc/ygrRmT1Y)
 # Fixed vehicle reflections
 [![refl2.png](https://i.postimg.cc/1RYpg5Dc/refl2.png)](https://postimg.cc/bdkGWPCs)
 [![refl.png](https://i.postimg.cc/0j3mhc9H/refl.png)](https://postimg.cc/SY6JML2W)
