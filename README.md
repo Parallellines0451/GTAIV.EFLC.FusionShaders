@@ -2,7 +2,7 @@
 Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete Edition. The goal is to restore and fix everything from [here](https://libertycity-ru.translate.goog/gta-4/articles/4346-gta-iv-complete-edition-xbox-protiv-pc.html?_x_tr_sl=ru&amp;_x_tr_tl=en&amp;_x_tr_hl=pt-BR).
 
 # Feature list
-- Restored stippled transparency/LOD fading from 1.0.5.0 and older versions, and reduced the stippling effect on vegetation and fences
+- Restored stippled transparency/LOD fading from 1.0.5.0 and older versions, and reduced the stippling effect on vegetation and fences; <b>do not use a solid stipple.wtd</b>
 - Restored volumetric light shafts thanks to Vaani
 - Improved depth of field and fixed resolution scaling
 - Remade bloom shader with proper resolution scaling
