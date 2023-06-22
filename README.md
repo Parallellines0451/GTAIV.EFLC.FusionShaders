@@ -9,7 +9,7 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 - Fixed the entire screen being blurry with definition off
 - Fixed distorted car reflections thanks to AssaultKifle47 and increased their intensity to match consoles
 - Included native FXAA thanks to RaphaelK12
-- Included RaphaelK12's 5x5 gaussian [shadow filter](https://github.com/RaphaelK12/GTA4-Improved-Soft-Shadows)
+- Included RaphaelK12's 5x5 gaussian shadow filter
 - Fixed excessively strong vertex AO and static vehicle shadows; also includes uncompressed textures for them
 - Improved water texture tiling (console/medium tiling for the very high setting)
 - Fixed textureless water on AMD graphics cards
@@ -19,7 +19,7 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 - Included console-like gamma in rage_postfx, disabled by default; also includes console timecycles and vehicle.ide's for reflections
 - Fixed disconnected shadows/excessively high depth bias for cascaded shadow maps
 - Fixed improper reflection mipmap dimming which made ambient reflections weaker than they're supposed to be
-- Reduced z-fighting/clipping on some objects like the BAWSAQ sign and glass (disabled by default to avoid more issues)
+- Included robi29 & \_CP_'s water shadow stretching fix, disconnected night shadow fix and mirror reflection fix
 
 # Improved depth of field, fixed definition blur and added native FXAA
 [![dof.png](https://i.postimg.cc/L4kcRwfp/dof.png)](https://postimg.cc/jC5g48Zg)
@@ -46,7 +46,11 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 # Notes
 Most shaders are commented; feel free to include any of them in your projects or to improve upon them, which there will definitely be room for. Use the C++ version of [RAGE Shader Editor](https://gtaforums.com/topic/984675-rage-shader-editor/) to reassemble the shaders.<br>
 
-Special thanks to my friends Vaani, AssaultKifle47 and RaphaelK12 for their support and contributions, and to Shvab for making RAGE Shader Editor.
+Special thanks to my friends Vaani, AssaultKifle47, RaphaelK12, robi29 and \_CP_ for their support and contributions, and to Shvab for making RAGE Shader Editor.
+
+Their repositories, which also have lots of cool stuff:
+- [GTA4-Improved-Soft-Shadows](https://github.com/RaphaelK12/GTA4-Improved-Soft-Shadows)
+- [GTA-IV-Shaders](https://github.com/robi29/GTA-IV-Shaders)
 
 # To-do:
 - Port the Xbox screen droplet shader to PC
