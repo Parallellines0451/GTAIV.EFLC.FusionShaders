@@ -858,8 +858,8 @@
     min r0.z, c79.z, r1.w
     max r1.w, r0.x, r0.z
     dp3 r0.x, r7, c1.yzww
-    dp3 r8.x, r11, c1.yzww // near pixelation, needs clean HDRSampler
-    dp3 r8.y, c1.x, c1.yzww // near pixelation, needs to be 0
+    dp3 r8.x, r11, c1.yzww // disable "pixelation"
+    dp3 r8.y, r4, c1.yzww
     dp3 r8.z, r5, c1.yzww
     dp3 r8.w, r6, c1.yzww
     dp4 r0.z, r8, c2.x
@@ -876,7 +876,7 @@
     mad r10, r8.w, -c6.x, c6.yzwx
     cmp r10, r10, -c2.y, -c2.w
     add r9, r9, r10
-    mul r9, r9, c1.x // near blur
+    mul r9, r9, c1.x // disable static PC blur
     dp4 r0.z, r9, c2.y
     add r0.z, r0.z, c4.w
     rcp r0.z, r0.z
