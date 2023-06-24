@@ -3,7 +3,7 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 
 # Feature list
 - Restored stippled transparency/LOD fading from 1.0.5.0 and older versions, and reduced the stippling effect on vegetation and fences; <b>do not use a solid stipple.wtd</b>
-- Restored volumetric light shafts thanks to Vaani
+- Fixed volumetric light shafts thanks to Vaani
 - Improved depth of field and fixed resolution scaling
 - Remade bloom shader with proper resolution scaling
 - Fixed the entire screen being blurry with definition off
@@ -36,7 +36,6 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 [![2023-06-21-1.png](https://i.postimg.cc/nrn1tdN7/2023-06-21-1.png)](https://postimg.cc/ygrRmT1Y)
 # Fixed vehicle reflections
 [![refl2.png](https://i.postimg.cc/1RYpg5Dc/refl2.png)](https://postimg.cc/bdkGWPCs)
-[![refl.png](https://i.postimg.cc/0j3mhc9H/refl.png)](https://postimg.cc/SY6JML2W)
 [![2023-06-19-27.png](https://i.postimg.cc/y8xtmNG1/2023-06-19-27.png)](https://postimg.cc/QFLfsjsw)
 # Improved water texture tiling and water droplets
 [![2023-06-19-32.png](https://i.postimg.cc/6pyyJ9DT/2023-06-19-32.png)](https://postimg.cc/SnbycpQp)
@@ -44,7 +43,7 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 [![2023-06-19-34.png](https://i.postimg.cc/P5SY1XwM/2023-06-19-34.png)](https://postimg.cc/jDJDbrvW)
 
 # Notes
-Most shaders are commented; feel free to include any of them in your projects or to improve upon them, which there will definitely be room for. Use the C++ version of [RAGE Shader Editor](https://gtaforums.com/topic/984675-rage-shader-editor/) to reassemble the shaders.<br>
+Most shaders are commented; feel free to include any of them in your projects or to improve upon them, which there will definitely be room for. Use the C++ version of [RAGE Shader Editor](https://gtaforums.com/topic/984675-rage-shader-editor/) to reassemble them.
 
 Special thanks to my friends Vaani, AssaultKifle47, RaphaelK12, robi29 and \_CP_ for their support and contributions, and to Shvab for making RAGE Shader Editor.
 
