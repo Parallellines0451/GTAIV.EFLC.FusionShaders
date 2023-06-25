@@ -31,164 +31,165 @@
 	
 	// DOF Start
 	
-	if_eq r0.w, c100.y		// if (r0.w = 0) DOF = on, else off
+	if_eq r0.w, c100.y		// if Definition On, don't render DOF
 		mov r20, c10
 		mov r21, c100.y		// sum = 0
 		mul r22, c76, r20.w // texel size * radius
 		mul r22, r22, c44.y // multiply by resolution height
 		mul r22, r22, c10.y // divide by 720
+		mov r23.w, c100.y
 	
 		// first ring
 	
 		mad r23.xy, r22, c100.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c100.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c101.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c101.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c102.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c102.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c103.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c103.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		
 		// second ring
 	
 		mad r23.xy, r22, c104.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c104.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c105.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c105.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c106.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c106.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c107.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c107.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c108.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c108.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c109.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c109.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c110.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c110.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c111.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c111.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		
 		// third ring
 	
 		mad r23.xy, r22, c112.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c112.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c113.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c113.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c114.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c114.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c115.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c115.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c116.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c116.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c117.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c117.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c118.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c118.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c119.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c119.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c120.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c120.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c121.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c121.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c122.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c122.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c123.xy, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		mad r23.xy, r22, c123.zw, v0
-		texld r23, r23, s2
+		texldl r23, r23, s2
 		add r21, r21, r23
 		
 		mul r21, r21, r20.z	// average
