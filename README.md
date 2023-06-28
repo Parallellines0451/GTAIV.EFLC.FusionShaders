@@ -7,29 +7,32 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 - Improved depth of field and fixed resolution scaling
 - Remade bloom shader with proper resolution scaling
 - Fixed the entire screen being blurry with definition off
-- Fixed distorted car reflections thanks to AssaultKifle47 and increased their intensity to match consoles
+- Improved TLAD noise tiling
+- Fixed distorted car reflections thanks to AssaultKifle47
+- Fixed anisotropic filtering making reflections weaker, especially in cars
+- Increased ambient reflection intensity to match consoles
 - Included native FXAA thanks to RaphaelK12
 - Included RaphaelK12's 5x5 gaussian shadow filter
-- Fixed excessively strong vertex AO and static vehicle shadows; also includes uncompressed textures for them
+- Fixed excessively strong vertex AO and static vehicle shadows
 - Improved water texture tiling (console/medium tiling for the very high setting)
 - Fixed textureless water on AMD graphics cards
-- Fixed "emissivestrong" lights
-- Increased rain and splash intensity to mostly match consoles
+- Fixed invisible "emissivestrong" lights
+- Improved rain intensity and made it more visible at night
 - Fixed black water droplets on screen (although refraction isn't restored yet)
-- Included console-like gamma in rage_postfx, disabled by default; also includes console timecycles and vehicle.ide's for reflections
+- Included console-like gamma in rage_postfx (disabled by default)
 - Fixed disconnected shadows/excessively high depth bias for cascaded shadow maps
-- Fixed improper reflection mipmap dimming which made ambient reflections weaker than they're supposed to be
 - Included robi29 & \_CP_'s water shadow stretching fix, disconnected night shadow fix and mirror reflection fix
 
-# Improved depth of field, fixed definition blur and added native FXAA
+# Fixed depth of field resolution scaling, fixed definition blur and added native FXAA
 [![dof.png](https://i.postimg.cc/L4kcRwfp/dof.png)](https://postimg.cc/jC5g48Zg)
 [![dof2.png](https://i.postimg.cc/KvZdYfrg/dof2.png)](https://postimg.cc/MXFsPyLW)
 [![2023-06-19-38.png](https://i.postimg.cc/h4Vmpbmv/2023-06-19-38.png)](https://postimg.cc/3WJWwGnQ)
 # Optional console-like gamma
 [![gammacomp2.png](https://i.postimg.cc/qRQ494FR/gammacomp2.png)](https://postimg.cc/ZB9GNt4t)
 # Fixed volumetric light shafts
-[![volume.png](https://i.postimg.cc/wBLBbKHy/volume.png)](https://postimg.cc/Lq4RnbJ2)
-# Scalable bloom
+[![Grand-Theft-Auto-IV-2023-06-26-01-57.png](https://i.postimg.cc/cLyJ1X4h/Grand-Theft-Auto-IV-2023-06-26-01-57.png)](https://postimg.cc/F7pvDbSk)
+[![Grand-Theft-Auto-IV-2023-06-26-06-15-1.png](https://i.postimg.cc/SNzspwqj/Grand-Theft-Auto-IV-2023-06-26-06-15-1.png)](https://postimg.cc/9rCVdgDj)
+# Fixed bloom resolution scaling
 [![bloom.png](https://i.postimg.cc/pTBLRDmP/bloom.png)](https://postimg.cc/8JjSbfdY)
 # Restored and improved stippled transparency
 [![2023-06-19-31.png](https://i.postimg.cc/RVCWd1d7/2023-06-19-31.png)](https://postimg.cc/c6j14nVC)
@@ -54,4 +57,4 @@ Their repositories, which also have lots of cool stuff:
 # To-do:
 - Port the Xbox screen droplet shader to PC
 - Fix the water foam, which is somehow tied to the camera height
-- Fix the 1.0.7.0+ fake tree shadows, which move according to the sun angle instead of stretching (ideally they'd behave like the 1.0.4.0 fake tree shadows)
+- Either fix the fake tree shadows or add wind to trees without flag #31 in ext_veg.ide
