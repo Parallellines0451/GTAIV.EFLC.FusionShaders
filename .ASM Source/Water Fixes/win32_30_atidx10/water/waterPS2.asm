@@ -93,12 +93,6 @@
     dp3 r0.w, r1, r1
     add r1.xyz, r1, c0.w
     nrm r2.xyz, r1
-	
-	// Water shadow stretching fix
-	mul r20.x, r0.w, -c2
-	max r21.x, r20.x, c2.w
-	mul r22.x, r21.x, v2.z
-	
     mad r1.xy, r0.w, -c2, c2.z
     max r0.w, r1.x, c2.w
     mul r0.z, r0.w, v2.z
@@ -116,7 +110,11 @@
     dp4 r5.y, r3, c56
     mul r3.xyz, c61.xyww, v2.y
     mad r3.xyz, v2.x, c60.xyww, r3
-    mad r3.xyz, r22.x, c62.xyww, r3 // Water shadow stretching fix
+	
+	// Water shadow stretching fix
+	add r20.z, v2.z, -c2.z
+    mad r3.xyz, r20.z, c62.xyww, r3
+	
     add r3.xyz, r3, c63.xyww
     mad r0.yz, r3.xxyw, r4.xxyw, r5.xxyw
     mov r3.y, c53.y
