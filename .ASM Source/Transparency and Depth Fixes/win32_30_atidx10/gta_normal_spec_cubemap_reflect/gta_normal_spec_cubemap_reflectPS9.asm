@@ -281,4 +281,3 @@
     mad oC0.xyz, r0.w, r1, r0
 
 // approximately 195 instruction slots used (18 texture, 177 arithmetic)
- 

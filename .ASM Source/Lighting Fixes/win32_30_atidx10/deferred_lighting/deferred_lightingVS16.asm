@@ -318,4 +318,3 @@
     mov o4.xyz, v1
 
 // approximately 276 instruction slots used (24 texture, 252 arithmetic)
- 

@@ -861,4 +861,3 @@
     mov oC0.w, c2.y
 
 // approximately 161 instruction slots used (13 texture, 148 arithmetic)
- 

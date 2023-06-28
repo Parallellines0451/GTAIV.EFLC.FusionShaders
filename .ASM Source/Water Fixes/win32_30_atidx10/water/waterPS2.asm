@@ -326,4 +326,3 @@
     mov oC1, c11.x
 
 // approximately 244 instruction slots used (19 texture, 225 arithmetic)
- 
