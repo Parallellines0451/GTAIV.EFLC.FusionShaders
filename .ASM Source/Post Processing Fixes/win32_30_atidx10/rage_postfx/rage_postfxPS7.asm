@@ -40,14 +40,14 @@
 		mad r5.xy, c66, -r2.xy, v0		// calculate texcoord
 		texld r5, r5, s0				// sample texture
 		add r5, r5, -r0 				// subtract by center
-		cmp r5, r5, r5, c1.z			// set negatives to 0
+		max r5, r5, c1.z				// set negatives to 0
 		mul r5, r5, r4.x				// multiply by weight
 		add r1, r1, r5					// sum
 		
 		mad r5.xy, c66, r2.xy, v0		// calculate texcoord
 		texld r5, r5, s0				// sample texture
 		add r5, r5, -r0 				// subtract by center
-		cmp r5, r5, r5, c1.z			// clamp negatives to 0
+		max r5, r5, c1.z				// set negatives to 0
 		mul r5, r5, r4.x				// multiply by weight
 		add r1, r1, r5					// sum
 		
