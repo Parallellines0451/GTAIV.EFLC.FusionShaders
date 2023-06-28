@@ -3658,7 +3658,7 @@
 			<Values value="10" >
 			AddressU Wrap
 			AddressV Wrap
-			MinFilter Anisotropic
+			MinFilter Linear
 			MagFilter Linear
 			MipFilter Linear
 			</Values>
