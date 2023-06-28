@@ -9,7 +9,7 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 - Fixed the entire screen being blurry with definition off
 - Improved TLAD noise tiling
 - Fixed distorted car reflections thanks to AssaultKifle47
-- Fixed anisotropic filtering making reflections weaker, especially in cars
+- Fixed reduced reflection intensity caused by anisotropic filtering, especially on cars
 - Increased ambient reflection intensity to match consoles
 - Included native FXAA thanks to RaphaelK12
 - Included RaphaelK12's 5x5 gaussian shadow filter
