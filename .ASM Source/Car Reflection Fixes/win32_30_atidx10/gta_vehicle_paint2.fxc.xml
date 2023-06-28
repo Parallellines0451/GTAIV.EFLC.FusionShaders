@@ -2097,7 +2097,7 @@
 			AddressV Wrap
 			AddressW Wrap
 			MipFilter Linear
-			MinFilter Anisotropic
+			MinFilter Linear
 			MagFilter Linear
 			</Values>
 		</Item>
