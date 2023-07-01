@@ -13,7 +13,7 @@
 //   float3 gDeferredLightDirection;
 //   float3 gDeferredLightPosition;
 //   float gDeferredLightRadius;
-//   sampler2D gDeferredLightSampler1;
+//   sampler2D gDeferredLightSampler2;
 //   float3 gDeferredLightTangent;
 //   float gDeferredLightType;
 //   float4 gDeferredLightVolumeParams;
@@ -42,7 +42,7 @@
 //   gDeferredLightConeAngle          c222     1
 //   gDeferredLightColourAndIntensity c223     1
 //   gDeferredLightVolumeParams       c224     1
-//   gDeferredLightSampler1           s0       1
+//   gDeferredLightSampler2           s0       1
 //
 
     vs_3_0
