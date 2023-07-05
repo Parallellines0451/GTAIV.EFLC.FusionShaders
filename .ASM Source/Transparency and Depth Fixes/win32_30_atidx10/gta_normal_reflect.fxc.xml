@@ -2168,7 +2168,7 @@
 				</Item>
 			</Annotation>
 			<Values value="6" >
-			MinFilter Anisotropic
+			MinFilter Linear
 			MagFilter Linear
 			MipFilter Linear
 			</Values>
