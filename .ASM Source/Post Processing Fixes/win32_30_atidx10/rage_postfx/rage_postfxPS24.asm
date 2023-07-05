@@ -864,6 +864,7 @@
 	
 	// Console-like gamma
 	mul r12, r0, r2.x
+	max r12, r12, c100.y
 	mov r20, c28
 	if_ne r20.x, r20.y
 		pow r12.x, r12.x, c10.x
