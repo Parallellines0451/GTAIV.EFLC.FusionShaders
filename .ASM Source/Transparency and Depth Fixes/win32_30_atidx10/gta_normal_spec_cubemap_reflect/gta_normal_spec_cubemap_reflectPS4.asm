@@ -39,6 +39,7 @@
     def c0, -0.5, 9.99999975e-006, 0.5, 0.001953125
     def c1, 3.99600005, 4, 0.125, 0.25
     def c2, 0, -1, -0, 1
+	def c100, 1.6666667, 0, 0, 0	// Reflection intensity multiplier
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_texcoord3 v2.xyz
@@ -99,6 +100,7 @@
     rsq r3.y, r3.y
     mul r2.xyz, r2, r3.y
     texld r4, r2, s4
+	mul r4, r4, c100.x
     mul r2.xyz, r3.x, r4
     mul r1.w, r1.w, v5.w
     mad oC0.xyz, r2, c75.x, r1

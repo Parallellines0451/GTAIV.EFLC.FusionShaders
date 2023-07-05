@@ -45,7 +45,7 @@
     def c4, 1.33333337, -0.5, 0.5, 5
     def c5, 0.0199999996, 0.00999999978, 0.75, 0.25
     def c6, 10, 0, 0, 0
-	def c20, 1.6666667, 0, 0, 0
+	def c20, 1.6666667, 0, 0, 0	// Reflection intensity multiplier
     dcl_texcoord v0.xy
     dcl_texcoord1 v1
     dcl_2d s0

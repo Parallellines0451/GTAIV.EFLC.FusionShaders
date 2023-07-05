@@ -120,6 +120,7 @@
     def c9, 0.962339997, -0.194983006, 0.473434001, -0.480026007
     def c10, -0.69591397, 0.457136989, -0.203345001, 0.620715976
     def c11, -0.326211989, -0.405809999, -0.840143979, -0.0735799968
+	def c100, 1.6666667, 0, 0, 0	// Reflection intensity multiplier
     dcl_texcoord v0.xy
     dcl_texcoord1 v1
     dcl_texcoord3 v2.xyz
@@ -174,6 +175,7 @@
     mad r0.xy, r0.xzzw, r0.y, c5.w
     mul r0.xy, r0, c0.x
     texld r0, r0, s2
+	mul r0, r0, c100.x
     mul r0.xyz, r0, c72.x
     mul r3.w, r1.w, v5.w
     mad r0.w, r1.w, v5.w, c0.z
