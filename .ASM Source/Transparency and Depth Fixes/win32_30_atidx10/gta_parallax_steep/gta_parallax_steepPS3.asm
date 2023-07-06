@@ -86,7 +86,8 @@
 		cmp r1.xy, vPos, r1, -r1
 		mul r1.xy, r1, c1.z
 		mad r1.xy, r3, c1.z, r1
-		texld r1, r1, s10
+		mov r1.w, c100.w
+		texldl r1, r1, s10
 		cmp r1, -r1.y, c2.x, c2.y
 		texkill r1
 	endif

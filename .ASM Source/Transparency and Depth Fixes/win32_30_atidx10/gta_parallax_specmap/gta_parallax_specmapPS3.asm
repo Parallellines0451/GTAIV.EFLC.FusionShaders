@@ -81,7 +81,8 @@
 		cmp r2.zw, vPos.xyxy, r2, -r2
 		mul r2.zw, r2, c2.y
 		mad r2.xy, r2, c2.y, r2.zwzw
-		texld r2, r2, s10
+		mov r2.w, c100.w
+		texldl r2, r2, s10
 		cmp r2, -r2.y, c2.z, c2.w
 		texkill r2
 	endif
