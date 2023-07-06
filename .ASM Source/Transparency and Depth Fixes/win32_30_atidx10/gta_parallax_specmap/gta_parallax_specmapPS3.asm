@@ -64,10 +64,10 @@
     mul r0.z, r1.w, r20.w
     mul r0.z, r0.z, c39.x
 	mov r20.x, c39.x
-	add r20.y, -r0.w, c100.y
+	add r20.y, -r0.z, c100.y
 	if_ge r20.x, c100.z
-		cmp r1, r20.y, c2.z, c2.w
-		texkill r1
+		cmp r2, r20.y, c2.z, c2.w
+		texkill r2
 	else
 		mov_sat r0.w, r0.z
 		mul r0.w, r0.w, c0.z
