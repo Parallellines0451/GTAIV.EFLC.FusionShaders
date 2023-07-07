@@ -2,8 +2,9 @@
 Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete Edition. The goal is to restore and fix everything from [here](https://libertycity-ru.translate.goog/gta-4/articles/4346-gta-iv-complete-edition-xbox-protiv-pc.html?_x_tr_sl=ru&amp;_x_tr_tl=en&amp;_x_tr_hl=pt-BR).
 
 # Feature list
-- Restored stippled transparency/LOD fading from 1.0.5.0 and older versions, and reduced the stippling effect on vegetation and fences; <b>do not use a solid stipple.wtd</b>
-- Fixed volumetric light shafts thanks to Vaani
+- Restored LOD fading from 1.0.5.0 and older versions
+- Removed stippled transparency from forward rendered objects, near deferred rendered objects and shadows
+- Fixed volumetric light shafts
 - Improved depth of field and fixed resolution scaling
 - Remade bloom shader with proper resolution scaling
 - Fixed the entire screen being blurry with definition off
@@ -35,7 +36,7 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 [![Grand-Theft-Auto-IV-2023-06-26-06-15-1.png](https://i.postimg.cc/SNzspwqj/Grand-Theft-Auto-IV-2023-06-26-06-15-1.png)](https://postimg.cc/9rCVdgDj)
 # Fixed bloom resolution scaling
 [![bloom.png](https://i.postimg.cc/pTBLRDmP/bloom.png)](https://postimg.cc/8JjSbfdY)
-# Restored and improved stippled transparency
+# Improved transparency across the board
 [![2023-06-19-31.png](https://i.postimg.cc/RVCWd1d7/2023-06-19-31.png)](https://postimg.cc/c6j14nVC)
 [![2023-06-21-1.png](https://i.postimg.cc/nrn1tdN7/2023-06-21-1.png)](https://postimg.cc/ygrRmT1Y)
 # Fixed vehicle reflections
@@ -49,7 +50,7 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 # Notes
 Most shaders are commented; feel free to include any of them in your projects or to improve upon them, which there will definitely be room for. Use the C++ version of [RAGE Shader Editor](https://gtaforums.com/topic/984675-rage-shader-editor/) to reassemble them.
 
-Special thanks to my friends Vaani, AssaultKifle47, RaphaelK12, robi29 and \_CP_ for their support and contributions, and to Shvab for making RAGE Shader Editor.
+Special thanks to my friends AssaultKifle47, RaphaelK12, robi29 and \_CP_ for their support and contributions, and to Shvab for making RAGE Shader Editor.
 
 Their repositories, which also have lots of cool stuff:
 - [GTA4-Improved-Soft-Shadows](https://github.com/RaphaelK12/GTA4-Improved-Soft-Shadows)
