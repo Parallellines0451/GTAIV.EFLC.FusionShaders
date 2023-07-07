@@ -57,6 +57,5 @@ Their repositories, which also have lots of cool stuff:
 - [GTA-IV-Shaders](https://github.com/robi29/GTA-IV-Shaders)
 
 # To-do:
-- Port the Xbox screen droplet shader to PC
+- Do something about screen droplet refraction
 - Fix the water foam, which is somehow tied to the camera height
-- Either fix the fake tree shadows or add wind to trees without flag #31 in ext_veg.ide
