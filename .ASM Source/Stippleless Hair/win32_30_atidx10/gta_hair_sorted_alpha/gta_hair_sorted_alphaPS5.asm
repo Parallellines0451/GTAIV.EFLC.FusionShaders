@@ -45,7 +45,7 @@
     def c2, 0, 1, 0.333333343, 3.99600005
     def c3, 64, 8, 4, 0.00392156886
     def c4, 32, 4, 1, 0.0078125
-	def c100, 1, 0.5, 1, 0
+	def c100, 3, 0.5, 1, 0
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_texcoord4 v2.xyz
@@ -85,7 +85,9 @@
         mov r2.xy, r4
       endif
     endif
-    mul r0.w, r0.w, v4.w
+	mul_sat r0.w, r0.w, c100.x
+	mul_sat r20.w, c100.x, v4.w
+    mul r0.w, r0.w, r20.w
     mul r0.w, r0.w, c39.x
 	mov r20.x, c39.x
 	add r20.y, -r0.w, c100.y
