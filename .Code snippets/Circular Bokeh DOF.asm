@@ -31,13 +31,14 @@
 	
 	// DOF Start
 	
-	if_eq r0.w, c100.y		// if Definition On, don't render DOF
+	mov r20.z, c79.z
+	if_gt r20.z, c1.x		// don't run if DOF intensity = 0
 		mov r20, c10
-		mov r21, c100.y		// sum = 0
+		mov r21, c1.x		// sum = 0
 		mul r22, c76, r20.w // texel size * radius
 		mul r22, r22, c44.y // multiply by resolution height
 		mul r22, r22, c10.y // divide by 720
-		mov r23.w, c100.y
+		mov r23.w, c1.x		// mip = 0
 	
 		// first ring
 	
@@ -194,12 +195,10 @@
 		
 		mul r21, r21, r20.z	// average
 		
-		mov r4, r21	// final result (DOF On)
-	else
-		mov r4, r1	// final result (DOF Off)
+		mov r3, r21
+		mov r4, r21
+		mov r5, r21
+		mov r6, r21
 	endif
-	mov r5, r4
-	mov r6, r4
-	mov r7, r4
 	
 	// DOF End
