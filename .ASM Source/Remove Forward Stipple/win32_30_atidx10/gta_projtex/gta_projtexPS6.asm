@@ -20,12 +20,13 @@
     ps_3_0
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, 0, -1, -0, 0
-	def c100, 1, 0.5, 1, 0
+	def c100, 3, 0.5, 1, 0
     dcl_texcoord v0.xyz
     dcl vPos.xy
     dcl_2d s0
     dcl_2d s10
     texld r0, v0.yzzw, s0
+    mul_sat r0.w, r0.w, c100.x
     mul r0.x, r0.w, c39.x
 	mov r20.x, c39.x
 	add r20.y, -r0.x, c100.y
