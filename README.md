@@ -2,28 +2,28 @@
 Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete Edition. The goal is to restore and fix everything from [here](https://libertycity-ru.translate.goog/gta-4/articles/4346-gta-iv-complete-edition-xbox-protiv-pc.html?_x_tr_sl=ru&amp;_x_tr_tl=en&amp;_x_tr_hl=pt-BR).
 
 # Feature list
-- Restored LOD fading from 1.0.5.0 and older versions
-- Removed stippled transparency from forward rendered objects, near deferred rendered objects and shadows
+- Fixed LOD fading
+- Removed unnecessary stippled transparency from various objects and shadows
 - Fixed volumetric light shafts
-- Improved depth of field and fixed resolution scaling
-- Remade bloom shader with proper resolution scaling
-- Fixed the entire screen being blurry with definition off
-- Improved TLAD noise tiling
-- Fixed distorted car reflections thanks to AssaultKifle47
-- Fixed reduced reflection intensity caused by anisotropic filtering, especially on cars
-- Restored console-style vehicle reflections (no need to edit vehicle.ide and dirt works)
+- Fixed depth of field and bloom resolution scaling
+- Fixed blurry screen
+- Repurposed Definition setting into a motion blur toggle
+- Reduced motion blur noise
+- Console-style TLAD noise tiling
+- Fixed vehicle normal maps thanks to AssaultKifle47
+- Fixed reduced reflection intensity while using anisotropic filtering
+- Restored console-style vehicle reflections
 - Increased ambient reflection intensity to match consoles
-- Included native FXAA thanks to RaphaelK12
-- Included RaphaelK12's 5x5 gaussian shadow filter
+- Native FXAA and improved shadow filtering thanks to RaphaelK12
+- Fixed disconnected cascaded shadow maps
 - Fixed excessively strong vertex AO and static vehicle shadows
-- Improved water texture tiling (console/medium tiling for the very high setting)
-- Fixed textureless water on AMD graphics cards
+- Fixed water shadow stretching, disconnected night shadows and mirror reflections thanks to robi29 & \_CP_
 - Fixed invisible "emissivestrong" lights
-- Improved rain intensity and made it more visible at night
+- Console-style water texture tiling
+- Fixed textureless water on AMD graphics cards
+- Improved rain visibility
 - Fixed black water droplets on screen (although refraction isn't restored yet)
-- Included console-like gamma in rage_postfx (disabled by default)
-- Fixed disconnected shadows/excessively high depth bias for cascaded shadow maps
-- Included robi29 & \_CP_'s water shadow stretching fix, disconnected night shadow fix and mirror reflection fix
+- Console-like gamma (disabled by default)
 
 # Fixed depth of field resolution scaling, fixed definition blur and added native FXAA
 [![dof.png](https://i.postimg.cc/L4kcRwfp/dof.png)](https://postimg.cc/jC5g48Zg)
@@ -57,5 +57,6 @@ Their repositories, which also have lots of cool stuff:
 - [GTA-IV-Shaders](https://github.com/robi29/GTA-IV-Shaders)
 
 # To-do:
-- Do something about screen droplet refraction
-- Fix the water foam, which is somehow tied to the camera height
+- ~~Fix screen water droplet refraction~~ - needs code injection
+- ~~Fix the broken post 1.0.6.0 tree shadows~~ - done in [FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix)
+- Fix the water foam
