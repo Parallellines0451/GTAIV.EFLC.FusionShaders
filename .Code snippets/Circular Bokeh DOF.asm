@@ -1,6 +1,6 @@
-	def c10, 1.3333333, 0.0013889, 0.0208333, 0.6666667
-	
 	// Circular Kernel from GPU Zen 'Practical Gather-based Bokeh Depth of Field' by Wojciech Sterna
+	// DOF constants
+	def c99, 0.0013889, 0.0208333, 0.6666667, 0
 	// first ring
 	def c100, 1.000000, 0.000000, 0.707107, 0.707107
 	def c101, -0.000000, 1.000000, -0.707107, 0.707107
@@ -33,11 +33,11 @@
 	
 	mov r20.z, c79.z
 	if_gt r20.z, c1.x		// don't run if DOF intensity = 0
-		mov r20, c10
+		mov r20, c99
 		mov r21, c1.x		// sum = 0
-		mul r22, c76, r20.w // texel size * radius
+		mul r22, c76, r20.z // texel size * radius
 		mul r22, r22, c44.y // multiply by resolution height
-		mul r22, r22, c10.y // divide by 720
+		mul r22, r22, r20.x // divide by 720
 		mov r23.w, c1.x		// mip = 0
 	
 		// first ring
@@ -193,7 +193,7 @@
 		texldl r23, r23, s2
 		add r21, r21, r23
 		
-		mul r21, r21, r20.z	// average
+		mul r21, r21, r20.y	// average
 		
 		mov r3, r21
 		mov r4, r21
