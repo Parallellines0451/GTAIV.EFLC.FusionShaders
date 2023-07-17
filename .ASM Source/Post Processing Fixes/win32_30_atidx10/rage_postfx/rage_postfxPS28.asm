@@ -56,7 +56,7 @@
     def c5, 2, -1, 0.125, 0
     def c6, 256, 2, 4, 8
     def c7, 0, 0.25, 0.5, 1
-	def c10, 1.3333333, 0.0013889, 0.0208333, 0.6666667
+	def c10, 1.3333333, 1.0526316, 1.05577, 0.0762		// Gamma constants
 	
 	// NVIDIA FXAA 3.11 by Timothy Lottes
 	// FXAA Constants
@@ -71,7 +71,7 @@
 	def c27, 1, 0, 88, 99		// FXAA Toggle
 	def c28, 0, 0, 88, 99		// Console Gamma Toggle
 	
-    defi i0, 14, 0, 0, 0		// double motion blur sample count
+    defi i0, 14, 0, 0, 0		// Doubled motion blur sample count (default = 7)
     dcl_texcoord v0.xy
     dcl_2d s0
     dcl_2d s1
@@ -92,8 +92,7 @@
 	
     // texld r1, v0, s2 HDR texture input
 	
-	mov r20, c27
-	if_ne r20.x, r20.y
+	if_ne c27.x, c27.y
 		mov r20, c76 // Copy TexelSize
 		
 		mul r22, c25.xxyy, v0.xyxx
@@ -575,9 +574,12 @@
     rcp r0.x, r0.x
     mul r4.y, r0.z, r0.x
     add r0.xz, -r3.yyzw, r4.xyyw
+	
 	mov r20.x, c79.x
 	mul r20.x, r20.x, c4.w	// halve motion blur length (because of doubled sample count)
     mul r0.xz, r0, r20.x
+	
+    // mul r0.xz, r0, c79.x
     mul r3.xy, r0.xzzw, c5.z
     texld r4, v0, s5
     add r0.w, r4.x, -c84.x
@@ -634,14 +636,20 @@
     add r0.w, -r7.z, c81.z
     pow r2.x, r1.x, r0.w
 	
-	// Console-like gamma
+	// Piecewise function to approximate Xbox gamma correction
 	mul r12, r0, r2.x
-	max r12, r12, c100.y
-	mov r20, c28
-	if_ne r20.x, r20.y
-		pow r12.x, r12.x, c10.x
-		pow r12.y, r12.y, c10.x
-		pow r12.z, r12.z, c10.x
+	max r12, r12, c1.x
+	if_ne c28.x, c28.y
+		mov r20, c10						// copy c10
+		add r21, r12, -c5.z					// r21 = r12 - 0.125
+		cmp r22, r21, c2.w, c2.z			// r22 = r12 >= 0.125 ? 1 : 0
+		lrp r23, r22, r20.x, r20.y			// mix(1.3333333, 1.0526316, r22(r12 >= 0.125))
+		pow r24.x, r12.x, r23.x				// if r12 >= 0.125 ? 1.3333333 : 1.0526316
+		pow r24.y, r12.y, r23.y				// if r12 >= 0.125 ? 1.3333333 : 1.0526316
+		pow r24.z, r12.z, r23.z				// if r12 >= 0.125 ? 1.3333333 : 1.0526316
+		add r25, r24, -c5.z					// if r12 >= 0.125
+		mad r25, r25, r20.z, r20.w			// if r12 >= 0.125
+		lrp r12.xyz, r22, r24, r25			// mix(r24, r25, r22(r12 >= 0.125))
 	endif
     mov oC0.xyz, r12
 	

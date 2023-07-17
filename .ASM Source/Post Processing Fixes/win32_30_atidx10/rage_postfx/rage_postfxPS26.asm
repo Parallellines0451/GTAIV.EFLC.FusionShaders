@@ -64,7 +64,7 @@
     def c5, 2, -1, 0.125, 0
     def c6, 1.10000002, 0, 0, 0
     def c7, 256, 2, 4, 8
-	def c10, 1.3333333, 0.0013889, 0.0208333, 0.6666667
+	def c10, 1.3333333, 1.0526316, 1.05577, 0.0762		// Gamma constants
 	
 	// NVIDIA FXAA 3.11 by Timothy Lottes
 	// FXAA Constants
@@ -80,6 +80,8 @@
 	def c28, 0, 0, 88, 99		// Console Gamma Toggle
 	
 	// Circular Kernel from GPU Zen 'Practical Gather-based Bokeh Depth of Field' by Wojciech Sterna
+	// DOF constants
+	def c99, 0.0013889, 0.0208333, 0.6666667, 0
 	// first ring
 	def c100, 1.000000, 0.000000, 0.707107, 0.707107
 	def c101, -0.000000, 1.000000, -0.707107, 0.707107
@@ -108,7 +110,7 @@
 	def c122, 1.500000, -2.598075, 2.121321, -2.121321
 	def c123, 2.598078, -1.499997, 2.897778, -0.776454
 	
-    defi i0, 14, 0, 0, 0		// double motion blur sample count
+    defi i0, 14, 0, 0, 0		// Doubled motion blur sample count (default = 7)
     dcl_texcoord v0.xy
     dcl_2d s0
     dcl_2d s1
@@ -131,8 +133,7 @@
 	
     // texld r1, v0, s2 HDR texture input
 	
-	mov r20, c27
-	if_ne r20.x, r20.y
+	if_ne c27.x, c27.y
 		mov r20, c76 // Copy TexelSize
 		
 		mul r22, c25.xxyy, v0.xyxx
@@ -617,11 +618,11 @@
 	
 	mov r20.z, c79.z
 	if_gt r20.z, c1.x		// don't run if DOF intensity = 0
-		mov r20, c10
+		mov r20, c99
 		mov r21, c1.x		// sum = 0
-		mul r22, c76, r20.w // texel size * radius
+		mul r22, c76, r20.z // texel size * radius
 		mul r22, r22, c44.y // multiply by resolution height
-		mul r22, r22, c10.y // divide by 720
+		mul r22, r22, r20.x // divide by 720
 		mov r23.w, c1.x		// mip = 0
 	
 		// first ring
@@ -777,7 +778,7 @@
 		texldl r23, r23, s2
 		add r21, r21, r23
 		
-		mul r21, r21, r20.z	// average
+		mul r21, r21, r20.y	// average
 		
 		mov r3, r21
 		mov r4, r21
@@ -808,9 +809,12 @@
     rcp r0.y, r0.y
     mul r6.y, r5.y, r0.y
     add r0.yz, -r4, r6.xxyw
+	
 	mov r20.x, c80.x
 	mul r20.x, r20.x, c4.w	// halve motion blur length (because of doubled sample count)
     mul r0.yz, r0, r20.x
+	
+    // mul r0.yz, r0, c80.x
     mul r4.xy, r0.yzzw, c5.z
     texld r5, v0, s7
     add r1.w, r5.x, -c86.x
@@ -883,14 +887,20 @@
     add r0.w, -r8.y, c82.z
     pow r2.x, r1.x, r0.w
 	
-	// Console-like gamma
+	// Piecewise function to approximate Xbox gamma correction
 	mul r12, r0, r2.x
-	max r12, r12, c100.y
-	mov r20, c28
-	if_ne r20.x, r20.y
-		pow r12.x, r12.x, c10.x
-		pow r12.y, r12.y, c10.x
-		pow r12.z, r12.z, c10.x
+	max r12, r12, c1.x
+	if_ne c28.x, c28.y
+		mov r20, c10						// copy c10
+		add r21, r12, -c5.z					// r21 = r12 - 0.125
+		cmp r22, r21, c2.w, c2.y			// r22 = r12 >= 0.125 ? 1 : 0
+		lrp r23, r22, r20.x, r20.y			// mix(1.3333333, 1.0526316, r22(r12 >= 0.125))
+		pow r24.x, r12.x, r23.x				// if r12 >= 0.125 ? 1.3333333 : 1.0526316
+		pow r24.y, r12.y, r23.y				// if r12 >= 0.125 ? 1.3333333 : 1.0526316
+		pow r24.z, r12.z, r23.z				// if r12 >= 0.125 ? 1.3333333 : 1.0526316
+		add r25, r24, -c5.z					// if r12 >= 0.125
+		mad r25, r25, r20.z, r20.w			// if r12 >= 0.125
+		lrp r12.xyz, r22, r24, r25			// mix(r24, r25, r22(r12 >= 0.125))
 	endif
     mov oC0.xyz, r12
 	
