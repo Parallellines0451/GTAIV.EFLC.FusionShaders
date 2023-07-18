@@ -86,11 +86,16 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_trees\gta_treesVS3.asm</File>
-				<Variables value="2" >
+				<Variables value="3" >
 					<Item>
 						<Type>float4x4</Type>
 						<Name>gShadowMatrix</Name>
 						<Index value="60" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>colorize</Name>
+						<Index value="51" />
 					</Item>
 					<Item>
 						<Type>float4x4</Type>
