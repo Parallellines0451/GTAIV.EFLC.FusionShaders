@@ -17,6 +17,7 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 - Native FXAA and improved shadow filtering thanks to RaphaelK12
 - Fixed disconnected cascaded shadow maps
 - Fixed excessively strong vertex AO and static vehicle shadows
+- Added wind sway support for "real" tree shadows
 - Fixed water shadow stretching, disconnected night shadows and mirror reflections thanks to robi29 & \_CP_
 - Fixed invisible "emissivestrong" lights
 - Console-style water texture tiling
