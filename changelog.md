@@ -17,7 +17,7 @@
 	- Fixed anisotropic filtering influence on reflection intensity
 
 - gta_cutout_fence
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
@@ -43,7 +43,7 @@
 	- Removed stippled transparency from forward pass shaders
 
 - gta_default
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
@@ -53,20 +53,20 @@
 	- Removed stippled transparency from forward pass shaders
 
 - gta_emissive
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
 
 - gta_emissivenight
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
 
 - gta_emissivestrong
 	- Fixed invisible lights
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
@@ -112,13 +112,13 @@
 	- Removed stippled transparency from forward pass shaders
 
 - gta_normal
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
 
 - gta_normal_cubemap_reflect
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
@@ -130,7 +130,7 @@
 	- Removed stippled transparency from forward pass shaders
 
 - gta_normal_reflect
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
@@ -150,14 +150,14 @@
 	- Fixed anisotropic filtering influence on reflection intensity
 
 - gta_normal_spec
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
 	- Increased reflection intensity to match consoles
 
 - gta_normal_spec_cubemap_reflect
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
@@ -169,7 +169,7 @@
 	- Removed stippled transparency from forward pass shaders
 
 - gta_normal_spec_reflect
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
@@ -194,19 +194,19 @@
 	- Fixed anisotropic filtering influence on reflection intensity
 
 - gta_parallax
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
 
 - gta_parallax_specmap
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
 
 - gta_parallax_steep
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
@@ -234,7 +234,7 @@
 	- Removed stippled transparency from forward pass shaders
 
 - gta_reflect
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
@@ -258,7 +258,7 @@
 	- Fixed black water droplets (fixing refraction needs code injection)
 
 - gta_spec
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
@@ -268,7 +268,7 @@
 	- Removed stippled transparency from forward pass shaders
 
 - gta_spec_reflect
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
@@ -282,7 +282,7 @@
 	- Fixed anisotropic filtering influence on reflection intensity
 
 - gta_trees
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Added a custom wind sway parameter for FusionFix to use
@@ -374,7 +374,7 @@
 	- Fixed distorted mirror reflections at certain angles
 
 - rage_default
-	- Fixed pop	-in/restored fading
+	- Fixed pop-in/restored fading
 	- Removed stippled transparency from deferred pass shaders up close
 	- Removed stipple from shadows up close
 	- Removed stippled transparency from forward pass shaders
@@ -386,14 +386,14 @@
 	- Fixed blurry screen
 	- Repurposed "Definition" setting into a motion blur toggle
 	- Reduced motion blur noise
-	- Added console	-like TLAD noise tiling
-	- Added console	-like gamma
+	- Added console-like TLAD noise tiling
+	- Added console-like gamma
 
 - shadowZ
 	- Fixed disconnected night shadows
 
 - water
-	- Added console	-like water tiling
+	- Added console-like water tiling
 	- Fixed shadow stretching
 
 - watertex
