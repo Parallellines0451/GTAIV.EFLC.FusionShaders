@@ -2354,12 +2354,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingPS28.asm</File>
-				<Variables value="6" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>GBufferStencilTextureSampler</Name>
-						<Index value="2" />
-					</Item>
+				<Variables value="5" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>GBufferTextureSampler3</Name>
