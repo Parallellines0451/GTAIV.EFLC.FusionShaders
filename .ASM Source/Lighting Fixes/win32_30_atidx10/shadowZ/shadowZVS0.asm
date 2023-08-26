@@ -24,7 +24,7 @@
 //
 
     vs_3_0
-    def c4, -0.5, 2, -1, 0.5
+    def c4, -0.55, 2, -1, 0.5
     def c5, 0, -3, 1, 0
     dcl_position v0
     dcl_position o0
@@ -43,7 +43,7 @@
       add r0.w, r2.z, c59.z
       abs r1.y, c56.y
       sge r1.y, -r1.y, r1.y
-      add r1.y, r1.y, c4.x
+      add r1.y, r1.y, -c4.w
       mul r0.w, r0.w, r1.y
       add r2.w, r0.w, r0.w
       dp3 r1.y, r2.xyww, r2.xyww
