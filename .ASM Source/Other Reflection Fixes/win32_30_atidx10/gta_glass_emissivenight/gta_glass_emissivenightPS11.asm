@@ -126,6 +126,7 @@
     dcl_color v5
     dcl_texcoord6 v6.xyz
     dcl vPos.xy
+    dcl_texcoord9 v9
     dcl_2d s0
     dcl_2d s1
     dcl_2d s2
@@ -378,5 +379,15 @@
     mul r0, r4, r0
     mad oC0.xyz, c72.x, r1, r0
     mul oC0.w, r0.w, c39.x
+	// ----------- Linear to Log -----------
+	rcp r20.z, c128.x
+	min r20.x, v9.w, c128.y
+	mul r20.x, r20.x, r20.z
+	mul r20.y, c128.y, r20.z
+	log r20.x, r20.x
+	log r20.y, r20.y
+	rcp r20.y, r20.y
+	mad oDepth, r20.x, r20.y, -c210.x
+	// -------------------------------------
 
 // approximately 269 instruction slots used (17 texture, 252 arithmetic)

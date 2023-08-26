@@ -54,6 +54,7 @@
 //
 
     ps_3_0
+    def c127, 0.9999999, 1, 0, 0
     def c0, 512, 0.99609375, 7.96875, 63.75
     def c1, 0.25, 256, -127.999992, 9.99999975e-006
     def c2, 1.33333337, 9.99999975e-005, 512, 1
@@ -113,6 +114,23 @@
     dcl_2d s5
     dcl_2d s15
     texld r0, v0, s4
+	// ----------- Log to Linear -----------
+	if_ne r0.x, c127.y
+		rcp r20.x, c128.x
+		mul r20.x, r20.x, c128.y
+		pow r20.x, r20.x, r0.x
+		mul r20.x, r20.x, c128.x	// W_clip
+		
+		add r20.y, r20.x, -c128.x
+		add r20.z, c128.y, -c128.x
+		mul r20.y, r20.y, c128.y
+		mul r20.z, r20.z, r20.x
+		rcp r20.z, r20.z
+		mul r20.w, r20.y, r20.z		// Linear depth
+		
+		min r0, r20.w, c127.x	// FP error hack
+	endif
+	// -------------------------------------
     mad r0.x, r0.x, c66.z, -c66.w
     mul r0.x, r0.x, v1.w
     rcp r0.x, r0.x

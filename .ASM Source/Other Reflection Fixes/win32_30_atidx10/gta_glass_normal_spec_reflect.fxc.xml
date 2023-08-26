@@ -287,7 +287,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_normal_spec_reflect\gta_glass_normal_spec_reflectPS1.asm</File>
-				<Variables value="52" >
+				<Variables value="53" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -548,12 +548,17 @@
 						<Name>specularFactor</Name>
 						<Index value="66" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_normal_spec_reflect\gta_glass_normal_spec_reflectPS2.asm</File>
-				<Variables value="3" >
+				<Variables value="4" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -568,13 +573,18 @@
 						<Type>float4</Type>
 						<Name>globalScalars</Name>
 						<Index value="39" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
 					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_normal_spec_reflect\gta_glass_normal_spec_reflectPS3.asm</File>
-				<Variables value="12" >
+				<Variables value="13" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -634,13 +644,18 @@
 						<Type>float4</Type>
 						<Name>stencil</Name>
 						<Index value="52" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
 					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_normal_spec_reflect\gta_glass_normal_spec_reflectPS4.asm</File>
-				<Variables value="12" >
+				<Variables value="13" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -700,6 +715,11 @@
 						<Type>float4</Type>
 						<Name>stencil</Name>
 						<Index value="52" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
 					</Item>
 				</Variables>
 			</Item>
@@ -809,7 +829,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_normal_spec_reflect\gta_glass_normal_spec_reflectPS8.asm</File>
-				<Variables value="11" >
+				<Variables value="12" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -865,12 +885,17 @@
 						<Name>specularFactor</Name>
 						<Index value="66" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_normal_spec_reflect\gta_glass_normal_spec_reflectPS9.asm</File>
-				<Variables value="28" >
+				<Variables value="29" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1011,12 +1036,17 @@
 						<Name>specularFactor</Name>
 						<Index value="66" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_normal_spec_reflect\gta_glass_normal_spec_reflectPS10.asm</File>
-				<Variables value="40" >
+				<Variables value="41" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1217,12 +1247,17 @@
 						<Name>specularFactor</Name>
 						<Index value="66" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_normal_spec_reflect\gta_glass_normal_spec_reflectPS11.asm</File>
-				<Variables value="48" >
+				<Variables value="49" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1463,11 +1498,16 @@
 						<Name>specularFactor</Name>
 						<Index value="66" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
+					</Item>
 				</Variables>
 			</Item>
 		</PixelShaders>
 	</Shaders>
-	<GlobalVariables value="59" >
+	<GlobalVariables value="60" >
 		<Item>
 			<Type>float4</Type>
 			<ArrayCount value="64" />
@@ -1528,7 +1568,7 @@
 			MipFilter Point
 			AddressU Wrap
 			AddressV Wrap
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1541,7 +1581,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1773,7 +1813,7 @@
 			0
 			0
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1797,7 +1837,7 @@
 			0
 			0
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1810,7 +1850,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1823,7 +1863,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1836,7 +1876,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1849,7 +1889,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1862,7 +1902,7 @@
 			9e+06
 			0.01
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1875,7 +1915,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1888,7 +1928,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1901,7 +1941,7 @@
 			0
 			1
 			0
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float</Type>
@@ -1911,7 +1951,7 @@
 			<Annotation />
 			<Values value="1" >
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1924,7 +1964,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1937,7 +1977,7 @@
 			255
 			0
 			0
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -2015,7 +2055,7 @@
 			MipFilter Point
 			MinFilter Point
 			MagFilter Point
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -2029,7 +2069,7 @@
 			MipFilter Point
 			MinFilter Point
 			MagFilter Point
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -2043,7 +2083,7 @@
 			MipFilter Point
 			MinFilter Point
 			MagFilter Point
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -2057,7 +2097,15 @@
 			MipFilter Point
 			MinFilter Linear
 			MagFilter Linear
-			</Values>
+		</Values>
+		</Item>
+		<Item>
+			<Type>float4</Type>
+			<ArrayCount value="0" />
+			<Name1>NearFarPlane</Name1>
+			<Name2>NearFarPlane</Name2>
+			<Annotation />
+			<Values />
 		</Item>
 	</GlobalVariables>
 	<LocalVariables value="13" >
@@ -2075,7 +2123,7 @@
 			</Annotation>
 			<Values value="1" >
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -2097,7 +2145,7 @@
 			MipFilter Linear
 			MinFilter Anisotropic
 			MagFilter Linear
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float</Type>
@@ -2107,7 +2155,7 @@
 			<Annotation />
 			<Values value="1" >
 			1280
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float2</Type>
@@ -2124,7 +2172,7 @@
 			-1
 			0
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float</Type>
@@ -2155,7 +2203,7 @@
 			</Annotation>
 			<Values value="1" >
 			100
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float</Type>
@@ -2186,7 +2234,7 @@
 			</Annotation>
 			<Values value="1" >
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float3</Type>
@@ -2224,7 +2272,7 @@
 			1
 			0
 			0
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float</Type>
@@ -2260,7 +2308,7 @@
 			</Annotation>
 			<Values value="1" >
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float</Type>
@@ -2291,7 +2339,7 @@
 			</Annotation>
 			<Values value="1" >
 			0.45
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float3</Type>
@@ -2303,7 +2351,7 @@
 			0.2125
 			0.7154
 			0.0721
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -2329,7 +2377,7 @@
 			MinFilter Anisotropic
 			MagFilter Linear
 			MipFilter Linear
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -2355,7 +2403,7 @@
 			MipFilter Linear
 			MinFilter Anisotropic
 			MagFilter Linear
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -2378,7 +2426,7 @@
 			MinFilter Linear
 			MagFilter Linear
 			MipFilter Linear
-			</Values>
+		</Values>
 		</Item>
 	</LocalVariables>
 	<Techniques value="22" >

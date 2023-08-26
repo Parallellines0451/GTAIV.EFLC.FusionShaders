@@ -58,6 +58,7 @@
 //
 
     ps_3_0
+    def c127, 0.9999999, 1, 0, 0
     def c0, 0.125, 0.00200000009, 0.0511999987, 9.99999975e-006
     def c1, 0.00039999999, 0.00111111114, 1, 0
     def c2, 0.002499999945, 0.0113636367, 0.256000012, 1.02400005	// 1/4 tiling
@@ -82,6 +83,7 @@
     dcl_texcoord2 v2
     dcl_texcoord3 v3
     dcl_texcoord4 v4.xyw
+    dcl_texcoord9 v9
     dcl_2d s0
     dcl_2d s1
     dcl_2d s2
@@ -245,6 +247,23 @@
     mul r7.xyz, r7, r0.x
     mad r7.xyz, r7, c3.xxyw, c3.y
     texld r8, r7.zyzw, s2
+	// ----------- Log to Linear -----------
+	if_ne r8.x, c127.y
+		rcp r20.x, c128.x
+		mul r20.x, r20.x, c128.y
+		pow r20.x, r20.x, r8.x
+		mul r20.x, r20.x, c128.x	// W_clip
+		
+		add r20.y, r20.x, -c128.x
+		add r20.z, c128.y, -c128.x
+		mul r20.y, r20.y, c128.y
+		mul r20.z, r20.z, r20.x
+		rcp r20.z, r20.z
+		mul r20.w, r20.y, r20.z		// Linear depth
+		
+		min r8, r20.w, c127.x	// FP error hack
+	endif
+	// -------------------------------------
     add r0.x, -c75.x, c75.y
     rcp r0.x, r0.x
     mad r0.w, c75.y, -r0.x, r8.x
@@ -319,5 +338,14 @@
     mad r1.xyz, r1.xzww, c9.w, r2
     lrp r2.xyz, r0.z, r1, r0.xyww
     mul oC0.xyz, r2, c39.y
+	// ----------- Linear to Log -----------
+	rcp r20.z, c128.x
+	mul r20.x, v9.w, r20.z
+	mul r20.y, c128.y, r20.z
+	log r20.x, r20.x
+	log r20.y, r20.y
+	rcp r20.y, r20.y
+	mul oDepth, r20.x, r20.y
+	// -------------------------------------
 
 // approximately 243 instruction slots used (19 texture, 224 arithmetic)

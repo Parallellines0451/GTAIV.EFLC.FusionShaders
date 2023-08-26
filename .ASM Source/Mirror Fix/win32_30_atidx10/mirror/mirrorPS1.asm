@@ -20,6 +20,7 @@
     ps_3_0
     def c0, -1.75, -0.5, -0.285714298, 0.5
     dcl_texcoord v0.xyw
+    dcl_texcoord9 v9
     dcl_2d s0
     mov r0.y, v0_abs.w
     rcp r0.x, r0.y
@@ -29,5 +30,14 @@
     texld r0, r0, s0
     mul oC0.xyz, r0, c39.y
     mov oC0.w, c46.x
+	// ----------- Linear to Log -----------
+	rcp r20.z, c128.x
+	mul r20.x, v9.w, r20.z
+	mul r20.y, c128.y, r20.z
+	log r20.x, r20.x
+	log r20.y, r20.y
+	rcp r20.y, r20.y
+	mul oDepth, r20.x, r20.y
+	// -------------------------------------
 
 // approximately 8 instruction slots used (1 texture, 7 arithmetic)

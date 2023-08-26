@@ -20,6 +20,7 @@
     def c1, 3.99600005, 4, 0.125, 0.25
     dcl_texcoord v0.xy
     dcl vPos.xy
+    dcl_texcoord9 v9
     dcl_2d s0
     dcl_2d s10
     texld r0, v0, s0
@@ -39,5 +40,14 @@
     cmp r1, -r1.y, c0.x, c0.y
     texkill r1
     mov oC0, r0.w
+	// ----------- Linear to Log -----------
+	rcp r20.z, c128.x
+	mul r20.x, v9.w, r20.z
+	mul r20.y, c128.y, r20.z
+	log r20.x, r20.x
+	log r20.y, r20.y
+	rcp r20.y, r20.y
+	mul oDepth, r20.x, r20.y
+	// -------------------------------------
 
 // approximately 17 instruction slots used (2 texture, 15 arithmetic)

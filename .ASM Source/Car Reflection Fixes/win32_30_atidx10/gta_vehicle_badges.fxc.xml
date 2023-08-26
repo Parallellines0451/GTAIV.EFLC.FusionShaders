@@ -252,7 +252,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_badges\gta_vehicle_badgesPS2.asm</File>
-				<Variables value="51" >
+				<Variables value="52" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -508,12 +508,17 @@
 						<Name>specMapIntMask</Name>
 						<Index value="72" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_badges\gta_vehicle_badgesPS3.asm</File>
-				<Variables value="27" >
+				<Variables value="28" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -649,12 +654,17 @@
 						<Name>specMapIntMask</Name>
 						<Index value="72" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_badges\gta_vehicle_badgesPS4.asm</File>
-				<Variables value="39" >
+				<Variables value="40" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -850,12 +860,17 @@
 						<Name>specMapIntMask</Name>
 						<Index value="72" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_badges\gta_vehicle_badgesPS5.asm</File>
-				<Variables value="11" >
+				<Variables value="12" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -911,12 +926,17 @@
 						<Name>stencil</Name>
 						<Index value="52" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_badges\gta_vehicle_badgesPS6.asm</File>
-				<Variables value="3" >
+				<Variables value="4" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>TextureSampler</Name>
@@ -932,11 +952,16 @@
 						<Name>matDiffuseColor</Name>
 						<Index value="66" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
+					</Item>
 				</Variables>
 			</Item>
 		</PixelShaders>
 	</Shaders>
-	<GlobalVariables value="59" >
+	<GlobalVariables value="60" >
 		<Item>
 			<Type>float4</Type>
 			<ArrayCount value="64" />
@@ -997,7 +1022,7 @@
 			MipFilter Point
 			AddressU Wrap
 			AddressV Wrap
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1010,7 +1035,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1242,7 +1267,7 @@
 			0
 			0
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1266,7 +1291,7 @@
 			0
 			0
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1279,7 +1304,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1292,7 +1317,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1305,7 +1330,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1318,7 +1343,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1331,7 +1356,7 @@
 			9e+06
 			0.01
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1344,7 +1369,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1357,7 +1382,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1370,7 +1395,7 @@
 			0
 			1
 			0
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float</Type>
@@ -1380,7 +1405,7 @@
 			<Annotation />
 			<Values value="1" >
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1393,7 +1418,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1406,7 +1431,7 @@
 			255
 			0
 			0
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1484,7 +1509,7 @@
 			MipFilter Point
 			MinFilter Point
 			MagFilter Point
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -1498,7 +1523,7 @@
 			MipFilter Point
 			MinFilter Point
 			MagFilter Point
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -1512,7 +1537,7 @@
 			MipFilter Point
 			MinFilter Point
 			MagFilter Point
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -1526,7 +1551,15 @@
 			MipFilter Point
 			MinFilter Linear
 			MagFilter Linear
-			</Values>
+		</Values>
+		</Item>
+		<Item>
+			<Type>float4</Type>
+			<ArrayCount value="0" />
+			<Name1>NearFarPlane</Name1>
+			<Name2>NearFarPlane</Name2>
+			<Annotation />
+			<Values />
 		</Item>
 	</GlobalVariables>
 	<LocalVariables value="18" >
@@ -1550,7 +1583,7 @@
 			MipFilter Linear
 			MinFilter Anisotropic
 			MagFilter Linear
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>int</Type>
@@ -1566,7 +1599,7 @@
 			</Annotation>
 			<Values value="1" >
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -1581,7 +1614,7 @@
 			MipFilter Point
 			MinFilter Point
 			MagFilter Point
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>bool</Type>
@@ -1591,7 +1624,7 @@
 			<Annotation />
 			<Values value="1" >
 			0
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float</Type>
@@ -1609,7 +1642,7 @@
 			<Annotation />
 			<Values value="1" >
 			1280
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float3</Type>
@@ -1642,7 +1675,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float4</Type>
@@ -1655,7 +1688,7 @@
 			1
 			1
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float</Type>
@@ -1686,7 +1719,7 @@
 			</Annotation>
 			<Values value="1" >
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float</Type>
@@ -1717,7 +1750,7 @@
 			</Annotation>
 			<Values value="1" >
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float3</Type>
@@ -1755,7 +1788,7 @@
 			1
 			0
 			0
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float</Type>
@@ -1791,7 +1824,7 @@
 			</Annotation>
 			<Values value="1" >
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float</Type>
@@ -1822,7 +1855,7 @@
 			</Annotation>
 			<Values value="1" >
 			1
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>float3</Type>
@@ -1834,7 +1867,7 @@
 			0.2125
 			0.7154
 			0.0721
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -1860,7 +1893,7 @@
 			MipFilter Linear
 			MinFilter Anisotropic
 			MagFilter Linear
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -1886,7 +1919,7 @@
 			MipFilter Linear
 			MinFilter Linear
 			MagFilter Linear
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -1898,7 +1931,7 @@
 			MinFilter Linear
 			MagFilter Linear
 			MipFilter Linear
-			</Values>
+		</Values>
 		</Item>
 		<Item>
 			<Type>sampler</Type>
@@ -1912,7 +1945,7 @@
 			MipFilter Point
 			AddressU Clamp
 			AddressV Clamp
-			</Values>
+		</Values>
 		</Item>
 	</LocalVariables>
 	<Techniques value="13" >

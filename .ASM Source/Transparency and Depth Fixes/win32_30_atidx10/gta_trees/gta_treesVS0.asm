@@ -34,6 +34,7 @@
     dcl_color v2
     dcl_texcoord v3
     dcl_position o0
+    dcl_texcoord9 o10
     dcl_texcoord o1.xy
     dcl_texcoord1 o2.xyz
     dcl_texcoord2 o3.xy
@@ -77,6 +78,7 @@
     mad r1, r0.x, c8, r1
     mad r0, r0.z, c10, r1
     add o0, r0, c11
+    add o10, r0, c11
     mul r0.xyz, c1, v0.y
     mad r0.xyz, v0.x, c0, r0
     mad r0.xyz, v0.z, c2, r0
