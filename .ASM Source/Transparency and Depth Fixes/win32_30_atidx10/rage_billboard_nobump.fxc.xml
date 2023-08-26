@@ -4,122 +4,54 @@
 <Platform>PC</Platform>
 <Effect>
 	<Shaders>
-		<VertexShaders value="5" >
+		<VertexShaders value="3" >
 			<Item>
 				<DataType>asm</DataType>
-				<File>gta_trees\gta_treesVS0.asm</File>
-				<Variables value="6" >
-					<Item>
-						<Type>float4</Type>
-						<Name>colorize</Name>
-						<Index value="51" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>gDayNightEffects</Name>
-						<Index value="45" />
-					</Item>
-					<Item>
-						<Type>float4x4</Type>
-						<Name>gWorld</Name>
-						<Index value="0" />
-					</Item>
+				<File>rage_billboard_nobump\rage_billboard_nobumpVS0.asm</File>
+				<Variables value="4" >
 					<Item>
 						<Type>float4x4</Type>
 						<Name>gWorldViewProj</Name>
 						<Index value="8" />
 					</Item>
 					<Item>
-						<Type>float4</Type>
-						<Name>globalScalars</Name>
-						<Index value="39" />
+						<Type>float3</Type>
+						<Name>imposterWorldX</Name>
+						<Index value="208" />
 					</Item>
 					<Item>
-						<Type>float4</Type>
-						<Name>globalScalars2</Name>
-						<Index value="40" />
+						<Type>float3</Type>
+						<Name>imposterWorldY</Name>
+						<Index value="209" />
+					</Item>
+					<Item>
+						<Type>float3</Type>
+						<Name>imposterWorldZ</Name>
+						<Index value="210" />
 					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
-				<File>gta_trees\gta_treesVS1.asm</File>
+				<File>rage_billboard_nobump\rage_billboard_nobumpVS1.asm</File>
 				<Variables value="1" >
-					<Item>
-						<Type>float4x4</Type>
-						<Name>gWorldViewProj</Name>
-						<Index value="8" />
-					</Item>
-				</Variables>
-			</Item>
-			<Item>
-				<DataType>asm</DataType>
-				<File>gta_trees\gta_treesVS2.asm</File>
-				<Variables value="5" >
-					<Item>
-						<Type>float4</Type>
-						<Name>gDayNightEffects</Name>
-						<Index value="45" />
-					</Item>
-					<Item>
-						<Type>float4x4</Type>
-						<Name>gWorld</Name>
-						<Index value="0" />
-					</Item>
-					<Item>
-						<Type>float4x4</Type>
-						<Name>gWorldViewProj</Name>
-						<Index value="8" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScalars</Name>
-						<Index value="39" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScalars2</Name>
-						<Index value="40" />
-					</Item>
-				</Variables>
-			</Item>
-			<Item>
-				<DataType>asm</DataType>
-				<File>gta_trees\gta_treesVS3.asm</File>
-				<Variables value="3" >
 					<Item>
 						<Type>float4x4</Type>
 						<Name>gShadowMatrix</Name>
 						<Index value="60" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>colorize</Name>
-						<Index value="51" />
-					</Item>
-					<Item>
-						<Type>float4x4</Type>
-						<Name>gWorld</Name>
-						<Index value="0" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
-				<File>gta_trees\gta_treesVS4.asm</File>
-				<Variables value="1" >
-					<Item>
-						<Type>float4x4</Type>
-						<Name>gWorldViewProj</Name>
-						<Index value="8" />
-					</Item>
-				</Variables>
+				<File>rage_billboard_nobump\rage_billboard_nobumpVS2.asm</File>
+				<Variables />
 			</Item>
 		</VertexShaders>
-		<PixelShaders value="6" >
+		<PixelShaders value="4" >
 			<Item>
 				<DataType>asm</DataType>
-				<File>gta_trees\gta_treesPS1.asm</File>
+				<File>rage_billboard_nobump\rage_billboard_nobumpPS1.asm</File>
 				<Variables value="3" >
 					<Item>
 						<Type>sampler</Type>
@@ -128,66 +60,8 @@
 					</Item>
 					<Item>
 						<Type>sampler</Type>
-						<Name>TextureSampler</Name>
+						<Name>imposterSampler</Name>
 						<Index value="0" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScalars</Name>
-						<Index value="39" />
-					</Item>
-				</Variables>
-			</Item>
-			<Item>
-				<DataType>asm</DataType>
-				<File>gta_trees\gta_treesPS2.asm</File>
-				<Variables value="1" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>TextureSampler</Name>
-						<Index value="0" />
-					</Item>
-				</Variables>
-			</Item>
-			<Item>
-				<DataType>asm</DataType>
-				<File>gta_trees\gta_treesPS3.asm</File>
-				<Variables value="2" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
-					<Item>
-						<Type>sampler</Type>
-						<Name>TextureSampler</Name>
-						<Index value="0" />
-					</Item>
-				</Variables>
-			</Item>
-			<Item>
-				<DataType>asm</DataType>
-				<File>gta_trees\gta_treesPS4.asm</File>
-				<Variables value="5" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
-					<Item>
-						<Type>sampler</Type>
-						<Name>TextureSampler</Name>
-						<Index value="0" />
-					</Item>
-					<Item>
-						<Type>float</Type>
-						<Name>altRemap</Name>
-						<Index value="88" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>colorize</Name>
-						<Index value="51" />
 					</Item>
 					<Item>
 						<Type>float3</Type>
@@ -198,49 +72,73 @@
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
-				<File>gta_trees\gta_treesPS5.asm</File>
+				<File>rage_billboard_nobump\rage_billboard_nobumpPS2.asm</File>
 				<Variables value="3" >
 					<Item>
 						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
-					<Item>
-						<Type>sampler</Type>
-						<Name>TextureSampler</Name>
-						<Index value="0" />
+						<Name>blitSampler</Name>
+						<Index value="1" />
 					</Item>
 					<Item>
 						<Type>float4</Type>
-						<Name>globalScalars</Name>
-						<Index value="39" />
+						<Name>g_ImposterSize</Name>
+						<Index value="66" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>imposterSampler</Name>
+						<Index value="0" />
 					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
-				<File>gta_trees\gta_treesPS6.asm</File>
-				<Variables value="2" >
+				<File>rage_billboard_nobump\rage_billboard_nobumpPS3.asm</File>
+				<Variables value="3" >
 					<Item>
 						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
+						<Name>blitSampler</Name>
+						<Index value="1" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>g_ImposterSize</Name>
+						<Index value="66" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>
-						<Name>TextureSampler</Name>
+						<Name>imposterSampler</Name>
+						<Index value="0" />
+					</Item>
+				</Variables>
+			</Item>
+			<Item>
+				<DataType>asm</DataType>
+				<File>rage_billboard_nobump\rage_billboard_nobumpPS4.asm</File>
+				<Variables value="1" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>blitSampler</Name>
 						<Index value="0" />
 					</Item>
 				</Variables>
 			</Item>
 		</PixelShaders>
 	</Shaders>
-	<GlobalVariables value="58" >
+	<GlobalVariables value="59" >
 		<Item>
 			<Type>float4</Type>
 			<ArrayCount value="64" />
 			<Name1>gAllGlobals</Name1>
 			<Name2>AllGlobals</Name2>
+			<Annotation />
+			<Values />
+		</Item>
+		<Item>
+			<Type>float4x3</Type>
+			<ArrayCount value="48" />
+			<Name1>gBoneMtx</Name1>
+			<Name2>WorldMatrixArray</Name2>
 			<Annotation />
 			<Values />
 		</Item>
@@ -820,7 +718,7 @@
 			</Values>
 		</Item>
 	</GlobalVariables>
-	<LocalVariables value="7" >
+	<LocalVariables value="12" >
 		<Item>
 			<Type>sampler</Type>
 			<ArrayCount value="0" />
@@ -883,6 +781,49 @@
 			</Values>
 		</Item>
 		<Item>
+			<Type>sampler</Type>
+			<ArrayCount value="0" />
+			<Name1>imposterSampler</Name1>
+			<Name2>imposterTexture</Name2>
+			<Annotation value="1" >
+				<Item>
+					<Name>UIName</Name>
+					<Type>String</Type>
+					<Value>Diffuse Billboard Texture</Value>
+				</Item>
+			</Annotation>
+			<Values value="12" >
+			AddressU Clamp
+			AddressV Clamp
+			AddressW Clamp
+			MipFilter None
+			MinFilter Linear
+			MagFilter Linear
+			</Values>
+		</Item>
+		<Item>
+			<Type>sampler</Type>
+			<ArrayCount value="0" />
+			<Name1>blitSampler</Name1>
+			<Name2>blitTexture</Name2>
+			<Annotation value="1" >
+				<Item>
+					<Name>UIName</Name>
+					<Type>String</Type>
+					<Value>Blit Texture</Value>
+				</Item>
+			</Annotation>
+			<Values value="14" >
+			AddressU Wrap
+			AddressV Wrap
+			AddressW Wrap
+			MipFilter None
+			MinFilter Point
+			MagFilter Point
+			MipMapLodBias 8
+			</Values>
+		</Item>
+		<Item>
 			<Type>float3</Type>
 			<ArrayCount value="8" />
 			<Name1>imposterDir</Name1>
@@ -913,6 +854,55 @@
 			0.57735
 			-0.57735
 			-0.57735
+			</Values>
+		</Item>
+		<Item>
+			<Type>float3</Type>
+			<ArrayCount value="0" />
+			<Name1>imposterWorldX</Name1>
+			<Name2>imposterWorldX</Name2>
+			<Annotation />
+			<Values value="3" >
+			1
+			0
+			0
+			</Values>
+		</Item>
+		<Item>
+			<Type>float3</Type>
+			<ArrayCount value="0" />
+			<Name1>imposterWorldY</Name1>
+			<Name2>imposterWorldY</Name2>
+			<Annotation />
+			<Values value="3" >
+			0
+			1
+			0
+			</Values>
+		</Item>
+		<Item>
+			<Type>float3</Type>
+			<ArrayCount value="0" />
+			<Name1>imposterWorldZ</Name1>
+			<Name2>imposterWorldZ</Name2>
+			<Annotation />
+			<Values value="3" >
+			0
+			0
+			1
+			</Values>
+		</Item>
+		<Item>
+			<Type>float4</Type>
+			<ArrayCount value="0" />
+			<Name1>g_ImposterSize</Name1>
+			<Name2>g_ImposterSize</Name2>
+			<Annotation />
+			<Values value="4" >
+			128
+			8
+			16
+			0.015625
 			</Values>
 		</Item>
 		<Item>
@@ -972,109 +962,57 @@
 			0
 			</Values>
 		</Item>
-		<Item>
-			<Type>float</Type>
-			<ArrayCount value="16" />
-			<Name1>altRemap</Name1>
-			<Name2>altRemap</Name2>
-			<Annotation />
-			<Values value="16" >
-			0
-			2
-			6
-			8
-			10
-			11
-			7
-			12
-			9
-			13
-			5
-			14
-			14
-			14
-			13
-			15
-			</Values>
-		</Item>
 	</LocalVariables>
-	<Techniques value="8" >
+	<Techniques value="6" >
 		<Item>
-			<Name>deferred_draw</Name>
-			<Passes value="2" >
+			<Name>draw</Name>
+			<Passes value="1" >
 				<Item>
 					<VertexShader>0</VertexShader>
 					<PixelShader>1</PixelShader>
-					<Params value="8" >
+					<Params value="4" >
 						<Item>
 							<Type value="16" />
 							<Value value="3" />
-						</Item>
-						<Item>
-							<Type value="6" />
-							<Value value="3" />
-						</Item>
-						<Item>
-							<Type value="10" />
-							<Value value="0" />
 						</Item>
 						<Item>
 							<Type value="3" />
 							<Value value="0" />
 						</Item>
 						<Item>
-							<Type value="19" />
-							<Value value="7" />
+							<Type value="10" />
+							<Value value="0" />
 						</Item>
 						<Item>
-							<Type value="20" />
-							<Value value="7" />
-						</Item>
-						<Item>
-							<Type value="21" />
-							<Value value="7" />
-						</Item>
-						<Item>
-							<Type value="22" />
-							<Value value="15" />
+							<Type value="6" />
+							<Value value="1" />
 						</Item>
 					</Params>
 				</Item>
+			</Passes>
+		</Item>
+		<Item>
+			<Name>deferred_draw</Name>
+			<Passes value="1" >
 				<Item>
 					<VertexShader>0</VertexShader>
 					<PixelShader>1</PixelShader>
-					<Params value="8" >
+					<Params value="4" >
 						<Item>
 							<Type value="16" />
 							<Value value="3" />
-						</Item>
-						<Item>
-							<Type value="6" />
-							<Value value="2" />
-						</Item>
-						<Item>
-							<Type value="10" />
-							<Value value="0" />
 						</Item>
 						<Item>
 							<Type value="3" />
 							<Value value="0" />
 						</Item>
 						<Item>
-							<Type value="19" />
-							<Value value="7" />
+							<Type value="10" />
+							<Value value="0" />
 						</Item>
 						<Item>
-							<Type value="20" />
-							<Value value="7" />
-						</Item>
-						<Item>
-							<Type value="21" />
-							<Value value="7" />
-						</Item>
-						<Item>
-							<Type value="22" />
-							<Value value="15" />
+							<Type value="6" />
+							<Value value="1" />
 						</Item>
 					</Params>
 				</Item>
@@ -1086,38 +1024,55 @@
 				<Item>
 					<VertexShader>0</VertexShader>
 					<PixelShader>1</PixelShader>
-					<Params value="3" >
+					<Params value="4" >
 						<Item>
-							<Type value="6" />
-							<Value value="1" />
+							<Type value="16" />
+							<Value value="3" />
+						</Item>
+						<Item>
+							<Type value="3" />
+							<Value value="0" />
 						</Item>
 						<Item>
 							<Type value="10" />
 							<Value value="0" />
 						</Item>
 						<Item>
-							<Type value="3" />
-							<Value value="0" />
+							<Type value="6" />
+							<Value value="1" />
 						</Item>
 					</Params>
 				</Item>
 			</Passes>
 		</Item>
 		<Item>
-			<Name>draw</Name>
+			<Name>wd_draw</Name>
 			<Passes value="1" >
 				<Item>
 					<VertexShader>1</VertexShader>
 					<PixelShader>2</PixelShader>
-					<Params />
+					<Params value="3" >
+						<Item>
+							<Type value="3" />
+							<Value value="0" />
+						</Item>
+						<Item>
+							<Type value="10" />
+							<Value value="0" />
+						</Item>
+						<Item>
+							<Type value="6" />
+							<Value value="1" />
+						</Item>
+					</Params>
 				</Item>
 			</Passes>
 		</Item>
 		<Item>
-			<Name>imposter_draw</Name>
+			<Name>wd_masked_draw</Name>
 			<Passes value="1" >
 				<Item>
-					<VertexShader>2</VertexShader>
+					<VertexShader>1</VertexShader>
 					<PixelShader>3</PixelShader>
 					<Params value="3" >
 						<Item>
@@ -1137,35 +1092,12 @@
 			</Passes>
 		</Item>
 		<Item>
-			<Name>imposterdeferred_draw</Name>
+			<Name>blit_average</Name>
 			<Passes value="1" >
 				<Item>
 					<VertexShader>2</VertexShader>
 					<PixelShader>4</PixelShader>
-					<Params value="2" >
-						<Item>
-							<Type value="3" />
-							<Value value="0" />
-						</Item>
-						<Item>
-							<Type value="6" />
-							<Value value="1" />
-						</Item>
-					</Params>
-				</Item>
-			</Passes>
-		</Item>
-		<Item>
-			<Name>wd_draw</Name>
-			<Passes value="1" >
-				<Item>
-					<VertexShader>3</VertexShader>
-					<PixelShader>5</PixelShader>
 					<Params value="3" >
-						<Item>
-							<Type value="6" />
-							<Value value="1" />
-						</Item>
 						<Item>
 							<Type value="3" />
 							<Value value="0" />
@@ -1174,40 +1106,11 @@
 							<Type value="10" />
 							<Value value="0" />
 						</Item>
-					</Params>
-				</Item>
-			</Passes>
-		</Item>
-		<Item>
-			<Name>wd_masked_draw</Name>
-			<Passes value="1" >
-				<Item>
-					<VertexShader>3</VertexShader>
-					<PixelShader>5</PixelShader>
-					<Params value="3" >
 						<Item>
 							<Type value="6" />
 							<Value value="1" />
 						</Item>
-						<Item>
-							<Type value="3" />
-							<Value value="0" />
-						</Item>
-						<Item>
-							<Type value="10" />
-							<Value value="0" />
-						</Item>
 					</Params>
-				</Item>
-			</Passes>
-		</Item>
-		<Item>
-			<Name>impostershadow_draw</Name>
-			<Passes value="1" >
-				<Item>
-					<VertexShader>4</VertexShader>
-					<PixelShader>6</PixelShader>
-					<Params />
 				</Item>
 			</Passes>
 		</Item>
