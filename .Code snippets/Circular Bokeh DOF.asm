@@ -38,7 +38,6 @@
 		mul r22, c76, r20.z // texel size * radius
 		mul r22, r22, c44.y // multiply by resolution height
 		mul r22, r22, r20.x // divide by 720
-		mov r23.w, c1.x		// mip = 0
 	
 		// first ring
 	

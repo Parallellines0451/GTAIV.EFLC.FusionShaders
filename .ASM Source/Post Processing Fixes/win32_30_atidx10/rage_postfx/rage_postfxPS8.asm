@@ -18,44 +18,73 @@
 //
 
     ps_3_0
-    def c0, 0.333, 0.0625, 0.0020833, 0	// x = radius multiplier, y = center weight, z = center weight * radius multiplier / 10
-	// vanilla c0.x = 1, y = 0.172413796, z = 0.0172413796 (vanilla non averaged weights are 1, 0.9, 0.8, 0.7)
-	def c1, 0.0013889, 1, 0, 0			// x = 1/720
-	defi i0, 9, 0, 0, 0
-	// vanilla i0 = 3
+    def c0, 0.0013889, 1, 0, 1080			// x = 1/720
+    def c1, 0.5, 0.0917431, 0.0045871, 0	// x = radius multiplier, y = center weight, z = center weight * radius multiplier / 10
+	def c2, 0.333, 0.0625, 0.0020833, 0
+	defi i0, 6, 0, 0, 0
+	defi i1, 9, 0, 0, 0
     dcl_texcoord v0.xy
     dcl_2d s0
 	
 	texld r0, v0, s0					// center point
-	mov r1, c1.z						// sum = 0
-	mov r2.xy, c0.wx					// copy offset, c0.xw for horizontal pass, wx for vertical pass
-	mul r2.xy, r2.xy, c44.y				// multiply by screen height
-	mul r2.xy, r2.xy, c1.x				// divide by 720
-	mov r3.xy, r2.xy					// copy offset
-	mov r4.x, c0.y						// copy center weight
-	
-	rep i0
-		add r4.x, r4.x, -c0.z			// subtract weight
+	mov r1, c0.z						// sum = 0
+	mov r2, c44
+	if_le r2.y, c0.w
+		mov r2.xy, c1.wx					// copy offset, c1.xw for horizontal pass, wx for vertical pass
+		mul r2.xy, r2.xy, c44.y				// multiply by screen height
+		mul r2.xy, r2.xy, c0.x				// divide by 720
+		mov r3.xy, r2.xy					// copy offset
+		mov r4.x, c1.y						// copy center weight
 		
-		mad r5.xy, c66, -r2.xy, v0		// calculate texcoord
-		texld r5, r5, s0				// sample texture
-		add r5, r5, -r0 				// subtract by center
-		max r5, r5, c1.z				// set negatives to 0
-		mul r5, r5, r4.x				// multiply by weight
-		add r1, r1, r5					// sum
+		rep i0
+			add r4.x, r4.x, -c1.z			// subtract weight
+			
+			mad r5.xy, c66, -r2.xy, v0		// calculate texcoord
+			texldl r5, r5, s0				// sample texture
+			add r5, r5, -r0 				// subtract by center
+			max r5, r5, c0.z				// set negatives to 0
+			mul r5, r5, r4.x				// multiply by weight
+			add r1, r1, r5					// sum
+			
+			mad r5.xy, c66, r2.xy, v0		// calculate texcoord
+			texldl r5, r5, s0				// sample texture
+			add r5, r5, -r0 				// subtract by center
+			max r5, r5, c0.z				// set negatives to 0
+			mul r5, r5, r4.x				// multiply by weight
+			add r1, r1, r5					// sum
+			
+			add r2.xy, r2.xy, r3.xy			// offset++
+		endrep
+	else
+		mov r2.xy, c2.wx					// copy offset, c2.xw for horizontal pass, wx for vertical pass
+		mul r2.xy, r2.xy, c44.y				// multiply by screen height
+		mul r2.xy, r2.xy, c0.x				// divide by 720
+		mov r3.xy, r2.xy					// copy offset
+		mov r4.x, c2.y						// copy center weight
 		
-		mad r5.xy, c66, r2.xy, v0		// calculate texcoord
-		texld r5, r5, s0				// sample texture
-		add r5, r5, -r0 				// subtract by center
-		max r5, r5, c1.z				// set negatives to 0
-		mul r5, r5, r4.x				// multiply by weight
-		add r1, r1, r5					// sum
-		
-		add r2.xy, r2.xy, r3.xy			// offset++
-	endrep
+		rep i1
+			add r4.x, r4.x, -c2.z			// subtract weight
+			
+			mad r5.xy, c66, -r2.xy, v0		// calculate texcoord
+			texldl r5, r5, s0				// sample texture
+			add r5, r5, -r0 				// subtract by center
+			max r5, r5, c0.z				// set negatives to 0
+			mul r5, r5, r4.x				// multiply by weight
+			add r1, r1, r5					// sum
+			
+			mad r5.xy, c66, r2.xy, v0		// calculate texcoord
+			texldl r5, r5, s0				// sample texture
+			add r5, r5, -r0 				// subtract by center
+			max r5, r5, c0.z				// set negatives to 0
+			mul r5, r5, r4.x				// multiply by weight
+			add r1, r1, r5					// sum
+			
+			add r2.xy, r2.xy, r3.xy			// offset++
+		endrep
+	endif
 
     add oC0.xyz, r1, r0					// offset samples + center
-    mov oC0.w, c1.y
+    mov oC0.w, c0.y
 
 // approximately 40 instruction slots used (7 texture, 33 arithmetic)
  
