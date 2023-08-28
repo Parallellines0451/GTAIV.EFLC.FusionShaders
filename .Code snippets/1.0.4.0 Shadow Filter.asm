@@ -1,10 +1,12 @@
+	// Shadow filter ported from 1.0.4.0; don't forget to use c53.xy to prevent filter separation
+
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
-    def c112, 3, 7.13800001, 2.4, 0
+    def c112, 3, 7.13800001, 3, 0
     def c113, 0.75, -0.5, 0.5, 0
 
 	mov r1.xy, c53.yy
-	mul r1.xy, r1.xy, c112.z			// *2.4 instead of *3 because CSM resolutions are multiples of 256 instead of 320
+	mul r1.xy, r1.xy, c112.z			// blur factor
 	
     mov r2.xy, c112.xy
     mul r2.xy, r2.xy, c44.xy			// r2.xy * screen dimensions
@@ -20,7 +22,7 @@
     texld r5, r5, s15					// sample #1
     mov r6.x, r5.x						// copy to r6
 	
-    mad r5.xy, r4.zw, r1.xy, r0.zw		// offset * texel size + UV
+    mad r5.xy, r3.zw, r1.xy, r0.zw		// offset * texel size + UV
     texld r5, r5, s15					// sample #2
     mov r6.y, r5.x						// copy to r6
 	
@@ -28,10 +30,10 @@
     texld r5, r5, s15					// sample #3
     mov r6.z, r5.x						// copy to r6
 	
-    mad r5.xy, r3.zw, r1.xy, r0.zw		// offset * texel size + UV
+    mad r5.xy, r4.zw, r1.xy, r0.zw		// offset * texel size + UV
     texld r5, r5, s15					// sample #4
     mov r6.w, r5.x						// copy to r6
 
-	add r6, r1.z, -r6
-	cmp r6, r6, c3.x, c3.y				// depth bias
+	add r6, r1.z, -r6					// depth bias
+	cmp r6, r6, c3.x, c3.y
 	dp4 r0.z, r6, c3.x					// sum
