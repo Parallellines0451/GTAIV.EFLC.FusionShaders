@@ -27,7 +27,6 @@
     dcl_texcoord v1
     dcl_position o0
     dcl_texcoord o1.xyz
-	
     mul r0.xyz, c4.zwzw, v0.zxyw
     mad r0.xyz, v0.yzxw, c4.wzzw, -r0
     add r0.xyz, r0, c5.x
@@ -36,7 +35,7 @@
     rsq r0.x, r0.x
     rcp r0.x, r0.x
     mad r0.y, r0.x, c4.x, c4.y
-	
+	// ------------------------------------------------------------- FusionFix Support --------------------------------------------------------------
 	mov r20, c51
 	mov r21, c4
 	if_eq c51.w, r21.w
@@ -45,7 +44,7 @@
 		endif
 	endif
 	mul r0.x, r0.x, r20.w
-	
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
     // mul r0.x, r0.x, c51.w
     mad r0.x, r0.x, c5.z, c5.y
     frc r0.x, r0.x
@@ -60,7 +59,6 @@
     mul r1.xyz, r0.y, r3
     mul r1.xyz, r1, c5.y
     mad r3.xyz, r1, r2.x, r0.xzww
-	
     mul r0.xyz, c1, r3.y
     mad r0.xyz, r3.x, c0, r0
     mad r0.xyz, r3.z, c2, r0
