@@ -437,12 +437,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_normal_spec_reflect_emissivenight\gta_normal_spec_reflect_emissivenightPS1.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -483,12 +478,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_normal_spec_reflect_emissivenight\gta_normal_spec_reflect_emissivenightPS2.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -794,12 +784,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_normal_spec_reflect_emissivenight\gta_normal_spec_reflect_emissivenightPS8.asm</File>
-				<Variables value="15" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="14" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -875,12 +860,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_normal_spec_reflect_emissivenight\gta_normal_spec_reflect_emissivenightPS9.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -921,12 +901,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_normal_spec_reflect_emissivenight\gta_normal_spec_reflect_emissivenightPS10.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -967,12 +942,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_normal_spec_reflect_emissivenight\gta_normal_spec_reflect_emissivenightPS11.asm</File>
-				<Variables value="51" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="50" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>

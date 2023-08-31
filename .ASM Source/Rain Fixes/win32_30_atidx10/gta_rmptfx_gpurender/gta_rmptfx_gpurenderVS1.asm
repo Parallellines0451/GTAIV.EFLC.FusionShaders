@@ -91,7 +91,7 @@
     def c0, 0, 0.5, -0.5, 0.699999988
     def c1, 0.0500000007, -10, 0.100000001, 9.99999975e-006
     def c2, 1, 1.11111116, 0.200000003, 0
-	def c3, 4, 0, 0, 0.25
+	def c3, 4, 0.25, 0, 0
     dcl_position v0
     dcl_texcoord v1
     dcl_2d s0
@@ -127,7 +127,7 @@
       mad r2, r1.x, c8, r2
       mad r2, r1.z, c10, r2
       add o0, r2, c11
-    add o10, r2, c11
+    add o10.zw, r2, c11
       mov r2.x, c1.x
       add r1.w, r2.x, c76.w
       mov r2.xyz, c76
@@ -149,7 +149,7 @@
       mad r6, r1.x, c8, r6
       mad r6, r1.z, c10, r6
       add o0, r6, c11
-    add o10, r6, c11
+    add o10.zw, r6, c11
       mad r0.w, r5.w, c75.x, -c75.y
       frc r2.w, r0.w
       add r3.w, r0.w, -r2.w
@@ -292,15 +292,15 @@
     dp4 r6.z, c31, r5
 	// ---------------------------------------------------------- Improved Rain Visibility ----------------------------------------------------------
 	mov r20, c3
-	mul r21.x, c80.x, r20.x	// increase ambient influence
-	mul r21.w, c18.w, r20.w	// decrease directional influence
+	mul r20.x, c80.x, r20.x	// increase ambient influence
+	mul r20.y, c18.w, r20.y	// decrease directional influence
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
-    mad r5.xyz, r1, r21.w, r6
+    mad r5.xyz, r1, r20.y, r6
     dp3 r0.w, r3, c6
     mad_sat r0.w, r0.w, c0.z, c0.y
     mov r6.xyz, c38
     mad r6.xyz, r6, r0.w, c37
-    mad r5.xyz, r6, r21.x, r5
+    mad r5.xyz, r6, r20.x, r5
     mul r7, r3.x, r9
     mad r7, r3.y, r10, r7
     mad r3, r3.z, r11, r7
@@ -308,8 +308,8 @@
     dp4 r7.x, c29, r3
     dp4 r7.y, c30, r3
     dp4 r7.z, c31, r3
-    mad r1.xyz, r1, r21.w, r7
-    mad r1.xyz, r6, r21.x, r1
+    mad r1.xyz, r1, r20.y, r7
+    mad r1.xyz, r6, r20.x, r1
     add r1.xyz, r5, r1
     mul o1.xyz, r2, r1
     add r0.xyz, -r0, c15
@@ -323,5 +323,9 @@
     mul o1.w, r1.w, r0.x
     mov r4.y, v1.y
     mov o2.xy, r4
+    mov r20.x, c8.w
+    add r20.x, r20.x, c9.w
+    add r20.x, r20.x, c10.w
+    add o10.y, r20.x, c11.w
 
 // approximately 247 instruction slots used (4 texture, 243 arithmetic)

@@ -437,12 +437,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_emissivenight\gta_glass_emissivenightPS1.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -483,12 +478,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_emissivenight\gta_glass_emissivenightPS2.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -774,12 +764,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_emissivenight\gta_glass_emissivenightPS8.asm</File>
-				<Variables value="15" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="14" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -855,12 +840,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_emissivenight\gta_glass_emissivenightPS9.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -901,12 +881,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_emissivenight\gta_glass_emissivenightPS10.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -947,12 +922,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_emissivenight\gta_glass_emissivenightPS11.asm</File>
-				<Variables value="49" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="48" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>

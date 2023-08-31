@@ -407,12 +407,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivestrong\gta_emissivestrongPS1.asm</File>
-				<Variables value="7" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="6" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -448,12 +443,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivestrong\gta_emissivestrongPS2.asm</File>
-				<Variables value="7" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="6" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -659,12 +649,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivestrong\gta_emissivestrongPS8.asm</File>
-				<Variables value="12" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="11" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -736,12 +721,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivestrong\gta_emissivestrongPS10.asm</File>
-				<Variables value="7" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="6" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -777,12 +757,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivestrong\gta_emissivestrongPS11.asm</File>
-				<Variables value="7" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="6" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -818,12 +793,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivestrong\gta_emissivestrongPS12.asm</File>
-				<Variables value="43" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="42" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>

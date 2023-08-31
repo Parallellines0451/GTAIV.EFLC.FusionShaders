@@ -407,12 +407,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissive\gta_emissivePS1.asm</File>
-				<Variables value="7" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="6" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -448,12 +443,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissive\gta_emissivePS2.asm</File>
-				<Variables value="7" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="6" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -639,12 +629,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissive\gta_emissivePS8.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -696,12 +681,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissive\gta_emissivePS10.asm</File>
-				<Variables value="7" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="6" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -737,12 +717,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissive\gta_emissivePS11.asm</File>
-				<Variables value="7" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="6" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -778,12 +753,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissive\gta_emissivePS12.asm</File>
-				<Variables value="43" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="42" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>

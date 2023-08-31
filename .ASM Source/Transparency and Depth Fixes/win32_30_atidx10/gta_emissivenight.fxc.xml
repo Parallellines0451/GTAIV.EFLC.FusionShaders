@@ -407,12 +407,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivenight\gta_emissivenightPS1.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -453,12 +448,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivenight\gta_emissivenightPS2.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -674,12 +664,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivenight\gta_emissivenightPS8.asm</File>
-				<Variables value="13" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="12" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -756,12 +741,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivenight\gta_emissivenightPS10.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -802,12 +782,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivenight\gta_emissivenightPS11.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="7" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -848,12 +823,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivenight\gta_emissivenightPS12.asm</File>
-				<Variables value="43" >
-					<Item>
-						<Type>float</Type>
-						<Name>zShift</Name>
-						<Index value="210" />
-					</Item>
+				<Variables value="42" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
