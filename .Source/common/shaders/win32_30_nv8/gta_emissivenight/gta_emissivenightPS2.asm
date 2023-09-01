@@ -26,7 +26,7 @@
     ps_3_0
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 3.99600005, 4, 0.125, 0.25
-    def c1, 0, -1, -0, 0.1
+    def c1, 0, -1, -0, 0
     dcl_texcoord v0.xy
     dcl_color v1
     dcl vPos.xy
@@ -52,7 +52,7 @@
     mul r0, r0, v1
     mov r1.x, c66.x
 	mov r20.w, c45.w
-	max r20.w, r20.w, c1.w
+	max r20.w, r20.w, c0.z
     mul r1.x, r1.x, r20.w
     mul r1.xyz, r0, r1.x
     mul r1.w, r0.w, c39.x
