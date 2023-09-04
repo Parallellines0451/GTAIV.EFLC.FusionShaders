@@ -68,7 +68,7 @@
     def c6, 1, -1, 0.00499999989, 1.33333337
     def c7, -500, 0.25, 1000, 0.5
     def c8, 9.99999975e-005, -511, 512.000122, 1.5
-    def c9, 0.0833333358, 9, 10, 3
+    def c9, 0.25, 9, 10, 3	// 4 samples
     def c10, -0.500005007, 0.5, 0.600000024, 0.200000003
     def c11, 1, 0, 9.99999975e-006, -2
     def c12, 1, -1, 0, -0
@@ -78,6 +78,18 @@
     def c20, 0.962339997, -0.194983006, 0.473434001, -0.480026007
     def c21, -0.69591397, 0.457136989, -0.203345001, 0.620715976
     def c22, -0.326211989, -0.405809999, -0.840143979, -0.0735799968
+	// ------------------------------------------------------ 1.0.4.0 Shadow Filter Constants -------------------------------------------------------
+    def c110, -0.25, 1, -1, 0
+    def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
+    def c112, 3, 7.13800001, 6, 0
+    def c113, 0.75, -0.5, 0.5, 0
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------- Filter Utilities Constants ---------------------------------------------------------
+	def c120, 0.25, 0.5, 0.75, 0
+    def c121, 1, 0.625, 0.390625, 0.244140625
+	def c130, 0.1, 0.1, 0, 0
+	def c131, 0.0001220703125, 0.00048828125, 0.000244140625, 0.0009765625
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
     dcl_texcoord v0
     dcl_texcoord1 v1
     dcl_texcoord2 v2
@@ -117,66 +129,51 @@
 	// ------------------------------------------------------------------------------------------------------------------------------------------------
     add r3.xyz, r3, c63.xyww
     mad r0.yz, r3.xxyw, r4.xxyw, r5.xxyw
-    mov r3.y, c53.y
-    mad r1.xz, r3.y, c22.xyyw, r0.yyzw
-    texld r4, r1.xzzw, s15
-    add r1.x, r3.z, -r4.x
-    cmp r1.x, r1.x, c1.z, c1.w
-    mad r3.xw, r3.y, c22.zyzw, r0.yyzz
-    texld r4, r3.xwzw, s15
-    add r1.z, r3.z, -r4.x
-    cmp r1.z, r1.z, c1.z, c1.w
-    add r1.x, r1.x, r1.z
-    mad r3.xw, r3.y, c21.xyzy, r0.yyzz
-    texld r4, r3.xwzw, s15
-    add r1.z, r3.z, -r4.x
-    cmp r1.z, r1.z, c1.z, c1.w
-    add r1.x, r1.x, r1.z
-    mad r3.xw, r3.y, c21.zyzw, r0.yyzz
-    texld r4, r3.xwzw, s15
-    add r1.z, r3.z, -r4.x
-    cmp r1.z, r1.z, c1.z, c1.w
-    add r1.x, r1.x, r1.z
-    mad r3.xw, r3.y, c20.xyzy, r0.yyzz
-    texld r4, r3.xwzw, s15
-    add r1.z, r3.z, -r4.x
-    cmp r1.z, r1.z, c1.z, c1.w
-    add r1.x, r1.x, r1.z
-    mad r3.xw, r3.y, c20.zyzw, r0.yyzz
-    texld r4, r3.xwzw, s15
-    add r1.z, r3.z, -r4.x
-    cmp r1.z, r1.z, c1.z, c1.w
-    add r1.x, r1.x, r1.z
-    mad r3.xw, r3.y, c19.xyzy, r0.yyzz
-    texld r4, r3.xwzw, s15
-    add r1.z, r3.z, -r4.x
-    cmp r1.z, r1.z, c1.z, c1.w
-    add r1.x, r1.x, r1.z
-    mad r3.xw, r3.y, c19.zyzw, r0.yyzz
-    texld r4, r3.xwzw, s15
-    add r1.z, r3.z, -r4.x
-    cmp r1.z, r1.z, c1.z, c1.w
-    add r1.x, r1.x, r1.z
-    mad r3.xw, r3.y, c16.xyzy, r0.yyzz
-    texld r4, r3.xwzw, s15
-    add r1.z, r3.z, -r4.x
-    cmp r1.z, r1.z, c1.z, c1.w
-    add r1.x, r1.x, r1.z
-    mad r3.xw, r3.y, c16.zyzw, r0.yyzz
-    texld r4, r3.xwzw, s15
-    add r1.z, r3.z, -r4.x
-    cmp r1.z, r1.z, c1.z, c1.w
-    add r1.x, r1.x, r1.z
-    mad r3.xw, r3.y, c13.xyzy, r0.yyzz
-    mad r0.yz, r3.y, c13.xzww, r0
-    texld r4, r0.yzzw, s15
-    add r0.y, r3.z, -r4.x
-    cmp r0.y, r0.y, c1.z, c1.w
-    texld r4, r3.xwzw, s15
-    add r0.z, r3.z, -r4.x
-    cmp r0.z, r0.z, c1.z, c1.w
-    add r0.z, r1.x, r0.z
-    add r0.y, r0.y, r0.z
+	// -------------------------------------------------------------- Filter Utilities --------------------------------------------------------------
+	mov r21.xy, c53.xy
+	max r21.x, r21.x, c131.x
+	max r21.y, r21.y, c131.y
+	min r21.x, r21.x, c131.z
+	min r21.y, r21.y, c131.w			// limit min and max blur intensity
+	
+    add r27.xyz, r20.z, -c120.xyz
+    cmp r27.w, r27.x, c121.y, c121.x	// cascade 2
+    cmp r27.w, r27.y, c121.z, r27.w		// cascade 3
+    cmp r27.w, r27.z, c121.w, r27.w		// cascade 4
+    mul r21.xy, r21.xy, r27.w			// per cascade blur
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
+	// ----------------------------------------------------------- 1.0.4.0 Shadow Filter ------------------------------------------------------------
+	mul r21.xy, r21.xy, c112.z			// blur factor
+    mov r22.xy, c112.xy
+    mul r22.xy, r22.xy, c44.xy			// r22.xy * screen dimensions
+    dp2add r22.y, v0, r22, c1.w			// v0.x * r22.x + v0.y * r22.y
+    mad r22.y, r22.y, c111.x, c111.y
+    frc r22.y, r22.y
+    mad r22.y, r22.y, c111.z, c111.w	// r22.y * 2pi - pi
+    sincos r23.xy, r22.y				// sine & cosine of r22.y
+    mul r24, r23.yxxy, c110.xxyz
+    mul r23, r23.yxxy, c113.xxyz
+	
+    mad r25.xy, r24.xy, r21.xy, r0.yz	// offset * texel size + UV
+    texld r25, r25, s15					// sample #1
+    mov r26.x, r25.x					// copy to r26
+	
+    mad r25.xy, r23.zw, r21.xy, r0.yz	// offset * texel size + UV
+    texld r25, r25, s15					// sample #2
+    mov r26.y, r25.x					// copy to r26
+	
+    mad r25.xy, r23.xy, r21.xy, r0.yz	// offset * texel size + UV
+    texld r25, r25, s15					// sample #3
+    mov r26.z, r25.x					// copy to r26
+	
+    mad r25.xy, r24.zw, r21.xy, r0.yz	// offset * texel size + UV
+    texld r25, r25, s15					// sample #4
+    mov r26.w, r25.x					// copy to r26
+
+	add r26, r3.z, -r26
+	cmp r26, r26, c1.z, c1.w
+	dp4 r0.y, r26, c1.z				// sum
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
     rcp r0.z, c53.w
     mul r0.z, r0.x, r0.z
     add r0.x, r0.x, -c53.w
