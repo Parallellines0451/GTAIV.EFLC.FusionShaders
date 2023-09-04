@@ -22,7 +22,6 @@
 //   globalScalars2   c40      1
 //   gDayNightEffects c45      1
 //   colorize         c51      1
-//   CustomWindSway   c233     1	// Not defined in the xml as a local variable to avoid having to edit tree models
 //
 
     vs_3_0

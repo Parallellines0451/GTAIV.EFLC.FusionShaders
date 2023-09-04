@@ -16,7 +16,6 @@
 //   gWorld           c0       4
 //   colorize         c51      1
 //   gShadowMatrix    c60      4
-//   CustomWindSway   c233     1	// Not defined in the xml as a local variable to avoid having to edit tree models
 //
 
     vs_3_0
