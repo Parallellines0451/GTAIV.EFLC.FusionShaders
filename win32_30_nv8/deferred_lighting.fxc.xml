@@ -874,7 +874,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingPS1.asm</File>
-				<Variables value="22" >
+				<Variables value="23" >
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>GBufferTextureSampler0</Name>
@@ -990,7 +995,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingPS2.asm</File>
-				<Variables value="23" >
+				<Variables value="24" >
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>GBufferStencilTextureSampler</Name>
