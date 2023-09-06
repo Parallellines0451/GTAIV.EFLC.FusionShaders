@@ -55,3 +55,4 @@ Their shader repositories, which also have lots of cool stuff:
 - Implement multiple toggleable shadow filters
 - Implement shadow cascade blending
 - Port Xbox mirror shader
+- Fix uncolored broken glass shards
