@@ -36,7 +36,7 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 - Console-like gamma
 
 # Notes
-1.0.7.0 and 1.0.8.0 players need to use the GTAIV.LogDepth asi; Complete Edition players need to use [FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix).
+1.0.7.0 and 1.0.8.0 players need to use either the GTAIV.LogDepth asi or pre-CE FusionFix. Complete Edition players need to use [FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix).
 
 Using FusionFix is highly recommended because it allows toggling of certain features ingame, like console gamma and foliage translucency. It also enables real tree shadows with working wind sway and fixes raindrop refraction.
 
