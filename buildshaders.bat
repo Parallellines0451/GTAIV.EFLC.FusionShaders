@@ -17,4 +17,4 @@ del "%%i"
 
 echo D | xcopy "%cd%\other_assets\Improved Stipple" "%cd%\.Build" /K /H /Y /S
 echo D | xcopy "%cd%\other_assets\Opaque Wires" "%cd%\.Build" /K /H /Y /S
-echo D | xcopy "%cd%\other_assets\Standalone Tree Shader" "%cd%\.Build" /K /H /Y /S
+echo D | xcopy "%cd%\other_assets\gta_trees_new dependencies" "%cd%\.Build" /K /H /Y /S
