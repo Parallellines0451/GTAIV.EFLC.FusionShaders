@@ -34,7 +34,6 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 - Fixed textureless water on AMD graphics cards
 - Improved rain visibility
 - Console-like gamma
-- **[Per .fxc changelog](changelog.md)**
 
 # Notes
 1.0.7.0 and 1.0.8.0 players need to use the GTAIV.LogDepth asi; Complete Edition players need to use [FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix).
