@@ -20,7 +20,7 @@
     ps_3_0
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, 0, -1, -0, 0
-	def c100, 1.1, 0.5, 1, 0	// x = shadow alpha multiplier
+	def c100, 1.2, 0.5, 1, 0	// x = shadow alpha multiplier
     dcl_texcoord v0.xyz
     dcl vPos.xy
     dcl_2d s0

@@ -22,7 +22,7 @@
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, -1, -0, 0.5, 0
-	def c2, 1.1, 0.01176470588, 0, 0	// x = alpha multiplier
+	def c2, 1.2, 0.01176470588, 0, 0	// x = alpha multiplier
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl vPos.xy
