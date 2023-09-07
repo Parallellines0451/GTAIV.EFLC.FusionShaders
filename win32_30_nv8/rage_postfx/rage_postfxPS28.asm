@@ -539,7 +539,11 @@
     add r7, r7, -r0.w
     dp4 r1.w, r7, r7
     add r0.z, r0.z, -r0.w
-    mad r0.z, r0.z, r0.z, -r1.w
+	if_eq c220.x, c220.w	// Stipple filter toggle
+		mad r0.z, r0.z, r0.z, -r1.w
+	else
+		mov r0.z, -r1.w
+	endif
     texld r7, v0, s0
     mov r7.yz, c2
     mad r8, r7.w, -r7.y, c3

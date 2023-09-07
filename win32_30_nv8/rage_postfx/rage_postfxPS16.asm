@@ -573,7 +573,7 @@
     mul r0.x, r1.w, r0.x
     lrp r1.w, r0.x, c79.z, c79.y
     min r0.x, c79.z, r1.w
-	if_ne c222.y, c222.w
+	if_ne c222.y, c222.w	// DOF toggle
 		mov r0.x, c1.x
 	endif
     dp3 r0.z, r7, c1.yzww
@@ -587,7 +587,9 @@
     add r0.z, r0.z, -r1.w
     mad r0.z, r0.z, r0.z, -r2.w
     mul r0.x, r0.x, r0.x
-    cmp r0.x, r0.z, c2.y, r0.x
+	if_eq c220.x, c220.w	// Stipple filter toggle
+		cmp r0.x, r0.z, c2.y, r0.x
+	endif
     texld r8, v0, s0
     mov r8.yz, c2
     mad r9, r8.w, -r8.z, c3
