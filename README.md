@@ -36,7 +36,7 @@ Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete E
 - Console-like gamma
 
 # Notes
-<b>This repository is part of [FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix). ENBSeries or game versions prior to 1.0.7.0 are not compatible.
+<b>This repository is part of [FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix). ENBSeries or game versions prior to 1.0.7.0 are not compatible.</b>
 
 Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [RaphaelK12](https://github.com/RaphaelK12), [robi29](https://github.com/robi29/) and [\_CP_](https://github.com/cpmodding) for directly contributing with their own fixes, to [Shvab](https://github.com/d3g0n-byte) for making RAGE Shader Editor and to [ThirteenAG](https://github.com/ThirteenAG) for implementing features we requested into FusionFix.
 
