@@ -18,6 +18,7 @@
 //
 
     ps_3_0
+    def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.1364530546e-42 // 811
     def c0, 0.0013889, 1, 0, 1080			// x = 1/720
     def c1, 0.5, 0.0917431, 0.0045871, 0	// x = radius multiplier, y = center weight, z = center weight * radius multiplier / 10
 	def c2, 0.333, 0.0625, 0.0020833, 0

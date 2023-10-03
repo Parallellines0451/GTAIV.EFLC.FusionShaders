@@ -14,6 +14,7 @@
 //
 
     vs_3_0
+    def c230, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 2.9371215812e-42 // 2096
     dcl_position v0
     dcl_texcoord v1
     dcl_texcoord1 v3
