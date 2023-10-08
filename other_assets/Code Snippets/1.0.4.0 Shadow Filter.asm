@@ -2,7 +2,7 @@
 
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
-    def c112, 3, 7.13800001, 3, 0
+    def c112, 3, 7.13800001, 0, 0
     def c113, 0.75, -0.5, 0.5, 0
 	
     mov r2.xy, c112.xy
@@ -15,7 +15,7 @@
     mul r4, r3.yxxy, c110.xxyz
     mul r3, r3.yxxy, c113.xxyz
 	mov r1.xy, c53.xy					// copy texel size
-	mul r1.xy, r1.xy, c112.z			// blur factor
+	mul r1.xy, r1.xy, c112.x			// blur factor
 	
     mad r5.xy, r4.xy, r1.xy, r0.zw		// offset * texel size + UV
     texld r5, r5, s15					// sample #1
