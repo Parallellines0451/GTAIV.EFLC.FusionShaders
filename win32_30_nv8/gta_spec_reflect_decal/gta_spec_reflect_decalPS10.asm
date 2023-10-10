@@ -117,7 +117,8 @@
     dcl_2d s2
     dcl_2d s10
     dcl_2d s15
-    /*mov_sat r0.x, c39.x
+    /* removed stipple
+    mov_sat r0.x, c39.x
     mul r0.x, r0.x, c150.x
     frc r0.y, r0.x
     mul r0.z, r0.y, c150.y
@@ -131,7 +132,8 @@
     mov r0.zw, c2.x
     texldl r0, r0, s10
     cmp r0, -r0.y, c2.y, c2.z
-    texkill r0*/
+    texkill r0
+    removed stipple */
     texld r0, v0, s0
     add r1.xyz, c2.w, v1
     nrm r2.xyz, r1

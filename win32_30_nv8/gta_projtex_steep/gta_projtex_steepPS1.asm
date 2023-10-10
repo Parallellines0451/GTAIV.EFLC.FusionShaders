@@ -161,7 +161,8 @@
       mul r3.yzw, r5.xxyw, c6.xxxy
       cmp r2, r0.z, r2, r3
     endrep
-    /*mov_sat r0.x, c39.x
+    /* removed stipple
+    mov_sat r0.x, c39.x
     mul r0.x, r0.x, c150.x
     frc r0.y, r0.x
     mul r0.z, r0.y, c150.y
@@ -175,7 +176,8 @@
     mov r0.zw, c7.y
     texldl r0, r0, s10
     cmp r0, -r0.y, c7.z, c7.w
-    texkill r0*/
+    texkill r0
+    removed stipple */
     texld r0, r1.zwzw, s0
     add r1.xy, r2.yzzw, c1.x
     mul r1.xy, r1, c74.x

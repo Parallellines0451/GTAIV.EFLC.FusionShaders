@@ -310,7 +310,8 @@
     mov r0.w, c0.y
     mul r0, r3, r0
     mul r0.w, r0.w, c39.x
-    /*mov_sat r1.x, r0.w
+    /* removed stipple
+    mov_sat r1.x, r0.w
     mul r1.x, r1.x, c150.x
     frc r1.y, r1.x
     mul r1.z, r1.y, c150.y
@@ -324,7 +325,8 @@
     mov r1.zw, c2.z
     texldl r1, r1, s10
     cmp r1, -r1.y, -c2.y, -c2.z
-    texkill r1*/
+    texkill r1
+    removed stipple */
     mov oC0, r0
 	// ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------
 	if_ne v9.y, c127.y

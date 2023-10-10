@@ -292,7 +292,8 @@
     mov r1.w, c1.x
     mul r2, r0, r1
     mul r0.w, r2.w, c39.x
-    /*mov_sat r1.w, r0.w
+    /* removed stipple
+    mov_sat r1.w, r0.w
     mul r1.w, r1.w, c150.x
     frc r2.w, r1.w
     mul r3.x, r2.w, c150.y
@@ -307,7 +308,8 @@
     mov r3.zw, c1.y
     texldl r3, r3, s10
     cmp r3, -r3.y, -c1.x, -c1.y
-    texkill r3*/
+    texkill r3
+    removed stipple */
     add r1.w, c16.w, -v3.w
     add r2.w, -c16.z, c16.w
     rcp r2.w, r2.w

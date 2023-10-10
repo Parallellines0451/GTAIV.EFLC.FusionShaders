@@ -59,7 +59,8 @@
         mad r0.xyz, r0, r2.x, r1
       endif
     endif
-    /*mov_sat r1.x, c39.x
+    /* removed stipple
+    mov_sat r1.x, c39.x
     mul r1.x, r1.x, c150.x
     frc r1.y, r1.x
     mul r1.z, r1.y, c150.y
@@ -73,7 +74,8 @@
     mov r1.zw, c2.x
     texldl r1, r1, s10
     cmp r1, -r1.y, -c2.y, -c2.x
-    texkill r1*/
+    texkill r1
+    removed stipple */
     texld r1, v0, s2
     add r1.z, -r1.w, c2.y
     add r1.z, -r1.x, r1.z

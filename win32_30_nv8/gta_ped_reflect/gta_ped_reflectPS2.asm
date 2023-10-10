@@ -186,7 +186,8 @@
     else
       mov r1.yw, r1.xxzw
     endif
-    /*mov_sat r1.z, c39.x
+    /* removed stipple
+    mov_sat r1.z, c39.x
     mul r1.z, r1.z, c150.x
     frc r2.x, r1.z
     mul r2.y, r2.x, c150.y
@@ -201,7 +202,8 @@
     mov r2.zw, c2.x
     texldl r2, r2, s10
     cmp r2, -r2.y, -c2.y, -c2.x
-    texkill r2*/
+    texkill r2
+    removed stipple */
     texld r2, v0, s5
     add r1.z, -r2.w, c2.y
     add r1.z, -r2.x, r1.z
