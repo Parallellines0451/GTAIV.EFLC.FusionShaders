@@ -793,7 +793,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivestrong\gta_emissivestrongPS12.asm</File>
-				<Variables value="42" >
+				<Variables value="43" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -1003,6 +1003,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

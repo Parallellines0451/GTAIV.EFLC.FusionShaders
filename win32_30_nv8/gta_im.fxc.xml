@@ -115,7 +115,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_im\gta_imPS1.asm</File>
-				<Variables value="45" >
+				<Variables value="46" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -340,6 +340,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

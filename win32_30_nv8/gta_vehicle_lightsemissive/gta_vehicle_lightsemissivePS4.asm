@@ -92,6 +92,12 @@
 //
 
     ps_3_0
+	// ------------------------------------------------------ 1.0.4.0 Shadow Filter Constants -------------------------------------------------------
+    def c110, -0.25, 1, -1, 0
+    def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
+    def c112, 3, 7.13800001, 0, 0
+    def c113, 0.75, -0.5, 0.5, 0
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 9.4167256803e-43 // 672
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 1.33333337, 9.99999975e-005, 190, 1.5
@@ -99,7 +105,7 @@
     def c2, 0.800000012, 0.5, 0.200000003, 0
     def c3, 5, 18, -0.5, 0.5
     def c4, 0, 1, -0, -0.25
-    def c5, 0.0833333358, -0.100000001, 1.11111116, 1.00000001e-007
+    def c5, 1, -0.100000001, 1.11111116, 1.00000001e-007
     def c6, 0.212500006, 0.715399981, 0.0720999986, 0
     def c7, 1, -1, 0, -0
     def c8, -0.321940005, -0.932614982, -0.791558981, -0.597710013
@@ -205,6 +211,7 @@
     mul r3.x, r1.w, r3.x
     mul r3.x, r3.x, r3.x
     mul r3.x, r3.x, c0.w
+    /* removed 1.0.6.0 filter
     mov r9.y, c53.y
     mad r9.xz, r9.y, c13.xyyw, r8.xyyw
     texld r10, r9.xzzw, s15
@@ -265,6 +272,37 @@
     add r7.w, r8.z, -r9.x
     cmp r7.w, r7.w, c4.y, c4.x
     add r6.w, r6.w, r7.w
+    removed 1.0.6.0 filter */
+	// ----------------------------------------------------------- 1.0.4.0 Shadow Filter ------------------------------------------------------------
+    mov r21.xy, c112.xy
+    mul r21.xy, r21.xy, c44.xy			// r21.xy * screen dimensions
+    dp2add r21.y, v0, r21, c110.w		// v0.x * r21.x + v0.y * r21.y
+    mad r21.y, r21.y, c111.x, c111.y
+    frc r21.y, r21.y
+    mad r21.y, r21.y, c111.z, c111.w	// r21.y * 2pi - pi
+    sincos r22.xy, r21.y				// sine & cosine of r21.y
+    mul r23, r22.yxxy, c110.xxyz
+    mul r22, r22.yxxy, c113.xxyz
+	mov r20.xy, c53.xy					// copy texel size
+	mul r20.xy, r20.xy, c112.x			// blur factor
+	
+    mad r24.xy, r23.xy, r20.xy, r8.xy	// offset * texel size + UV
+    texld r24, r24, s15					// sample #1
+    mov r25.x, r24.x					// copy to r25
+    mad r24.xy, r22.zw, r20.xy, r8.xy	// offset * texel size + UV
+    texld r24, r24, s15					// sample #2
+    mov r25.y, r24.x					// copy to r25
+    mad r24.xy, r22.xy, r20.xy, r8.xy	// offset * texel size + UV
+    texld r24, r24, s15					// sample #3
+    mov r25.z, r24.x					// copy to r25
+    mad r24.xy, r23.zw, r20.xy, r8.xy	// offset * texel size + UV
+    texld r24, r24, s15					// sample #4
+    mov r25.w, r24.x					// copy to r25
+
+	add r25, r8.z, -r25					// depth bias
+	cmp r25, r25, c110.y, c110.w
+	dp4 r6.w, r25, -c110.x				// average
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
     mad r3.x, r6.w, c5.x, r3.x
     add r1.w, r1.w, -c53.w
     cmp r8.xy, r1.w, c7, c7.zwzw

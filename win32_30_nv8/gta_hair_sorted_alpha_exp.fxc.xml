@@ -202,7 +202,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_hair_sorted_alpha_exp\gta_hair_sorted_alpha_expPS2.asm</File>
-				<Variables value="54" >
+				<Variables value="55" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -473,12 +473,17 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_hair_sorted_alpha_exp\gta_hair_sorted_alpha_expPS3.asm</File>
-				<Variables value="30" >
+				<Variables value="31" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -629,12 +634,17 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_hair_sorted_alpha_exp\gta_hair_sorted_alpha_expPS4.asm</File>
-				<Variables value="42" >
+				<Variables value="43" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -844,6 +854,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

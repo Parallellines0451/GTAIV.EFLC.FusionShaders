@@ -892,7 +892,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_glass_emissive\gta_glass_emissivePS11.asm</File>
-				<Variables value="48" >
+				<Variables value="49" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1132,6 +1132,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

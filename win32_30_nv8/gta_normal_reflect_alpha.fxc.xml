@@ -362,7 +362,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_normal_reflect_alpha\gta_normal_reflect_alphaPS1.asm</File>
-				<Variables value="49" >
+				<Variables value="50" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -607,6 +607,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>
@@ -890,7 +895,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_normal_reflect_alpha\gta_normal_reflect_alphaPS9.asm</File>
-				<Variables value="25" >
+				<Variables value="26" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1016,12 +1021,17 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_normal_reflect_alpha\gta_normal_reflect_alphaPS10.asm</File>
-				<Variables value="37" >
+				<Variables value="38" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1207,12 +1217,17 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_normal_reflect_alpha\gta_normal_reflect_alphaPS11.asm</File>
-				<Variables value="45" >
+				<Variables value="46" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1437,6 +1452,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

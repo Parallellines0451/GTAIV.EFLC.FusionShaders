@@ -432,7 +432,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_cutout_fence\gta_cutout_fencePS1.asm</File>
-				<Variables value="45" >
+				<Variables value="46" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -657,6 +657,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>
@@ -911,7 +916,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_cutout_fence\gta_cutout_fencePS10.asm</File>
-				<Variables value="21" >
+				<Variables value="22" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -1017,12 +1022,17 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_cutout_fence\gta_cutout_fencePS11.asm</File>
-				<Variables value="33" >
+				<Variables value="34" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -1188,12 +1198,17 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_cutout_fence\gta_cutout_fencePS12.asm</File>
-				<Variables value="41" >
+				<Variables value="42" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -1398,6 +1413,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

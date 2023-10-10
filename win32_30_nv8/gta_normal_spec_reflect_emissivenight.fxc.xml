@@ -942,7 +942,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_normal_spec_reflect_emissivenight\gta_normal_spec_reflect_emissivenightPS11.asm</File>
-				<Variables value="50" >
+				<Variables value="51" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1192,6 +1192,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

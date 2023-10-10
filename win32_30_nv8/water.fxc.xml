@@ -97,7 +97,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>water\waterPS2.asm</File>
-				<Variables value="24" >
+				<Variables value="25" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DepthBufferSampler</Name>
@@ -217,6 +217,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>
