@@ -134,53 +134,53 @@
     add r1.xyz, r1, c63.xyww
     mad r0.zw, r1.xyxy, r2.xyxy, r3.xyxy
 	// -------------------------------------------------------------- Filter Utilities --------------------------------------------------------------
-	mov r1.xy, c53.xy					// copy texel size
+	mov r20.xy, c53.xy					// copy texel size
 	
-	max r1.x, r1.x, c131.x
-	max r1.y, r1.y, c131.y
-	min r1.x, r1.x, c131.z
-	min r1.y, r1.y, c131.w				// limit min and max blur intensity
+	max r20.x, r20.x, c131.x
+	max r20.y, r20.y, c131.y
+	min r20.x, r20.x, c131.z
+	min r20.y, r20.y, c131.w			// limit min and max blur intensity
 	
-    add r7.xyz, r0.z, -c120.xyz
-    cmp r7.w, r7.x, c121.y, c121.x
-    cmp r7.w, r7.y, c121.z, r7.w
-    cmp r7.w, r7.z, c121.w, r7.w
-    mul r1.xy, r1.xy, r7.w				// per cascade blur
+    add r21.xyz, r0.z, -c120.xyz
+    cmp r21.w, r21.x, c121.y, c121.x
+    cmp r21.w, r21.y, c121.z, r21.w
+    cmp r21.w, r21.z, c121.w, r21.w
+    mul r20.xy, r20.xy, r21.w			// per cascade blur
 	
-	mul_sat r20.x, r0.x, c130.x
-	add_sat r20.x, r20.x, -c130.y
-	mul r20.x, r20.x, c130.z
-	mad r20.x, r20.x, r20.x, c130.w
-	mul r1.xy, r1.xy, r20.x				// gradual distance blur
+	mul_sat r21.x, r0.x, c130.x
+	add_sat r21.x, r21.x, -c130.y
+	mul r21.x, r21.x, c130.z
+	mad r21.x, r21.x, r21.x, c130.w
+	mul r20.xy, r20.xy, r21.x			// gradual distance blur
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// ----------------------------------------------------------- 1.0.4.0 Shadow Filter ------------------------------------------------------------
-    mov r2.xy, c112.xy
-    mul r2.xy, r2.xy, c44.xy			// r2.xy * screen dimensions
-    dp2add r2.y, v0, r2, c110.w			// v0.x * r2.x + v0.y * r2.y
-    mad r2.y, r2.y, c111.x, c111.y
-    frc r2.y, r2.y
-    mad r2.y, r2.y, c111.z, c111.w		// r2.y * 2pi - pi
-    sincos r3.xy, r2.y					// sine & cosine of r2.y
-    mul r4, r3.yxxy, c110.xxyz
-    mul r3, r3.yxxy, c113.xxyz
-	mul r1.xy, r1.xy, c112.x			// blur factor
+    mov r21.xy, c112.xy
+    mul r21.xy, r21.xy, c44.xy			// r21.xy * screen dimensions
+    dp2add r21.y, v0, r21, c110.w		// v0.x * r21.x + v0.y * r21.y
+    mad r21.y, r21.y, c111.x, c111.y
+    frc r21.y, r21.y
+    mad r21.y, r21.y, c111.z, c111.w	// r21.y * 2pi - pi
+    sincos r22.xy, r21.y				// sine & cosine of r21.y
+    mul r23, r22.yxxy, c110.xxyz
+    mul r22, r22.yxxy, c113.xxyz
+	mul r20.xy, r20.xy, c112.x			// blur factor
 	
-    mad r5.xy, r4.xy, r1.xy, r0.zw		// offset * texel size + UV
-    texld r5, r5, s15					// sample #1
-    mov r6.x, r5.x						// copy to r6
-    mad r5.xy, r3.zw, r1.xy, r0.zw		// offset * texel size + UV
-    texld r5, r5, s15					// sample #2
-    mov r6.y, r5.x						// copy to r6
-    mad r5.xy, r3.xy, r1.xy, r0.zw		// offset * texel size + UV
-    texld r5, r5, s15					// sample #3
-    mov r6.z, r5.x						// copy to r6
-    mad r5.xy, r4.zw, r1.xy, r0.zw		// offset * texel size + UV
-    texld r5, r5, s15					// sample #4
-    mov r6.w, r5.x						// copy to r6
+    mad r24.xy, r23.xy, r20.xy, r0.zw	// offset * texel size + UV
+    texld r24, r24, s15					// sample #1
+    mov r25.x, r24.x					// copy to r25
+    mad r24.xy, r22.zw, r20.xy, r0.zw	// offset * texel size + UV
+    texld r24, r24, s15					// sample #2
+    mov r25.y, r24.x					// copy to r25
+    mad r24.xy, r22.xy, r20.xy, r0.zw	// offset * texel size + UV
+    texld r24, r24, s15					// sample #3
+    mov r25.z, r24.x					// copy to r25
+    mad r24.xy, r23.zw, r20.xy, r0.zw	// offset * texel size + UV
+    texld r24, r24, s15					// sample #4
+    mov r25.w, r24.x					// copy to r25
 
-	add r6, r1.z, -r6					// depth bias
-	cmp r6, r6, c110.y, c110.w
-	dp4 r0.z, r6, -c110.x				// average
+	add r25, r1.z, -r25					// depth bias
+	cmp r25, r25, c110.y, c110.w
+	dp4 r0.z, r25, -c110.x				// average
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     rcp r0.w, c53.w
     mul r0.w, r0.y, r0.w
