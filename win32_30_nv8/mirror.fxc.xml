@@ -31,7 +31,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>mirror\mirrorPS1.asm</File>
-				<Variables value="4" >
+				<Variables value="5" >
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>ReflectTextureSampler</Name>
@@ -569,7 +574,7 @@
 			AddressV Clamp
 			AddressW Clamp
 			MipFilter Point
-			MinFilter Anisotropic
+			MinFilter Linear
 			MagFilter Linear
 		</Values>
 		</Item>
