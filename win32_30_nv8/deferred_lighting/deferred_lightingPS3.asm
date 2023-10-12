@@ -59,7 +59,8 @@
 	texld r21, v0, s6
 	add r21.x, r21.x, -c5.w
 	mov r21.y, c223.x
-	cmp r21.y, -r21.y, -c0.z, -r21_abs.x	// Console tree lighting toggle
+	add r21.y, r21.y, -c5.y
+	cmp r21.y, r21.y, -r21_abs.x, -c0.z	// Console tree lighting toggle
 	if_lt r21.y, c0.w
 		texld r0, v0, s1
 		mul r1.xyz, r0.w, c1
