@@ -68,6 +68,7 @@
     def c6, 1.10000002, 0, 0, 0
     def c7, 256, 2, 4, 8
 	def c10, 1.3333333, 1.0526316, 1.05577, 0.0762		// Gamma Constants
+	def c11, 4, 5, 6, 0 // Definition ID's
 	// --------------------------------------------------------------- FXAA Constants ---------------------------------------------------------------
 	// NVIDIA FXAA 3.11 by Timothy Lottes
 	def c20, 0.25, 0, 0, 0		// Subpix				0.25, 0, 0, 0
@@ -618,7 +619,9 @@
     add r0.z, r0.z, -r1.w
     mad r0.z, r0.z, r0.z, -r2.w
     mul r0.x, r0.x, r0.x
-	cmp r30.x, -r0.w, -c2.y, r30.x
+	mov r0.w, c223.z
+	add r0.w, r0.w, -c11.y
+	cmp r30.x, r0.w, r30.x, -c2.y
 	cmp r0.z, -r30_abs.x, -c2.y, r0.z // Definition toggle
 	cmp r0.x, r0.z, c2.y, r0.x
     texld r8, v0, s0
