@@ -46,8 +46,9 @@
     def c3, -0.5, 0.5, 0.0199999996, 0.00999999978
     def c4, 0.75, 0.25, 5, 10
 	def c20, 1.6666667, 0, 0, 0	// Reflection intensity multiplier
-	def c21, 3, 2, 1, 0	// Console tree lighting constants
-	def c22, 0.01171875, 0.01953125, 0.0234375, 0 // Stencils
+	def c21, 3, 2, 1, 9	// Console tree lighting constants
+	def c22, 0.01171875, 0.01953125, 0.0234375, 0
+	def c23, 0.35, 0.5, 0.3333333, 0
     dcl_texcoord v0.xy
     dcl_texcoord1 v1
     dcl_2d s0
@@ -62,8 +63,8 @@
 	cmp r21.yz, -r21_abs, c0.z, c0.w
 	add_sat r21.x, r21.y, r21.z // masks 5 and 6
 	mov r21.y, c223.x
-	add r21.y, r21.y, -c21.y
-	cmp r21.y, r21.y, r21.x, c0.w	// Console tree lighting toggle
+	add r21.y, r21.y, -c21.w
+	cmp r21.y, -r21_abs.y, r21.x, c0.w	// Console tree lighting toggle
 	if_eq r21.y, c0.w
 		texld r0, v0, s1
 		mul r1.xyz, r0.w, c1
@@ -137,12 +138,16 @@
 		dp3 r1.x, r1, -c17
 		add r1.x, r1.x, -c1.w
 		mul_sat r1.x, r1.x, c2.w
-		mov r2.xyz, c38
+		mov r10, c38
+		mov r11, c37
 		if_ne -r21_abs.x, c0.w // Tree orange glow fix
-			add r2.xyz, r2, c37
-			mul r2.xyz, r2, c3.y
+			dp3 r12.x, r10, c23.z
+			dp3 r12.y, r11, c23.z
+			lrp r10, c23.x, r10, r12.x
+			lrp r11, c23.y, r11, r12.y
 		endif
-		mad r1.yzw, r2.xxyz, r0.w, c37.xxyz
+		mov r2.xyz, r10
+		mad r1.yzw, r2.xxyz, r0.w, r11.xxyz
 		mul r1.yzw, r3.z, r1
 		mul r2.xyz, c18.w, c18
 		mad r1.xyz, r2, r1.x, r1.yzww
