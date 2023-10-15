@@ -16,7 +16,7 @@
 
 	mov r20.xy, c53.xy					// copy texel size
 	mul r20.xy, r20.xy, c112.z			// blur factor
-	mul r20.xy, r20.xy, c112.w			// compensate iteration blur
+	mul r20.xy, r20.xy, c112.w			// compensate blur for extra iterations
 	
 	mov r20.zw, c110.w
 	
@@ -45,8 +45,8 @@
 		dp4 r20.w, r25, -c110.x				// average samples of current iteration
 		add r20.z, r20.z, r20.w
 		
-		add r26, r26, c110.zzyz				// add (-1, -1, 1, -1) to offsets #1 and #4
-		add r27, r27, -c110.zzyz			// add (1, 1, -1, 1) to offsets #3 and #2
+		add r26, r26, c110.zzyz				// add (-1, -1, 1, -1)
+		add r27, r27, -c110.zzyz			// add (1, 1, -1, 1)
 	endrep
 	
 	mul r0.z, r20.z, c112.w					// average all iterations

@@ -13,17 +13,17 @@
     mad r21.y, r21.y, c111.z, c111.w	// r21.y * 2pi - pi
     sincos r22.xy, r21.y				// sine & cosine of r21.y
     mul r23, r22.yxxy, c110.xxyz		// offsets for 1st and 4th samples, respectively
-    mul r22, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
+    mul r21, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
 	mov r20.xy, c53.xy					// copy texel size
 	mul r20.xy, r20.xy, c112.z			// blur factor
 	
     mad r24.xy, r23.xy, r20.xy, r0.zw	// offset * texel size + UV
     texld r24, r24, s15					// 1st sample
     mov r25.x, r24.x					// copy to r25
-    mad r24.xy, r22.zw, r20.xy, r0.zw	// offset * texel size + UV
+    mad r24.xy, r21.zw, r20.xy, r0.zw	// offset * texel size + UV
     texld r24, r24, s15					// 2nd sample
     mov r25.y, r24.x					// copy to r25
-    mad r24.xy, r22.xy, r20.xy, r0.zw	// offset * texel size + UV
+    mad r24.xy, r21.xy, r20.xy, r0.zw	// offset * texel size + UV
     texld r24, r24, s15					// 3rd sample
     mov r25.z, r24.x					// copy to r25
     mad r24.xy, r23.zw, r20.xy, r0.zw	// offset * texel size + UV
