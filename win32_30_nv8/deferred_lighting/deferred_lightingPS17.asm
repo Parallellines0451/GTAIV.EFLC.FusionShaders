@@ -62,11 +62,12 @@
     def c3, 0.5, -0.5, 0.159154937, 0.25
     def c4, 3, 4.27199984, 0, 0
     def c5, 6.28318548, -3.14159274, -1, 1
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
+	// ------------------------------------------------------ Improved Shadow Filter Constants ------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
-    def c112, 3, 4.27199984, 3, 0
+    def c112, 3, 4.27199984, 3, 0.25
     def c113, 0.75, -0.5, 0.5, 0
+	defi i1, 4, 0, 0, 0
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     dcl_texcoord v0
     dcl vPos.xy
@@ -202,36 +203,53 @@
     cmp r2, r2, c1.x, c1.z
     dp4 r1.x, r2, c3.w
     removed original filter */
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
+	// ----------------------------------------------------------- Improved Shadow Filter -----------------------------------------------------------
     mov r21.xy, c112.xy
     dp2add r21.y, vPos, r21, c110.w		// v0.x * r21.x + v0.y * r21.y
     mad r21.y, r21.y, c111.x, c111.y
     frc r21.y, r21.y
     mad r21.y, r21.y, c111.z, c111.w	// r21.y * 2pi - pi
     sincos r22.xy, r21.y				// sine & cosine of r21.y
-    mul r23, r22.yxxy, c110.xxyz		// offsets for 1st and 4th samples, respectively
-    mul r21, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
-	
-    mad_sat r24.xy, r23.xy, c77.z, r2.xy	// offset * texel size + UV
-	mad r24.xy, r24, c77.w, c77
-    texld r24, r24, s14						// 1st sample
-    dp2add r25.x, r24, r4.xy, c110.w		// copy to r25
-    mad_sat r24.xy, r21.zw, c77.z, r2.xy	// offset * texel size + UV
-	mad r24.xy, r24, c77.w, c77
-    texld r24, r24, s14						// 2nd sample
-    dp2add r25.y, r24, r4.xy, c110.w		// copy to r25
-    mad_sat r24.xy, r21.xy, c77.z, r2.xy	// offset * texel size + UV
-	mad r24.xy, r24, c77.w, c77
-    texld r24, r24, s14						// 3rd sample
-    dp2add r25.z, r24, r4.xy, c110.w		// copy to r25
-    mad_sat r24.xy, r23.zw, c77.z, r2.xy	// offset * texel size + UV
-	mad r24.xy, r24, c77.w, c77
-    texld r24, r24, s14						// 4th sample
-    dp2add r25.w, r24, r4.xy, c110.w		// copy to r25
 
-	mad r25, r1.y, c66.w, r25				// depth bias
-	cmp r25, r25, c110.y, c110.w
-	dp4 r1.x, r25, -c110.x					// average
+	mov r20.x, c77.z					// copy texel size
+	mul r20.x, r20.x, c112.w			// compensate blur for extra iterations
+	
+	mov r20.zw, c110.w
+	
+	mov r26, c110.xxyz					// copy offsets for 1st and 4th samples, respectively
+	mov r27, c113.xxyz					// copy offsets for 3rd and 2nd samples, respectively
+	
+	rep i1
+		mul r23, r22.yxxy, r26
+		mul r21, r22.yxxy, r27
+		
+		mad_sat r24.xy, r23.xy, r20.x, r2.xy	// offset * texel size + UV
+		mad r24.xy, r24, c77.w, c77
+		texld r24, r24, s14						// 1st sample
+		dp2add r25.x, r24, r4.xy, c110.w		// copy to r25
+		mad_sat r24.xy, r21.zw, r20.x, r2.xy	// offset * texel size + UV
+		mad r24.xy, r24, c77.w, c77
+		texld r24, r24, s14						// 2nd sample
+		dp2add r25.y, r24, r4.xy, c110.w		// copy to r25
+		mad_sat r24.xy, r21.xy, r20.x, r2.xy	// offset * texel size + UV
+		mad r24.xy, r24, c77.w, c77
+		texld r24, r24, s14						// 3rd sample
+		dp2add r25.z, r24, r4.xy, c110.w		// copy to r25
+		mad_sat r24.xy, r23.zw, r20.x, r2.xy	// offset * texel size + UV
+		mad r24.xy, r24, c77.w, c77
+		texld r24, r24, s14						// 4th sample
+		dp2add r25.w, r24, r4.xy, c110.w		// copy to r25
+	
+		mad r25, r1.y, c66.w, r25				// depth bias
+		cmp r25, r25, c110.y, c110.w
+		dp4 r20.w, r25, -c110.x					// average samples of current iteration
+		add r20.z, r20.z, r20.w
+		
+		add r26, r26, c110.zzyz				// add (-1, -1, 1, -1)
+		add r27, r27, -c110.zzyz			// add (1, 1, -1, 1)
+	endrep
+	
+	mul r1.x, r20.z, c112.w					// average all iterations
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     mul r0.xyz, r0, r1.x
     cmp r0.xyz, r0.w, r0, c1.z
