@@ -25,8 +25,7 @@
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, -1, -0, 0.5, 0
-	def c2, 0.01953125, 2, 8, 0	// x = stencil, y = alpha multiplier, z = ID
-	def c3, 4, 5, 6, 0 // Definition ID's
+	def c2, 0.01953125, 2, 2, 0	// x = stencil, y = alpha multiplier
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl vPos.xy
@@ -36,7 +35,7 @@
     dcl_2d s10
     texld r0, v0, s0
 	mov r22.x, c223.z
-	if_eq r22.x, c3.z
+	if_eq r22.x, c2.z
 		add r1.x, -r0.w, c0.w
 		cmp r1.x, r1.x, c1.x, c1.y
 		add r0.w, r1.x, -c1.x
@@ -63,11 +62,11 @@
     mov r20.w, r0
     mad oC1, v1.xyzx, c1.zzzw, c1.zzzw
     mov oC2, c1.wzzw
-	mov r1.x, c2.z
+	mov r1.x, -c1.x
 	add r1.x, c223.x, -r1.x
 	cmp oC2.z, -r1_abs.x, v2.x, c1.z // Vertex AO toggle
     mov oC3, c2.xwww
-	add r22.x, r22.x, -c3.z
+	add r22.x, r22.x, -c2.z
 	cmp r20.w, -r22_abs.x, c39.x, r20.w
 	// -------------------------------------------------------------- Dithering Mask ----------------------------------------------------------------
 	if_le r20.w, c151.x

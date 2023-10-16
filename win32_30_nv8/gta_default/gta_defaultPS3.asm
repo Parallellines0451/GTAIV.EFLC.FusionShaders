@@ -27,8 +27,7 @@
     def c0, -1, -0, 9.99999975e-006, 1
     def c1, 3.99600005, 4, 0.125, 0.25
     def c2, 0.5, 0, 1, 0.25
-	def c3, 1.22, 0, 0, 0 // x = alpha multiplier
-	def c4, 4, 5, 6, 0 // Definition ID's
+	def c3, 1.22, 2, 0, 0 // x = alpha multiplier
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_color v2.xw
@@ -38,7 +37,7 @@
     dcl_2d s10
     texld r0, v0, s0
 	mov r22.x, c223.z
-	if_eq r22.x, c4.z
+	if_eq r22.x, c3.y
 		add r1.x, -r0.w, c1.w
 		cmp r1.x, r1.x, c0.x, c0.y
 		add r0.w, r1.x, -c0.x
@@ -74,7 +73,7 @@
     mov oC2.w, r0.w
     mov r0.xy, c0
     mul oC3, -r0.xyyy, c52.x
-	add r22.x, r22.x, -c4.z
+	add r22.x, r22.x, -c3.y
 	cmp r20.w, -r22_abs.x, c39.x, r20.w
 	// -------------------------------------------------------------- Dithering Mask ----------------------------------------------------------------
 	if_le r20.w, c151.x
