@@ -36,7 +36,7 @@
     rsq r0.x, r0.x
     rcp r0.x, r0.x
     mad r0.y, r0.x, c4.x, c4.y
-	mul r0.x, r0.x, c233.w
+	mul r0.x, r0.x, c233.x
     // mul r0.x, r0.x, c51.w
     mad r0.x, r0.x, c5.z, c5.y
     frc r0.x, r0.x

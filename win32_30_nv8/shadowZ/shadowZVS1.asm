@@ -75,7 +75,7 @@
       mul r3.w, r2.w, -c57.w
       mul r3.z, r1.y, -c57.w
 	  mov r31.x, c0.z
-	  if_ne r31.x, c232.x
+	  if_ne r31.x, c233.y
 		sge r4.z, -r3.z, c1.z
 		add r3.z, r3.z, -r4.z
 	  endif
