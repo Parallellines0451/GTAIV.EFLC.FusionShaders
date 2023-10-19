@@ -77,7 +77,7 @@
     mad r2.xy, r3, c150.w, r2
     mov r2.zw, c2.y
     texldl r2, r2, s10
-    cmp r2, -r2.y, c2.z, c2.w
+    cmp r2, -r2.x, c2.z, c2.w
     texkill r2
     mul r0.xyz, r0, v2
     mul r0.xyz, r0, c66.x

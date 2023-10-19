@@ -49,7 +49,7 @@
     mad r1.xy, r2, c150.w, r1
     mov r1.zw, c0.x
     texldl r1, r1, s10
-    cmp r1, -r1.y, c0.y, c0.z
+    cmp r1, -r1.x, c0.y, c0.z
     texkill r1
     add r1.xyz, c0.w, v1
     dp3 r1.w, r1, r1

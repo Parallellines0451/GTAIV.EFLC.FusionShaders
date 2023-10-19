@@ -111,7 +111,7 @@
     mad r1.xy, r3, c150.w, r1
     mov r1.zw, c1.x
     texldl r1, r1, s10
-    cmp r1, -r1.y, -c1.y, -c1.x
+    cmp r1, -r1.x, -c1.y, -c1.x
     texkill r1
     texld r1, v0, s4
     add r1.z, -r1.w, c1.y

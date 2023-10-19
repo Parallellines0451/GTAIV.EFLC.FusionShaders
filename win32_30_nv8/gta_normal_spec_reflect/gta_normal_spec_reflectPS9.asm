@@ -119,7 +119,7 @@
     mad r0.xy, r1, c150.w, r0
     mov r0.zw, c0.x
     texldl r0, r0, s10
-    cmp r0, -r0.y, c0.y, c0.z
+    cmp r0, -r0.x, c0.y, c0.z
     texkill r0
     removed stipple */
     texld r0, v0, s1

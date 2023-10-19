@@ -74,7 +74,7 @@
     mul r2.zw, r2, c150.w
     mad r2.xy, r2, c150.w, r2.zwzw
     texld r2, r2, s10
-    cmp r2, -r2.y, c2.z, c2.w
+    cmp r2, -r2.x, c2.z, c2.w
     texkill r2
     texld r2, r0, s1
     add r0.xy, r2, -c0.y

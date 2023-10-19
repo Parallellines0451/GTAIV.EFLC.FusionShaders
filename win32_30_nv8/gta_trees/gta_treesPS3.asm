@@ -41,7 +41,7 @@
     mul r1.xy, r1, c150.w
     mad r1.xy, r2, c150.w, r1
     texld r1, r1, s10
-    cmp r1, -r1.y, -c1.x, -c1.y
+    cmp r1, -r1.x, -c1.x, -c1.y
     texkill r1
     removed stipple */
     mov oC0, r0

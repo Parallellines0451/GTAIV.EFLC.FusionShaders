@@ -222,7 +222,7 @@
     mad r3.xy, r3, c150.w, r3.zwzw
     mov r3.zw, c1.y
     texldl r3, r3, s10
-    cmp r3, -r3.y, -c1.x, -c1.y
+    cmp r3, -r3.x, -c1.x, -c1.y
     texkill r3
     add r1.w, c16.w, -v3.w
     add r2.w, -c16.z, c16.w

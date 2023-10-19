@@ -46,7 +46,7 @@
     mad r0.xy, r1, c150.w, r0
     mov r0.zw, c1.x
     texldl r0, r0, s10
-    cmp r0, -r0.y, c1.y, c1.z
+    cmp r0, -r0.x, c1.y, c1.z
     texkill r0
     texld r0, v0, s0
     mul r0, r0, v1

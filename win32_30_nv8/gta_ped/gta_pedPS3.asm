@@ -294,7 +294,7 @@
     mad r3.xy, r3, c150.w, r3.zwzw
     mov r3.zw, c0.w
     texldl r3, r3, s10
-    cmp r3, -r3.y, -c0.x, -c0.w
+    cmp r3, -r3.x, -c0.x, -c0.w
     texkill r3
     removed stipple */
     add r3.xyz, c0.z, v2

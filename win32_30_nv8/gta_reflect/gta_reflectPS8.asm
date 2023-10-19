@@ -73,7 +73,7 @@
     mad r3.xy, r3, c150.w, r3.zwzw
     mov r3.zw, c2.y
     texldl r3, r3, s10
-    cmp r3, -r3.y, c2.z, c2.w
+    cmp r3, -r3.x, c2.z, c2.w
     texkill r3
     add r1.w, -c41.x, v1.w
     add r2.w, -c41.x, c41.y

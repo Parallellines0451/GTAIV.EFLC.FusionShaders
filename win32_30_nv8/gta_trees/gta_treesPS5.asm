@@ -44,7 +44,7 @@
     mad r1.xy, r1, c150.w, r0.yzzw
     mov r1.zw, c1.x
     texldl r1, r1, s10
-    cmp r1, -r1.y, c1.y, c1.z
+    cmp r1, -r1.x, c1.y, c1.z
     texkill r1
     mov oC0.xyz, v0.x
     mov oC0.w, r0.x

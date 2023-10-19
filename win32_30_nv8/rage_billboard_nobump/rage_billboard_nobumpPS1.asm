@@ -73,7 +73,7 @@
     mul r0.zw, r0, c150.w
     mad r0.zw, r1.xyxy, c150.w, r0
     texld r1, r0.zwzw, s10
-    cmp r1, -r1.y, c0.x, c0.y
+    cmp r1, -r1.x, c0.x, c0.y
     texkill r1
     texld r1, c0.zwzw, s0
     frc r0.z, r2.x

@@ -366,7 +366,7 @@
     mad r1.xy, r13, c150.w, r1
     mov r1.zw, c1.w
     texldl r1, r1, s10
-    cmp r1, -r1.y, -c1.z, -c1.w
+    cmp r1, -r1.x, -c1.z, -c1.w
     texkill r1
     removed stipple */
     texld r1, v0, s2

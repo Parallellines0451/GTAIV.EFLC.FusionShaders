@@ -58,7 +58,7 @@
     mad r1.xy, r1, c150.w, r0
     mov r1.zw, c2.x
     texldl r1, r1, s10
-    cmp r1, -r1.y, c2.y, c2.z
+    cmp r1, -r1.x, c2.y, c2.z
     texkill r1
     add r0.xyz, c2.w, v1
     nrm r1.xyz, r0

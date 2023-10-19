@@ -395,7 +395,7 @@
     mad r5.xy, r5, c150.w, r5.zwzw
     mov r5.zw, c2.z
     texldl r5, r5, s10
-    cmp r5, -r5.y, -c2.y, -c2.z
+    cmp r5, -r5.x, -c2.y, -c2.z
     texkill r5
     removed stipple */
     mul r1.w, r0.w, c66.x
