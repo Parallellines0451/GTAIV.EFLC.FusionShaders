@@ -214,19 +214,15 @@
     add r0.z, r0.z, r0.w
 	removed 1.0.6.0 filter */
 	// -------------------------------------------------------------- Filter Utilities --------------------------------------------------------------
-	mov r20.xy, c53.xy					// copy texel size
+	mov r20.xy, c131.xy					// static texel size instead of c53.xy because blur is now user controllable
 	
-	max r20.x, r20.x, c131.x
-	max r20.y, r20.y, c131.y            // limit max blur intensity
-	min r20.x, r20.x, c131.z            
-	min r20.y, r20.y, c131.w			// limit min blur intensity
+    add r21.xyz, r0.z, -c120.xyz
+    cmp r22.xy, r21.x, c121.yw, c121.xz
+    cmp r22.xy, r21.y, c122.xz, r22.xy
+    cmp r22.xy, r21.z, c122.yw, r22.xy	// r22.x = per cascade blur, r22.y = per cascade bias
+    mul r20.xy, r20.xy, r22.x
 	
-    add r10.xyz, r0.z, -c120.xyz
-    cmp r11.xy, r10.x, c121.yw, c121.xz
-    cmp r11.xy, r10.y, c122.xz, r11.xy
-    cmp r11.xy, r10.z, c122.yw, r11.xy	// r11.x = per cascade blur, r11.y = per cascade bias
-    mul r20.xy, r20.xy, r11.x
-	add r1.z, r1.z, -r11.y
+	add r1.z, r1.z, -r22.y				// improve depth bias for 2nd, 3rd and 4th cascade
 	
 	// Filter Selection
 	mov r20.z, c223.y
@@ -389,7 +385,7 @@
 		add r20.xy, r4.x, -c22.xw
 		cmp r20.xy, -r20_abs.xy, c4.z, c4.w
 		add_sat r20.x, r20.x, r20.y
-		add r4.x, r20.x, -c4.z // masks 0 and 3 (0 by default)
+		add r4.x, r20.x, -c4.z // change wetness mask to include stencil 3 alongside 0 (since 3 is now used for the dithering mask)
 		cmp r3.w, r4.x, r3.w, c0.x
 		texld r4, v0, s2
 		mul r4.y, r4.y, r4.y
