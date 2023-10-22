@@ -86,22 +86,21 @@
 	defi i1, 4, 0, 0, 0
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// --------------------------------------------------------- Filter Utilities Constants ---------------------------------------------------------
-	def c120, 0.25, 0.5, 0.75, 0
+	def c120, 0.25, 0.5, 0.75, 0 // cascade identifiers
 	
-    def c121, 1, 0.475, 0, 0.12
-	def c122, 0.19, 0.0542857, 0.28, 0.55
+    def c121, 1, 0.475, 0, 0.12 // x,y = 1st & 2nd cascade blur | z,w = 1st & 2nd cascade bias
+	def c122, 0.19, 0.0542857, 0.28, 0.55 // x,y = 3rd & 4th cascade blur | z,w = 3rd & 4th cascade bias
 	
-	def c130, 0.02, 0.19, 3.5375328, 1
-	def c131, 0.0001220703125, 0.00048828125, 0.000244140625, 0.0009765625
+	def c130, 9.5, 0.0246914, 9.210526, 1 // smooth distance blur | x = start, y = 1/(end - start), z = maximum blur, w = minimum
+	def c131, 0.0001220703125, 0.00048828125, 0, 0 // x,y = static texel size
 	
-	def c132, 0, 1, 2, 3
-	def c133, 0.5, 1.5, 2, 0.2
-	def c134, 5.1529055, 2.79905456, 2.3441396, 1.7763092
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
-    // --------------------------------------------------------------- PCSS Constants ---------------------------------------------------------------
-    def c140, 63, 1.4, 2.0, 0.015
-    def c141, 6, 1, 0, 0
-    defi i2, 22, 0, 0, 0
+	def c132, 0, 1, 2, 3 // filter ID's
+	def c133, 0.5, 1, 1.5, 2 // blur multipliers
+	
+	// PCSS constants
+    def c140, 49, 0.2333333, 0.5, 0.045
+    def c141, -33, 6, 0, 1
+    defi i2, 12, 0, 0, 0
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     dcl_texcoord v0.xy
     dcl_texcoord1 v1
@@ -213,86 +212,69 @@
     add r0.w, r1.x, r0.w
     add r0.z, r0.z, r0.w
 	removed 1.0.6.0 filter */
-	// -------------------------------------------------------------- Filter Utilities --------------------------------------------------------------
-	mov r20.xy, c131.xy					// static texel size instead of c53.xy because blur is now user controllable
-	
+	// ------------------------------------------------------------- Per Cascade Tweaks -------------------------------------------------------------
     add r21.xyz, r0.z, -c120.xyz
     cmp r22.xy, r21.x, c121.yw, c121.xz
     cmp r22.xy, r21.y, c122.xz, r22.xy
     cmp r22.xy, r21.z, c122.yw, r22.xy	// r22.x = per cascade blur, r22.y = per cascade bias
-    mul r20.xy, r20.xy, r22.x
 	
+    mul r20.xy, c131.xy, r22.x			// copy texel size and reduce cascade blur disparity
 	add r1.z, r1.z, -r22.y				// improve depth bias for 2nd, 3rd and 4th cascade
-	
-	// Filter Selection
-	mov r20.z, c223.y
-	if_eq r20.z, c132.x // "Sharp"
-		mul r20.xy, r20.xy, c133.x
-		mov r20.w, c134.x
-	else
-	if_eq r20.z, c132.y // "Soft"
-		mov r20.w, c130.z
-	else
-	if_eq r20.z, c132.z // "Softer"
-		mul r20.xy, r20.xy, c133.y
-		mov r20.w, c134.y
-	else
-	if_eq r20.z, c132.w // "Softest"
-		mul r20.xy, r20.xy, c133.z
-		mov r20.w, c134.z
-	else				// "PCSS"
-		mul r20.xy, r20.xy, c133.w
-		mov r20.w, c134.w
-	endif
-	endif
-	endif
-	endif
-	
-	mul_sat r21.x, r0.x, c130.x
-	add_sat r21.x, r21.x, -c130.y
-	mul r21.x, r21.x, r20.w
-	mad r21.x, r21.x, r21.x, c130.w
-	mul r20.xy, r20.xy, r21.x			// gradual distance blur
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
-	// -------------------------------------------------------------------- PCSS --------------------------------------------------------------------
-	if_gt r20.z, c132.w
+	// -------------------------------------------------------------- Filter Selection --------------------------------------------------------------
+	mov r20.z, c223.y
+    add r21.xyz, r20.z, -c132.yzw
+    cmp r20.w, r21.x, c133.y, c133.x
+    cmp r20.w, r21.y, c133.z, r20.w
+    cmp r20.w, r21.z, c133.w, r20.w // "Sharp", "Soft", "Softer" & "Softest"
+	
+	if_gt r20.z, c132.w // "PCSS"
 		mov r21.y, c141.z // blockers
 	
-		mov r22.xy, -c140.xx // x - inner loop index, y - outer loop index
-		mov r23.x, c141.z // sum
+		mul r22.xy, r22.xx, c141.xy // pcss texel step
+	
+		mov r23.xy, r22.xx // x - inner loop index, y - outer loop index
+		mov r24.x, c141.z // sum
 	
 		rep i2
-			mul r21.w, r22.y, c140.w
+			mul r21.w, r23.y, c140.w
 	
 			rep i2
-				mad r24.xy, c53.xy, r22.xy, r0.zw
-				texldl r25, r24.xy, s15
+				mad r25.xy, c53.xy, r23.xy, r0.zw
+				texldl r26, r25.xy, s15
 	
-				add r24.x, r25.x, -r1.z
+				add r25.x, r26.x, -r1.z
 	
-				if_gt r24.x, r21.w
-					min r24.x, r24.x, c140.x
-					add r23.x, r23.x, r24.x
-					add r21.y, r21.y, c141.y
+				if_gt r25.x, r21.w
+					min r25.x, r25.x, c140.x // < 49
+					add r24.x, r24.x, r25.x
+					add r21.y, r21.y, c141.w
 				endif
 	
-				add r22.x, r22.x, c141.x // j++
+				add r23.x, r23.x, r22.y // j++
 			endrep
-			add r22.y, r22.y, c141.x // i++
-			mov r22.x, -c140.x
+			add r23.y, r23.y, r22.y // i++
+			mov r23.x, r22.x // j = -33
 		endrep
 	
 		// avg if any blockers
 		if_gt r21.y, c141.z
 			rcp r21.y, r21.y
-			mul r23.x, r23.x, r21.y
-			mad r23.x, r23.x, c140.y, c140.z // x * 1.4 + 2.0
+			mul r24.x, r24.x, r21.y
+			mul r24.x, r24.x, c140.y // maximum intensity
 		else
-			mov r23.x, c140.z
+			mov r24.x, c141.z
 		endif
 	
-		mul r20.xy, r20.xy, r23.x
+		max r20.w, r24.x, c140.z // minimum intensity
 	endif
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------ Smooth Distance Blur ------------------------------------------------------------
+	add r20.z, r0.y, -c130.x
+	mul_sat r20.z, r20.z, c130.y
+	mul r20.z, r20.z, r20.z
+	lrp r21.x, r20.z, c130.z, r20.w
+	mul r20.xy, r20.xy, r21.x
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// ----------------------------------------------------------- 1.0.4.0 Shadow Filter ------------------------------------------------------------
     mov r21.xy, c112.xy
@@ -344,7 +326,7 @@
     add r0.y, r0.y, -c53.w
     cmp r1.xy, r0.y, c9, c9.zwzw
     mul r0.y, r0.w, r0.w
-	mul r0.y, r0.y, r0.y	// improved distance fade
+	mul r0.y, r0.y, r0.y	// improved fadeout
     mul r0.y, r0.y, c5.x
     mad r0.y, r0.z, c5.w, r0.y
     add r0.z, r1.y, r0.y
