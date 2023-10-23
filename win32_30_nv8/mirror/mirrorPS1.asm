@@ -31,12 +31,11 @@
     mul r1.x, -r1.x, c0.x
     mad r2.xy, r1.x, v0.yx, c0.x
 	
-    mov r1, c0.w
     mul r3.xy, c44.xy, c44.z
     mul r3.xy, r3.xy, c1.w
+	
     mad r0.xy, r3.xy, c1.xx, r2.xy
-    texld r0, r0.yx, s0
-    add r1, r1, r0
+    texld r1, r0.yx, s0
     mad r0.xy, r3.xy, c1.xy, r2.xy
     texld r0, r0.yx, s0
     add r1, r1, r0
