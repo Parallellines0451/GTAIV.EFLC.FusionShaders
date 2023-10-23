@@ -29,26 +29,43 @@
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, 0, -1, -0, 0
+    def c2, 0, 0.001, 0.999, 1
+    def c3, 5, 3, 0.00390625, 0
     dcl_texcoord v0.xy
     dcl_color v1
     dcl vPos.xy
     dcl_texcoord9 v9
     dcl_2d s0
     dcl_2d s10
+	mov r5, c39
+	mov r6.xy, vPos.xy
+	if_le r5.y, c2.y
+		add r6.xy, vPos.xy, -c3.xy
+	endif
     mov_sat r0.x, c39.x
-    mul r0.x, r0.x, c150.x
+    mul r0.x, r0.x, c150.y
     frc r0.y, r0.x
     mul r0.z, r0.y, c150.y
     frc r0.w, r0.z
     add r1.xy, r0.zxzw, -r0.wyzw
-    mul r0.xy, c150.z, vPos
+    mul r0.xy, c150.z, r6
     frc r0.xy, r0_abs
-    cmp r0.xy, vPos, r0, -r0
+    cmp r0.xy, r6, r0, -r0
     mul r0.xy, r0, c150.w
     mad r0.xy, r1, c150.w, r0
     mov r0.zw, c1.x
+	if_le r5.y, c2.y
+		sub r0.xy, c2.ww, r0.xy
+		sub r0.xy, r0.xy, c3.zz
+	endif
     texldl r0, r0, s10
-    cmp r0, -r0.x, c1.y, c1.z
+	if_le r5.y, c2.y
+		sub r0, c2.wwww, r0
+	endif
+	if_ge r5.x, c2.z
+		sub r0, c2.wwww, r0
+	endif
+    cmp r0, -r0.z, c1.y, c1.z
     texkill r0
     texld r0, v0, s0
     mul r0, r0, v1
@@ -57,7 +74,7 @@
 	max r20.w, r20.w, c0.z
     mul r1.x, r1.x, r20.w
     mul r1.xyz, r0, r1.x
-    mul r1.w, r0.w, c39.x
+    mul r1.w, r0.w, c2.w
     mul oC0, r1, c51
 	// ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------
 	if_ne v9.y, c127.y
