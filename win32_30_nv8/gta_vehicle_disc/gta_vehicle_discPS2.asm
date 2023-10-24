@@ -128,10 +128,10 @@
 	// --------------------------------------------------------- Filter Utilities Constants ---------------------------------------------------------
 	def c120, 0.25, 0.5, 0.75, 0 // cascade identifiers
 	
-    def c121, 1, 0.475, 0, 0.12 // x,y = 1st & 2nd cascade blur | z,w = 1st & 2nd cascade bias
-	def c122, 0.19, 0.0542857, 0.28, 0.55 // x,y = 3rd & 4th cascade blur | z,w = 3rd & 4th cascade bias
+    def c121, 1, 0.475, 0, 0.14 // x,y = 1st & 2nd cascade blur | z,w = 1st & 2nd cascade bias
+	def c122, 0.19, 0.0542857, 0.4, 0.7 // x,y = 3rd & 4th cascade blur | z,w = 3rd & 4th cascade bias
 	
-	def c130, 9.5, 0.0246914, 9.210526, 1 // smooth distance blur | x = start, y = 1/(end - start), z = maximum blur, w = minimum
+	def c130, 9.5, 0.0246914, 9.210526, 0.15 // smooth distance blur | x = start, y = 1/(end - start), z = maximum blur, w = maximum bias
 	def c131, 0.0001220703125, 0.00048828125, 0, 0 // x,y = static texel size
 	
 	def c132, 0, 1, 2, 3 // filter ID's
@@ -302,11 +302,14 @@
 	endif
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// ------------------------------------------------------------ Smooth Distance Blur ------------------------------------------------------------
-	add r20.z, r0.y, -c130.x
-	mul_sat r20.z, r20.z, c130.y
-	mul r20.z, r20.z, r20.z
-	lrp r21.x, r20.z, c130.z, r20.w
-	mul r20.xy, r20.xy, r21.x
+	mov r20.z, c110.w
+	add r21.x, r0.y, -c130.x
+	mul_sat r21.x, r21.x, c130.y
+	mul r21.x, r21.x, r21.x
+	lrp r22.xy, r21.x, c130.zw, r20.wz // r22.x = blur factor, r22.y = bias factor
+	
+	mul r20.xy, r20.xy, r22.x
+	add r0.z, r0.z, r22.y
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// ----------------------------------------------------------- 1.0.4.0 Shadow Filter ------------------------------------------------------------
     mov r21.xy, c112.xy
