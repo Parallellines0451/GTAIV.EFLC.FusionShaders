@@ -308,6 +308,7 @@
     rcp r0.y, r0.y
     rcp r0.z, c53.w
     mul r0.z, r0.y, r0.z
+    mul r0.z, r0.z, r0.z // improved shadow fadeout
     add r0.y, r0.y, -c53.w
     cmp r0.yw, r0.y, c5.xxzy, c5.xzzw
     mul r0.z, r0.z, r0.z

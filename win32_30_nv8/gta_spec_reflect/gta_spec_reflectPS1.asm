@@ -239,6 +239,7 @@
     rcp r4.w, r4.w
     rcp r6.x, c53.w
     mul r6.x, r4.w, r6.x
+    mul r6.x, r6.x, r6.x // improved shadow fadeout
     mul r6.x, r6.x, r6.x
     mul r6.x, r6.x, c1.z
     /* removed 1.0.6.0 filter

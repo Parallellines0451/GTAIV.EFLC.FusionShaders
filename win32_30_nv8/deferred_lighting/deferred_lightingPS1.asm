@@ -322,10 +322,10 @@
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     rcp r0.w, c53.w
     mul r0.w, r0.y, r0.w
+    mul r0.w, r0.w, r0.w // improved shadow fadeout
     add r0.y, r0.y, -c53.w
     cmp r1.xy, r0.y, c7, c7.zwzw
     mul r0.y, r0.w, r0.w
-	mul r0.y, r0.y, r0.y	// improved fadeout
     mul r0.y, r0.y, c3.z
     mad r0.y, r0.z, c3.w, r0.y
     add r0.z, r1.y, r0.y
