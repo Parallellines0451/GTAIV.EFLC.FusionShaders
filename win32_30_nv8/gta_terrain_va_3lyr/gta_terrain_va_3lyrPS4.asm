@@ -69,7 +69,7 @@
     mad oC1.xyz, v5, c0.x, c0.x
     mov oC1.w, c39.x
     mad r21.xyz, v3.w, c0.yyzw, c0.ywyw
-    mul r21.y, r21.y, c151.z
+    mul r21.xy, r21.xy, c151.z
     mov oC2.xyz, r21.xyz
     mov oC2.w, c39.x
     mov r0.yz, c0

@@ -67,6 +67,7 @@
     mov oC0.w, r0.x
     mov r20.w, r0.x
     mov r1.x, c73.x
+    mul r1.x, r1.x, c151.z
     mul oC2.xz, r1.x, c2.xyyw
     mov oC2.w, r0.x
     mul oC3, -r0.yzzz, c52.x

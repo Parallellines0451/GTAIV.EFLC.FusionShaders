@@ -104,6 +104,7 @@
     mul r0.y, r0.w, v4.w
     mad r1.xyz, r1, r1.w, c0.z
     mul oC1.xyz, r1, -c1.z
+    mul r0.x, r0.x, c151.z
     mul oC2.x, r0.x, -c1.z
     mov r0.x, c72.x
     mul r0.x, r0.x, c2.x

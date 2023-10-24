@@ -61,7 +61,7 @@
     mov r20.w, r0
     mov oC1.w, r0.w
     mad r21.xyz, v2.x, c2.yyzw, c2.ywyw
-    mul r21.y, r21.y, c151.z
+    mul r21.xy, r21.xy, c151.z
     mov oC2.xyz, r21.xyz
     mov oC2.w, r0.w
     mov r0.yz, c0

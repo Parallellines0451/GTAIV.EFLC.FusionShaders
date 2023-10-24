@@ -103,6 +103,7 @@
     mul r0.x, r2.x, c73.x
     mad r1.xyz, r1, r1.w, c0.z
     mul oC1.xyz, r1, -c1.w
+    mul r0.x, r0.x, c151.z
     mul oC2.x, r0.x, -c1.w
     mov r1.xyw, c2
     mul r0.x, r1.w, c72.x
