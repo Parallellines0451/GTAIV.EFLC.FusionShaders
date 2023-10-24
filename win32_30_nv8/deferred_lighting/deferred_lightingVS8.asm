@@ -42,7 +42,7 @@
 //   gDeferredLightConeAngle          c222     1
 //   gDeferredLightColourAndIntensity c223     1
 //   gDeferredLightVolumeParams       c224     1
-//   gDeferredLightSampler2           s0       1
+//   gDeferredLightSampler1           s0       1
 //
 
     vs_3_0

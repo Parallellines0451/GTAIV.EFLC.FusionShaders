@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   sampler2D StippleTexture;
 //   sampler2D TextureSampler_layer0;
 //   sampler2D TextureSampler_layer1;
 //   sampler2D TextureSampler_layer2;
@@ -21,6 +22,7 @@
 //   TextureSampler_layer1 s1       1
 //   TextureSampler_layer2 s2       1
 //   TextureSampler_layer3 s3       1
+//   StippleTexture        s10      1
 //
 
     ps_3_0

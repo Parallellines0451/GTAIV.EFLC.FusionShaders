@@ -4,6 +4,7 @@
 //
 // Parameters:
 //
+//   sampler2D GBufferStencilTextureSampler;
 //   sampler2D GBufferTextureSampler0;
 //   sampler2D GBufferTextureSampler1;
 //   sampler2D GBufferTextureSampler2;
@@ -34,7 +35,7 @@
 //   GBufferTextureSampler2       s2       1
 //   GBufferTextureSampler3       s4       1
 //   ParabSampler                 s5       1
-//   GBufferStencilTextureSampler s5       1
+//   GBufferStencilTextureSampler s6       1
 //
 
     ps_3_0

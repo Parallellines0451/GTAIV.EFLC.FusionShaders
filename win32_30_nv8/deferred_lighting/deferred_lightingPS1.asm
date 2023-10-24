@@ -4,6 +4,7 @@
 //
 // Parameters:
 //
+//   sampler2D GBufferStencilTextureSampler;
 //   sampler2D GBufferTextureSampler0;
 //   sampler2D GBufferTextureSampler1;
 //   sampler2D GBufferTextureSampler2;
@@ -29,29 +30,30 @@
 //
 // Registers:
 //
-//   Name                   Reg   Size
-//   ---------------------- ----- ----
-//   gViewInverse           c12      4
-//   gDirectionalLight      c17      1
-//   gDirectionalColour     c18      1
-//   gLightAmbient0         c37      1
-//   gLightAmbient1         c38      1
-//   globalScalars          c39      1
-//   gShadowParam18192021   c53      1
-//   gFacetCentre           c54      1
-//   gShadowParam14151617   c56      1
-//   gShadowParam0123       c57      1
-//   gShadowParam4567       c58      1
-//   gShadowParam891113     c59      1
-//   gShadowMatrix          c60      4
-//   gDeferredProjParams    c66      1
-//   dReflectionParams      c72      1
-//   GBufferTextureSampler0 s0       1
-//   GBufferTextureSampler1 s1       1
-//   GBufferTextureSampler2 s2       1
-//   GBufferTextureSampler3 s4       1
-//   ParabSampler           s5       1
-//   gShadowZSamplerDir     s15      1
+//   Name                         Reg   Size
+//   ---------------------------- ----- ----
+//   gViewInverse                 c12      4
+//   gDirectionalLight            c17      1
+//   gDirectionalColour           c18      1
+//   gLightAmbient0               c37      1
+//   gLightAmbient1               c38      1
+//   globalScalars                c39      1
+//   gShadowParam18192021         c53      1
+//   gFacetCentre                 c54      1
+//   gShadowParam14151617         c56      1
+//   gShadowParam0123             c57      1
+//   gShadowParam4567             c58      1
+//   gShadowParam891113           c59      1
+//   gShadowMatrix                c60      4
+//   gDeferredProjParams          c66      1
+//   dReflectionParams            c72      1
+//   GBufferTextureSampler0       s0       1
+//   GBufferTextureSampler1       s1       1
+//   GBufferTextureSampler2       s2       1
+//   GBufferTextureSampler3       s4       1
+//   ParabSampler                 s5       1
+//   GBufferStencilTextureSampler s6       1
+//   gShadowZSamplerDir           s15      1
 //
 
     ps_3_0
