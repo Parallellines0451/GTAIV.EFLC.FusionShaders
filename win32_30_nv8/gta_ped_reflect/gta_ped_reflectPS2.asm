@@ -132,7 +132,7 @@
 	// --------------------------------------------------------- Filter Utilities Constants ---------------------------------------------------------
 	def c120, 0.25, 0.5, 0.75, 0 // cascade identifiers
 	
-    def c121, 1, 0.475, 0, 0.14 // x,y = 1st & 2nd cascade blur | z,w = 1st & 2nd cascade bias
+    def c121, 1, 0.475, 0, 0.12 // x,y = 1st & 2nd cascade blur | z,w = 1st & 2nd cascade bias
 	def c122, 0.19, 0.0542857, 0.4, 0.7 // x,y = 3rd & 4th cascade blur | z,w = 3rd & 4th cascade bias
 	
 	def c130, 9.5, 0.0246914, 9.210526, 0.15 // smooth distance blur | x = start, y = 1/(end - start), z = maximum blur, w = maximum bias
