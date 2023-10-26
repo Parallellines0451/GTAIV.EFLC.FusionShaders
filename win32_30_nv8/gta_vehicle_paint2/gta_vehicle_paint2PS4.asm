@@ -104,7 +104,7 @@
 	def c122, 0.19, 0.0542857, 0.4, 0.7 // x,y = 3rd & 4th cascade blur | z,w = 3rd & 4th cascade bias
 	
 	def c130, 9.5, 0.0246914, 9.210526, 0.15 // smooth distance blur | x = start, y = 1/(end - start), z = maximum blur, w = maximum bias
-	def c131, 0.0001220703125, 0.00048828125, 0, 0 // x,y = static texel size
+	def c131, 0.0001220703125, 0.00048828125, 0, 0 // x,y = "Very High" setting texel size
 	
 	def c132, 0, 1, 2, 3 // filter ID's
 	def c133, 0.5, 1, 1.5, 2 // blur multipliers
@@ -272,7 +272,9 @@
     cmp r22.xy, r21.y, c122.xz, r22.xy
     cmp r22.xy, r21.z, c122.yw, r22.xy	// r22.x = per cascade blur, r22.y = per cascade bias
 	
-    mul r20.xy, c131.xy, r22.x			// copy texel size and reduce cascade blur disparity
+	mov r20.xy, c53.xy
+	max r20.xy, r20.xy, c131.xy			// limit minimum blur
+    mul r20.xy, r20.xy, r22.x			// reduce cascade blur disparity
 	add r7.z, r7.z, -r22.y				// improve depth bias for 2nd, 3rd and 4th cascade
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------- Filter Selection --------------------------------------------------------------
