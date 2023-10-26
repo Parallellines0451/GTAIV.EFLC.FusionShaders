@@ -14,3 +14,4 @@ del "%%i"
 )
 
 echo D | xcopy "%cd%/other_assets/Improved Stipple" "%cd%/update" /K /H /Y /S
+echo D | xcopy "%cd%/other_assets/New Shader Dependencies" "%cd%/update" /K /H /Y /S
