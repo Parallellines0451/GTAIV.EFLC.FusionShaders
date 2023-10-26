@@ -1,54 +1,66 @@
-# GTAIV.ShaderFixesCollection
-Various shader fixes and improvements for GTA IV 1.0.7.0, 1.0.8.0 and Complete Edition.
+# GTAIV.EFLC.FusionShaders
+Various shader fixes and improvements for [GTAIV.EFLC.FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix).
 
-# Main features list
-- Fixed z-fighting
+Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [RaphaelK12](https://github.com/RaphaelK12), [robi29](https://github.com/robi29/) and [\_CP_](https://github.com/cpmodding) for directly contributing with fixes, to [Shvab](https://github.com/d3g0n-byte) for making RAGE Shader Editor and to [ThirteenAG](https://github.com/ThirteenAG) for implementing features we requested into FusionFix.
+
+# General
+- Fixed z-fighting by implementing a logarithmic depth buffer
 - Fixed LOD pop-in
-- Fixed soft particles
-- Ported 1.0.4.0 shadow filter
-- Fixed light dimming/pop-in
-- Wires and bridge cables are now opaque and cast shadows
+- Removed unnecessary stippled transparency from hundreds of shaders
+- Added 256 tile stipple for smoother transparency and LOD transitions
+# Lighting
+- Fixed volumetric light shafts occlusion
 - Ported console foliage translucency
-- Added a new shader exclusively for trees and tree mods to use
+- Fixed orange glow under trees
+- Added tree vertex AO toggle
+- Fixed light dimming/pop-in
+# Shadows
+- Ported 1.0.4.0 shadow filter and improved its sample count
+- Improved night shadow filter
 - Fixed broken shadows following the player at high altitudes
-- Fixed invisible lamp glass at day
-- Fixed improper explosion texture alpha
-- Fixed volumetric light shafts
-- Fixed depth of field and bloom resolution scaling
-- Fixed blurry screen
-- Added native FXAA
-- Repurposed Definition setting into a motion blur toggle
-- Console-style TLAD noise tiling
-- Fixed vehicle reflections
-- Fixed anisotropic filtering affecting reflection intensity
-- Restored console-style vehicle reflections (intensity not affected by dirt)
-- Increased ambient reflection intensity to match consoles
-- Fixed disconnected shadows ("peter panning")
-- Fixed stippled character eyewear
+- Fixed broken shadows cast by finely detailed objects like fences
+- Added percentage closer soft shadows
+- Fixed disconnected shadows/peter panning and implemented slope scale depth bias
+- Reduced shadow cascade disparity
+- Slightly improved shadow fadeout
 - Fixed excessively strong vertex AO and static vehicle shadows
-- Added wind sway support for real tree shadows
+- Added wind sway for tree shadows
 - Fixed improper water shadow stretching
-- Fixed distorted mirror reflections
-- Fixed invisible gta_emissivestrong lights
-- Console-style water texture tiling
-- Fixed textureless water on AMD graphics cards
+- Added experimental support for simultaneous headlight and vehicle shadows
+# Post processing
+- Added a mask for the dithering filter to only smooth out stippled objects instead of the whole screen
+- Fixed depth of field and bloom resolution scaling
+- Fixed excessively blurred screen compared to consoles
+- Added native anti aliasing
+- Ported console bloom and auto exposure
+- Increased motion blur quality (reduced noisiness)
+- Split depth of field and motion blur into dedicated settings
+- Restored console TLAD noise effect
+- Restored console gamma
+# Reflections
+- Fixed excessive wetness/specularity of various surfaces
+- Fixed blocky vehicle reflections
+- Fixed anisotropic filtering affecting reflection intensity
+- Removed influence of vehicle.ide on vehicle reflection intensity
+- Increased global reflection intensity to match consoles
+- Fixed distorted mirror reflections at certain camera angles
+- Restored console mirror filter
+# Particles
+- Fixed particle seams/restored soft particles
 - Improved rain visibility
-- Console-like gamma
-
-# Notes
-<b>This repository is part of [FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix). ENBSeries or game versions prior to 1.0.7.0 are not compatible.</b>
-
-Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [RaphaelK12](https://github.com/RaphaelK12), [robi29](https://github.com/robi29/) and [\_CP_](https://github.com/cpmodding) for directly contributing with their own fixes, to [Shvab](https://github.com/d3g0n-byte) for making RAGE Shader Editor and to [ThirteenAG](https://github.com/ThirteenAG) for implementing features we requested into FusionFix.
-
-Their shader repositories, which also have lots of cool stuff:
-- [GTA4-Improved-Soft-Shadows](https://github.com/RaphaelK12/GTA4-Improved-Soft-Shadows)
-- [GTA-IV-Shaders](https://github.com/robi29/GTA-IV-Shaders)
+# Water
+- Console/medium water texture tiling for the very high setting
+- Fixed textureless water on AMD graphics cards
+# Misc
+- Improved mirror depth/placement
+- Fixed invisible gta_emissivestrong lights like in the Rotterdam Tower
+- Improved window crossfade
+- Added lamppost on/off toggle support
+- Added optional opaque wires and bridge cables
+- Added a new shader exclusively for trees
 
 # To-do:
 - Fix water foam
-- Fix improper emissive LOD crossfade
-- Fix depth bias on lower shadow settings
-- Implement multiple toggleable shadow filters
 - Implement shadow cascade blending
-- Port Xbox mirror shader
 - Fix uncolored broken glass shards
+- Fix color/sky banding
