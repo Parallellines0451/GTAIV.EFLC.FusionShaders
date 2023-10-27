@@ -33,6 +33,7 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [Ra
 - Fixed excessively blurred screen compared to consoles
 - Added native anti aliasing
 - Ported console bloom and auto exposure
+- Fixed motion blur framerate scaling
 - Increased motion blur quality (reduced noisiness)
 - Split depth of field and motion blur into dedicated settings
 - Restored console TLAD noise effect
@@ -48,8 +49,9 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [Ra
 # Particles
 - Fixed particle seams/restored soft particles
 - Improved rain visibility
+- Fixed rain framerate scaling
 # Water
-- Console/medium water texture tiling for the very high setting
+- Fixed water texture tiling
 - Fixed textureless water on AMD graphics cards
 # Misc
 - Improved mirror depth/placement
