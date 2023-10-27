@@ -324,7 +324,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_interior\gta_vehicle_interiorPS2.asm</File>
-				<Variables value="51" >
+				<Variables value="50" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -575,17 +575,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_interior\gta_vehicle_interiorPS3.asm</File>
-				<Variables value="27" >
+				<Variables value="26" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -716,17 +711,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_interior\gta_vehicle_interiorPS4.asm</File>
-				<Variables value="39" >
+				<Variables value="38" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -916,11 +906,6 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

@@ -339,7 +339,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_paint1\gta_vehicle_paint1PS2.asm</File>
-				<Variables value="53" >
+				<Variables value="52" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
@@ -600,17 +600,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_paint1\gta_vehicle_paint1PS3.asm</File>
-				<Variables value="29" >
+				<Variables value="28" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
@@ -751,17 +746,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_paint1\gta_vehicle_paint1PS4.asm</File>
-				<Variables value="41" >
+				<Variables value="40" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
@@ -961,11 +951,6 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

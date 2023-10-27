@@ -347,7 +347,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_decal_normal_only\gta_decal_normal_onlyPS1.asm</File>
-				<Variables value="50" >
+				<Variables value="49" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -592,11 +592,6 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>
@@ -881,7 +876,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_decal_normal_only\gta_decal_normal_onlyPS10.asm</File>
-				<Variables value="26" >
+				<Variables value="25" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1007,17 +1002,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_decal_normal_only\gta_decal_normal_onlyPS11.asm</File>
-				<Variables value="38" >
+				<Variables value="37" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1203,17 +1193,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_decal_normal_only\gta_decal_normal_onlyPS12.asm</File>
-				<Variables value="46" >
+				<Variables value="45" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1438,11 +1423,6 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

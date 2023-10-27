@@ -73,7 +73,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_diffuse_instance\gta_diffuse_instancePS1.asm</File>
-				<Variables value="46" >
+				<Variables value="45" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -299,11 +299,6 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
@@ -351,7 +346,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_diffuse_instance\gta_diffuse_instancePS4.asm</File>
-				<Variables value="22" >
+				<Variables value="21" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -457,11 +452,6 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
@@ -509,7 +499,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_diffuse_instance\gta_diffuse_instancePS7.asm</File>
-				<Variables value="34" >
+				<Variables value="33" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
@@ -674,11 +664,6 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

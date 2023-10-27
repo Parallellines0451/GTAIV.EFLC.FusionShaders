@@ -324,7 +324,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_chrome\gta_vehicle_chromePS2.asm</File>
-				<Variables value="55" >
+				<Variables value="54" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
@@ -595,17 +595,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_chrome\gta_vehicle_chromePS3.asm</File>
-				<Variables value="31" >
+				<Variables value="30" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
@@ -756,17 +751,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_chrome\gta_vehicle_chromePS4.asm</File>
-				<Variables value="43" >
+				<Variables value="42" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
@@ -976,11 +966,6 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

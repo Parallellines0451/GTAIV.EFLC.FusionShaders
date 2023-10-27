@@ -447,7 +447,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_spec\gta_specPS1.asm</File>
-				<Variables value="50" >
+				<Variables value="49" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>SpecSampler</Name>
@@ -692,11 +692,6 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>
@@ -1000,7 +995,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_spec\gta_specPS9.asm</File>
-				<Variables value="26" >
+				<Variables value="25" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>SpecSampler</Name>
@@ -1126,17 +1121,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_spec\gta_specPS10.asm</File>
-				<Variables value="38" >
+				<Variables value="37" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>SpecSampler</Name>
@@ -1322,17 +1312,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_spec\gta_specPS11.asm</File>
-				<Variables value="46" >
+				<Variables value="45" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>SpecSampler</Name>
@@ -1557,11 +1542,6 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

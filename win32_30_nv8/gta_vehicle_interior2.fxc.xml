@@ -324,7 +324,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_interior2\gta_vehicle_interior2PS2.asm</File>
-				<Variables value="50" >
+				<Variables value="49" >
 					<Item>
 						<Type>float3</Type>
 						<Name>LuminanceConstants</Name>
@@ -570,17 +570,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_interior2\gta_vehicle_interior2PS3.asm</File>
-				<Variables value="26" >
+				<Variables value="25" >
 					<Item>
 						<Type>float3</Type>
 						<Name>LuminanceConstants</Name>
@@ -706,17 +701,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_interior2\gta_vehicle_interior2PS4.asm</File>
-				<Variables value="38" >
+				<Variables value="37" >
 					<Item>
 						<Type>float3</Type>
 						<Name>LuminanceConstants</Name>
@@ -901,11 +891,6 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>

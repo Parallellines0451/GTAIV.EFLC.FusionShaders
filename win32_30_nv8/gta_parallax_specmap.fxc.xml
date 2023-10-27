@@ -362,7 +362,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_parallax_specmap\gta_parallax_specmapPS1.asm</File>
-				<Variables value="53" >
+				<Variables value="52" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -622,11 +622,6 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>
@@ -960,7 +955,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_parallax_specmap\gta_parallax_specmapPS9.asm</File>
-				<Variables value="29" >
+				<Variables value="28" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1101,17 +1096,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_parallax_specmap\gta_parallax_specmapPS10.asm</File>
-				<Variables value="41" >
+				<Variables value="40" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1312,17 +1302,12 @@
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
 					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
 				</Variables>
 			</Item>
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_parallax_specmap\gta_parallax_specmapPS11.asm</File>
-				<Variables value="49" >
+				<Variables value="48" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -1562,11 +1547,6 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
 					</Item>
 				</Variables>
 			</Item>
