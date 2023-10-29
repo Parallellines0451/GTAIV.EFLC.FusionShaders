@@ -448,7 +448,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivenight\gta_emissivenightPS2.asm</File>
-				<Variables value="7" >
+				<Variables value="8" >
+					<Item>
+						<Type>float4</Type>
+						<Name>shadowmap_res</Name>
+						<Index value="207" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>

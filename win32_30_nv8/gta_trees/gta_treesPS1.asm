@@ -7,6 +7,7 @@
 //   sampler2D StippleTexture;
 //   sampler2D TextureSampler;
 //   float4 globalScalars;
+//   float4 shadowmap_res;
 //
 //
 // Registers:
@@ -14,6 +15,7 @@
 //   Name           Reg   Size
 //   -------------- ----- ----
 //   globalScalars  c39      1
+//   shadowmap_res  c207     1 // model identifier
 //   TextureSampler s0       1
 //   StippleTexture s10      1
 //
@@ -25,7 +27,8 @@
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, -1, -0, 0.5, 0
-	def c2, 0.01953125, 2, 2, 0	// x = stencil, y = alpha multiplier
+	def c2, 0.01953125, 1280, 2, 0	// x = stencil
+	def c3, 0.25, 2, 0.5, 1.22
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl vPos.xy
@@ -34,14 +37,17 @@
     dcl_2d s0
     dcl_2d s10
     texld r0, v0, s0
+	mov r1.y, c2.y
+	add r1.y, r1.y, -c207.x
+	cmp r1.yz, -r1_abs.y, c3.xxyy, c3.zzww
 	mov r22.x, c223.z
 	if_eq r22.x, c2.z
-		add r1.x, -r0.w, c0.w
+		add r1.x, -r0.w, r1.y
 		cmp r1.x, r1.x, c1.x, c1.y
 		add r0.w, r1.x, -c1.x
 		texkill r1.x
 	else
-		mul_sat r0.w, r0.w, c2.y
+		mul_sat r0.w, r0.w, r1.z
 	endif
     mul r0.w, r0.w, c39.x
     mov_sat r1.x, r0.w
