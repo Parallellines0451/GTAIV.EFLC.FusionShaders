@@ -24,11 +24,12 @@
 //
 
     ps_3_0
-    def c151, 0.9999, 0.01171875, 0.125, 0	// Dithering Mask constants + specularity multiplier
+    def c151, 0.9999, 0.01171875, 0, 0	// Dithering Mask constants
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 8.4778557092e-43 // 605
     def c150, 15.996, 16, 0.0625, 0.0625	// 256 state stipple constants
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 0.5, 0, 1, 0.25
+    def c1, 3.99600005, 4, 0.125, 0.25
     dcl_texcoord v0.xy
     dcl_texcoord3 v1.xy
     dcl_texcoord4 v2.xy
@@ -69,7 +70,7 @@
     mad oC1.xyz, v5, c0.x, c0.x
     mov oC1.w, c39.x
     mad r21.xyz, v3.w, c0.yyzw, c0.ywyw
-    mul r21.xy, r21.xy, c151.z
+    mul r21.xy, r21.xy, c1.z
     mov oC2.xyz, r21.xyz
     mov oC2.w, c39.x
     mov r0.yz, c0
