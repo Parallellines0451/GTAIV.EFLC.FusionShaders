@@ -32,7 +32,7 @@
     texld r0, v0.yzzw, s0
 	mov r1.x, c2.x
 	if_eq c207.x, r1.x
-		mul_sat r0.w, r0.w, c2.x
+		mul_sat r0.w, r0.w, c2.y
 	else
 		add r1.x, -r0.w, c2.z
 		cmp r1.x, r1.x, c1.y, c1.x
