@@ -48,7 +48,7 @@
     def c4, 0.75, 0.25, 5, 10
 	def c20, 1.6666667, 0, 0, 0	// Reflection intensity multiplier
 	def c21, 3, 2, 1, 0	// Console tree lighting constants
-	def c22, 0.01171875, 0.01953125, 0.0234375, 0
+	def c22, 0.01171875, 0.0234375, 0.02734375, 0
 	def c23, 0.35, 0.5, 0.3333333, 0
     dcl_texcoord v0.xy
     dcl_texcoord1 v1
