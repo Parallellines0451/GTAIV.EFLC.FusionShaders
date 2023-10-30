@@ -135,155 +135,226 @@
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------- FXAA --------------------------------------------------------------------
 	if_ne c222.x, r31.x
-		if_le r30.x, c1.x
-			mov r11, c76
-			mul r13, c25.xxyy, v0.xyxx
-			texldl r13, r13, s2
-			mul r12.xyz, r13, r13
-			dp3 r13.w, r12, c26
-			rsq r13.w, r13.w
-			rcp r13.w, r13.w
-			mov r14.xyz, c25
-			mad r15.xyz, r11.yxyw, r14.xxyw, v0.yxyw
-			mul r16.xzw, c25.xyyy, v0.x
-			mov r16.y, r15.x
-			texldl r16, r16, s2
-			mul r12.xyz, r16, r16
-			dp3 r16.w, r12, c26
-			rsq r16.w, r16.w
-			rcp r16.w, r16.w
-			mul r15, r15.yzyy, c25.xxyy
-			texldl r15, r15, s2
-			mul r12.xyz, r15, r15
-			dp3 r15.w, r12, c26
-			rsq r15.w, r15.w
-			rcp r15.w, r15.w
-			mad r15.xyz, r11.yxyw, r14.zzyw, v0.yxyw
-			mul r17.xzw, c25.xyyy, v0.x
-			mov r17.y, r15.x
-			texldl r17, r17, s2
-			mul r12.xyz, r17, r17
-			dp3 r17.w, r12, c26
-			rsq r17.w, r17.w
-			rcp r17.w, r17.w
-			mul r18, r15.yzyy, c25.xxyy
-			texldl r18, r18, s2
-			mul r12.xyz, r18, r18
-			dp3 r18.w, r12, c26
-			rsq r18.w, r18.w
-			rcp r18.w, r18.w
-			max r14.w, r16.w, r13.w
-			min r15.x, r13.w, r16.w
-			max r16.x, r15.w, r14.w
-			min r14.w, r15.x, r15.w
-			max r15.x, r17.w, r18.w
-			min r15.y, r18.w, r17.w
-			max r17.x, r15.x, r16.x
-			min r16.x, r14.w, r15.y
-			mul r14.w, r17.x, c21.x
-			add r15.x, -r16.x, r17.x
-			max r15.y, c22.x, r14.w
-			if_lt r15.x, r15.y
+		mov r11, c76
+		mul r13, c25.xxyy, v0.xyxx
+		texldl r13, r13, s2
+		mul r12.xyz, r13, r13
+		dp3 r13.w, r12, c26
+		rsq r13.w, r13.w
+		rcp r13.w, r13.w
+		mov r14.xyz, c25
+		mad r15.xyz, r11.yxyw, r14.xxyw, v0.yxyw
+		mul r16.xzw, c25.xyyy, v0.x
+		mov r16.y, r15.x
+		texldl r16, r16, s2
+		mul r12.xyz, r16, r16
+		dp3 r16.w, r12, c26
+		rsq r16.w, r16.w
+		rcp r16.w, r16.w
+		mul r15, r15.yzyy, c25.xxyy
+		texldl r15, r15, s2
+		mul r12.xyz, r15, r15
+		dp3 r15.w, r12, c26
+		rsq r15.w, r15.w
+		rcp r15.w, r15.w
+		mad r15.xyz, r11.yxyw, r14.zzyw, v0.yxyw
+		mul r17.xzw, c25.xyyy, v0.x
+		mov r17.y, r15.x
+		texldl r17, r17, s2
+		mul r12.xyz, r17, r17
+		dp3 r17.w, r12, c26
+		rsq r17.w, r17.w
+		rcp r17.w, r17.w
+		mul r18, r15.yzyy, c25.xxyy
+		texldl r18, r18, s2
+		mul r12.xyz, r18, r18
+		dp3 r18.w, r12, c26
+		rsq r18.w, r18.w
+		rcp r18.w, r18.w
+		max r14.w, r16.w, r13.w
+		min r15.x, r13.w, r16.w
+		max r16.x, r15.w, r14.w
+		min r14.w, r15.x, r15.w
+		max r15.x, r17.w, r18.w
+		min r15.y, r18.w, r17.w
+		max r17.x, r15.x, r16.x
+		min r16.x, r14.w, r15.y
+		mul r14.w, r17.x, c21.x
+		add r15.x, -r16.x, r17.x
+		max r15.y, c22.x, r14.w
+		if_lt r15.x, r15.y
+		else
+		add r19.xy, -r11, v0
+		mov r19.zw, c25.y
+		texldl r19, r19, s2
+		mul r12.xyz, r19, r19
+		dp3 r19.w, r12, c26
+		rsq r19.w, r19.w
+		rcp r19.w, r19.w
+		add r20.xy, r11, v0
+		mov r20.zw, c25.y
+		texldl r20, r20, s2
+		mul r12.xyz, r20, r20
+		dp3 r20.w, r12, c26
+		rsq r20.w, r20.w
+		rcp r20.w, r20.w
+		mad r21, r11.xyxy, r14.xzzx, v0.xyxy
+		mul r22, r21.xyxx, c25.xxyy
+		texldl r22, r22, s2
+		mul r12.xyz, r22, r22
+		dp3 r22.w, r12, c26
+		rsq r22.w, r22.w
+		rcp r22.w, r22.w
+		mul r21, r21.zwxx, c25.xxyy
+		texldl r21, r21, s2
+		mul r12.xyz, r21, r21
+		dp3 r21.w, r12, c26
+		rsq r21.w, r21.w
+		rcp r21.w, r21.w
+		add r14.x, r16.w, r17.w
+		add r14.z, r15.w, r18.w
+		rcp r14.w, r15.x
+		add r15.x, r14.z, r14.x
+		mad r14.x, r13.w, c25.w, r14.x
+		mad r14.z, r13.w, c25.w, r14.z
+		add r15.y, r20.w, r22.w
+		add r15.z, r19.w, r22.w
+		mad r16.x, r15.w, c25.w, r15.y
+		mad r15.z, r17.w, c25.w, r15.z
+		add r16.y, r19.w, r21.w
+		add r16.z, r20.w, r21.w
+		mad r14.x, r14_abs.x, -c25.w, r16_abs.x
+		mad r14.z, r14_abs.z, -c25.w, r15_abs.z
+		mad r15.z, r18.w, c25.w, r16.y
+		mad r16.x, r16.w, c25.w, r16.z
+		add r14.x, r14.x, r15_abs.z
+		add r14.z, r14.z, r16_abs.x
+		add r15.y, r15.y, r16.y
+		add r14.x, -r14.z, r14.x
+		mad r14.z, r15.x, -c25.w, r15.y
+		cmp r15.x, r14.x, r17.w, r18.w
+		cmp r15.y, r14.x, r16.w, r15.w
+		cmp r15.z, r14.x, r11.y, r11.x
+		mad r14.z, r14.z, c23.x, -r13.w
+		add r15.w, -r13.w, r15.x
+		add r16.x, -r13.w, r15.y
+		add r15.xy, r13.w, r15
+		add r16.y, r15_abs.w, -r16_abs.x
+		max r17.x, r15_abs.w, r16_abs.x
+		cmp r15.z, r16.y, -r15.z, r15.z
+		mul_sat r14.z, r14.w, r14_abs.z
+		cmp r14.w, r14.x, r11.x, r14.y
+		cmp r14.y, r14.x, r14.y, r11.y
+		mad r16.xz, r15.z, c23.y, v0.xyyw
+		cmp r15.w, r14.x, v0.x, r16.x
+		cmp r16.x, r14.x, r16.z, v0.y
+		add r18.x, -r14.w, r15.w
+		add r18.y, -r14.y, r16.x
+		add r19.x, r14.w, r15.w
+		add r19.y, r14.y, r16.x
+		mad r15.w, r14.z, c23.z, c23.w
+		mov r18.zw, c25.y
+		texldl r20, r18, s2
+		mul r12.xyz, r20, r20
+		dp3 r20.w, r12, c26
+		rsq r20.w, r20.w
+		rcp r20.w, r20.w
+		mul r14.z, r14.z, r14.z
+		mov r19.zw, c25.y
+		texldl r21, r19, s2
+		mul r12.xyz, r21, r21
+		dp3 r21.w, r12, c26
+		rsq r21.w, r21.w
+		rcp r21.w, r21.w
+		cmp r15.x, r16.y, r15.x, r15.y
+		mul r15.y, r17.x, c24.x
+		mad r16.x, r15.x, -c23.y, r13.w
+		mul r14.z, r14.z, r15.w
+		mad r16.y, r15.x, -c23.y, r20.w
+		mad r16.z, r15.x, -c23.y, r21.w
+		mad r17.yz, r17.x, -c24.x, r16_abs
+		mad r15.w, r14.w, -c24.y, r18.x
+		cmp r20.x, r17.y, r18.x, r15.w
+		mad r15.w, r14.y, -c24.y, r18.y
+		cmp r20.y, r17.y, r18.y, r15.w
+		cmp r18.xy, r17.yzzw, c25.y, c25.x
+		add r15.w, r18.y, r18.x
+		mad r16.w, r14.w, c24.y, r19.x
+		cmp r18.x, r17.z, r19.x, r16.w
+		mad r16.w, r14.y, c24.y, r19.y
+		cmp r18.y, r17.z, r19.y, r16.w
+		if_lt -r15.w, c25.y
+			if_ge r16_abs.y, r15.y
 			else
-			add r19.xy, -r11, v0
-			mov r19.zw, c25.y
-			texldl r19, r19, s2
+			mov r20.zw, c25.y
+			texldl r19, r20, s2
 			mul r12.xyz, r19, r19
 			dp3 r19.w, r12, c26
 			rsq r19.w, r19.w
 			rcp r19.w, r19.w
-			add r20.xy, r11, v0
-			mov r20.zw, c25.y
-			texldl r20, r20, s2
-			mul r12.xyz, r20, r20
-			dp3 r20.w, r12, c26
-			rsq r20.w, r20.w
-			rcp r20.w, r20.w
-			mad r21, r11.xyxy, r14.xzzx, v0.xyxy
-			mul r22, r21.xyxx, c25.xxyy
-			texldl r22, r22, s2
-			mul r12.xyz, r22, r22
-			dp3 r22.w, r12, c26
-			rsq r22.w, r22.w
-			rcp r22.w, r22.w
-			mul r21, r21.zwxx, c25.xxyy
-			texldl r21, r21, s2
-			mul r12.xyz, r21, r21
-			dp3 r21.w, r12, c26
-			rsq r21.w, r21.w
-			rcp r21.w, r21.w
-			add r14.x, r16.w, r17.w
-			add r14.z, r15.w, r18.w
-			rcp r14.w, r15.x
-			add r15.x, r14.z, r14.x
-			mad r14.x, r13.w, c25.w, r14.x
-			mad r14.z, r13.w, c25.w, r14.z
-			add r15.y, r20.w, r22.w
-			add r15.z, r19.w, r22.w
-			mad r16.x, r15.w, c25.w, r15.y
-			mad r15.z, r17.w, c25.w, r15.z
-			add r16.y, r19.w, r21.w
-			add r16.z, r20.w, r21.w
-			mad r14.x, r14_abs.x, -c25.w, r16_abs.x
-			mad r14.z, r14_abs.z, -c25.w, r15_abs.z
-			mad r15.z, r18.w, c25.w, r16.y
-			mad r16.x, r16.w, c25.w, r16.z
-			add r14.x, r14.x, r15_abs.z
-			add r14.z, r14.z, r16_abs.x
-			add r15.y, r15.y, r16.y
-			add r14.x, -r14.z, r14.x
-			mad r14.z, r15.x, -c25.w, r15.y
-			cmp r15.x, r14.x, r17.w, r18.w
-			cmp r15.y, r14.x, r16.w, r15.w
-			cmp r15.z, r14.x, r11.y, r11.x
-			mad r14.z, r14.z, c23.x, -r13.w
-			add r15.w, -r13.w, r15.x
-			add r16.x, -r13.w, r15.y
-			add r15.xy, r13.w, r15
-			add r16.y, r15_abs.w, -r16_abs.x
-			max r17.x, r15_abs.w, r16_abs.x
-			cmp r15.z, r16.y, -r15.z, r15.z
-			mul_sat r14.z, r14.w, r14_abs.z
-			cmp r14.w, r14.x, r11.x, r14.y
-			cmp r14.y, r14.x, r14.y, r11.y
-			mad r16.xz, r15.z, c23.y, v0.xyyw
-			cmp r15.w, r14.x, v0.x, r16.x
-			cmp r16.x, r14.x, r16.z, v0.y
-			add r18.x, -r14.w, r15.w
-			add r18.y, -r14.y, r16.x
-			add r19.x, r14.w, r15.w
-			add r19.y, r14.y, r16.x
-			mad r15.w, r14.z, c23.z, c23.w
+			mov r16.y, r19.w
+			endif
+			if_ge r16_abs.z, r15.y
+			else
 			mov r18.zw, c25.y
-			texldl r20, r18, s2
-			mul r12.xyz, r20, r20
-			dp3 r20.w, r12, c26
-			rsq r20.w, r20.w
-			rcp r20.w, r20.w
-			mul r14.z, r14.z, r14.z
-			mov r19.zw, c25.y
-			texldl r21, r19, s2
-			mul r12.xyz, r21, r21
-			dp3 r21.w, r12, c26
-			rsq r21.w, r21.w
-			rcp r21.w, r21.w
-			cmp r15.x, r16.y, r15.x, r15.y
-			mul r15.y, r17.x, c24.x
-			mad r16.x, r15.x, -c23.y, r13.w
-			mul r14.z, r14.z, r15.w
-			mad r16.y, r15.x, -c23.y, r20.w
-			mad r16.z, r15.x, -c23.y, r21.w
+			texldl r19, r18, s2
+			mul r12.xyz, r19, r19
+			dp3 r19.w, r12, c26
+			rsq r19.w, r19.w
+			rcp r19.w, r19.w
+			mov r16.z, r19.w
+			endif
+			mad r15.w, r15.x, -c23.y, r16.y
+			cmp r16.y, r17.y, r16.y, r15.w
+			mad r15.w, r15.x, -c23.y, r16.z
+			cmp r16.z, r17.z, r16.z, r15.w
 			mad r17.yz, r17.x, -c24.x, r16_abs
-			mad r15.w, r14.w, -c24.y, r18.x
-			cmp r20.x, r17.y, r18.x, r15.w
-			mad r15.w, r14.y, -c24.y, r18.y
-			cmp r20.y, r17.y, r18.y, r15.w
-			cmp r18.xy, r17.yzzw, c25.y, c25.x
-			add r15.w, r18.y, r18.x
-			mad r16.w, r14.w, c24.y, r19.x
-			cmp r18.x, r17.z, r19.x, r16.w
-			mad r16.w, r14.y, c24.y, r19.y
-			cmp r18.y, r17.z, r19.y, r16.w
+			mad r15.w, r14.w, c25.w, r20.x
+			cmp r20.x, r17.y, r20.x, r15.w
+			mad r15.w, r14.y, c25.w, r20.y
+			cmp r20.y, r17.y, r20.y, r15.w
+			cmp r19.xy, r17.yzzw, c25.y, c25.x
+			add r15.w, r19.y, r19.x
+			mad r16.w, r14.w, -c25.w, r18.x
+			cmp r18.x, r17.z, r18.x, r16.w
+			mad r16.w, r14.y, -c25.w, r18.y
+			cmp r18.y, r17.z, r18.y, r16.w
+			if_lt -r15.w, c25.y
+			if_ge r16_abs.y, r15.y
+			else
+				mov r20.zw, c25.y
+				texldl r19, r20, s2
+				mul r12.xyz, r19, r19
+				dp3 r19.w, r12, c26
+				rsq r19.w, r19.w
+				rcp r19.w, r19.w
+				mov r16.y, r19.w
+			endif
+			if_ge r16_abs.z, r15.y
+			else
+				mov r18.zw, c25.y
+				texldl r19, r18, s2
+				mul r12.xyz, r19, r19
+				dp3 r19.w, r12, c26
+				rsq r19.w, r19.w
+				rcp r19.w, r19.w
+				mov r16.z, r19.w
+			endif
+			mad r15.w, r15.x, -c23.y, r16.y
+			cmp r16.y, r17.y, r16.y, r15.w
+			mad r15.w, r15.x, -c23.y, r16.z
+			cmp r16.z, r17.z, r16.z, r15.w
+			mad r17.yz, r17.x, -c24.x, r16_abs
+			mad r15.w, r14.w, c25.w, r20.x
+			cmp r20.x, r17.y, r20.x, r15.w
+			mad r15.w, r14.y, c25.w, r20.y
+			cmp r20.y, r17.y, r20.y, r15.w
+			cmp r19.xy, r17.yzzw, c25.y, c25.x
+			add r15.w, r19.y, r19.x
+			mad r16.w, r14.w, -c25.w, r18.x
+			cmp r18.x, r17.z, r18.x, r16.w
+			mad r16.w, r14.y, -c25.w, r18.y
+			cmp r18.y, r17.z, r18.y, r16.w
 			if_lt -r15.w, c25.y
 				if_ge r16_abs.y, r15.y
 				else
@@ -382,15 +453,15 @@
 					mad r15.w, r15.x, -c23.y, r16.z
 					cmp r16.z, r17.z, r16.z, r15.w
 					mad r17.yz, r17.x, -c24.x, r16_abs
-					mad r15.w, r14.w, c25.w, r20.x
+					mad r15.w, r14.w, -c24.z, r20.x
 					cmp r20.x, r17.y, r20.x, r15.w
-					mad r15.w, r14.y, c25.w, r20.y
+					mad r15.w, r14.y, -c24.z, r20.y
 					cmp r20.y, r17.y, r20.y, r15.w
 					cmp r19.xy, r17.yzzw, c25.y, c25.x
 					add r15.w, r19.y, r19.x
-					mad r16.w, r14.w, -c25.w, r18.x
+					mad r16.w, r14.w, c24.z, r18.x
 					cmp r18.x, r17.z, r18.x, r16.w
-					mad r16.w, r14.y, -c25.w, r18.y
+					mad r16.w, r14.y, c24.z, r18.y
 					cmp r18.y, r17.z, r18.y, r16.w
 					if_lt -r15.w, c25.y
 					if_ge r16_abs.y, r15.y
@@ -413,129 +484,54 @@
 						rcp r19.w, r19.w
 						mov r16.z, r19.w
 					endif
-					mad r15.w, r15.x, -c23.y, r16.y
-					cmp r16.y, r17.y, r16.y, r15.w
-					mad r15.w, r15.x, -c23.y, r16.z
-					cmp r16.z, r17.z, r16.z, r15.w
-					mad r17.yz, r17.x, -c24.x, r16_abs
-					mad r15.w, r14.w, c25.w, r20.x
-					cmp r20.x, r17.y, r20.x, r15.w
-					mad r15.w, r14.y, c25.w, r20.y
-					cmp r20.y, r17.y, r20.y, r15.w
-					cmp r19.xy, r17.yzzw, c25.y, c25.x
-					add r15.w, r19.y, r19.x
-					mad r16.w, r14.w, -c25.w, r18.x
-					cmp r18.x, r17.z, r18.x, r16.w
-					mad r16.w, r14.y, -c25.w, r18.y
-					cmp r18.y, r17.z, r18.y, r16.w
-					if_lt -r15.w, c25.y
-						if_ge r16_abs.y, r15.y
-						else
-						mov r20.zw, c25.y
-						texldl r19, r20, s2
-						mul r12.xyz, r19, r19
-						dp3 r19.w, r12, c26
-						rsq r19.w, r19.w
-						rcp r19.w, r19.w
-						mov r16.y, r19.w
-						endif
-						if_ge r16_abs.z, r15.y
-						else
-						mov r18.zw, c25.y
-						texldl r19, r18, s2
-						mul r12.xyz, r19, r19
-						dp3 r19.w, r12, c26
-						rsq r19.w, r19.w
-						rcp r19.w, r19.w
-						mov r16.z, r19.w
-						endif
-						mad r15.w, r15.x, -c23.y, r16.y
-						cmp r16.y, r17.y, r16.y, r15.w
-						mad r15.w, r15.x, -c23.y, r16.z
-						cmp r16.z, r17.z, r16.z, r15.w
-						mad r17.yz, r17.x, -c24.x, r16_abs
-						mad r15.w, r14.w, -c24.z, r20.x
-						cmp r20.x, r17.y, r20.x, r15.w
-						mad r15.w, r14.y, -c24.z, r20.y
-						cmp r20.y, r17.y, r20.y, r15.w
-						cmp r19.xy, r17.yzzw, c25.y, c25.x
-						add r15.w, r19.y, r19.x
-						mad r16.w, r14.w, c24.z, r18.x
-						cmp r18.x, r17.z, r18.x, r16.w
-						mad r16.w, r14.y, c24.z, r18.y
-						cmp r18.y, r17.z, r18.y, r16.w
-						if_lt -r15.w, c25.y
-						if_ge r16_abs.y, r15.y
-						else
-							mov r20.zw, c25.y
-							texldl r19, r20, s2
-							mul r12.xyz, r19, r19
-							dp3 r19.w, r12, c26
-							rsq r19.w, r19.w
-							rcp r19.w, r19.w
-							mov r16.y, r19.w
-						endif
-						if_ge r16_abs.z, r15.y
-						else
-							mov r18.zw, c25.y
-							texldl r19, r18, s2
-							mul r12.xyz, r19, r19
-							dp3 r19.w, r12, c26
-							rsq r19.w, r19.w
-							rcp r19.w, r19.w
-							mov r16.z, r19.w
-						endif
-						mad r15.y, r15.x, -c23.y, r16.y
-						mad r15.x, r15.x, -c23.y, r16.z
-						cmp r16.yz, r17, r16, r15.xyxw
-						mad r15.xy, r17.x, -c24.x, r16_abs.yzzw
-						mad r15.w, r14.w, -c24.w, r20.x
-						cmp r20.x, r15.x, r20.x, r15.w
-						mad r15.w, r14.y, -c24.w, r20.y
-						cmp r20.y, r15.x, r20.y, r15.w
-						mad r14.w, r14.w, c24.w, r18.x
-						mad r14.y, r14.y, c24.w, r18.y
-						cmp r18.xy, r15.y, r18, r14.wyzw
-						endif
-					endif
+					mad r15.y, r15.x, -c23.y, r16.y
+					mad r15.x, r15.x, -c23.y, r16.z
+					cmp r16.yz, r17, r16, r15.xyxw
+					mad r15.xy, r17.x, -c24.x, r16_abs.yzzw
+					mad r15.w, r14.w, -c24.w, r20.x
+					cmp r20.x, r15.x, r20.x, r15.w
+					mad r15.w, r14.y, -c24.w, r20.y
+					cmp r20.y, r15.x, r20.y, r15.w
+					mad r14.w, r14.w, c24.w, r18.x
+					mad r14.y, r14.y, c24.w, r18.y
+					cmp r18.xy, r15.y, r18, r14.wyzw
 					endif
 				endif
 				endif
 			endif
-			add r14.y, -r20.x, v0.x
-			add r14.w, r18.x, -v0.x
-			add r15.x, -r20.y, v0.y
-			cmp r14.y, r14.x, r14.y, r15.x
-			add r15.x, r18.y, -v0.y
-			cmp r14.w, r14.x, r14.w, r15.x
-			cmp r15.xy, r16.yzzw, c25.y, c25.x
-			cmp r15.w, r16.x, -c25.y, -c25.x
-			add r15.xy, r15.w, r15
-			add r15.w, r14.y, r14.w
-			rcp r15.w, r15.w
-			add r16.x, -r14.w, r14.y
-			min r16.y, r14.w, r14.y
-			cmp r14.y, r16.x, r15_abs.y, r15_abs.x
-			mul r14.z, r14.z, r14.z
-			mad r14.w, r16.y, -r15.w, c23.y
-			mul r14.z, r14.z, c20.x
-			cmp r14.y, -r14.y, c25.y, r14.w
-			max r15.x, r14.y, r14.z
-			mad r14.yz, r15.x, r15.z, v0.xxyw
-			cmp r15.x, r14.x, v0.x, r14.y
-			cmp r15.y, r14.x, r14.z, v0.y
-			mov r15.zw, c25.y
-			texldl r14, r15, s2
-			mul r12.xyz, r14, r14
-			dp3 r14.w, r12, c26
-			rsq r14.w, r14.w
-			rcp r14.w, r14.w
-			mov r13.xyz, r14
 			endif
-			mov r1, r13
-		else
-			texld r1, v0, s2
 		endif
+		add r14.y, -r20.x, v0.x
+		add r14.w, r18.x, -v0.x
+		add r15.x, -r20.y, v0.y
+		cmp r14.y, r14.x, r14.y, r15.x
+		add r15.x, r18.y, -v0.y
+		cmp r14.w, r14.x, r14.w, r15.x
+		cmp r15.xy, r16.yzzw, c25.y, c25.x
+		cmp r15.w, r16.x, -c25.y, -c25.x
+		add r15.xy, r15.w, r15
+		add r15.w, r14.y, r14.w
+		rcp r15.w, r15.w
+		add r16.x, -r14.w, r14.y
+		min r16.y, r14.w, r14.y
+		cmp r14.y, r16.x, r15_abs.y, r15_abs.x
+		mul r14.z, r14.z, r14.z
+		mad r14.w, r16.y, -r15.w, c23.y
+		mul r14.z, r14.z, c20.x
+		cmp r14.y, -r14.y, c25.y, r14.w
+		max r15.x, r14.y, r14.z
+		mad r14.yz, r15.x, r15.z, v0.xxyw
+		cmp r15.x, r14.x, v0.x, r14.y
+		cmp r15.y, r14.x, r14.z, v0.y
+		mov r15.zw, c25.y
+		texldl r14, r15, s2
+		mul r12.xyz, r14, r14
+		dp3 r14.w, r12, c26
+		rsq r14.w, r14.w
+		rcp r14.w, r14.w
+		mov r13.xyz, r14
+		endif
+		mov r1, r13
 	else
 		texld r1, v0, s2
 	endif
