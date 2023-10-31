@@ -21,13 +21,13 @@
 //
 
     ps_3_0
-    def c151, 0.9999, 255, 3, 0.00390625 // Dithering Mask constants
+    def c151, 0.9999, 0.012156862745098, 0, 0 // Dithering Mask constants
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 8.5619336170e-43 // 611
     def c150, 15.996, 16, 0.0625, 0.0625	// 256 state stipple constants
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, -1, -0, 0.5, 0
-	def c2, 0.0234375, 0.02734375, 0, 0	// stencil
+	def c2, 0.0235294117647059, 0.0274509803921569, 0, 0	// stencil
 	def c3, 0.25, 0.5, 1280, 2
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz

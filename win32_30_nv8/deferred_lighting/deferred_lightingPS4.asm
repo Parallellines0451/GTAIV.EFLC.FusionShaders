@@ -50,8 +50,8 @@
     def c6, 10, 1, 0, 0
 	def c20, 1.6666667, 0, 0, 0	// Reflection intensity multiplier
 	def c21, 3, 2, 1, 0	// Console tree lighting constants
-	def c22, 0.01171875, 0.0234375, 0.02734375, 0
-	def c23, 0.35, 0.5, 0.3333333, 0
+	def c22, 0.012156862745098, 0.023921568627451, 0.027843137254902, 0 // 3.1, 6.1, 7.1
+	def c23, 0.35, 0.5, 0.3333333, 0.0007843137254902
     dcl_texcoord v0.xy
     dcl_texcoord1 v1
     dcl_2d s0
@@ -63,8 +63,9 @@
 	
 	texld r21, v0, s5
 	add r21.yz, r21.x, -c22
-	cmp r21.yz, -r21_abs, c6.y, c6.z
-	add_sat r21.x, r21.y, r21.z // masks 5 and 6
+	add r21.yz, -r21_abs, c23.w
+	cmp r21.yz, r21, c6.y, c6.z
+	add_sat r21.x, r21.y, r21.z
 	mov r21.y, c223.x
 	add r21.y, r21.y, -c21.y
 	cmp r21.y, -r21_abs.y, r21.x, c0.x	// Console tree lighting toggle
@@ -127,7 +128,8 @@
 		texld r3, v0, s5
 		// add r0.z, -r3.x, c2.z
 		add r20.xy, r3.x, -c22.xw
-		cmp r20.xy, -r20_abs.xy, c6.y, c6.z
+		add r20.xy, -r20_abs, c23.w
+		cmp r20.xy, r20, c6.y, c6.z
 		add_sat r20.x, r20.x, r20.y
 		add r0.z, r20.x, -c6.y // change wetness mask to include stencil 3 alongside 0 (since 3 is now used for the dithering mask)
 		cmp r0.y, r0.z, r0.y, c0.x

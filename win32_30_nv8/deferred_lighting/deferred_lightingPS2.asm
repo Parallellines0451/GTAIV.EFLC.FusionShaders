@@ -76,8 +76,8 @@
     def c16, -0.840143979, -0.0735799968, -0.69591397, 0.457136989
 	def c20, 1.6666667, 0, 0, 0	// Reflection intensity multiplier
 	def c21, 3, 2, 1, 0	// Console tree lighting constants
-	def c22, 0.01171875, 0.0234375, 0.02734375, 0
-	def c23, 0.35, 0.5, 0.3333333, 0
+	def c22, 0.012156862745098, 0.023921568627451, 0.027843137254902, 0 // 3.1, 6.1, 7.1
+	def c23, 0.35, 0.5, 0.3333333, 0.0007843137254902
 	// ------------------------------------------------------ 1.0.4.0 Shadow Filter Constants -------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
@@ -338,8 +338,9 @@
 	// ----------------------------------------------------------- Console Tree Lighting ------------------------------------------------------------
 	texld r21, v0, s5
 	add r21.yz, r21.x, -c22
-	cmp r21.yz, -r21_abs, c4.z, c4.w
-	add_sat r21.x, r21.y, r21.z // masks 5 and 6
+	add r21.yz, -r21_abs, c23.w
+	cmp r21.yz, r21, c4.z, c4.w
+	add_sat r21.x, r21.y, r21.z
 	mov r21.y, c223.x
 	add r21.y, r21.y, -c21.y
 	cmp r21.y, -r21_abs.y, r21.x, c4.w	// Console tree lighting toggle
@@ -371,7 +372,8 @@
 		texld r4, v0, s5
 		// add r4.x, -r4.x, c2.z
 		add r20.xy, r4.x, -c22.xw
-		cmp r20.xy, -r20_abs.xy, c4.z, c4.w
+		add r20.xy, -r20_abs, c23.w
+		cmp r20.xy, r20, c4.z, c4.w
 		add_sat r20.x, r20.x, r20.y
 		add r4.x, r20.x, -c4.z // change wetness mask to include stencil 3 alongside 0 (since 3 is now used for the dithering mask)
 		cmp r3.w, r4.x, r3.w, c0.x
