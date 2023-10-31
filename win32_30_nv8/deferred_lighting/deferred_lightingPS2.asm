@@ -369,6 +369,7 @@
 		mov_sat r3.w, r3.w
 		mul r3.w, r3.w, c72.y
 		texld r4, v0, s5
+		// add r4.x, -r4.x, c2.z
 		add r20.xy, r4.x, -c22.xw
 		cmp r20.xy, -r20_abs.xy, c4.z, c4.w
 		add_sat r20.x, r20.x, r20.y

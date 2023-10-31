@@ -125,11 +125,12 @@
 		mov_sat r0.y, r0.y
 		mul r0.y, r0.y, c72.y
 		texld r3, v0, s5
+		// add r0.z, -r3.x, c2.z
 		add r20.xy, r3.x, -c22.xw
 		cmp r20.xy, -r20_abs.xy, c6.y, c6.z
 		add_sat r20.x, r20.x, r20.y
-		add r3.x, r20.x, -c6.y // change wetness mask to include stencil 3 alongside 0 (since 3 is now used for the dithering mask)
-		cmp r0.y, r3.x, r0.y, c0.x
+		add r0.z, r20.x, -c6.y // change wetness mask to include stencil 3 alongside 0 (since 3 is now used for the dithering mask)
+		cmp r0.y, r0.z, r0.y, c0.x
 		texld r3, v0, s2
 		mul r0.z, r3.y, r3.y
 		mul r3.yw, r0.z, c0.xyzz
