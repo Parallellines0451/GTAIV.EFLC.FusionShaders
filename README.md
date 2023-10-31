@@ -1,7 +1,7 @@
 # GTAIV.EFLC.FusionShaders
 Various shader fixes and improvements for [GTAIV.EFLC.FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix).
 
-Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [RaphaelK12](https://github.com/RaphaelK12), [robi29](https://github.com/robi29/) and [\_CP_](https://github.com/cpmodding) for directly contributing with fixes, to [Shvab](https://github.com/d3g0n-byte) for making RAGE Shader Editor and to [ThirteenAG](https://github.com/ThirteenAG) for implementing features we requested into FusionFix.
+Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [RaphaelK12](https://github.com/RaphaelK12), [robi29](https://github.com/robi29/) and [\_CP_](https://github.com/cpmodding) for directly contributing with fixes, to [Shvab](https://github.com/d3g0n-byte) for making RAGE Shader Editor, to [ThirteenAG](https://github.com/ThirteenAG) for implementing features we requested into FusionFix and to everyone else from the Fusion Team for their support.
 
 # General
 - Fixed z-fighting by implementing a logarithmic depth buffer
@@ -33,6 +33,7 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [Ra
 - Fixed excessively blurred screen compared to consoles
 - Added native anti aliasing
 - Ported console bloom and auto exposure
+- Fixed instantaneous auto exposure delay in some weathers
 - Fixed motion blur framerate scaling
 - Increased motion blur quality (reduced noisiness)
 - Split depth of field and motion blur into dedicated settings
@@ -59,7 +60,6 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [Ra
 - Improved window crossfade
 - Added lamppost on/off toggle support
 - Added optional opaque wires and bridge cables
-- Added a new shader exclusively for trees
 
 # To-do:
 - Fix water foam
