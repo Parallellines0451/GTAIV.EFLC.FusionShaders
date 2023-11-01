@@ -37,7 +37,7 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [Ra
 - Fixed motion blur framerate scaling
 - Increased motion blur quality (reduced noisiness)
 - Split depth of field and motion blur into dedicated settings
-- Restored console TLAD noise effect
+- Fixed TLAD noise being affected by water quality
 - Restored console gamma
 # Reflections
 - Fixed excessive wetness/specularity of various surfaces
