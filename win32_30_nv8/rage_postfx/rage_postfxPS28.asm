@@ -112,29 +112,33 @@
     rcp r0.x, r0.x
     mul r0.x, r0.z, r0.x
 	// --------------------------------------------------------------- Dithering Mask ---------------------------------------------------------------
-	mov r23, c130.y
-	mov r24.xy, c130.x
-	rep i1
+	mov r30.y, c223.z
+	if_ne r30.y, c130.y
+		mov r20, c130.y
+		mov r21.xy, c130.x
 		rep i1
-			mad r21.xy, c76, r24.xy, v0
-			texld r21, r21, s5
-			add r25.xyzw, r21.x, -c131
-			add r25.xyzw, -r25_abs, c133.y
-			cmp r22.xyzw, r25, c130.z, c130.y
-			add r23.xyzw, r23, r22
-			add r25.xyzw, r21.x, -c132
-			add r25.xyzw, -r25_abs, c133.y
-			cmp r22.xyzw, r25, c130.z, c130.y
-			add r23.xyzw, r23, r22
-			add r25.xyzw, r21.x, -c133.x
-			add r25.xyzw, -r25_abs, c133.y
-			cmp r22.xyzw, r25, c130.z, c130.y
-			add r23.xyzw, r23, r22
-			add r24.y, r24.y, c130.z
+			rep i1
+				mad r22.xy, c76, r21.xy, v0
+				texldl r22, r22, s5
+				
+				add r23, r22.x, -c131
+				add_sat r23, -r23_abs, c133.y
+				add r20, r20, r23
+				add r23, r22.x, -c132
+				add_sat r23, -r23_abs, c133.y
+				add r20, r20, r23
+				add r23, r22.x, -c133.x
+				add_sat r23, -r23_abs, c133.y
+				add r20, r20, r23
+				
+				add r21.y, r21.y, c130.z
+			endrep
+			mad r21.xy, r21.x, c130.zy, c130.zx
 		endrep
-		mad r24.xy, r24.x, c130.zy, c130.zx
-	endrep
-	dp4_sat r30.x, r23, c130.z
+		dp4 r30.x, r20, c130.z
+	else
+		mov r30.x, c130.z
+	endif
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------------- FXAA --------------------------------------------------------------------
 	if_ne c222.x, r31.x
@@ -574,9 +578,6 @@
     dp4 r1.w, r7, r7
     add r0.z, r0.z, -r0.w
 	mad r0.z, r0.z, r0.z, -r1.w
-	mov r0.y, c223.z
-	add r0.y, r0.y, -c2.z
-	cmp r30.x, r0.y, r30.x, -c2.z
 	cmp r0.z, -r30_abs.x, -r1.w, r0.z // Definition toggle
     texld r7, v0, s0
     mov r7.yz, c2
@@ -617,11 +618,13 @@
     rcp r0.x, r0.x
     mul r4.y, r0.z, r0.x
     add r0.xz, -r3.yyzw, r4.xyyw
+	// ------------------------------------------------------------ Motion Blur FPS Fix -------------------------------------------------------------
 	rcp r20.x, c221.z
 	mul r20.x, r20.x, c11.x
 	mul r20.x, r20.x, c79.x
 	min r20.x, r20.x, c4.w
     mul r0.xz, r0, r20.x
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
     mul r3.xy, r0.xzzw, c5.z
     texld r4, v0, s5
     add r0.w, r4.x, -c84.x

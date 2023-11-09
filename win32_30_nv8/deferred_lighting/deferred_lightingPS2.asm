@@ -337,9 +337,8 @@
 	// ----------------------------------------------------------- Console Tree Lighting ------------------------------------------------------------
 	texld r21, v0, s5
 	add r21.yz, r21.x, -c22
-	add r21.yz, -r21_abs, c23.w
-	cmp r21.yz, r21, c4.z, c4.w
-	add_sat r21.x, r21.y, r21.z
+	add_sat r21.yz, -r21_abs, c23.w
+	add r21.x, r21.y, r21.z
 	mov r21.y, c223.x
 	add r21.y, r21.y, -c21.y
 	cmp r21.y, -r21_abs.y, r21.x, c4.w	// Console tree lighting toggle
@@ -369,13 +368,14 @@
 		mov_sat r3.w, r3.w
 		mul r3.w, r3.w, c72.y
 		texld r4, v0, s5
+		
 		// add r4.x, -r4.x, c2.z
+		// cmp r3.w, r4.x, r3.w, c0.x
 		add r20.xy, r4.x, -c22.xw
-		add r20.xy, -r20_abs, c23.w
-		cmp r20.xy, r20, c4.z, c4.w
-		add_sat r20.x, r20.x, r20.y
-		add r4.x, r20.x, -c4.z // change wetness mask to include stencil 3 alongside 0 (since 3 is now used for the dithering mask)
-		cmp r3.w, r4.x, r3.w, c0.x
+		add_sat r20.xy, -r20_abs, c23.w
+		add r4.x, r20.x, r20.y // change wetness mask to include stencil 3 alongside 0 (since 3 is now used for the dithering mask)
+		cmp r3.w, -r4.x, c0.x, r3.w
+		
 		texld r4, v0, s2
 		mul r4.y, r4.y, r4.y
 		mul r5.xy, r4.y, c0.yzzw
