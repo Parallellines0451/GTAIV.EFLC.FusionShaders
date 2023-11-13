@@ -67,22 +67,36 @@
     def c113, 0.75, -0.5, 0.5, 0
 	defi i1, 3, 0, 0, 0
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
-	// --------------------------------------------------------- Filter Utilities Constants ---------------------------------------------------------
-	def c120, 0.25, 0.5, 0.75, 0 // cascade identifiers
-	
-    def c121, 1, 0.475, 0, 0.12 // x,y = 1st & 2nd cascade blur | z,w = 1st & 2nd cascade bias
-	def c122, 0.19, 0.0542857, 0.4, 0.7 // x,y = 3rd & 4th cascade blur | z,w = 3rd & 4th cascade bias
-	
-	def c130, 9.5, 0.0246914, 9.210526, 0.15 // smooth distance blur | x = start, y = 1/(end - start), z = maximum blur, w = maximum bias
-	def c131, 0.0001220703125, 0.00048828125, 0, 0 // x,y = "Very High" setting texel size
-	
-	def c132, 0, 1, 2, 3 // filter ID's
-	def c133, 0.5, 1, 1.5, 2 // blur multipliers
-	
-	// PCSS constants
-    def c140, 49, 0.2333333, 0.5, 0.045
-    def c141, -33, 6, 0, 1
+	// --------------------------------------------------------------- PCSS Constants ---------------------------------------------------------------
+    def c114, 49, 0.2333333, 0.5, 0.045
+    def c115, -33, 6, 0, 1
     defi i2, 12, 0, 0, 0
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------- Filter Utilities Constants ---------------------------------------------------------
+	def c116, 0.25, 0.5, 0.75, 0 // cascade identifiers
+	def c117, 0, 1, 2, 3 // filter ID's
+	def c118, 0.5, 1, 1.5, 2 // blur multipliers
+	def c119, 0.0001220703125, 0.00048828125, 0, 0 // x,y = static texel size
+	
+	// Very High
+    def c130, 1, 0.475, 0.1, 0.22 // x,y = 1st & 2nd cascade blur | z,w = 1st & 2nd cascade bias
+	def c131, 0.19, 0.0542857, 0.5, 0.8 // x,y = 3rd & 4th cascade blur | z,w = 3rd & 4th cascade bias
+	def c132, 9.5, 0.0246914, 9.2105263, 0.15 // smooth distance blur | x = start, y = 1/(end - start), z = maximum blur, w = maximum bias
+	
+	// High
+	def c133, 1, 0.4, 0.22, 0.42
+	def c134, 0.1538462, 0.0571429, 1.07, 1.22
+	def c135, 10, 0.0181818, 8.75, 0.15
+	
+	// Medium
+	def c136, 2, 0.7878788, 0.28, 0.53
+	def c137, 0.2888888, 0.1485714, 0.98, 1.08
+	def c138, 13, 0.0129870, 6.7307692, 0.15
+	
+	// Low
+	def c139, 2, 0.8888888, 0.5, 0.8
+	def c140, 0.4444444, 0.2285714, 1.35, 1.5
+	def c141, 20, 0.0142857, 4.375, 0.15
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 4.4981680705e-43 // 321
     def c150, 15.996, 16, 0.0625, 0.0625	// 256 state stipple constants
@@ -255,34 +269,57 @@
     cmp r2.x, r2.x, c5.w, c5.x
     add r2.x, r4.x, r2.x
     removed 1.0.6.0 filter */
+	// ------------------------------------------------------------- Per Setting Tweaks -------------------------------------------------------------
+	mov r20.x, c221.y
+	if_eq r20.x, c117.w // High
+		mov r23, c133
+		mov r24, c134
+		mov r27, c135
+	else
+	if_eq r20.x, c117.z // Medium
+		mov r23, c136
+		mov r24, c137
+		mov r27, c138
+	else
+	if_eq r20.x, c117.y // Low
+		mov r23, c139
+		mov r24, c140
+		mov r27, c141
+	else                // Very High
+		mov r23, c130
+		mov r24, c131
+		mov r27, c132
+	endif
+	endif
+	endif
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// ------------------------------------------------------------- Per Cascade Tweaks -------------------------------------------------------------
-    add r21.xyz, r2.x, -c120.xyz
-    cmp r22.xy, r21.x, c121.yw, c121.xz
-    cmp r22.xy, r21.y, c122.xz, r22.xy
-    cmp r22.xy, r21.z, c122.yw, r22.xy	// r22.x = per cascade blur, r22.y = per cascade bias
+    add r21.xyz, r2.x, -c116.xyz
+    cmp r22.xy, r21.x, r23.yw, r23.xz
+    cmp r22.xy, r21.y, r24.xz, r22.xy
+    cmp r22.xy, r21.z, r24.yw, r22.xy	// r22.x = per cascade blur, r22.y = per cascade bias
 	
-	mov r20.xy, c53.xy
-	max r20.xy, r20.xy, c131.xy			// limit minimum blur
+	mov r20.xy, c119.xy					// static texel size instead of c53.xy
     mul r20.xy, r20.xy, r22.x			// reduce cascade blur disparity
 	add r2.z, r2.z, -r22.y				// improve depth bias for 2nd, 3rd and 4th cascade
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// -------------------------------------------------------------- Filter Selection --------------------------------------------------------------
 	mov r20.z, c223.y
-    add r21.xyz, r20.z, -c132.yzw
-    cmp r20.w, r21.x, c133.y, c133.x
-    cmp r20.w, r21.y, c133.z, r20.w
-    cmp r20.w, r21.z, c133.w, r20.w // "Sharp", "Soft", "Softer" & "Softest"
+    add r21.xyz, r20.z, -c117.yzw
+    cmp r20.w, r21.x, c118.y, c118.x
+    cmp r20.w, r21.y, c118.z, r20.w
+    cmp r20.w, r21.z, c118.w, r20.w // "Sharp", "Soft", "Softer" & "Softest"
 	
-	if_gt r20.z, c132.w // "PCSS"
-		mov r21.y, c141.z // blockers
+	if_gt r20.z, c117.w // "PCSS"
+		mov r21.y, c115.z // blockers
 	
-		mul r22.xy, r22.xx, c141.xy // pcss texel step
+		mul r22.xy, r22.xx, c115.xy // pcss texel step
 	
 		mov r23.xy, r22.xx // x - inner loop index, y - outer loop index
-		mov r24.x, c141.z // sum
+		mov r24.x, c115.z // sum
 	
 		rep i2
-			mul r21.w, r23.y, c140.w
+			mul r21.w, r23.y, c114.w
 	
 			rep i2
 				mad r25.xy, c53.xy, r23.xy, r2.xy
@@ -291,9 +328,9 @@
 				add r25.x, r26.x, -r2.z
 	
 				if_gt r25.x, r21.w
-					min r25.x, r25.x, c140.x // < 49
+					min r25.x, r25.x, c114.x // < 49
 					add r24.x, r24.x, r25.x
-					add r21.y, r21.y, c141.w
+					add r21.y, r21.y, c115.w
 				endif
 	
 				add r23.x, r23.x, r22.y // j++
@@ -303,23 +340,23 @@
 		endrep
 	
 		// avg if any blockers
-		if_gt r21.y, c141.z
+		if_gt r21.y, c115.z
 			rcp r21.y, r21.y
 			mul r24.x, r24.x, r21.y
-			mul r24.x, r24.x, c140.y // maximum intensity
+			mul r24.x, r24.x, c114.y // maximum intensity
 		else
-			mov r24.x, c141.z
+			mov r24.x, c115.z
 		endif
 	
-		max r20.w, r24.x, c140.z // minimum intensity
+		max r20.w, r24.x, c114.z // minimum intensity
 	endif
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// ------------------------------------------------------------ Smooth Distance Blur ------------------------------------------------------------
 	mov r20.z, c110.w
-	add r21.x, r1.w, -c130.x
-	mul_sat r21.x, r21.x, c130.y
+	add r21.x, r1.w, -r27.x
+	mul_sat r21.x, r21.x, r27.y
 	mul r21.x, r21.x, r21.x
-	lrp r22.xy, r21.x, c130.zw, r20.wz // r22.x = blur factor, r22.y = bias factor
+	lrp r22.xy, r21.x, r27.zw, r20.wz // r22.x = blur factor, r22.y = bias factor
 	
 	mul r20.xy, r20.xy, r22.x
 	add r2.z, r2.z, r22.y
