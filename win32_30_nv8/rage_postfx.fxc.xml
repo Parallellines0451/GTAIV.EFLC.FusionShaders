@@ -2266,8 +2266,8 @@
 			MinFilter Linear
 			MagFilter Linear
 			MipFilter None
-			AddressU Clamp
-			AddressV Clamp
+			AddressU Wrap
+			AddressV Wrap
 		</Values>
 		</Item>
 		<Item>
