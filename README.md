@@ -1,7 +1,7 @@
 # GTAIV.EFLC.FusionShaders
-Various shader fixes and improvements for [GTAIV.EFLC.FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix).
+Various shader fixes and improvements for GTA IV.
 
-Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [RaphaelK12](https://github.com/RaphaelK12), [robi29](https://github.com/robi29/) and [\_CP_](https://github.com/cpmodding) for directly contributing with fixes, to [Shvab](https://github.com/d3g0n-byte) for making RAGE Shader Editor, to [ThirteenAG](https://github.com/ThirteenAG) for implementing features we requested into FusionFix and to everyone else from the Fusion Team for their support.
+Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [robi29](https://github.com/robi29/) and [\_CP_](https://github.com/cpmodding) for directly contributing fixes, to [RaphaelK12](https://github.com/RaphaelK12) for fixes and for making a [realtime shader editor](https://github.com/RaphaelK12/ShadowResFix), to [Shvab](https://github.com/d3g0n-byte) for making RAGE Shader Editor, to [ThirteenAG](https://github.com/ThirteenAG) for implementing features we requested into FusionFix and to everyone else from the Fusion Team for their support.
 
 # General
 - [Fixed z-fighting](https://www.youtube.com/watch?v=sAfKfvAIsXw) by implementing a logarithmic depth buffer
@@ -37,7 +37,7 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [Ra
 - Fixed motion blur framerate scaling
 - Increased motion blur quality (reduced noisiness)
 - Split depth of field and motion blur into dedicated settings
-- Fixed TLAD noise being affected by water quality
+- Fixed TLAD noise being affected by water quality and corrected its aspect ratio
 - Restored console gamma
 # Reflections
 - Fixed excessive wetness/specularity of various surfaces
@@ -84,7 +84,4 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [Ra
 [![wetness.png](https://i.postimg.cc/mrb0N7WX/wetness.png)](https://postimg.cc/K1HqmkzB)
 
 # To-do:
-- Fix water foam
-- Implement shadow cascade blending
-- Fix uncolored broken glass shards
-- Fix color/sky banding
+- Fix shore foam
