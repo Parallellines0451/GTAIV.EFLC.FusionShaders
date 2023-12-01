@@ -37,7 +37,7 @@
     def c150, 15.996, 16, 0.0625, 0.0625	// 256 state stipple constants
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, -1, -0, 1, 0
-    def c1, -0.5, 9.99999975e-006, 0.1, 0.001953125
+    def c1, -0.5, 9.99999975e-006, 0.5, 0.001953125
     def c2, 3.99600005, 4, 0.125, 0.25
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
@@ -88,7 +88,7 @@
     dp3 r2.x, r2, c73
     mul r2.x, r2.x, c72.x
     mad r1.xyz, r1, r1.w, c0.z
-    mul oC1.xyz, r1.yzww, -c1.x
+    mul oC1.xyz, r1, c1.z
     mul oC2.x, r2.x, c1.z
     mul r1.x, r2.w, c1.w
     rsq r1.x, r1.x
