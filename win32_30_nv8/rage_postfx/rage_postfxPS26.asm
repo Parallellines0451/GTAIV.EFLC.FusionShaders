@@ -62,7 +62,7 @@
     def c1, 0, 0.212500006, 0.715399981, 0.0720999986
     def c2, 0.25, 1, 256, 0
     def c3, 0, 2, 4, 8
-    def c4, -0.5, -1.5, 1.5, 0.5
+    def c4, 0, -1.5, 0.8, 0.5
     def c5, 2, -1, 0.125, 0
     def c6, 1.10000002, 0, 0, 0
     def c7, 256, 2, 4, 8
@@ -870,7 +870,7 @@
     mul r4.zw, c0.xyxy, v0.xyxy
     mad r4.zw, r3.xyxy, c3.w, r4
     texld r5, r4.zwzw, s6
-    add r2.w, r5.x, c4.x
+    add r2.w, r5.x, -c4.w
     mad r4.zw, r4.xyxy, r2.w, v0.xyxy
     mov r5.xyz, r3
     mov r2.w, c2.y
@@ -917,7 +917,7 @@
 	mul r1.xy, r1.xy, c44.w // fix aspect ratio
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     texld r1, r1, s3
-    add r0.w, r1.z, c4.x
+    add r0.w, r1.z, -c4.w
     mul r0.w, r0.w, c85.z
     mad r0.xyz, r0.w, c6.x, r0
     texld r1, c1.x, s5
