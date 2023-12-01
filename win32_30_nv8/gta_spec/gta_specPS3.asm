@@ -34,7 +34,7 @@
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, -1, -0, 9.99999975e-006, 1
     def c1, 3.99600005, 4, 0.125, 0.25
-    def c2, 0.5, 0.001953125, 0, 0
+    def c2, 0.5, 0.007, 0.14, 0
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_color v2.xw
@@ -68,8 +68,8 @@
     dp3 r2.x, r2, c73
     mul r2.x, r2.x, c72.x
     mad r1.xyz, r1, r1.w, c0.w
-    mul oC1.xyz, r1, c2.x
-    mul oC2.x, r2.x, c2.x
+    mul oC1.xyz, r1.yzww, c2.x
+    mul oC2.x, r2.x, c2.z
     mul r1.x, r2.w, c2.y
     rsq r1.x, r1.x
     rcp oC2.y, r1.x
