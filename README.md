@@ -26,12 +26,10 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [ro
 - Fixed excessively strong vertex AO and static vehicle shadows
 - Added wind sway for tree shadows
 - Fixed improper water shadow stretching
-- Added experimental support for simultaneous headlight and vehicle shadows
 # Post processing
 - Added a mask for the dithering filter to only smooth out stippled objects instead of the whole screen
 - Fixed depth of field and bloom resolution scaling
 - Fixed excessively blurred screen compared to consoles
-- Added native anti aliasing
 - Ported console bloom and auto exposure
 - Fixed instantaneous auto exposure delay in some weathers
 - Fixed motion blur framerate scaling
