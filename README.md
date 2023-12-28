@@ -1,5 +1,5 @@
 # GTAIV.EFLC.FusionShaders
-Various shader fixes and improvements for GTA IV.
+Various shader fixes and improvements for GTA IV FusionFix.
 
 Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [robi29](https://github.com/robi29/) and [\_CP_](https://github.com/cpmodding) for directly contributing fixes, to [RaphaelK12](https://github.com/RaphaelK12) for fixes and for making a [realtime shader editor](https://github.com/RaphaelK12/ShadowResFix), to [Shvab](https://github.com/d3g0n-byte) for making RAGE Shader Editor, to [ThirteenAG](https://github.com/ThirteenAG) for implementing features we requested into FusionFix and to everyone else from the Fusion Team for their support.
 
@@ -26,12 +26,10 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [ro
 - Fixed excessively strong vertex AO and static vehicle shadows
 - Added wind sway for tree shadows
 - Fixed improper water shadow stretching
-- Added experimental support for simultaneous headlight and vehicle shadows
 # Post processing
 - Added a mask for the dithering filter to only smooth out stippled objects instead of the whole screen
 - Fixed depth of field and bloom resolution scaling
 - Fixed excessively blurred screen compared to consoles
-- Added native anti aliasing
 - Ported console bloom and auto exposure
 - Fixed instantaneous auto exposure delay in some weathers
 - Fixed motion blur framerate scaling
@@ -42,6 +40,7 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [ro
 # Reflections
 - Fixed excessive wetness/specularity of various surfaces
 - Fixed blocky vehicle reflections
+- Reduced corona reflection intensity
 - Fixed anisotropic filtering affecting reflection intensity
 - Removed influence of vehicle.ide on vehicle reflection intensity
 - Increased global reflection intensity to match consoles
