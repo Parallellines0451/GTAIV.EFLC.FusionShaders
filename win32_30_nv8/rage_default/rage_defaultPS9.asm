@@ -64,20 +64,20 @@
 	defi i1, 3, 0, 0, 0
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// --------------------------------------------------------------- PCSS Constants ---------------------------------------------------------------
-    def c114, 49, 0.2333333, 0.5, 0.045
-    def c115, -33, 6, 0, 1
+    def c114, 49, 1, 0.5, 0.045
+    def c115, -33, 6, 0, 0
     defi i2, 12, 0, 0, 0
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// --------------------------------------------------------- Filter Utilities Constants ---------------------------------------------------------
 	def c116, 0.25, 0.5, 0.75, 0 // cascade identifiers
 	def c117, 0, 1, 2, 3 // filter ID's
 	def c118, 0.5, 1, 1.5, 2 // blur multipliers
-	def c119, 0.0001220703125, 0.00048828125, 0, 0 // x,y = static texel size
+	def c119, 0.0001220703125, 0.00048828125, 0.00006103515625, 0.000244140625 // static texel size
 	
 	// Very High
     def c130, 1, 0.475, 0.1, 0.22 // x,y = 1st & 2nd cascade blur | z,w = 1st & 2nd cascade bias
 	def c131, 0.19, 0.0542857, 0.5, 0.8 // x,y = 3rd & 4th cascade blur | z,w = 3rd & 4th cascade bias
-	def c132, 9.5, 0.0246914, 9.2105263, 0.15 // smooth distance blur | x = start, y = 1/(end - start), z = maximum blur, w = maximum bias
+	def c132, 9.5, 0.0246914, 9.2105263, 0.15 // depth based blur | x = start, y = 1/(end - start), z = maximum blur, w = maximum bias
 	
 	// High
 	def c133, 1, 0.4, 0.22, 0.42
@@ -283,18 +283,18 @@
     cmp r20.w, r21.z, c118.w, r20.w // "Sharp", "Soft", "Softer" & "Softest"
 	
 	if_gt r20.z, c117.w // "PCSS"
-		mov r21.y, c115.z // blockers
+		mov r21.y, c110.w // blockers
 	
 		mul r22.xy, r22.xx, c115.xy // pcss texel step
 	
 		mov r23.xy, r22.xx // x - inner loop index, y - outer loop index
-		mov r24.x, c115.z // sum
+		mov r24.x, c110.w // sum
 	
 		rep i2
 			mul r21.w, r23.y, c114.w
 	
 			rep i2
-				mad r25.xy, c53.xy, r23.xy, r2.xy
+				mad r25.xy, c119.zw, r23.xy, r2.xy
 				texldl r26, r25.xy, s15
 	
 				add r25.x, r26.x, -r2.z
@@ -302,7 +302,7 @@
 				if_gt r25.x, r21.w
 					min r25.x, r25.x, c114.x // < 49
 					add r24.x, r24.x, r25.x
-					add r21.y, r21.y, c115.w
+					add r21.y, r21.y, c110.y
 				endif
 	
 				add r23.x, r23.x, r22.y // j++
@@ -312,18 +312,18 @@
 		endrep
 	
 		// avg if any blockers
-		if_gt r21.y, c115.z
+		if_gt r21.y, c110.w
 			rcp r21.y, r21.y
 			mul r24.x, r24.x, r21.y
-			mul r24.x, r24.x, c114.y // maximum intensity
+			rsq r24.x, r24.x
+			rcp r24.x, r24.x
+			max r20.w, r24.x, c114.z // minimum factor
 		else
-			mov r24.x, c115.z
+			mov r20.w, c114.z
 		endif
-	
-		max r20.w, r24.x, c114.z // minimum intensity
 	endif
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------ Smooth Distance Blur ------------------------------------------------------------
+	// ------------------------------------------------------------ Depth Based Blur ------------------------------------------------------------
 	mov r20.z, c110.w
 	add r21.x, r2.w, -r27.x
 	mul_sat r21.x, r21.x, r27.y
