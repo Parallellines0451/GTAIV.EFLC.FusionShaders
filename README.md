@@ -33,7 +33,6 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [ro
 - Ported console bloom and auto exposure
 - Fixed instantaneous auto exposure delay in some weathers
 - Fixed motion blur framerate scaling
-- Increased motion blur quality (reduced noisiness)
 - Split depth of field and motion blur into dedicated settings
 - Fixed TLAD noise being affected by water quality and corrected its aspect ratio
 - Restored console gamma
