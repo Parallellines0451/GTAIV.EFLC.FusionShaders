@@ -19,7 +19,7 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.1308478607e-42 // 807
-	def c0, 0.111111112, 0, 0, 0
+	def c0, 0.111111112, 0.0625, 0, 0
 	def c1, 0.5, 1.5, -1.5, -0.5
     dcl_texcoord v0.xy
     dcl_2d s0
@@ -73,8 +73,11 @@
 	texld r1, r1, s0
 	add r2.x, r2.x, r1.x
 	
+	mov r3, c0
+	cmp r3.x, -c222_abs.x, r3.y, r3.x // autoexposure toggle
+	
 	mov r2.y, c66.x
-	mul r2.y, r2.y, c0.x
+	mul r2.y, r2.y, r3.x
 	mul oC0, r2.y, r2.x
 
 // approximately 14 instruction slots used (4 texture, 10 arithmetic)
