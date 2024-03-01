@@ -75,7 +75,7 @@
     dcl_2d s3
     dcl_2d s4
     dcl_2d s5
-	mov r31, c1.x
+	mov r30, c1.x
     texld r0, v0, s1
 	// ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
 	if_ne r0.x, c127.y
@@ -102,8 +102,8 @@
     rcp r0.x, r0.x
     mul r0.x, r0.z, r0.x
 	// --------------------------------------------------------------- Dithering Mask ---------------------------------------------------------------
-	mov r30.y, c223.z
-	if_ne r30.y, c130.y
+	mov r29.y, c223.z
+	if_ne r29.y, c130.y
 		mov r20, c130.y
 		mov r21.xy, c130.x
 		rep i1
@@ -125,9 +125,9 @@
 			endrep
 			mad r21.xy, r21.x, c130.zy, c130.zx
 		endrep
-		dp4 r30.x, r20, c130.z
+		dp4 r29.x, r20, c130.z
 	else
-		mov r30.x, c130.z
+		mov r29.x, c130.z
 	endif
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     texld r1, v0, s2
@@ -166,7 +166,7 @@
     dp4 r1.w, r7, r7
     add r0.z, r0.z, -r0.w
 	mad r0.z, r0.z, r0.z, -r1.w
-	cmp r0.z, -r30_abs.x, -r1.w, r0.z // Definition toggle
+	cmp r0.z, -r29_abs.x, -r1.w, r0.z // Definition toggle
     texld r7, v0, s0
     mov r7.yz, c2
     mad r8, r7.w, -r7.y, c3
@@ -224,7 +224,7 @@
     mov r1.w, c2.z
     mov r2.w, c2.z
 	// ---------------------------------------------------------- Motion Blur Optimization ----------------------------------------------------------
-	if_ne c222.w, r31.x	// don't run if motion blur is disabled
+	if_ne c222.w, r30.x	// don't run if motion blur is disabled
 		rep i0
 		mad r5.xy, r3, r2.w, r3.zwzw
 		texldl r6, r5, s5
@@ -270,7 +270,7 @@
 	// ------------------------------------------------------------- Console-like Gamma -------------------------------------------------------------
 	// Piecewise function to approximate Xbox gamma correction
 	max r12, r12, c1.x
-	if_ne c222.z, r31.x
+	if_ne c222.z, r30.x
 		mov r20, c10						// copy c10
 		add r21, r12, -c5.z					// r21 = r12 - 0.125
 		cmp r22, r21, c2.w, c2.z			// r22 = r12 >= 0.125 ? 1 : 0

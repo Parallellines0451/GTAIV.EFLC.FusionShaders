@@ -110,7 +110,7 @@
     dcl_2d s4
     dcl_2d s5
     dcl_2d s6
-	mov r31, c1.x
+	mov r30, c1.x
     texld r0, v0, s1
 	// ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
 	if_ne r0.x, c127.y
@@ -137,8 +137,8 @@
     rcp r0.x, r0.x
     mul r0.y, r0.z, r0.x
 	// --------------------------------------------------------------- Dithering Mask ---------------------------------------------------------------
-	mov r30.y, c223.z
-	if_ne r30.y, c130.y
+	mov r29.y, c223.z
+	if_ne r29.y, c130.y
 		mov r20, c130.y
 		mov r21.xy, c130.x
 		rep i1
@@ -160,9 +160,9 @@
 			endrep
 			mad r21.xy, r21.x, c130.zy, c130.zx
 		endrep
-		dp4 r30.x, r20, c130.z
+		dp4 r29.x, r20, c130.z
 	else
-		mov r30.x, c130.z
+		mov r29.x, c130.z
 	endif
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     texld r1, v0, s2
@@ -199,7 +199,7 @@
     mul r0.x, r1.w, r0.x
     lrp r1.w, r0.x, c79.z, c79.y
     min r0.x, c79.z, r1.w
-	cmp r0.x, -c222.y, r31.x, r0.x	// DOF toggle
+	cmp r0.x, -c222.y, r30.x, r0.x	// DOF toggle
     dp3 r0.z, r7, c1.yzww
     dp3 r8.x, r3, c1.yzww
     dp3 r8.y, r4, c1.yzww
@@ -211,7 +211,7 @@
     add r0.z, r0.z, -r1.w
     mad r0.z, r0.z, r0.z, -r2.w
     mul r0.x, r0.x, r0.x
-	cmp r0.z, -r30_abs.x, -c2.y, r0.z // Definition toggle
+	cmp r0.z, -r29_abs.x, -c2.y, r0.z // Definition toggle
 	cmp r0.x, r0.z, c2.y, r0.x
     texld r8, v0, s0
     mov r8.yz, c2
@@ -233,7 +233,7 @@
     add r0.z, -r0.x, c2.y
     mul r1.w, r0.x, c2.x
 	// --------------------------------------------------------------- Depth of Field ---------------------------------------------------------------
-	if_ne c222.y, r31.x
+	if_ne c222.y, r30.x
 		mov r20.z, c79.z
 		if_gt r20.z, c1.x		// don't run if DOF intensity = 0
 			mov r20, c99
@@ -448,7 +448,7 @@
     mov r2.w, c2.y
     mov r3.y, c2.y
 	// ---------------------------------------------------------- Motion Blur Optimization ----------------------------------------------------------
-	if_ne c222.w, r31.x	// don't run if motion blur is disabled
+	if_ne c222.w, r30.x	// don't run if motion blur is disabled
 		rep i0
 		mad r6.xy, r4, r3.y, r4.zwzw
 		texldl r7, r6, s6
@@ -502,7 +502,7 @@
 	// ------------------------------------------------------------- Console-like Gamma -------------------------------------------------------------
 	// Piecewise function to approximate Xbox gamma correction
 	max r12, r12, c1.x
-	if_ne c222.z, r31.x
+	if_ne c222.z, r30.x
 		mov r20, c10						// copy c10
 		add r21, r12, -c5.z					// r21 = r12 - 0.125
 		cmp r22, r21, c2.w, c2.y			// r22 = r12 >= 0.125 ? 1 : 0
