@@ -44,13 +44,10 @@
     texldl r1, r1, s10
     cmp r1, -r1.x, c1.y, c1.z
     texkill r1
-	// sqrt((dsx(v0.x))^2 + (dsy(v0.x))^2) * factor
+	// sqrt((ddx(v0.x))^2 + (ddy(v0.x))^2) approximation
 	dsx r1.x, v0.x
 	dsy r1.y, v0.x
-	mul r1.x, r1.x, r1.x
-	mad r1.x, r1.y, r1.y, r1.x
-	rsq r1.x, r1.x
-	rcp r1.x, r1.x
+	add r1.x, r1_abs.x, r1_abs.y
 	mad r1.x, r1.x, -c1.w, v0.x
     mov oC0.xyz, r1.x
     mov oC0.w, r0.x
