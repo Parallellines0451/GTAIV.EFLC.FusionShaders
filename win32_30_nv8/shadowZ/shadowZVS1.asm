@@ -74,11 +74,8 @@
       mul r3.xy, r2, r0.w
       mul r3.w, r2.w, -c57.w
       mul r3.z, r1.y, -c57.w
-	  mov r20.x, c0.z
-	  if_ne r20.x, c233.y
-		sge r4.z, -r3.z, c1.z
-		add r3.z, r3.z, -r4.z
-	  endif
+	  sge r4.z, -r3.z, c1.z
+	  mad r3.z, -r4.z, c233.y, r3.z
     else
       mov r1.y, c0.y
       add r0.w, -r1.y, c56.x
