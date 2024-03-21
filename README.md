@@ -7,7 +7,6 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [ro
 - [Fixed z-fighting](https://www.youtube.com/watch?v=sAfKfvAIsXw) by implementing a logarithmic depth buffer
 - Fixed LOD pop-in
 - Removed unnecessary stippled transparency from hundreds of shaders
-- Added 256 tile stipple support
 # Lighting
 - Fixed volumetric light shafts occlusion
 - Ported console foliage translucency
