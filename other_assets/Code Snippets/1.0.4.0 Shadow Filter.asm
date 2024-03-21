@@ -11,7 +11,7 @@
     mad r21.y, r21.y, c111.x, c111.y
     frc r21.y, r21.y
     mad r21.y, r21.y, c111.z, c111.w	// r21.y * 2pi - pi
-    sincos r22.xy, r21.y				// sine & cosine of r21.y
+    sincos r22.xy, r21.y				// cosine & sine of r21.y
     mul r23, r22.yxxy, c110.xxyz		// offsets for 1st and 4th samples, respectively
     mul r21, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
 	mov r20.xy, c53.xy					// copy texel size
