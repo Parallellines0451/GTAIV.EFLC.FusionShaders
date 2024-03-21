@@ -57,7 +57,6 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [ro
 - Fixed invisible gta_emissivestrong lights like in the Rotterdam Tower
 - Improved window crossfade
 - Added lamppost on/off toggle support
-- Added optional opaque wires and bridge cables
 # Screenshots
 [![pic1.png](https://i.postimg.cc/kgjksBM7/pic1.png)](https://postimg.cc/18qC5RNd)
 [![pic2.png](https://i.postimg.cc/fLdpMCcb/pic2.png)](https://postimg.cc/njH0kvw8)
