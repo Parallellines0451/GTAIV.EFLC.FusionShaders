@@ -92,43 +92,26 @@
 //
 
     ps_3_0
-	// ------------------------------------------------------ 1.0.4.0 Shadow Filter Constants -------------------------------------------------------
+	// ----------------------------------------------------- Improved Shadow Filter Constants -------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
-    def c112, 3, 7.13800001, 3, 0.3333333
+    def c112, 3, 7.13800001, 2, 0.3333333
     def c113, 0.75, -0.5, 0.5, 0
-	defi i1, 3, 0, 0, 0
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
-	// --------------------------------------------------------------- PCSS Constants ---------------------------------------------------------------
-    def c114, 49, 1, 1, 0.045
-    def c115, -33, 6, 0, 0
-    defi i2, 12, 0, 0, 0
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
-	// --------------------------------------------------------- Filter Utilities Constants ---------------------------------------------------------
-	def c116, 0.25, 0.5, 0.75, 0 // cascade identifiers
-	def c117, 0, 1, 2, 3 // filter ID's
-	def c118, 0.5, 1, 1.5, 2 // blur multipliers
-	def c119, 0.0001220703125, 0.00048828125, 0.00006103515625, 0.000244140625 // static texel size
+	def c114, -1.25, 2, -2, 0 // c114-c117 = offsets for extra samples
+	def c115, 1.75, -1.5, 1.5, 0
+	def c116, -2.25, 3, -3, 0
+	def c117, 2.75, -2.5, 2.5, 0
 	
-	// Very High
-    def c130, 1, 0.475, 0.1, 0.22 // x,y = 1st & 2nd cascade blur | z,w = 1st & 2nd cascade bias
-	def c131, 0.19, 0.0542857, 0.5, 0.8 // x,y = 3rd & 4th cascade blur | z,w = 3rd & 4th cascade bias
-	def c132, 9.5, 0.0246914, 9.2105263, 0.15 // depth based blur | x = start, y = 1/(end - start), z = maximum blur, w = maximum bias
+    def c118, 0.1, 0.22, 0.5, 0.8 // c118-c121 = biases for each cascade of each quality setting
+    def c119, 0.22, 0.42, 1.07, 1.22
+    def c120, 0.28, 0.53, 0.98, 1.08
+    def c121, 0.5, 0.8, 1.35, 1.5
 	
-	// High
-	def c133, 1, 0.4, 0.22, 0.42
-	def c134, 0.1538462, 0.0571429, 1.07, 1.22
-	def c135, 10, 0.0181818, 8.75, 0.15
+	def c122, 4, 3, 2, 1 // quality ID's
+	def c123, 0.15, 0, 0, 0 // end bias
 	
-	// Medium
-	def c136, 2, 0.7878788, 0.28, 0.53
-	def c137, 0.2888888, 0.1485714, 0.98, 1.08
-	def c138, 13, 0.0129870, 6.7307692, 0.15
-	
-	// Low
-	def c139, 2, 0.8888888, 0.5, 0.8
-	def c140, 0.4444444, 0.2285714, 1.35, 1.5
-	def c141, 20, 0.0142857, 4.375, 0.15
+	def c124, -17, 6, 0.045, 0 // PCSS constants
+    defi i1, 6, 0, 0, 0
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.0369608636e-42 // 740
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
@@ -222,6 +205,11 @@
     dp3 r0.w, c14, v6
     add r8.xyz, -r0.w, -c54
     cmp r8.yzw, r8.xxyz, c3.y, c3.x
+	// ---------------------------------------------------------------- Cascade Mask ----------------------------------------------------------------
+	mov r21.x, c110.y
+	mov r21.yzw, r8
+	add r21.xyz, r21.xyz, -r21.yzw
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
     mov r8.x, c0.x
     dp4 r9.x, r8, c57
     dp4 r9.y, r8, c58
@@ -299,141 +287,127 @@
     cmp r6.w, r6.w, c3.y, c3.x
     add r5.w, r5.w, r6.w
     removed 1.0.6.0 filter */
-	// ------------------------------------------------------------- Per Setting Tweaks -------------------------------------------------------------
-	mov r20.x, c221.y
-	if_eq r20.x, c117.w // High
-		mov r23, c133
-		mov r24, c134
-		mov r27, c135
-	else
-	if_eq r20.x, c117.z // Medium
-		mov r23, c136
-		mov r24, c137
-		mov r27, c138
-	else
-	if_eq r20.x, c117.y // Low
-		mov r23, c139
-		mov r24, c140
-		mov r27, c141
-	else                // Very High
-		mov r23, c130
-		mov r24, c131
-		mov r27, c132
-	endif
-	endif
-	endif
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------- Per Cascade Tweaks -------------------------------------------------------------
-    add r21.xyz, r7.x, -c116.xyz
-    cmp r22.xy, r21.x, r23.yw, r23.xz
-    cmp r22.xy, r21.y, r24.xz, r22.xy
-    cmp r22.xy, r21.z, r24.yw, r22.xy	// r22.x = per cascade blur, r22.y = per cascade bias
-	
-	mov r20.xy, c119.xy					// static texel size instead of c53.xy
-    mul r20.xy, r20.xy, r22.x			// reduce cascade blur disparity
-	add r7.z, r7.z, -r22.y				// improve depth bias for 2nd, 3rd and 4th cascade
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
-	// -------------------------------------------------------------- Filter Selection --------------------------------------------------------------
-	mov r20.z, c223.y
-    add r21.xyz, r20.z, -c117.yzw
-    cmp r20.w, r21.x, c118.y, c118.x
-    cmp r20.w, r21.y, c118.z, r20.w
-    cmp r20.w, r21.z, c118.w, r20.w // "Sharp", "Soft", "Softer" & "Softest"
-	
-	if_gt r20.z, c117.w // "PCSS"
-		mov r21.y, c110.w // blockers
-	
-		mul r22.xy, r22.xx, c115.xy // pcss texel step
-	
-		mov r23.xy, r22.xx // x - inner loop index, y - outer loop index
-		mov r24.x, c110.w // sum
-	
-		rep i2
-			mul r21.w, r23.y, c114.w
-	
-			rep i2
-				mad r25.xy, c119.zw, r23.xy, r7.xy
-				texldl r26, r25.xy, s15
-	
-				add r25.x, r26.x, -r7.z
-	
-				if_gt r25.x, r21.w
-					min r25.x, r25.x, c114.x // < 49
-					add r24.x, r24.x, r25.x
-					add r21.y, r21.y, c110.y
+	// ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
+	add r22, c54.w, -c54
+	add r22, c53.w, -r22 // cascade distances
+	rcp r23.x, r22.x
+	dp4 r23.y, r22, r21
+	rcp r23.y, r23.y
+	mul r20.z, r23.y, r22.x
+	mul r20.xy, c53.xy, r20.z // apply per cascade blur
+	mov r24, c122
+	add r24, r24, -c221.y
+	add_sat r24, c110.y, -r24_abs
+	m4x4 r25, r21, c118
+	dp4 r20.w, r25, r24
+	mov r24, c110.ywww
+	add r7.z, r7.z, -r20.w // apply per cascade bias
+	if_ne r24.z, c223.y // PCSS
+		mov r24.xyw, c110.w // sum
+		mul r25.xy, r20.z, c124.xy // pcss texel step
+		mov r25.zw, r25.x // x - inner loop index, y - outer loop index
+		rep i1
+			mul r24.z, r25.w, c124.z
+			rep i1
+				mad r26.xy, c53.xy, r25.zw, r7.xy
+				texldl r27, r26.xy, s15
+				add r26.x, r27.x, -r7.z
+				if_gt r26.x, r24.z
+					min r26.x, r26.x, -c124.x
+					add r24.x, r24.x, r26.x
+					add r24.w, r24.w, c110.y // blockers
 				endif
-	
-				add r23.x, r23.x, r22.y // j++
+				add r25.z, r25.z, r25.y // j++
 			endrep
-			add r23.y, r23.y, r22.y // i++
-			mov r23.x, r22.x // j = -33
+			add r25.w, r25.w, r25.y // i++
+			mov r25.z, r25.x // j = -33
 		endrep
-	
-		// avg if any blockers
-		if_gt r21.y, c110.w
-			rcp r21.y, r21.y
-			mul r24.x, r24.x, r21.y
+		if_gt r24.w, c110.w // avg if any blockers
+			rcp r24.w, r24.w
+			mul r24.x, r24.x, r24.w
 			rsq r24.x, r24.x
 			rcp r24.x, r24.x
-			max r20.w, r24.x, c114.z // minimum factor
+			max r24.x, r24.x, c111.y // minimum factor
 		else
-			mov r20.w, c114.z
+			mov r24.x, c110.y
 		endif
 	endif
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------ Depth Based Blur ------------------------------------------------------------
-	mov r20.z, c110.w
-	add r21.x, r0.w, -r27.x
-	mul_sat r21.x, r21.x, r27.y
-	mul r21.x, r21.x, r21.x
-	lrp r22.xy, r21.x, r27.zw, r20.wz // r22.x = blur factor, r22.y = bias factor
+	add r22.x, r0.w, -r22.x
+	add r22.y, c54.z, -c54.x
+	rcp r22.y, r22.y
+	mul_sat r22.x, r22.x, r22.y
+	mul r22.x, r22.x, r22.x
+	mul r22.y, r23.x, c53.w
+	mov r22.z, c123.x
+	lrp r23.xy, r22.x, r22.yz, r24.xy
+	mul r20.xy, r20.xy, r23.x // apply depth based blur
+	add r7.z, r7.z, r23.y // apply depth based bias
 	
-	mul r20.xy, r20.xy, r22.x
-	add r7.z, r7.z, r22.y
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
-	// ----------------------------------------------------------- 1.0.4.0 Shadow Filter ------------------------------------------------------------
     mov r21.xy, c112.xy
     dp2add r21.y, vPos, r21, c110.w		// v0.x * r21.x + v0.y * r21.y
     mad r21.y, r21.y, c111.x, c111.y
     frc r21.y, r21.y
     mad r21.y, r21.y, c111.z, c111.w	// r21.y * 2pi - pi
-    sincos r22.xy, r21.y				// sine & cosine of r21.y
-
+    sincos r22.xy, r21.y				// cosine & sine of r21.y
+    mul r23, r22.yxxy, c110.xxyz		// offsets for 1st and 4th samples, respectively
+    mul r21, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
 	mul r20.xy, r20.xy, c112.z			// blur factor
-	mul r20.xy, r20.xy, c112.w			// compensate blur for extra iterations
 	
-	mov r20.zw, c110.w
+    mad r24.xy, r23.xy, r20.xy, r7.xy	// offset * texel size + UV
+    texld r24, r24, s15					// 1st sample
+    mov r25.x, r24.x					// copy to r25
+    mad r24.xy, r21.zw, r20.xy, r7.xy	// offset * texel size + UV
+    texld r24, r24, s15					// 2nd sample
+    mov r25.y, r24.x					// copy to r25
+    mad r24.xy, r21.xy, r20.xy, r7.xy	// offset * texel size + UV
+    texld r24, r24, s15					// 3rd sample
+    mov r25.z, r24.x					// copy to r25
+    mad r24.xy, r23.zw, r20.xy, r7.xy	// offset * texel size + UV
+    texld r24, r24, s15					// 4th sample
+    mov r25.w, r24.x					// copy to r25
+	add r25, r7.z, -r25					// depth bias
+	cmp r25, r25, c110.y, c110.w
+	dp4 r26.x, r25, -c110.x				// average
 	
-	mov r26, c110.xxyz					// copy offsets for 1st and 4th samples, respectively
-	mov r27, c113.xxyz					// copy offsets for 3rd and 2nd samples, respectively
+    mul r23, r22.yxxy, c114.xxyz		// offsets for 5th and 8th samples, respectively
+    mul r21, r22.yxxy, c115.xxyz        // offsets for 7th and 6th samples, respectively
 	
-	rep i1
-		mul r23, r22.yxxy, r26
-		mul r21, r22.yxxy, r27
-		
-		mad r24.xy, r23.xy, r20.xy, r7.xy	// offset * texel size + UV
-		texld r24, r24, s15					// 1st sample
-		mov r25.x, r24.x					// copy to r25
-		mad r24.xy, r21.zw, r20.xy, r7.xy	// offset * texel size + UV
-		texld r24, r24, s15					// 2nd sample
-		mov r25.y, r24.x					// copy to r25
-		mad r24.xy, r21.xy, r20.xy, r7.xy	// offset * texel size + UV
-		texld r24, r24, s15					// 3rd sample
-		mov r25.z, r24.x					// copy to r25
-		mad r24.xy, r23.zw, r20.xy, r7.xy	// offset * texel size + UV
-		texld r24, r24, s15					// 4th sample
-		mov r25.w, r24.x					// copy to r25
+    mad r24.xy, r23.xy, r20.xy, r7.xy	// offset * texel size + UV
+    texld r24, r24, s15					// 5th sample
+    mov r25.x, r24.x					// copy to r25
+    mad r24.xy, r21.zw, r20.xy, r7.xy	// offset * texel size + UV
+    texld r24, r24, s15					// 6th sample
+    mov r25.y, r24.x					// copy to r25
+    mad r24.xy, r21.xy, r20.xy, r7.xy	// offset * texel size + UV
+    texld r24, r24, s15					// 7th sample
+    mov r25.z, r24.x					// copy to r25
+    mad r24.xy, r23.zw, r20.xy, r7.xy	// offset * texel size + UV
+    texld r24, r24, s15					// 8th sample
+    mov r25.w, r24.x					// copy to r25
+	add r25, r7.z, -r25					// depth bias
+	cmp r25, r25, c110.y, c110.w
+	dp4 r26.y, r25, -c110.x				// average
 	
-		add r25, r7.z, -r25					// depth bias
-		cmp r25, r25, c110.y, c110.w
-		dp4 r20.w, r25, -c110.x				// average samples of current iteration
-		add r20.z, r20.z, r20.w
-		
-		add r26, r26, c110.zzyz				// add (-1, -1, 1, -1)
-		add r27, r27, -c110.zzyz			// add (1, 1, -1, 1)
-	endrep
+    mul r23, r22.yxxy, c116.xxyz		// offsets for 9th and 12th samples, respectively
+    mul r21, r22.yxxy, c117.xxyz        // offsets for 11th and 10th samples, respectively
 	
-	mul r5.w, r20.z, c112.w					// average all iterations
+    mad r24.xy, r23.xy, r20.xy, r7.xy	// offset * texel size + UV
+    texld r24, r24, s15					// 9th sample
+    mov r25.x, r24.x					// copy to r25
+    mad r24.xy, r21.zw, r20.xy, r7.xy	// offset * texel size + UV
+    texld r24, r24, s15					// 10th sample
+    mov r25.y, r24.x					// copy to r25
+    mad r24.xy, r21.xy, r20.xy, r7.xy	// offset * texel size + UV
+    texld r24, r24, s15					// 11th sample
+    mov r25.z, r24.x					// copy to r25
+    mad r24.xy, r23.zw, r20.xy, r7.xy	// offset * texel size + UV
+    texld r24, r24, s15					// 12th sample
+    mov r25.w, r24.x					// copy to r25
+	add r25, r7.z, -r25					// depth bias
+	cmp r25, r25, c110.y, c110.w
+	dp4 r26.z, r25, -c110.x				// average
+	
+	dp3 r5.w, r26, c112.w
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     add r3.w, r5.w, r3.w // mad r3.w, r5.w, c4.w, r3.w 1.0.6.0 filter average
     add r0.w, r0.w, -c53.w

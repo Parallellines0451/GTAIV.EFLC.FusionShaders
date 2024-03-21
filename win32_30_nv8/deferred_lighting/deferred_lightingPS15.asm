@@ -57,9 +57,12 @@
 	// ------------------------------------------------------ Improved Shadow Filter Constants ------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
-    def c112, 3, 4.27199984, 3, 0.3333333
+    def c112, 3, 4.27199984, 2, 0.3333333
     def c113, 0.75, -0.5, 0.5, 0
-	defi i1, 3, 0, 0, 0
+	def c114, -1.25, 2, -2, 0 // c114-c117 = offsets for extra samples
+	def c115, 1.75, -1.5, 1.5, 0
+	def c116, -2.25, 3, -3, 0
+	def c117, 2.75, -2.5, 2.5, 0
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     dcl_texcoord v0
     dcl vPos.xy
@@ -148,47 +151,79 @@
     mad r21.y, r21.y, c111.x, c111.y
     frc r21.y, r21.y
     mad r21.y, r21.y, c111.z, c111.w	// r21.y * 2pi - pi
-    sincos r22.xy, r21.y				// sine & cosine of r21.y
-
+    sincos r22.xy, r21.y				// cosine & sine of r21.y
+    mul r23, r22.yxxy, c110.xxyz		// offsets for 1st and 4th samples, respectively
+    mul r21, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
 	mov r20.x, c77.z					// copy texel size
-	mul r20.x, r20.x, c112.w			// compensate blur for extra iterations
+	mul r20.x, r20.x, c112.w
 	
-	mov r20.zw, c110.w
+	mad_sat r24.xy, r23.xy, r20.x, r2.xy	// offset * texel size + UV
+	mad r24.xy, r24, c77.w, c77
+	texld r24, r24, s14						// 1st sample
+	dp2add r25.x, r24, r4.xy, c110.w		// copy to r25
+	mad_sat r24.xy, r21.zw, r20.x, r2.xy	// offset * texel size + UV
+	mad r24.xy, r24, c77.w, c77
+	texld r24, r24, s14						// 2nd sample
+	dp2add r25.y, r24, r4.xy, c110.w		// copy to r25
+	mad_sat r24.xy, r21.xy, r20.x, r2.xy	// offset * texel size + UV
+	mad r24.xy, r24, c77.w, c77
+	texld r24, r24, s14						// 3rd sample
+	dp2add r25.z, r24, r4.xy, c110.w		// copy to r25
+	mad_sat r24.xy, r23.zw, r20.x, r2.xy	// offset * texel size + UV
+	mad r24.xy, r24, c77.w, c77
+	texld r24, r24, s14						// 4th sample
+	dp2add r25.w, r24, r4.xy, c110.w		// copy to r25
+	mad r25, r1.w, c66.w, r25				// depth bias
+	cmp r25, r25, c110.y, c110.w
+	dp4 r26.x, r25, -c110.x					// average
 	
-	mov r26, c110.xxyz					// copy offsets for 1st and 4th samples, respectively
-	mov r27, c113.xxyz					// copy offsets for 3rd and 2nd samples, respectively
+    mul r23, r22.yxxy, c114.xxyz			// offsets for 5th and 8th samples, respectively
+    mul r21, r22.yxxy, c115.xxyz        	// offsets for 7th and 6th samples, respectively
 	
-	rep i1
-		mul r23, r22.yxxy, r26
-		mul r21, r22.yxxy, r27
-		
-		mad_sat r24.xy, r23.xy, r20.x, r2.xy	// offset * texel size + UV
-		mad r24.xy, r24, c77.w, c77
-		texld r24, r24, s14						// 1st sample
-		dp2add r25.x, r24, r4.xy, c110.w		// copy to r25
-		mad_sat r24.xy, r21.zw, r20.x, r2.xy	// offset * texel size + UV
-		mad r24.xy, r24, c77.w, c77
-		texld r24, r24, s14						// 2nd sample
-		dp2add r25.y, r24, r4.xy, c110.w		// copy to r25
-		mad_sat r24.xy, r21.xy, r20.x, r2.xy	// offset * texel size + UV
-		mad r24.xy, r24, c77.w, c77
-		texld r24, r24, s14						// 3rd sample
-		dp2add r25.z, r24, r4.xy, c110.w		// copy to r25
-		mad_sat r24.xy, r23.zw, r20.x, r2.xy	// offset * texel size + UV
-		mad r24.xy, r24, c77.w, c77
-		texld r24, r24, s14						// 4th sample
-		dp2add r25.w, r24, r4.xy, c110.w		// copy to r25
+	mad_sat r24.xy, r23.xy, r20.x, r2.xy	// offset * texel size + UV
+	mad r24.xy, r24, c77.w, c77
+	texld r24, r24, s14						// 5th sample
+	dp2add r25.x, r24, r4.xy, c110.w		// copy to r25
+	mad_sat r24.xy, r21.zw, r20.x, r2.xy	// offset * texel size + UV
+	mad r24.xy, r24, c77.w, c77
+	texld r24, r24, s14						// 6th sample
+	dp2add r25.y, r24, r4.xy, c110.w		// copy to r25
+	mad_sat r24.xy, r21.xy, r20.x, r2.xy	// offset * texel size + UV
+	mad r24.xy, r24, c77.w, c77
+	texld r24, r24, s14						// 7th sample
+	dp2add r25.z, r24, r4.xy, c110.w		// copy to r25
+	mad_sat r24.xy, r23.zw, r20.x, r2.xy	// offset * texel size + UV
+	mad r24.xy, r24, c77.w, c77
+	texld r24, r24, s14						// 8th sample
+	dp2add r25.w, r24, r4.xy, c110.w		// copy to r25
+	mad r25, r1.w, c66.w, r25				// depth bias
+	cmp r25, r25, c110.y, c110.w
+	dp4 r26.y, r25, -c110.x					// average
 	
-		mad r25, r1.w, c66.w, r25				// depth bias
-		cmp r25, r25, c110.y, c110.w
-		dp4 r20.w, r25, -c110.x					// average samples of current iteration
-		add r20.z, r20.z, r20.w
-		
-		add r26, r26, c110.zzyz				// add (-1, -1, 1, -1)
-		add r27, r27, -c110.zzyz			// add (1, 1, -1, 1)
-	endrep
+    mul r23, r22.yxxy, c116.xxyz			// offsets for 9th and 12th samples, respectively
+    mul r21, r22.yxxy, c117.xxyz        	// offsets for 11th and 10th samples, respectively
 	
-	mul r0.w, r20.z, c112.w					// average all iterations
+	mad_sat r24.xy, r23.xy, r20.x, r2.xy	// offset * texel size + UV
+	mad r24.xy, r24, c77.w, c77
+	texld r24, r24, s14						// 9th sample
+	dp2add r25.x, r24, r4.xy, c110.w		// copy to r25
+	mad_sat r24.xy, r21.zw, r20.x, r2.xy	// offset * texel size + UV
+	mad r24.xy, r24, c77.w, c77
+	texld r24, r24, s14						// 10th sample
+	dp2add r25.y, r24, r4.xy, c110.w		// copy to r25
+	mad_sat r24.xy, r21.xy, r20.x, r2.xy	// offset * texel size + UV
+	mad r24.xy, r24, c77.w, c77
+	texld r24, r24, s14						// 11th sample
+	dp2add r25.z, r24, r4.xy, c110.w		// copy to r25
+	mad_sat r24.xy, r23.zw, r20.x, r2.xy	// offset * texel size + UV
+	mad r24.xy, r24, c77.w, c77
+	texld r24, r24, s14						// 12th sample
+	dp2add r25.w, r24, r4.xy, c110.w		// copy to r25
+	mad r25, r1.w, c66.w, r25				// depth bias
+	cmp r25, r25, c110.y, c110.w
+	dp4 r26.z, r25, -c110.x					// average
+	
+	dp3 r0.w, r26, c112.w
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     add r2.xyz, r1, c0.w
     dp3 r1.x, r1, r1
