@@ -102,7 +102,7 @@
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 9.99999975e-006, 0.00499999989, -0.5, 0.5
     def c1, -0.25, 1.33333337, 9.99999975e-005, 10
-    def c2, 1, 0, 1.5, 1
+    def c2, 1, 0, 1.5, 0.0833333358
     def c3, 0.212500006, 0.715399981, 0.0720999986, 1.00000001e-007
     def c4, 1, -1, 0, -0
     def c5, -0.321940005, -0.932614982, -0.791558981, -0.597710013
@@ -344,7 +344,7 @@
     cmp r0.yw, r0.y, c4.xxzy, c4.xzzw
     mul r0.z, r0.z, r0.z
     mul r0.z, r0.z, c2.z
-    mad r0.x, r0.x, c2.w, r0.z
+    add r0.x, r0.x, r0.z // mad r0.x, r0.x, c2.w, r0.z 1.0.6.0 filter average
     add r0.z, r0.w, r0.x
     cmp_sat r0.x, r0.z, r0.x, r0.y
     add r0.yzw, c0.x, v1.xxyz

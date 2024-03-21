@@ -107,7 +107,7 @@
     def c6, 1, -1, 0.00499999989, 1.33333337
     def c7, -500, 0.25, 1000, 0.5
     def c8, 9.99999975e-005, -511, 512.000122, 1.5
-    def c9, 1, 9, 10, 3
+    def c9, 0.0833333358, 9, 10, 3
     def c10, -0.500005007, 0.5, 0.600000024, 0.200000003
     def c11, 1, 0, 9.99999975e-006, -2
     def c12, 1, -1, 0, -0
@@ -367,7 +367,7 @@
     cmp r1.xz, r0.x, c12.xyyw, c12.zyww
     mul r0.x, r0.z, r0.z
     mul r0.x, r0.x, c8.w
-    mad r0.x, r0.y, c9.x, r0.x
+    add r0.x, r0.y, r0.x // mad r0.x, r0.y, c9.x, r0.x 1.0.6.0 filter average
     add r0.y, r1.z, r0.x
     cmp_sat r0.x, r0.y, r0.x, r1.x
     mul r0.yz, c0.y, v2.xxyw
