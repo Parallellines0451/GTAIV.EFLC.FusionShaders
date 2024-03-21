@@ -36,6 +36,7 @@
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 1, -0.5, 5, 9.99999975e-006
     def c1, 0.075000003, 0.37109375, 1, 0
+    def c74, 1, 1, 1, 1 // disable IDE dirt influence
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_texcoord4 v2.xyz
@@ -66,12 +67,12 @@
     mul oC1.xyz, r0, -c0.y
     texld r0, v0, s2
     dp3 r0.x, r0, c73
-    mul r0.y, r0.w, c0.x
+    mul r0.y, r0.w, c74.x
     mul r0.y, r0.y, c72.w
     mul r0.y, r0.y, c1.y
     rsq r0.y, r0.y
     rcp oC2.y, r0.y
-    mul r0.x, r0.x, c0.x
+    mul r0.x, r0.x, c74.x
     mul r0.x, r0.x, c72.w
     mul oC2.x, r0.x, c1.x
     texld r0, v0, s0

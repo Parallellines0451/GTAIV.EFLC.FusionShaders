@@ -58,6 +58,11 @@
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 9.99999975e-006, 0, 1, 9.99999975e-005
     def c1, -13.2877121, 0.5, 0.001953125, 0
+    def c76, 1, 1, 1, 1 // disable IDE dirt influence
+    def c78, 1, 1, 1, 1 // disable IDE dirt influence
+    def c81, 1, 1, 1, 1 // disable IDE dirt influence
+    def c83, 1, 1, 1, 1 // disable IDE dirt influence
+    def c84, 1, 1, 1, 1 // disable IDE dirt influence
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_texcoord3 v2.xyz
@@ -73,10 +78,10 @@
     mul r2.xyz, r1, r1.w
     texld r3, v0, s2
     mul r2.w, r3.w, c75.x
-    mul r2.w, r2.w, c0.z
+    mul r2.w, r2.w, c84.x
     dp3 r3.x, r3, c79
     mul r3.x, r3.x, c77.x
-    mul r3.x, r3.x, c0.z
+    mul r3.x, r3.x, c84.x
     mul r0.xyz, r0, c66
     mul r0, r0, v3
     dp3 r3.y, v3, c85
@@ -94,16 +99,16 @@
       mov r4.x, c0.z
     endif
     mul r3.w, r3.x, r4.x
-    mov r4.x, c0.z
-    mul r4.x, r4.x, c0.z
+    mov r4.x, c82.x
+    mul r4.x, r4.x, c83.x
     mov r5.x, c80.x
-    mul r4.y, r5.x, c0.z
+    mul r4.y, r5.x, c81.x
     mov r5.x, c75.x
-    mul r4.z, r5.x, c0.z
+    mul r4.z, r5.x, c76.x
     rcp r4.z, r4.z
     mul r4.z, r2.w, r4.z
     mov r5.x, c77.x
-    mul r4.w, r5.x, c0.z
+    mul r4.w, r5.x, c78.x
     rcp r4.w, r4.w
     mul r3.x, r3.x, r4.w
     mul r4.yz, r4.xzxw, r4.xyxw

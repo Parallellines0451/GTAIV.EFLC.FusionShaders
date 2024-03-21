@@ -117,6 +117,7 @@
     def c8, 0.962339997, -0.194983006, 0.473434001, -0.480026007
     def c9, -0.69591397, 0.457136989, -0.203345001, 0.620715976
     def c10, -0.326211989, -0.405809999, -0.840143979, -0.0735799968
+    def c75, 1, 1, 1, 1 // disable IDE dirt influence
     dcl vPos.xy
     dcl_texcoord v0.xy
     dcl_texcoord1 v1
@@ -133,9 +134,9 @@
     add r1.xyz, c1.x, v1
     nrm r2.xyz, r1
     texld r1, v0, s2
-    mul r1.w, r1.w, c1.w
+    mul r1.w, r1.w, c75.x
     dp3 r1.x, r1, c74
-    mul r1.x, r1.x, c1.w
+    mul r1.x, r1.x, c75.x
     mul r1.x, r1.x, c1.y
     mul r0.xyz, r0, c66
     mul r0, r0, v3

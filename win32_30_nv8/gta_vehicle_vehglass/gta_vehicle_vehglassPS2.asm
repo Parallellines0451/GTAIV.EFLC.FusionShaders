@@ -171,6 +171,7 @@
     def c12, 0.473434001, -0.480026007, 0.519456029, 0.767022014
     def c13, -0.203345001, 0.620715976, 0.962339997, -0.194983006
     def c28, -0.840143979, -0.0735799968, -0.69591397, 0.457136989
+    def c75, 1, 1, 1, 1 // disable IDE dirt influence
 	def c100, 1.6666667, 0, 0, 0	// Reflection intensity multiplier
     dcl vPos.xy
     dcl_texcoord v0.xy
@@ -189,10 +190,10 @@
     add r1.xyz, c1.x, v1
     nrm r2.xyz, r1
     texld r1, v0, s2
-    mul r1.w, r1.w, c1.w
+    mul r1.w, r1.w, c75.x
     mul r2.w, r1.w, c1.y
     dp3 r1.x, r1, c74
-    mul r1.x, r1.x, c1.w
+    mul r1.x, r1.x, c75.x
     mul r1.x, r1.x, c1.z
     add r3.xyz, c1.x, v2
     nrm r4.xyz, r3
@@ -223,7 +224,7 @@
     mul r4.xyz, r4, c3.y
     add r1.x, c39.w, c39.w
     mul r4.xyz, r4, r1.x
-    mul r4.xyz, r4, c1.w
+    mul r4.xyz, r4, c75.x
     mul r4.xyz, r4, c3.z
     mul r0.xyz, r0, c66
     mul r0, r0, v3

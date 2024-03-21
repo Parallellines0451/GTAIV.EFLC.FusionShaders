@@ -55,6 +55,11 @@
     def c2, 0.0078125, 0.5, 0.001953125, 0
     def c3, -13.2877121, 64, 8, 4
     def c4, 32, 4, 1, 0.00392156886
+    def c75, 1, 1, 1, 1 // disable IDE dirt influence
+    def c76, 1, 1, 1, 1 // disable IDE dirt influence
+    def c78, 1, 1, 1, 1 // disable IDE dirt influence
+    def c79, 1, 1, 1, 1 // disable IDE dirt influence
+    def c81, 1, 1, 1, 1 // disable IDE dirt influence
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_texcoord3 v2.xyz
@@ -69,10 +74,10 @@
     rsq r1.w, r1.w
     mul r2.xyz, r1, r1.w
     texld r3, v0, s2
-    mul r2.w, r3.w, c1.x
+    mul r2.w, r3.w, c81.x
     mul r2.w, r2.w, c0.y
     dp3 r3.x, r3, c77
-    mul r3.x, r3.x, c1.x
+    mul r3.x, r3.x, c81.x
     mul r3.x, r3.x, c0.z
     mul r0.xyz, r0, c66
     mul r0, r0, v3
@@ -93,15 +98,15 @@
     endif
     mul r3.w, r3.x, r4.x
     mov r4.xyz, c1
-    mul r4.z, r4.z, c1.x
-    mul r3.y, r3.y, c1.x
+    mul r4.z, r4.z, c78.x
+    mul r3.y, r3.y, c75.x
     rcp r3.y, r3.y
     mul r3.y, r2.w, r3.y
-    mul r3.z, r3.z, c1.x
+    mul r3.z, r3.z, c76.x
     rcp r3.z, r3.z
     mul r3.x, r3.x, r3.z
     mul r3.y, r4.z, r3.y
-    mul r3.z, c1.x, c1.x
+    mul r3.z, c79.x, c79.x
     mul r3.x, r3.x, r3.z
     add r5.xyz, c0.x, v2
     nrm r6.xyz, r5
@@ -116,7 +121,7 @@
     mul r2.x, r3.y, r2.x
     exp r2.x, r2.x
     mad r2.xyz, r5, r2.x, r0
-    cmp oC0.xyz, -c1.x, r0, r2
+    cmp oC0.xyz, -c79.x, r0, r2
     mul r0.x, r3.w, c72.w
     mul r0.y, r2.w, c72.w
     mad r1.xyz, r1, r1.w, c1.x
