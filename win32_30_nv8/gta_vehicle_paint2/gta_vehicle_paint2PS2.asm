@@ -358,7 +358,7 @@
     sincos r22.xy, r21.y				// cosine & sine of r21.y
     mul r23, r22.yxxy, c110.xxyz		// offsets for 1st and 4th samples, respectively
     mul r21, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
-	mul r20.xy, r20.xy, c112.z			// blur factor
+	mul r20.xy, r20.xy, c221.w			// compensate for FixCascadedShadowMapResolution
 	
     mad r24.xy, r23.xy, r20.xy, r7.xy	// offset * texel size + UV
     texld r24, r24, s15					// 1st sample

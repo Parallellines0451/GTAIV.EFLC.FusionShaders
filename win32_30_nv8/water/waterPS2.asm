@@ -100,8 +100,6 @@
     def c20, 0.962339997, -0.194983006, 0.473434001, -0.480026007
     def c21, -0.69591397, 0.457136989, -0.203345001, 0.620715976
     def c22, -0.326211989, -0.405809999, -0.840143979, -0.0735799968
-	def c30, 0, 1, 2, 3
-	def c31, 2, 1, 0.5, 0.25
     dcl_texcoord v0
     dcl_texcoord1 v1
     dcl_texcoord2 v2
@@ -276,7 +274,7 @@
     sincos r22.xy, r21.y				// cosine & sine of r21.y
     mul r23, r22.yxxy, c110.xxyz		// offsets for 1st and 4th samples, respectively
     mul r21, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
-	mul r20.xy, r20.xy, c112.z			// blur factor
+	mul r20.xy, r20.xy, c221.w			// compensate for FixCascadedShadowMapResolution
 	
     mad r24.xy, r23.xy, r20.xy, r0.yz	// offset * texel size + UV
     texld r24, r24, s15					// 1st sample
@@ -353,20 +351,13 @@
     rcp r0.y, v1.z
     mul r0.y, r0.w, r0.y
     mad r3, v1.xyxy, r0.y, r3
-	// -------------------------------------------------------------- Water Tiling Fix --------------------------------------------------------------
-    mov r20.x, c221.x
-    add r20.xyz, r20.x, -c30.yzw
-    cmp r21.x, r20.x, c31.y, c31.x
-    cmp r21.x, r20.y, c31.z, r21.xy
-    cmp r21.x, r20.z, c31.w, r21.xy
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
     mul r0.yz, c2.x, v2.xxyw
-	mul r0.yz, r0, r21.x
+	mul r0.yz, r0, c221.x // Low, Medium, High, Very High = 2, 1, 0.5, 0.25
     texld r4, r0.yzzw, s0
     add r4, r4.zwzw, c3.x
     mad r3, r4, c2.zzww, r3
     mul r0.yz, c2.y, v2.xxyw
-	mul r0.yz, r0, r21.x
+	mul r0.yz, r0, c221.x
     texld r4, r0.yzzw, s0
     add r4, r4.zwzw, c3.x
     mul r4, r0.w, r4
