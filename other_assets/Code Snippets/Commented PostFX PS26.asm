@@ -250,7 +250,7 @@
     mul_sat r0.x, r0.y, r0.x // with mul_sat r0.x, r0.y, c4.w if dof and stipple are removed
     mad r4.xyz, r5, r2.w, -r3
     mad r0.xyz, r0.x, r4, r3
-    cmp r0.xyz, r1.w, r3, r0
+    cmp r3.xyz, r1.w, r3, r0
     // cmp r0.xyz, -r0.w, r0, r1 disabled definition toggle
 	
 	// noise
@@ -260,7 +260,7 @@
     texld r1, r1, s3
     add r0.w, r1.z, c4.x
     mul r0.w, r0.w, c85.z
-    mad r0.xyz, r0.w, c6.x, r0
+    mad r3.xyz, r0.w, c6.x, r3
 	
     texld r1, c1.x, s5
     rcp r0.w, r1.x
@@ -274,7 +274,7 @@
     mul r2.xyz, r1, c81.z
     mul r2.xyz, r2, c2.x
     cmp r1.xyz, r1, r2, c1.x
-    mad r0.xyz, r0, c66.x, r1 // mul r0.xyz, r0, c66.x
+    mad r0.xyz, r3, c66.x, r1 // mul r0.xyz, r3, c66.x
 	
     mul r1.xyz, r0.w, r0
     dp3 r1.x, r1, c1.yzww

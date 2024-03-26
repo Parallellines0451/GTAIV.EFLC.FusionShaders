@@ -441,9 +441,7 @@
 		mul_sat r0.x, r0.y, r0.x
 		mad r4.xyz, r5, r2.w, -r3
 		mad r0.xyz, r0.x, r4, r3
-		cmp r0.xyz, r1.w, r3, r0
-	else
-		mov r0.xyz, r3
+		cmp r3.xyz, r1.w, r3, r0
 	endif
 	
 	// noise
@@ -457,7 +455,7 @@
 		texldl r1, r1, s3
 		add r0.w, r1.z, c4.x
 		mul r0.w, r0.w, c85.z
-		mad r0.xyz, r0.w, c6.x, r0
+		mad r3.xyz, r0.w, c6.x, r3
 	endif
 	
     texld r1, c1.x, s5
@@ -473,9 +471,9 @@
 		mul r2.xyz, r1, c81.z
 		mul r2.xyz, r2, c2.x
 		cmp r1.xyz, r1, r2, c1.x
-		mad r0.xyz, r0, c66.x, r1
+		mad r0.xyz, r3, c66.x, r1
 	else
-		mul r0.xyz, r0, c66.x
+		mul r0.xyz, r3, c66.x
 	endif
 	
     mul r1.xyz, r0.w, r0
