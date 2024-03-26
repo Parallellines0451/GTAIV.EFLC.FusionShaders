@@ -111,7 +111,7 @@
 	// ----------------------------------------------------- Improved Shadow Filter Constants -------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
-    def c112, 3, 7.13800001, 2, 0.3333333
+    def c112, 3, 7.13800001, 0.3333333, 0
     def c113, 0.75, -0.5, 0.5, 0
 	def c114, -1.25, 2, -2, 0 // c114-c117 = offsets for extra samples
 	def c115, 1.75, -1.5, 1.5, 0
@@ -157,12 +157,8 @@
     dp3 r0.x, c14, v4
     add r0.xyz, -r0.x, -c54
     cmp r0.yzw, r0.xxyz, c1.z, c1.w
-	// ---------------------------------------------------------------- Cascade Mask ----------------------------------------------------------------
-	mov r21.x, c110.y
-	mov r21.yzw, r0
-	add r21.xyz, r21.xyz, -r21.yzw
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
     mov r0.x, c1.z
+    mad r21, r0, c110.yyyw, -r0.yzww // shadow cascade mask
     dp4 r1.x, r0, c57
     dp4 r1.y, r0, c58
     dp4 r2.x, r0, c59
@@ -238,14 +234,14 @@
 	add r22, c54.w, -c54
 	add r22, c53.w, -r22 // cascade distances
 	rcp r23.x, r22.x
-	dp4 r23.y, r22, r21
+	dp4 r23.y, r22, r21_abs
 	rcp r23.y, r23.y
 	mul r20.z, r23.y, r22.x
 	mul r20.xy, c53.xy, r20.z // apply per cascade blur
 	mov r24, c122
 	add r24, r24, -c221.y
 	add_sat r24, c110.y, -r24_abs
-	m4x4 r25, r21, c118
+	m4x4 r25, r21_abs, c118
 	dp4 r20.w, r25, r24
 	mov r24, c110.ywww
 	add r0.z, r0.z, -r20.w // apply per cascade bias
@@ -300,17 +296,15 @@
     mul r21, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
 	mul r20.xy, r20.xy, c221.w			// compensate for FixCascadedShadowMapResolution
 	
-    mad r24.xy, r23.xy, r20.xy, r0.xy	// offset * texel size + UV
-    texld r24, r24, s15					// 1st sample
+    mad r23, r23, r20.xyxy, r0.xyxy		// offset * texel size + UV
+    mad r21, r21, r20.xyxy, r0.xyxy		// offset * texel size + UV
+    texld r24, r23.xy, s15				// 1st sample
     mov r25.x, r24.x					// copy to r25
-    mad r24.xy, r21.zw, r20.xy, r0.xy	// offset * texel size + UV
-    texld r24, r24, s15					// 2nd sample
+    texld r24, r21.zw, s15				// 2nd sample
     mov r25.y, r24.x					// copy to r25
-    mad r24.xy, r21.xy, r20.xy, r0.xy	// offset * texel size + UV
-    texld r24, r24, s15					// 3rd sample
+    texld r24, r21.xy, s15				// 3rd sample
     mov r25.z, r24.x					// copy to r25
-    mad r24.xy, r23.zw, r20.xy, r0.xy	// offset * texel size + UV
-    texld r24, r24, s15					// 4th sample
+    texld r24, r23.zw, s15				// 4th sample
     mov r25.w, r24.x					// copy to r25
 	add r25, r0.z, -r25					// depth bias
 	cmp r25, r25, c110.y, c110.w
@@ -319,17 +313,15 @@
     mul r23, r22.yxxy, c114.xxyz		// offsets for 5th and 8th samples, respectively
     mul r21, r22.yxxy, c115.xxyz        // offsets for 7th and 6th samples, respectively
 	
-    mad r24.xy, r23.xy, r20.xy, r0.xy	// offset * texel size + UV
-    texld r24, r24, s15					// 5th sample
+    mad r23, r23, r20.xyxy, r0.xyxy		// offset * texel size + UV
+    mad r21, r21, r20.xyxy, r0.xyxy		// offset * texel size + UV
+    texld r24, r23.xy, s15				// 5th sample
     mov r25.x, r24.x					// copy to r25
-    mad r24.xy, r21.zw, r20.xy, r0.xy	// offset * texel size + UV
-    texld r24, r24, s15					// 6th sample
+    texld r24, r21.zw, s15				// 6th sample
     mov r25.y, r24.x					// copy to r25
-    mad r24.xy, r21.xy, r20.xy, r0.xy	// offset * texel size + UV
-    texld r24, r24, s15					// 7th sample
+    texld r24, r21.xy, s15				// 7th sample
     mov r25.z, r24.x					// copy to r25
-    mad r24.xy, r23.zw, r20.xy, r0.xy	// offset * texel size + UV
-    texld r24, r24, s15					// 8th sample
+    texld r24, r23.zw, s15				// 8th sample
     mov r25.w, r24.x					// copy to r25
 	add r25, r0.z, -r25					// depth bias
 	cmp r25, r25, c110.y, c110.w
@@ -338,23 +330,21 @@
     mul r23, r22.yxxy, c116.xxyz		// offsets for 9th and 12th samples, respectively
     mul r21, r22.yxxy, c117.xxyz        // offsets for 11th and 10th samples, respectively
 	
-    mad r24.xy, r23.xy, r20.xy, r0.xy	// offset * texel size + UV
-    texld r24, r24, s15					// 9th sample
+    mad r23, r23, r20.xyxy, r0.xyxy		// offset * texel size + UV
+    mad r21, r21, r20.xyxy, r0.xyxy		// offset * texel size + UV
+    texld r24, r23.xy, s15				// 9th sample
     mov r25.x, r24.x					// copy to r25
-    mad r24.xy, r21.zw, r20.xy, r0.xy	// offset * texel size + UV
-    texld r24, r24, s15					// 10th sample
+    texld r24, r21.zw, s15				// 10th sample
     mov r25.y, r24.x					// copy to r25
-    mad r24.xy, r21.xy, r20.xy, r0.xy	// offset * texel size + UV
-    texld r24, r24, s15					// 11th sample
+    texld r24, r21.xy, s15				// 11th sample
     mov r25.z, r24.x					// copy to r25
-    mad r24.xy, r23.zw, r20.xy, r0.xy	// offset * texel size + UV
-    texld r24, r24, s15					// 12th sample
+    texld r24, r23.zw, s15				// 12th sample
     mov r25.w, r24.x					// copy to r25
 	add r25, r0.z, -r25					// depth bias
 	cmp r25, r25, c110.y, c110.w
 	dp4 r26.z, r25, -c110.x				// average
 	
-	dp3 r0.x, r26, c112.w
+	dp3 r0.x, r26, c112.z
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     add r0.yzw, c15.xxyz, -v4.xxyz
     dp3 r0.y, r0.yzww, r0.yzww
