@@ -2682,7 +2682,7 @@
 				</Item>
 				<Item>
 					<VertexShader>0</VertexShader>
-					<PixelShader>12</PixelShader>
+					<PixelShader>26</PixelShader>
 					<Params value="2" >
 						<Item>
 							<Type value="10" />
@@ -2710,7 +2710,7 @@
 				</Item>
 				<Item>
 					<VertexShader>0</VertexShader>
-					<PixelShader>14</PixelShader>
+					<PixelShader>26</PixelShader>
 					<Params value="2" >
 						<Item>
 							<Type value="10" />
@@ -2850,7 +2850,7 @@
 				</Item>
 				<Item>
 					<VertexShader>0</VertexShader>
-					<PixelShader>24</PixelShader>
+					<PixelShader>26</PixelShader>
 					<Params value="2" >
 						<Item>
 							<Type value="10" />
@@ -2906,7 +2906,7 @@
 				</Item>
 				<Item>
 					<VertexShader>0</VertexShader>
-					<PixelShader>28</PixelShader>
+					<PixelShader>26</PixelShader>
 					<Params value="2" >
 						<Item>
 							<Type value="10" />
