@@ -101,6 +101,7 @@
     mad r0.x, c77.y, -r0.y, r0.x
     rcp r0.x, r0.x
     mul r0.y, r0.z, r0.x
+	
     /* replace sampling code
     texld r1, v0, s2
     texld r2, v0, s4 // moved this instruction to bloom code
@@ -130,7 +131,6 @@
     rcp r1.w, r1.w
     cmp r7.xyz, -r1_abs.w, c1.x, r1
     replace sampling code */
-	
     mov r3, c4
     mad r4.xy, c76.xyxy, r3.xyxy, v0.xyxy
     mad r4.zw, c76.xyxy, r3.zxzx, v0.xyxy
@@ -142,7 +142,7 @@
     texld r5.xyz, r6.xy, s2
     texld r6.xyz, r6.zw, s2
 	
-	// depth of field CoC, remove for TBoGT
+	// depth of field CoC
     mad r1.w, r0.z, -r0.x, c78.w // cutscene
     mad r1.w, c78.y, -r3.w, r1.w // cutscene
     max r2.w, r1.w, c1.x // cutscene
@@ -160,6 +160,7 @@
     max r0.z, r0.x, r0.z // cutscene
     mul r1.w, r0.z, r0.z
 	
+	// stipple filter
     dp3 r0.x, r7, c1.yzww
     dp3 r8.x, r3, c1.yzww
     dp3 r8.y, r4, c1.yzww
@@ -170,8 +171,8 @@
     dp4 r2.w, r8, r8
     add r0.x, r0.x, -r0.z
     mad r0.x, r0.x, r0.x, -r2.w
-    // mul r0.z, r1.w, r1.w moved above and edited to simplify cutscene code removal
-    cmp r0.x, r0.x, c2.y, r1.w // for TBoGT: cmp r0.x, r0.x, c2.y, c2.w
+    // mul r0.z, r1.w, r1.w moved to CoC section
+    cmp r0.x, r0.x, c2.y, r1.w // replace with cmp r0.x, r0.x, c2.y, c2.w if dof is removed
     /* remove edge blur
     texld r8, v0, s0
     mov r8.yz, c2 // this is still used, readded below
@@ -191,13 +192,15 @@
     mad r7.xyz, r6, r9.w, r7
     mul r7.xyz, r0.z, r7
     remove edge blur */
-    add r0.z, -r0.x, c2.y
-    mul r1.w, r0.x, c2.x
+    add r0.z, -r0.x, c2.y // replace r0.x here
+    mul r1.w, r0.x, c2.x // and here with r1.w if the stipple filter is removed
     mul r3.xyz, r3, r1.w
     mad r3.xyz, r7, r0.z, r3
     mad r3.xyz, r4, r1.w, r3
     mad r3.xyz, r5, r1.w, r3
     mad r3.xyz, r6, r1.w, r3
+	
+	// motion blur
     mad r4.xyz, v0.yxyw, c5.x, c5.y
     mul r0.z, r4.y, c77.z
     mul r0.z, r0.y, r0.z
@@ -241,19 +244,16 @@
     dp2add r0.y, r0.yzzw, r0.yzzw, c1.x
     rsq r0.y, r0.y
     rcp r0.y, r0.y
-	
-	// affected by depth of field/dithering filter, replace with the comment if both are removed entirely (TBoGT also skips a few instructions, but it's effectively the same as this section)
-    mul r0.y, r0.y, c4.w
+    mul r0.y, r0.y, c4.w // replace these instructions
     add r0.x, r0.x, c2.y
     rcp r0.x, r0.x
-    mul_sat r0.x, r0.y, r0.x // mul_sat r0.x, r0.y, c4.w
-	
+    mul_sat r0.x, r0.y, r0.x // with mul_sat r0.x, r0.y, c4.w if dof and stipple are removed
     mad r4.xyz, r5, r2.w, -r3
     mad r0.xyz, r0.x, r4, r3
     cmp r0.xyz, r1.w, r3, r0
     // cmp r0.xyz, -r0.w, r0, r1 disabled definition toggle
 	
-	// noise, remove for non TLAD
+	// noise
     mov r1.zw, c0
     mad r1.xy, v0, r1.zwzw, c85
     frc r1.xy, r1
@@ -266,7 +266,7 @@
     rcp r0.w, r1.x
     mul r0.w, r0.w, c81.y
 	
-	// bloom, for TBoGT replace this entire section with the comment
+	// bloom, replace with the comment to remove
     rcp r1.x, r0.w
     mul r1.x, r1.x, c81.x
     texld r2, v0, s4
