@@ -72,7 +72,7 @@
 	def c10, 0.027843137254902, 0.0007843137254902, 0, 0 // 7.1, 0.2
 	def c11, 1.2, 0, 0, 0
 	
-	def c14, 0.25, 0.1290323, 0.000926, 0.000617
+	def c14, 0.0625, 0.0322581, 0.000926, 0.000617
 	def c15, -0.500, -1.500, -1.581, 0.012
 	def c16, -0.477, 1.507, 1.286, 0.920
 	def c17, 1.272, -0.939, -1.000, -3.000
@@ -161,8 +161,8 @@
 		
 		// new scalable blur
 		mov r20, c76.xyxy
-		mov r21.xyz, r7 // center
 		mul r20, r20, c44.y
+		mov r21.xyz, r7 // center
 		mov r21.w, c14.z
 		if_ge r21.w, c44.w // use two rings for 1080p and below, three for above
 			mul r20, r20, c14.z
@@ -315,6 +315,7 @@
 		add r24.xyz, r3, r4
 		add r24.xyz, r24, r5
 		add r24.xyz, r24, r6
+		mul r24.xyz, r24, c2.x
 	endif
 	
 	// stipple filter
@@ -383,9 +384,10 @@
 		cmp r0.x, -r20_abs.x, -c2.y, r0.x
 	endif
     cmp r0.x, r0.x, c2.y, r1.w
+	
+	// average
     add r0.z, -r0.x, c2.y
-    mul r1.w, r0.x, c2.x
-	mul r3.xyz, r24, r1.w
+	mul r3.xyz, r24, r0.x
 	mad r3.xyz, r7, r0.z, r3
 	
 	// motion blur

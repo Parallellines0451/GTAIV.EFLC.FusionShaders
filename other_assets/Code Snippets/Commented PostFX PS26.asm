@@ -192,15 +192,25 @@
     mad r7.xyz, r6, r9.w, r7
     mul r7.xyz, r0.z, r7
     remove edge blur */
-    add r0.z, -r0.x, c2.y // replace r0.x here
-    mul r1.w, r0.x, c2.x // and here with r1.w if the stipple filter is removed
+	
+	// average
+    add r0.z, -r0.x, c2.y // replace r0.x with r1.w if the stipple filter is removed
+	/* replace average code
+    mul r1.w, r0.x, c2.x
     mul r3.xyz, r3, r1.w
     mad r3.xyz, r7, r0.z, r3
     mad r3.xyz, r4, r1.w, r3
     mad r3.xyz, r5, r1.w, r3
     mad r3.xyz, r6, r1.w, r3
+	replace average code */
+	add r3.xyz, r3, r4
+	add r3.xyz, r3, r5
+	add r3.xyz, r3, r6
+	mul r3.xyz, r3, c2.x
+	mul r3.xyz, r3, r0.x // replace r0.x with r1.w if the stipple filter is removed
+	mad r3.xyz, r7, r0.z, r3
 	
-	// motion blur
+	// motion blur, add texld r3, v0, s2 if dof and stipple filter are removed
     mad r4.xyz, v0.yxyw, c5.x, c5.y
     mul r0.z, r4.y, c77.z
     mul r0.z, r0.y, r0.z
