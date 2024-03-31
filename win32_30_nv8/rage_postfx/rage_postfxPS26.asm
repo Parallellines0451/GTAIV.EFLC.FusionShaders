@@ -130,10 +130,8 @@
 	endif
 	
     mov r3, c4
-    mad r4.xy, c76.xyxy, r3.xyxy, v0.xyxy
-    mad r4.zw, c76.xyxy, r3.zxzx, v0.xyxy
-    mad r6.xy, c76.xyxy, r3.wzwz, v0.xyxy
-    mad r6.zw, c76.xyxy, r3.ywyw, v0.xyxy
+    mad r4, c76.xyxy, r3.xyzx, v0.xyxy
+    mad r6, c76.xyxy, r3.wzyw, v0.xyxy
     texld r7.xyz, v0, s2
     texld r3.xyz, r4.xy, s2
     texld r4.xyz, r4.zw, s2
@@ -330,13 +328,11 @@
     add r0.x, r0.x, -r0.z
     mad r0.x, r0.x, r0.x, -r2.w
 	if_ne r31.x, c223.z // Definition mask
-		mov r20, c2.w
 		mov r21, c76
 		
 		texld r22, v0, s7
 		add r23, r22.x, -c8
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
+		add_sat r20, -r23_abs, c10.y
 		add r23, r22.x, -c9
 		add_sat r23, -r23_abs, c10.y
 		add r20, r20, r23
@@ -344,8 +340,9 @@
 		add_sat r23.x, -r23_abs, c10.y
 		add r20.x, r20, r23
 		
-		mad r22.xy, r21, c2.yw, v0
-		texldl r22, r22, s7
+		mad r21, r21.xyxy, c2.yyww, v0.xyxy
+		
+		texldl r22, r21.xw, s7
 		add r23, r22.x, -c8
 		add_sat r23, -r23_abs, c10.y
 		add r20, r20, r23
@@ -356,8 +353,7 @@
 		add_sat r23.x, -r23_abs, c10.y
 		add r20.x, r20, r23
 		
-		mad r22.xy, r21, c2.wy, v0
-		texldl r22, r22, s7
+		texldl r22, r21.zy, s7
 		add r23, r22.x, -c8
 		add_sat r23, -r23_abs, c10.y
 		add r20, r20, r23
@@ -368,8 +364,7 @@
 		add_sat r23.x, -r23_abs, c10.y
 		add r20.x, r20, r23
 		
-		mad r22.xy, r21, c2.yy, v0
-		texldl r22, r22, s7
+		texldl r22, r21.xy, s7
 		add r23, r22.x, -c8
 		add_sat r23, -r23_abs, c10.y
 		add r20, r20, r23

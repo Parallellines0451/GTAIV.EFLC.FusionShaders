@@ -28,18 +28,16 @@
     dcl_2d s0
     rcp r1.x, v0.w
     mul r1.x, -r1.x, c0.x
-    mad r2.xy, r1.x, v0.yx, c0.x
-
+    mad r2.xy, r1.x, v0.xy, c0.x
     mul r3.xy, c44.yx, c44.z
-    texld r0, r2.yx, s0
-    mad r1.xy, r3.xy, c0.zz, r2.yx
-    texld r1, r1, s0
+
+    texld r0, r2.xy, s0
+    mad r2, r3.xyxy, c0.zzww, r2.xyxy
+    texld r1, r2.xw, s0
     add r0, r0, r1
-    mad r1.xy, r3.xy, c0.zw, r2.yx
-    texld r1, r1, s0
+    texld r1, r2.zy, s0
     add r0, r0, r1
-    mad r1.xy, r3.xy, c0.wz, r2.yx
-    texld r1, r1, s0
+    texld r1, r2.xy, s0
     add r0, r0, r1
 
     mul r0.xyz, r0.xyz, c0.y

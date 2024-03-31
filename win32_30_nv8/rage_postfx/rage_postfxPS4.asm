@@ -23,55 +23,47 @@
 	def c1, 0.5, 1.5, -1.5, -0.5
     dcl_texcoord v0.xy
     dcl_2d s0
-	mov r0, c72
+	mov r0, c72.xyxy
 	
-	mad r1.xy, r0, c1.xx, v0
-	texld r2, r1, s0
-	mad r1.xy, r0, c1.xy, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.xz, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.xw, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.yx, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.yy, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.yz, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.yw, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.zx, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.zy, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.zz, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.zw, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.wx, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.wy, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.wz, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
-	mad r1.xy, r0, c1.ww, v0
-	texld r1, r1, s0
-	add r2.x, r2.x, r1.x
+	mad r1, r0, c1.xxxy, v0.xyxy
+	texld r2, r1.xy, s0
+	texld r3, r1.zw, s0
+	add r2.x, r2.x, r3.x
+	mad r1, r0, c1.xzxw, v0.xyxy
+	texld r3, r1.xy, s0
+	add r2.x, r2.x, r3.x
+	texld r3, r1.zw, s0
+	add r2.x, r2.x, r3.x
+	mad r1, r0, c1.yxyy, v0.xyxy
+	texld r3, r1.xy, s0
+	add r2.x, r2.x, r3.x
+	texld r3, r1.zw, s0
+	add r2.x, r2.x, r3.x
+	mad r1, r0, c1.yzyw, v0.xyxy
+	texld r3, r1.xy, s0
+	add r2.x, r2.x, r3.x
+	texld r3, r1.zw, s0
+	add r2.x, r2.x, r3.x
+	mad r1, r0, c1.zxzy, v0.xyxy
+	texld r3, r1.xy, s0
+	add r2.x, r2.x, r3.x
+	texld r3, r1.zw, s0
+	add r2.x, r2.x, r3.x
+	mad r1, r0, c1.zzzw, v0.xyxy
+	texld r3, r1.xy, s0
+	add r2.x, r2.x, r3.x
+	texld r3, r1.zw, s0
+	add r2.x, r2.x, r3.x
+	mad r1, r0, c1.wxwy, v0.xyxy
+	texld r3, r1.xy, s0
+	add r2.x, r2.x, r3.x
+	texld r3, r1.zw, s0
+	add r2.x, r2.x, r3.x
+	mad r1, r0, c1.wzww, v0.xyxy
+	texld r3, r1.xy, s0
+	add r2.x, r2.x, r3.x
+	texld r3, r1.zw, s0
+	add r2.x, r2.x, r3.x
 	
 	mov r3, c0
 	cmp r3.x, -c222_abs.x, r3.y, r3.x // autoexposure toggle

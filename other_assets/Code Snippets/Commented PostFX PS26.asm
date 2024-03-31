@@ -132,10 +132,8 @@
     cmp r7.xyz, -r1_abs.w, c1.x, r1
     replace sampling code */
     mov r3, c4
-    mad r4.xy, c76.xyxy, r3.xyxy, v0.xyxy
-    mad r4.zw, c76.xyxy, r3.zxzx, v0.xyxy
-    mad r6.xy, c76.xyxy, r3.wzwz, v0.xyxy
-    mad r6.zw, c76.xyxy, r3.ywyw, v0.xyxy
+    mad r4, c76.xyxy, r3.xyzx, v0.xyxy
+    mad r6, c76.xyxy, r3.wzyw, v0.xyxy
     texld r7.xyz, v0, s2
     texld r3.xyz, r4.xy, s2
     texld r4.xyz, r4.zw, s2

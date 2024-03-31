@@ -107,8 +107,8 @@
     mad_sat r0.y, r0.z, -r0.y, c1.w
     mul r0.y, r0.y, r0.y
     mul r0.x, r0.x, r0.y
-    mul r0.x, r0.x, c77.w
-    mov oC0.w, r0.x // static shadow fix
+    mul oC0.w, r0.x, c77.w
+    // mul oC0.w, r0.x, c2.x
     mov oC0.xyz, c1.z
 	// ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------
 	if_ne v9.y, c127.y
