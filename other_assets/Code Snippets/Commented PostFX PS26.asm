@@ -155,6 +155,7 @@
     mul r0.z, r1.w, r0.z
     lrp r1.w, r0.z, c79.z, c79.y
     min r0.z, c79.z, r1.w
+    // max r1.w, r0.x, r0.z
     max r0.z, r0.x, r0.z // cutscene
     mul r1.w, r0.z, r0.z
 	
@@ -170,7 +171,8 @@
     add r0.x, r0.x, -r0.z
     mad r0.x, r0.x, r0.x, -r2.w
     // mul r0.z, r1.w, r1.w moved to CoC section
-    cmp r0.x, r0.x, c2.y, r1.w // replace with cmp r0.x, r0.x, c2.y, c2.w if dof is removed
+    // cmp r0.x, r0.x, c2.y, r0.z
+    cmp r0.x, r0.x, c2.y, r1.w // replace r1.w with c2.w if dof is removed
     /* remove edge blur
     texld r8, v0, s0
     mov r8.yz, c2 // this is still used, readded below
@@ -258,6 +260,7 @@
     mul_sat r0.x, r0.y, r0.x // with mul_sat r0.x, r0.y, c4.w if dof and stipple are removed
     mad r4.xyz, r5, r2.w, -r3
     mad r0.xyz, r0.x, r4, r3
+    // cmp r0.xyz, r1.w, r3, r0
     cmp r3.xyz, r1.w, r3, r0
     // cmp r0.xyz, -r0.w, r0, r1 disabled definition toggle
 	
@@ -268,6 +271,7 @@
     texld r1, r1, s3
     add r0.w, r1.z, c4.x
     mul r0.w, r0.w, c85.z
+    // mad r0.xyz, r0.w, c6.x, r0
     mad r3.xyz, r0.w, c6.x, r3
 	
     texld r1, c1.x, s5
@@ -282,6 +286,7 @@
     mul r2.xyz, r1, c81.z
     mul r2.xyz, r2, c2.x
     cmp r1.xyz, r1, r2, c1.x
+    // mad r0.xyz, r0, c66.x, r1
     mad r0.xyz, r3, c66.x, r1 // mul r0.xyz, r3, c66.x
 	
     mul r1.xyz, r0.w, r0
