@@ -65,7 +65,7 @@
     def c4, -0.5, -1.5, 1.5, 0.5
     def c5, 2, -1, 0.125, 0
     def c6, 1.10000002, 0, 0, 0
-    def c7, 256, 2, 4, 8
+    // def c7, 256, 2, 4, 8
     defi i0, 7, 0, 0, 0
     dcl_texcoord v0.xy
     dcl_2d s0
@@ -172,7 +172,7 @@
     mad r0.x, r0.x, r0.x, -r2.w
     // mul r0.z, r1.w, r1.w moved to CoC section
     // cmp r0.x, r0.x, c2.y, r0.z
-    cmp r0.x, r0.x, c2.y, r1.w // replace r1.w with c2.w if dof is removed
+    cmp r0.xz, r0.x, c2.yyww, r1.wwyy // replace r1 with c2 if dof is removed
     /* remove edge blur
     texld r8, v0, s0
     mov r8.yz, c2 // this is still used, readded below
@@ -194,7 +194,7 @@
     remove edge blur */
 	
 	// average
-    add r0.z, -r0.x, c2.y // replace r0.x with r1.w if the stipple filter is removed
+    add r0.z, -r0.x, c2.y // replace r0.x with r1.w if the stipple filter is removed, or comment if dof is removed
 	/* replace average code
     mul r1.w, r0.x, c2.x
     mul r3.xyz, r3, r1.w

@@ -382,7 +382,7 @@
 		dp4 r20.x, r20, c2.y
 		cmp r0.x, -r20_abs.x, -c2.y, r0.x
 	endif
-    cmp r0.x, r0.x, c2.y, r1.w
+    cmp r0.xz, r0.x, c2.yyww, r1.wwyy
 	
 	// average
     add r0.z, -r0.x, c2.y
