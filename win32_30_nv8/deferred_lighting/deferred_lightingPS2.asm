@@ -94,6 +94,9 @@
 	
 	def c120, 0, 0.25, 0.5, 0.75
 	def c121, 0.2499, 0.4999, 0.7499, 1
+	
+	def c122, -17, 6, 0.045, 0 // PCSS constants
+    defi i1, 6, 0, 0, 0
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     dcl_texcoord v0.xy
     dcl_texcoord1 v1
@@ -111,7 +114,7 @@
     mad r3.xy, r2.yzzw, -c1.w, r3
     mad r1.xyz, r1, c2.x, r3
     add r1.xyz, r1, c2.y
-    nrm r30.xyz, r1
+    nrm r31.xyz, r1
     texld r0, v0, s4
 	// ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
 	if_ne r0.x, c127.y
@@ -151,9 +154,9 @@
     rsq r0.y, r0.y
     rcp r0.y, r0.y
     add r1.xyz, r1, c63.xyww
-    mul r20.xyz, r30.y, c61.xyww
-    mad r20.xyz, r30.x, c60.xyww, r20
-    mad r20.xyz, r30.z, c62.xyww, r20
+    mul r20.xyz, r31.y, c61.xyww
+    mad r20.xyz, r31.x, c60.xyww, r20
+    mad r20.xyz, r31.z, c62.xyww, r20
     mad r1.xyz, r20, c99.x, r1 // normal offset bias
     mad r0.zw, r1.xyxy, r2.xyxy, r3.xyxy
     /* removed 1.0.6.0 filter
@@ -225,18 +228,18 @@
 	dp4 r23.y, r21_abs, r22.xxyz
 	add r23.z, r0.y, -r23.y
 	dp4 r23.w, r21_abs, c119.xxyz
-	mul_sat r23.z, r23.z, r23.w
-	rcp r23.x, r23.x
-	mul r23.y, r23.x, r23.y
-	lrp r20.z, r23.z, c110.y, r23.y
-	mul r20.xy, c53.xy, r20.z // apply pseudo cascade blending
+	mul_sat r22.y, r23.z, r23.w
+	rcp r23.w, r23.x
+	mul r22.z, r23.w, r23.y
+	lrp r23.y, r22.y, c110.y, r22.z
+	mul r20.xy, c53.xy, r23.y // apply pseudo cascade blending
 	
 	mov r24, c118
 	add r24, r24, -c221.y
 	add_sat r24, c110.y, -r24_abs
 	m4x4 r25, r21_abs, c114
-	dp4 r20.w, r25, r24
-	add r1.z, r1.z, -r20.w // apply per cascade bias
+	dp4 r24.x, r25, r24
+	add r1.z, r1.z, -r24.x // apply per cascade bias
 	
 	dp4 r20.z, r21_abs, c120 // UV clamp
 	dp4 r20.w, r21_abs, c121
@@ -288,7 +291,7 @@
     add r1.xyz, r1, c2.y
     nrm r2.xyz, r1
     moved normal */
-    mov r2.xyz, r30.xyz
+    mov r2.xyz, r31.xyz
     mad r1.xyz, v1, -r0.x, c3.w
 	// ----------------------------------------------------------- Console Tree Lighting ------------------------------------------------------------
 	texld r21, v0, s5

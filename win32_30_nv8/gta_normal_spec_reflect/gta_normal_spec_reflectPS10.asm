@@ -108,6 +108,9 @@
 	
 	def c120, 0, 0.25, 0.5, 0.75
 	def c121, 0.2499, 0.4999, 0.7499, 1
+	
+	def c122, -17, 6, 0.045, 0 // PCSS constants
+    defi i1, 6, 0, 0, 0
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 5.7593366884e-43 // 411
     def c99, 0.1, 0, 0, 0 // normal offset bias magnitude
@@ -303,18 +306,18 @@
 	dp4 r23.y, r21_abs, r22.xxyz
 	add r23.z, r3.w, -r23.y
 	dp4 r23.w, r21_abs, c119.xxyz
-	mul_sat r23.z, r23.z, r23.w
-	rcp r23.x, r23.x
-	mul r23.y, r23.x, r23.y
-	lrp r20.z, r23.z, c110.y, r23.y
-	mul r20.xy, c53.xy, r20.z // apply pseudo cascade blending
+	mul_sat r22.y, r23.z, r23.w
+	rcp r23.w, r23.x
+	mul r22.z, r23.w, r23.y
+	lrp r23.y, r22.y, c110.y, r22.z
+	mul r20.xy, c53.xy, r23.y // apply pseudo cascade blending
 	
 	mov r24, c118
 	add r24, r24, -c221.y
 	add_sat r24, c110.y, -r24_abs
 	m4x4 r25, r21_abs, c114
-	dp4 r20.w, r25, r24
-	add r6.z, r6.z, -r20.w // apply per cascade bias
+	dp4 r24.x, r25, r24
+	add r6.z, r6.z, -r24.x // apply per cascade bias
 	
 	dp4 r20.z, r21_abs, c120 // UV clamp
 	dp4 r20.w, r21_abs, c121

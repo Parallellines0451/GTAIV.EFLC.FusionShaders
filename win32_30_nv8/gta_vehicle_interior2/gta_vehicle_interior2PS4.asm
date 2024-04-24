@@ -100,6 +100,9 @@
 	
 	def c120, 0, 0.25, 0.5, 0.75
 	def c121, 0.2499, 0.4999, 0.7499, 1
+	
+	def c122, -17, 6, 0.045, 0 // PCSS constants
+    defi i1, 6, 0, 0, 0
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 9.1925179260e-43 // 656
     def c99, 0.1, 0, 0, 0 // normal offset bias magnitude
@@ -128,7 +131,7 @@
     dcl_2d s1
     dcl_2d s15
     add r1.xyz, c0.x, v1
-    nrm r30.xyz, r1
+    nrm r31.xyz, r1
     dp3 r0.x, c14, v4
     add r0.xyz, -r0.x, -c54
     cmp r0.yzw, r0.xxyz, c1.z, c1.w
@@ -142,9 +145,9 @@
     mad r0.xyz, v4.x, c60.xyww, r0
     mad r0.xyz, v4.z, c62.xyww, r0
     add r0.xyz, r0, c63.xyww
-    mul r20.xyz, r30.y, c61.xyww
-    mad r20.xyz, r30.x, c60.xyww, r20
-    mad r20.xyz, r30.z, c62.xyww, r20
+    mul r20.xyz, r31.y, c61.xyww
+    mad r20.xyz, r31.x, c60.xyww, r20
+    mad r20.xyz, r31.z, c62.xyww, r20
     mad r0.xyz, r20, c99.x, r0 // normal offset bias
     mad r0.xy, r0, r1, r2
     /* removed 1.0.6.0 filter
@@ -216,18 +219,18 @@
 	dp4 r23.y, r21_abs, r22.xxyz
 	add r23.z, r0.y, -r23.y
 	dp4 r23.w, r21_abs, c119.xxyz
-	mul_sat r23.z, r23.z, r23.w
-	rcp r23.x, r23.x
-	mul r23.y, r23.x, r23.y
-	lrp r20.z, r23.z, c110.y, r23.y
-	mul r20.xy, c53.xy, r20.z // apply pseudo cascade blending
+	mul_sat r22.y, r23.z, r23.w
+	rcp r23.w, r23.x
+	mul r22.z, r23.w, r23.y
+	lrp r23.y, r22.y, c110.y, r22.z
+	mul r20.xy, c53.xy, r23.y // apply pseudo cascade blending
 	
 	mov r24, c118
 	add r24, r24, -c221.y
 	add_sat r24, c110.y, -r24_abs
 	m4x4 r25, r21_abs, c114
-	dp4 r20.w, r25, r24
-	add r0.z, r0.z, -r20.w // apply per cascade bias
+	dp4 r24.x, r25, r24
+	add r0.z, r0.z, -r24.x // apply per cascade bias
 	
 	dp4 r20.z, r21_abs, c120 // UV clamp
 	dp4 r20.w, r21_abs, c121
@@ -277,7 +280,7 @@
     add r1.xyz, c0.x, v1
     nrm r2.xyz, r1
     moved normal */
-    mov r2.xyz, r30.xyz
+    mov r2.xyz, r31.xyz
     dp3 r1.x, r2, -c17
     add r1.x, r1.x, c0.w
     mul_sat r1.x, r1.x, c2.z
