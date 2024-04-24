@@ -63,23 +63,19 @@
 	// ----------------------------------------------------- Improved Shadow Filter Constants -------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
-    def c112, 3, 7.13800001, 0.3333333, 0
+    def c112, 3, 7.13800001, 0, 0
     def c113, 0.75, -0.5, 0.5, 0
-	def c114, -1.25, 2, -2, 0 // c114-c117 = offsets for extra samples
-	def c115, 1.75, -1.5, 1.5, 0
-	def c116, -2.25, 3, -3, 0
-	def c117, 2.75, -2.5, 2.5, 0
 	
-    def c118, 0.1, 0.22, 0.5, 0.8 // c118-c121 = biases for each cascade of each quality setting
-    def c119, 0.22, 0.42, 1.07, 1.22
-    def c120, 0.28, 0.53, 0.98, 1.08
-    def c121, 0.5, 0.8, 1.35, 1.5
+    def c114, 0.1, 0.22, 0.5, 0.8 // c114-c117 = biases for each cascade of each quality setting
+    def c115, 0.22, 0.42, 1.07, 1.22
+    def c116, 0.28, 0.53, 0.98, 1.08
+    def c117, 0.5, 0.8, 1.35, 1.5
 	
-	def c122, 4, 3, 2, 1 // quality ID's
-	def c123, 0.16, 0.08, 0.04, 0 // 1/blend_distance
+	def c118, 4, 3, 2, 1 // quality ID's
+	def c119, 0.16, 0.08, 0.04, 0 // 1/blend_distance
 	
-	def c124, 0, 0.25, 0.5, 0.75
-	def c125, 0.2499, 0.4999, 0.7499, 1
+	def c120, 0, 0.25, 0.5, 0.75
+	def c121, 0.2499, 0.4999, 0.7499, 1
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 4.3440252394e-43 // 310
     def c99, 0.1, 0, 0, 0 // normal offset bias magnitude
@@ -253,22 +249,22 @@
 	dp4 r23.x, r21_abs, r22
 	dp4 r23.y, r21_abs, r22.xxyz
 	add r23.z, r2.w, -r23.y
-	dp4 r23.w, r21_abs, c123.xxyz
+	dp4 r23.w, r21_abs, c119.xxyz
 	mul_sat r23.z, r23.z, r23.w
 	rcp r23.x, r23.x
 	mul r23.y, r23.x, r23.y
 	lrp r20.z, r23.z, c110.y, r23.y
 	mul r20.xy, c53.xy, r20.z // apply pseudo cascade blending
 	
-	mov r24, c122
+	mov r24, c118
 	add r24, r24, -c221.y
 	add_sat r24, c110.y, -r24_abs
-	m4x4 r25, r21_abs, c118
+	m4x4 r25, r21_abs, c114
 	dp4 r20.w, r25, r24
 	add r2.z, r2.z, -r20.w // apply per cascade bias
 	
-	dp4 r20.z, r21_abs, c124 // UV clamp
-	dp4 r20.w, r21_abs, c125
+	dp4 r20.z, r21_abs, c120 // UV clamp
+	dp4 r20.w, r21_abs, c121
 	
     mov r21.xy, c112.xy
     dp2add r21.y, vPos, r21, c110.w		// v0.x * r21.x + v0.y * r21.y
@@ -278,15 +274,14 @@
     sincos r22.xy, r21.y				// cosine & sine of r21.y
     mul r23, r22.yxxy, c110.xxyz		// offsets for 1st and 4th samples, respectively
     mul r21, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
-	
+	mul r20.xy, r20.xy, c112.x			// blur factor
     mad r23, r23, r20.xyxy, r2.xyxy		// offset * texel size + UV
     mad r21, r21, r20.xyxy, r2.xyxy		// offset * texel size + UV
 	max r23.xz, r23, r20.z				// fix pixels leaking from one cascade to the other
 	min r23.xz, r23, r20.w
 	max r21.xz, r21, r20.z
 	min r21.xz, r21, r20.w
-    texld r24, r23.xy, s15				// 1st sample
-    mov r25.x, r24.x					// copy to r25
+    texld r25, r23.xy, s15				// 1st sample
     texld r24, r21.zw, s15				// 2nd sample
     mov r25.y, r24.x					// copy to r25
     texld r24, r21.xy, s15				// 3rd sample
@@ -295,51 +290,7 @@
     mov r25.w, r24.x					// copy to r25
 	add r25, r2.z, -r25					// depth bias
 	cmp r25, r25, c110.y, c110.w
-	dp4 r26.x, r25, -c110.x				// average
-	
-    mul r23, r22.yxxy, c114.xxyz		// offsets for 5th and 8th samples, respectively
-    mul r21, r22.yxxy, c115.xxyz        // offsets for 7th and 6th samples, respectively
-	
-    mad r23, r23, r20.xyxy, r2.xyxy		// offset * texel size + UV
-    mad r21, r21, r20.xyxy, r2.xyxy		// offset * texel size + UV
-	max r23.xz, r23, r20.z				// fix pixels leaking from one cascade to the other
-	min r23.xz, r23, r20.w
-	max r21.xz, r21, r20.z
-	min r21.xz, r21, r20.w
-    texld r24, r23.xy, s15				// 5th sample
-    mov r25.x, r24.x					// copy to r25
-    texld r24, r21.zw, s15				// 6th sample
-    mov r25.y, r24.x					// copy to r25
-    texld r24, r21.xy, s15				// 7th sample
-    mov r25.z, r24.x					// copy to r25
-    texld r24, r23.zw, s15				// 8th sample
-    mov r25.w, r24.x					// copy to r25
-	add r25, r2.z, -r25					// depth bias
-	cmp r25, r25, c110.y, c110.w
-	dp4 r26.y, r25, -c110.x				// average
-	
-    mul r23, r22.yxxy, c116.xxyz		// offsets for 9th and 12th samples, respectively
-    mul r21, r22.yxxy, c117.xxyz        // offsets for 11th and 10th samples, respectively
-	
-    mad r23, r23, r20.xyxy, r2.xyxy		// offset * texel size + UV
-    mad r21, r21, r20.xyxy, r2.xyxy		// offset * texel size + UV
-	max r23.xz, r23, r20.z				// fix pixels leaking from one cascade to the other
-	min r23.xz, r23, r20.w
-	max r21.xz, r21, r20.z
-	min r21.xz, r21, r20.w
-    texld r24, r23.xy, s15				// 9th sample
-    mov r25.x, r24.x					// copy to r25
-    texld r24, r21.zw, s15				// 10th sample
-    mov r25.y, r24.x					// copy to r25
-    texld r24, r21.xy, s15				// 11th sample
-    mov r25.z, r24.x					// copy to r25
-    texld r24, r23.zw, s15				// 12th sample
-    mov r25.w, r24.x					// copy to r25
-	add r25, r2.z, -r25					// depth bias
-	cmp r25, r25, c110.y, c110.w
-	dp4 r26.z, r25, -c110.x				// average
-	
-	dp3 r2.x, r26, c112.z
+	dp4 r2.x, r25, -c110.x				// average
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     add r2.x, r2.x, r3.y // mad r2.x, r2.x, c2.z, r3.y 1.0.6.0 filter average
     add r2.y, r2.w, -c53.w
