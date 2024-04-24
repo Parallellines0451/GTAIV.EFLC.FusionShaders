@@ -16,11 +16,9 @@
     mul r21, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
 	mov r20.xy, c53.xy					// copy texel size
 	mul r20.xy, r20.xy, c112.x			// blur factor
-	
     mad r23, r23, r20.xyxy, r0.zwzw		// offset * texel size + UV
     mad r21, r21, r20.xyxy, r0.zwzw		// offset * texel size + UV
-    texld r24, r23.xy, s15				// 1st sample
-    mov r25.x, r24.x					// copy to r25
+    texld r25, r23.xy, s15				// 1st sample
     texld r24, r21.zw, s15				// 2nd sample
     mov r25.y, r24.x					// copy to r25
     texld r24, r21.xy, s15				// 3rd sample
