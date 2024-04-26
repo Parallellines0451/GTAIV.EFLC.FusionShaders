@@ -30,9 +30,8 @@
     ps_3_0
     def c151, 0.9999, 0.012156862745098, 0, 0 // Dithering Mask constants
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 6.3058430895e-43 // 450
-    def c152, 0.2, 0.6, 0.8, 0.4
-    def c153, -2, 2, 1, 0
-    def c154, 0.5, 0, 0, 0
+    def c152, 0.2, 0.6, 0.8, 0.4 // c152-c153 = new stipple constants
+    def c153, 0.5, 2, 1, 0
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 9.99999975e-006, 0, 1, -0.125
     def c1, 0.176470593, -1, -0, -0.5
@@ -76,11 +75,11 @@
     cmp r4, r0.w, c1.y, c1.z
     texkill r4
     removed alpha threshold */
-    mul r20.xy, vPos.xy, c154.x
+    mul r20.xy, vPos.xy, c153.x
     frc r20.xy, r20.xy
-    mad r20, r20.xxyy, c153.xyxy, c153.zwzw
+    mad r20, r20.xxyy, -c153.y, c153.zwzw
     mul r20, r20.xxyy, r20.zwzw
-    dp4 r20.x, r20, c152
+    dp4 r20.x, r20_abs, c152
     add r20.y, -r20.x, r1.x
     texkill r20.y
     add r1.yz, r2, c1.w

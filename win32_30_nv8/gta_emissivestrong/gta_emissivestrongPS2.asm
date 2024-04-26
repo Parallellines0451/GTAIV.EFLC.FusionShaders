@@ -23,9 +23,8 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 2.6904930515e-43 // 192
-    def c152, 0.2, 0.6, 0.8, 0.4
-    def c153, -2, 2, 1, 0
-    def c154, 0.5, 0, 0, 0
+    def c152, 0.2, 0.6, 0.8, 0.4 // c152-c153 = new stipple constants
+    def c153, 0.5, 2, 1, 0
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, 0, -1, -0, 0
@@ -52,14 +51,14 @@
     cmp r0, -r0.y, c1.y, c1.z
     texkill r0
     removed stipple */
-    mul r20.xy, vPos.xy, c154.x
+    mul r20.xy, vPos.xy, c153.x
     frc r20.xy, r20.xy
-    mad r20, r20.xxyy, c153.xyxy, c153.zwzw
+    mad r20, r20.xxyy, -c153.y, c153.zwzw
     mul r20, r20.xxyy, r20.zwzw
     mov r21.x, c39.x
-    add r21.x, r21.x, -c154.x
+    add r21.x, r21.x, -c153.x
     cmp r21, r21.x, c152, c152.zwxy
-    dp4 r20.x, r20, r21
+    dp4 r20.x, r20_abs, r21
     add r20.y, -r20.x, c39.x
     texkill r20.y
     texld r0, v0, s0

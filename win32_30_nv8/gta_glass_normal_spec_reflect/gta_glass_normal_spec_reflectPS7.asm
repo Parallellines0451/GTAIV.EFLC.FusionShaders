@@ -35,9 +35,8 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 3.2369994526e-43 // 231
-    def c152, 0.2, 0.6, 0.8, 0.4
-    def c153, -2, 2, 1, 0
-    def c154, 0.5, 0, 0, 0
+    def c152, 0.2, 0.6, 0.8, 0.4 // c152-c153 = new stipple constants
+    def c153, 0.5, 2, 1, 0
     def c0, -512, 3.99600005, 4, 0.125
     def c1, 9.99999975e-006, -0.5, 0.5, 1.33333337
     def c2, 9.99999975e-005, 64, 0, 0
@@ -68,11 +67,11 @@
     cmp r0, -r0.y, c3.z, c3.w
     texkill r0
     removed stipple */
-    mul r20.xy, vPos.xy, c154.x
+    mul r20.xy, vPos.xy, c153.x
     frc r20.xy, r20.xy
-    mad r20, r20.xxyy, c153.xyxy, c153.zwzw
+    mad r20, r20.xxyy, -c153.y, c153.zwzw
     mul r20, r20.xxyy, r20.zwzw
-    dp4 r20.x, r20, c152
+    dp4 r20.x, r20_abs, c152
     add r20.y, -r20.x, c39.x
     texkill r20.y
     texld r0, v0, s0
