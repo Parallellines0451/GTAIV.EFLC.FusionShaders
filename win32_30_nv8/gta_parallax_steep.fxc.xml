@@ -644,16 +644,11 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_parallax_steep\gta_parallax_steepPS3.asm</File>
-				<Variables value="10" >
+				<Variables value="9" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
 						<Index value="1" />
-					</Item>
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>

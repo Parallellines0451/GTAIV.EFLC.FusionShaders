@@ -659,7 +659,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_normal_spec_cubemap_reflect\gta_normal_spec_cubemap_reflectPS3.asm</File>
-				<Variables value="13" >
+				<Variables value="12" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -674,11 +674,6 @@
 						<Type>sampler</Type>
 						<Name>SpecSampler</Name>
 						<Index value="2" />
-					</Item>
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>

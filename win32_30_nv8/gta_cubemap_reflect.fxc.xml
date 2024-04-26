@@ -629,16 +629,11 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_cubemap_reflect\gta_cubemap_reflectPS3.asm</File>
-				<Variables value="7" >
+				<Variables value="6" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>EnvironmentSampler</Name>
 						<Index value="1" />
-					</Item>
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>

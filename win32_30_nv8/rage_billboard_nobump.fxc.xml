@@ -54,9 +54,9 @@
 				<File>rage_billboard_nobump\rage_billboard_nobumpPS1.asm</File>
 				<Variables value="4" >
 					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
+						<Type>float4</Type>
+						<Name>g_ImposterSize</Name>
+						<Index value="66" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>
