@@ -38,10 +38,8 @@
     // mul r1.x, r0.w, c39.x
 	mov r22.x, c223.z
 	if_eq r22.x, c2.x
-		add r22.y, -r0.w, c1.w
-		cmp r22.y, r22.y, c0.y, c0.z
-		add r0.w, r22.y, -c0.y
-		texkill r22.y
+		add r22.y, r0.w, -c1.w
+		cmp r0.w, r22.y, -c0.y, c0.z
 		mul r1.x, r0.w, c39.x
 		mov r22.x, c39.x
 	else

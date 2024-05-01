@@ -45,10 +45,8 @@
 	add r21.x, r21.x, -c207.x
 	cmp r22.xy, -r21_abs.x, r22.xz, r22.yw
 	if_eq r22.x, c3.x
-		add r22.y, -r0.w, r22.y
-		cmp r22.y, r22.y, c1.y, c1.x
-		add r0.w, r22.y, -c1.y
-		texkill r22.y
+		add r22.y, r0.w, -r22.y
+		cmp r0.w, r22.y, -c1.y, c1.x
 		mul r0.w, r0.w, c39.x
 		mov r22.x, c39.x
 	else
