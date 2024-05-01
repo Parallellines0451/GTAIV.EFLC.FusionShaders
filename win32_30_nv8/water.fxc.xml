@@ -97,7 +97,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>water\waterPS2.asm</File>
-				<Variables value="25" >
+				<Variables value="26" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>DepthBufferSampler</Name>

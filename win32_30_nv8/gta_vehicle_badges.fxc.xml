@@ -252,7 +252,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_badges\gta_vehicle_badgesPS2.asm</File>
-				<Variables value="52" >
+				<Variables value="53" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -518,7 +523,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_badges\gta_vehicle_badgesPS3.asm</File>
-				<Variables value="28" >
+				<Variables value="29" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -664,7 +674,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_badges\gta_vehicle_badgesPS4.asm</File>
-				<Variables value="40" >
+				<Variables value="41" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>

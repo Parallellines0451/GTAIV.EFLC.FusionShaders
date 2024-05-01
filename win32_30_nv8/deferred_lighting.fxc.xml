@@ -874,7 +874,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingPS1.asm</File>
-				<Variables value="24" >
+				<Variables value="25" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>GBufferStencilTextureSampler</Name>
@@ -1000,7 +1005,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingPS2.asm</File>
-				<Variables value="24" >
+				<Variables value="25" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>float4</Type>
 						<Name>globalScreenSize</Name>
@@ -1847,7 +1857,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingPS14.asm</File>
-				<Variables value="20" >
+				<Variables value="21" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>GBufferStencilTextureSampler</Name>
@@ -1953,7 +1968,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingPS15.asm</File>
-				<Variables value="18" >
+				<Variables value="19" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>GBufferTextureSampler0</Name>
@@ -2140,7 +2160,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingPS17.asm</File>
-				<Variables value="22" >
+				<Variables value="23" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>GBufferTextureSampler0</Name>

@@ -324,7 +324,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_interior\gta_vehicle_interiorPS2.asm</File>
-				<Variables value="50" >
+				<Variables value="51" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -580,7 +585,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_interior\gta_vehicle_interiorPS3.asm</File>
-				<Variables value="26" >
+				<Variables value="27" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -716,7 +726,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_interior\gta_vehicle_interiorPS4.asm</File>
-				<Variables value="38" >
+				<Variables value="39" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>

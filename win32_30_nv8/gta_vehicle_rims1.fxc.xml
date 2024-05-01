@@ -204,7 +204,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_rims1\gta_vehicle_rims1PS2.asm</File>
-				<Variables value="54" >
+				<Variables value="55" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
@@ -480,7 +485,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_rims1\gta_vehicle_rims1PS3.asm</File>
-				<Variables value="30" >
+				<Variables value="31" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
@@ -636,7 +646,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_rims1\gta_vehicle_rims1PS4.asm</File>
-				<Variables value="42" >
+				<Variables value="43" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
