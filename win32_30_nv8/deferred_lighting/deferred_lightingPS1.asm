@@ -73,10 +73,11 @@
     def c11, 0.962339997, -0.194983006, 0.473434001, -0.480026007
     def c12, -0.69591397, 0.457136989, -0.203345001, 0.620715976
     def c13, -0.326211989, -0.405809999, -0.840143979, -0.0735799968
-	def c20, 1.6666667, 0.212500006, 0.715399981, 0.0720999986	// Reflection intensity multiplier
+	def c20, 1.6666667, 0, 0, 0	// Reflection intensity multiplier
 	def c21, 3, 2, 1, 0	// Console tree lighting constants
-	def c22, 0.012156862745098, 0.023921568627451, 0.027843137254902, 0 // 3.1, 6.1, 7.1
-	def c23, 0.35, 0.5, 0, 0.0007843137254902
+	def c22, 0.012156862745098, 0.023921568627451, 0.027843137254902, 0 // 3.1, 6.1, 7.1, 0.0
+	def c23, 0.0007843137254902, 0, 0, 0 // 0.2
+    def c24, 0.212500006, 0.715399981, 0.0720999986, 0.35
 	// ----------------------------------------------------- Improved Shadow Filter Constants -------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
@@ -412,7 +413,7 @@
 	// ----------------------------------------------------------- Console Tree Lighting ------------------------------------------------------------
 	texld r21, v0, s6
 	add r21.yz, r21.x, -c22
-	add_sat r21.yz, -r21_abs, c23.w
+	add_sat r21.yz, -r21_abs, c23.x
 	add r21.x, r21.y, r21.z
 	mov r21.y, c223.x
 	add r21.y, r21.y, -c21.y
@@ -467,16 +468,14 @@
 		mul r0.xzw, r0, r1.x
 		dp3 r1.x, r2, -c17
 		mad_sat r1.y, r2.z, c4.x, c4.y
-		mov r10, c38
-		mov r11, c37
-		if_ne -r21_abs.x, c3.y // Tree orange glow fix
-			dp3 r12.x, r10, c20.yzw
-			dp3 r12.y, r11, c20.yzw
-			lrp r10, c23.x, r10, r12.x
-			lrp r11, c23.y, r11, r12.y
-		endif
-		mov r2.xyz, r10
-		mad r1.yzw, r2.xxyz, r1.y, r11.xxyz
+		mov r2.xyz, c38
+		mad r1.yzw, r2.xxyz, r1.y, c37.xxyz
+		
+		mul r21.x, r21.x, c223.x
+		dp3 r10.x, r1.yzw, c24
+		lrp r11.yzw, c24.w, r1, r10.x
+		cmp r1.yzw, -r21_abs.x, r1, r11 // Tree orange glow tweak
+		
 		mul r1.yzw, r4.z, r1
 		add r1.x, r1.x, -c1.x
 		mul_sat r1.x, r1.x, c2.x

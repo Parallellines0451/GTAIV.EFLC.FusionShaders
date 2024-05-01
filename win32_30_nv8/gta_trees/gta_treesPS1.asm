@@ -85,7 +85,8 @@
     mad oC1, v1.xyzx, c1.wwwx, c1.wwwz
     mov oC2, c1.xwwx
     mov r1.x, c1.w
-    cmp oC2.z, -c223.x, r1.x, v2.x
+    min r1.y, v2.x, c1.w
+    cmp oC2.z, -c223_abs.x, r1.x, r1.y
     mov oC3, c2.xwww
 	// -------------------------------------------------------------- Dithering Mask ----------------------------------------------------------------
 	if_lt r22.x, c151.x

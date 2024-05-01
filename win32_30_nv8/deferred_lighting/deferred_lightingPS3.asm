@@ -45,10 +45,11 @@
     def c2, 256, -127.999992, 9.99999975e-006, 1.33333337
     def c3, -0.5, 0.5, 0.0199999996, 0.00999999978
     def c4, 0.75, 0.25, 5, 10
-	def c20, 1.6666667, 0.212500006, 0.715399981, 0.0720999986	// Reflection intensity multiplier
+	def c20, 1.6666667, 0, 0, 0	// Reflection intensity multiplier
 	def c21, 3, 2, 1, 0	// Console tree lighting constants
-	def c22, 0.012156862745098, 0.023921568627451, 0.027843137254902, 0 // 3.1, 6.1, 7.1
-	def c23, 0.35, 0.5, 0, 0.0007843137254902
+	def c22, 0.012156862745098, 0.023921568627451, 0.027843137254902, 0 // 3.1, 6.1, 7.1, 0.0
+	def c23, 0.0007843137254902, 0, 0, 0 // 0.2
+    def c24, 0.212500006, 0.715399981, 0.0720999986, 0.35
     dcl_texcoord v0.xy
     dcl_texcoord1 v1
     dcl_2d s0
@@ -60,7 +61,7 @@
 	
 	texld r21, v0, s6
 	add r21.yz, r21.x, -c22
-	add_sat r21.yz, -r21_abs, c23.w
+	add_sat r21.yz, -r21_abs, c23.x
 	add r21.x, r21.y, r21.z
 	mov r21.y, c223.x
 	add r21.y, r21.y, -c21.y
@@ -138,16 +139,14 @@
 		dp3 r1.x, r1, -c17
 		add r1.x, r1.x, -c1.w
 		mul_sat r1.x, r1.x, c2.w
-		mov r10, c38
-		mov r11, c37
-		if_ne -r21_abs.x, c0.w // Tree orange glow fix
-			dp3 r12.x, r10, c20.yzw
-			dp3 r12.y, r11, c20.yzw
-			lrp r10, c23.x, r10, r12.x
-			lrp r11, c23.y, r11, r12.y
-		endif
-		mov r2.xyz, r10
-		mad r1.yzw, r2.xxyz, r0.w, r11.xxyz
+		mov r2.xyz, c38
+		mad r1.yzw, r2.xxyz, r0.w, c37.xxyz
+		
+		mul r21.x, r21.x, c223.x
+		dp3 r10.x, r1.yzw, c24
+		lrp r11.yzw, c24.w, r1, r10.x
+		cmp r1.yzw, -r21_abs.x, r1, r11 // Tree orange glow tweak
+		
 		mul r1.yzw, r3.z, r1
 		mul r2.xyz, c18.w, c18
 		mad r1.xyz, r2, r1.x, r1.yzww
