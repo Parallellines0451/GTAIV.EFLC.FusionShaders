@@ -18,7 +18,7 @@
 //
 
     ps_3_0
-    def c151, 0.9999, 0.012156862745098, 0, 0 // Dithering Mask constants
+    def c151, 0.7999, 0.012156862745098, 0, 0 // Dithering Mask constants
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.1350517561e-43 // 81
     def c152, 0.2, 0.6, 0.8, 0.4 // c152-c153 = new stipple constants
     def c153, 0.5, 2, 1, 0
@@ -35,18 +35,13 @@
     dcl_2d s0
     texld r0, v0, s0
     // mul r0.w, r0.w, v2.w disabled vertex alpha
-    // mul r1.x, r0.w, c39.x
 	mov r22.x, c223.z
 	if_eq r22.x, c2.x
 		add r22.y, r0.w, -c1.w
 		cmp r0.w, r22.y, -c0.y, c0.z
-		mul r1.x, r0.w, c39.x
-		mov r22.x, c39.x
-	else
-		mul_sat r0.w, r0.w, c154.x
-		mul r1.x, r0.w, c39.x
-		mov r22.x, r1.x
 	endif
+    mul_sat r0.w, r0.w, c154.x
+    mul r1.x, r0.w, c39.x
     mov r2.xyz, c0
     /* removed alpha threshold
     mad r0.w, r0.w, -c39.x, r2.x
@@ -72,7 +67,7 @@
     mov oC2.w, r1.x
     mul oC3, -r2.yzzz, c52.x
 	// -------------------------------------------------------------- Dithering Mask ----------------------------------------------------------------
-	if_lt r22.x, c151.x
+	if_lt r1.x, c151.x
 		mov r20.z, c52.x
 		add oC3.x, r20.z, c151.y
 	endif

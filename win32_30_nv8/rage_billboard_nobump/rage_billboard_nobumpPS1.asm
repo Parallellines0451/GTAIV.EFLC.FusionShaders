@@ -18,7 +18,7 @@
 //
 
     ps_3_0
-    def c151, 0.9999, 0.012156862745098, 0.0117647058823529, 0 // Dithering Mask constants
+    def c151, 0.7999, 0.012156862745098, 0.0117647058823529, 0 // Dithering Mask constants
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.0846050114e-42 // 774
     def c152, 0.2, 0.6, 0.8, 0.4 // c152-c153 = new stipple constants
     def c153, 0.5, 2, 1, 0
@@ -57,18 +57,17 @@
     mov_sat r0.z, r0.y
     mul r0.z, r0.z, v1.w
     mov_sat r0.w, r0.x
-    mad r0.z, r0.w, v1.z, r0.z
+    mad r5.x, r0.w, v1.z, r0.z
     // mul r0.z, r0.z, v0.w disabled vertex alpha
     mul r20.xy, vPos.xy, c153.x
     frc r20.xy, r20.xy
     mad r20, r20.xxyy, -c153.y, c153.zwzw
     mul r20, r20.xxyy, r20.zwzw
     dp4 r20.x, r20_abs, c152
-    add r20.y, -r20.x, r0.z
+    add r20.y, -r20.x, r5.x
     texkill r20.y
     // mul oC0.w, r0.z, v0.w
-    mov oC0.w, r0.z
-    mov r20.w, r0.z
+    mov oC0.w, r5.x
     frc r0.z, r0.x
     add r0.x, r0.x, -r0.z
     add r1, r0.x, c1
@@ -129,7 +128,7 @@
     mov oC2, c6.zyyz
     mov oC3, c5.z
 	// -------------------------------------------------------------- Dithering Mask ----------------------------------------------------------------
-	if_lt r20.w, c151.x
+	if_lt r5.x, c151.x
 		mov oC3.x, c151.z
 	endif
 	// ----------------------------------------------------------------------------------------------------------------------------------------------

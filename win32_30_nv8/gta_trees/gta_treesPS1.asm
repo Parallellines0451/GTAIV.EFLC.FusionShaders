@@ -20,7 +20,7 @@
 //
 
     ps_3_0
-    def c151, 0.9999, 0.012156862745098, 0.0274509803921569, 0 // Dithering Mask constants
+    def c151, 0.7999, 0.012156862745098, 0.0274509803921569, 0 // Dithering Mask constants
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 8.5619336170e-43 // 611
     def c152, 0.2, 0.6, 0.8, 0.4 // c152-c153 = new stipple constants
     def c153, 0.5, 2, 1, 0
@@ -38,7 +38,6 @@
     dcl_2d s0
     dcl_2d s10
     texld r0, v0, s0
-    // mul r0.w, r0.w, c39.x
 	mov r22.x, c223.z
 	mov r22.yzw, c3.xxyz
 	mov r21.x, c2.y
@@ -47,13 +46,9 @@
 	if_eq r22.x, c3.x
 		add r22.y, r0.w, -r22.y
 		cmp r0.w, r22.y, -c1.y, c1.x
-		mul r0.w, r0.w, c39.x
-		mov r22.x, c39.x
-	else
-		mul_sat r0.w, r0.w, c154.x
-		mul r0.w, r0.w, c39.x
-		mov r22.x, r0.w
 	endif
+    mul_sat r0.w, r0.w, c154.x
+    mul r0.w, r0.w, c39.x
     /* removed stipple
     mov_sat r1.x, r0.w
     mul r1.x, r1.x, c0.x
@@ -81,7 +76,6 @@
     // mul oC0.w, r0.w, c39.x
     // mov oC0.xyz, r0
     mov oC0, r0
-    mov r20.w, r0
     mad oC1, v1.xyzx, c1.wwwx, c1.wwwz
     mov oC2, c1.xwwx
     mov r1.x, c1.w
@@ -89,7 +83,7 @@
     cmp oC2.z, -c223_abs.x, r1.x, r1.y
     mov oC3, c2.xwww
 	// -------------------------------------------------------------- Dithering Mask ----------------------------------------------------------------
-	if_lt r22.x, c151.x
+	if_lt r0.w, c151.x
 		mov oC3.x, c151.z
 	endif
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
