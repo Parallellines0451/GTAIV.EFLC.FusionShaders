@@ -34,7 +34,7 @@
     dcl_texcoord9 v9
     dcl_2d s0
     dcl_2d s10
-    /* remove stipple
+    /* removed stipple
     mov_sat r0.x, c39.x
     mul r0.x, r0.x, c1.x
     frc r0.y, r0.x

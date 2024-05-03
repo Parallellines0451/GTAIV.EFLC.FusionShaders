@@ -66,7 +66,7 @@
     mov r1.w, c1.z
     mul r1, r0, r1
     mul r0.w, r1.w, c39.x
-    /* remove stipple
+    /* removed stipple
     mov_sat r1.w, r0.w
     mul r1.w, r1.w, c1.w
     frc r2.x, r1.w

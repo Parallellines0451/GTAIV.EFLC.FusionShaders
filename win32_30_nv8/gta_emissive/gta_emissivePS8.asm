@@ -40,7 +40,7 @@
     texld r0, v0, s0
     mul r0.w, r0.w, v2.w
     mul r0.w, r0.w, c39.x
-    /* remove stipple
+    /* removed stipple
     mov_sat r1.x, r0.w
     mul r1.x, r1.x, c0.x
     frc r1.y, r1.x
