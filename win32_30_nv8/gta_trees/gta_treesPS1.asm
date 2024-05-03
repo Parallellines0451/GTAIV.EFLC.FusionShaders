@@ -24,7 +24,6 @@
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 8.5619336170e-43 // 611
     def c152, 0.2, 0.6, 0.8, 0.4 // c152-c153 = new stipple constants
     def c153, 0.5, 2, 1, 0
-    def c154, 2, 0, 0, 0
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, 0, -1, -0, 0.5
@@ -47,7 +46,7 @@
 		add r22.y, r0.w, -r22.y
 		cmp r0.w, r22.y, -c1.y, c1.x
 	endif
-    mul_sat r0.w, r0.w, c154.x
+    mul_sat r0.w, r0.w, c3.x
     mul r0.w, r0.w, c39.x
     /* removed stipple
     mov_sat r1.x, r0.w

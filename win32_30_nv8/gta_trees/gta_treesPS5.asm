@@ -32,14 +32,11 @@
     dcl_2d s10
     texld r0, v0.yzzw, s0
 	mov r1.x, c2.x
-	if_eq c207.x, r1.x
-		mul_sat r0.w, r0.w, c1.w
-	else
-		add r1.x, -r0.w, c2.y
-		cmp r1.x, r1.x, c1.y, c1.x
-		add r0.w, r1.x, -c1.y
-		texkill r1.x
+	if_ne c207.x, r1.x
+		add r1.x, r0.w, -c2.y
+		cmp r0.w, r1.x, -c1.y, c1.x
 	endif
+    mul_sat r0.w, r0.w, c1.w
     mul r0.x, r0.w, c39.x
     /* removed stipple
     mov_sat r0.y, r0.x
