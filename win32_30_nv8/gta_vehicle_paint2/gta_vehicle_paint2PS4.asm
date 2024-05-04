@@ -104,7 +104,7 @@
 	def c118, 4, 3, 2, 1 // quality ID's
 	def c119, 0.16, 0.08, 0.04, 0 // 1/blend_distance
 	
-	def c120, 0, 0.25, 0.5, 0.75
+	def c120, 0, 0.25, 0.5, 0.75 // UV clamps
 	def c121, 0.2499, 0.4999, 0.7499, 1
 	
 	def c122, -17, 6, 0.045, 0 // PCSS constants
@@ -281,6 +281,11 @@
     add r5.w, r5.w, r6.w
     removed 1.0.6.0 filter */
 	// ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
+	mov r20.xy, c53.y
+	rcp r20.z, c58.x
+	mul r20.z, r20.z, c57.x
+	mul r20.x, r20.x, r20.z // fix filter stretching
+	
 	add r22, c54.w, -c54
 	add r22, c53.w, -r22 // cascade distances
 	dp4 r23.x, r21_abs, r22
@@ -291,7 +296,7 @@
 	rcp r23.w, r23.x
 	mul r22.z, r23.w, r23.y
 	lrp r23.y, r22.y, c110.y, r22.z
-	mul r20.xy, c53.xy, r23.y // apply pseudo cascade blending
+	mul r20.xy, r20.xy, r23.y // apply pseudo cascade blending
 	
 	mov r24, c118
 	add r24, r24, -c221.y
@@ -300,7 +305,7 @@
 	dp4 r24.x, r25, r24
 	add r7.z, r7.z, -r24.x // apply per cascade bias
 	
-	dp4 r20.z, r21_abs, c120 // UV clamp
+	dp4 r20.z, r21_abs, c120 // fix pixels leaking into other cascades
 	dp4 r20.w, r21_abs, c121
 	
 	mov r21.x, c110.y
@@ -335,6 +340,7 @@
 		mul r24.x, r24.z, c111.z
 		sincos r25.xy, r24.x
 		mul r25, r25.xyyx, c110.yzyy
+		mul r20.xy, r20.xy, c112.x
 		mul r26, c130.xyxy, r25
 		add r27.xy, r26.xzxz, r26.ywyw
 		mul r26, c130.zwzw, r25

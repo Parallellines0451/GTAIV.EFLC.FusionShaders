@@ -14,7 +14,7 @@
     sincos r22.xy, r21.y				// cosine & sine of r21.y
     mul r23, r22.yxxy, c110.xxyz		// offsets for 1st and 4th samples, respectively
     mul r21, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
-	mov r20.xy, c53.xy					// copy texel size
+	mov r20.xy, c53.y					// copy texel size
 	mul r20.xy, r20.xy, c112.x			// blur factor
     mad r23, r23, r20.xyxy, r0.zwzw		// offset * texel size + UV
     mad r21, r21, r20.xyxy, r0.zwzw		// offset * texel size + UV
