@@ -57,12 +57,18 @@
 	// ------------------------------------------------------ Improved Shadow Filter Constants ------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
-    def c112, 3, 4.27199984, 0.3333333, 0
+    def c112, 3, 4.27199984, 0, 0.00390625
     def c113, 0.75, -0.5, 0.5, 0
-	def c114, -1.25, 2, -2, 0 // c114-c117 = offsets for extra samples
-	def c115, 1.75, -1.5, 1.5, 0
-	def c116, -2.25, 3, -3, 0
-	def c117, 2.75, -2.5, 2.5, 0
+	
+    def c130, 0.18993645671348536, 0.027087114076591513, -0.21261242652069953, 0.23391293246949066
+    def c131, 0.04771781344140756, -0.3666840644525993, 0.297730981239584, 0.398259878229082
+    def c132, -0.509063425827436, -0.06528681462854097, 0.507855152944665, -0.2875976005206389
+    def c133, -0.15230616564632418, 0.6426121151781916, -0.30240170651828074, -0.5805072900736001
+    def c134, 0.6978019230005561, 0.2771173334141519, -0.6990963248129052, 0.3210960724922725
+    def c135, 0.3565142601623699, -0.7066415061851589, 0.266890002328106, 0.8360191043249159
+    def c136, -0.7515861305520581, -0.41609876195815027, 0.9102937449894895, -0.17014527555321657
+    def c137, -0.5343471434373126, 0.8058593459499529, -0.1133270115046468, -0.9490025827627441
+    def c138, 0.06711056, 0.00583715, 52.9829189, 0
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     dcl_texcoord v0
     dcl vPos.xy
@@ -70,6 +76,7 @@
     dcl_2d s0
     dcl_2d s1
     dcl_2d s2
+    dcl_2d s10
     dcl_2d s14
     add r0.xy, c0.x, vPos
     mul r0.xy, r0, c84.zwzw
@@ -146,72 +153,137 @@
     dp4 r0.w, r2, c5.z
     removed original filter */
 	// ----------------------------------------------------------- Improved Shadow Filter -----------------------------------------------------------
-    mov r21.xy, c112.xy
-    dp2add r21.y, vPos, r21, c110.w		// v0.x * r21.x + v0.y * r21.y
-    mad r21.y, r21.y, c111.x, c111.y
-    frc r21.y, r21.y
-    mad r21.y, r21.y, c111.z, c111.w	// r21.y * 2pi - pi
-    sincos r22.xy, r21.y				// cosine & sine of r21.y
-    mul r23, r22.yxxy, c110.xxyz		// offsets for 1st and 4th samples, respectively
-    mul r21, r22.yxxy, c113.xxyz        // offsets for 3rd and 2nd samples, respectively
-	mov r20.x, c77.z					// copy texel size
-	mul r20.x, r20.x, c112.z
-	
-	mad_sat r23, r23, r20.x, r2.xyxy		// offset * texel size + UV
-	mad r23, r23, c77.w, c77.xyxy
-	mad_sat r21, r21, r20.x, r2.xyxy		// offset * texel size + UV
-	mad r21, r21, c77.w, c77.xyxy
-	texld r24, r23.xy, s14					// 1st sample
-	dp2add r25.x, r24, r4.xy, c110.w		// copy to r25
-	texld r24, r21.zw, s14					// 2nd sample
-	dp2add r25.y, r24, r4.xy, c110.w		// copy to r25
-	texld r24, r21.xy, s14					// 3rd sample
-	dp2add r25.z, r24, r4.xy, c110.w		// copy to r25
-	texld r24, r23.zw, s14					// 4th sample
-	dp2add r25.w, r24, r4.xy, c110.w		// copy to r25
-	mad r25, r1.w, c66.w, r25				// depth bias
-	cmp r25, r25, c110.y, c110.w
-	dp4 r26.x, r25, -c110.x					// average
-	
-    mul r23, r22.yxxy, c114.xxyz			// offsets for 5th and 8th samples, respectively
-    mul r21, r22.yxxy, c115.xxyz        	// offsets for 7th and 6th samples, respectively
-	
-	mad_sat r23, r23, r20.x, r2.xyxy		// offset * texel size + UV
-	mad r23, r23, c77.w, c77.xyxy
-	mad_sat r21, r21, r20.x, r2.xyxy		// offset * texel size + UV
-	mad r21, r21, c77.w, c77.xyxy
-	texld r24, r23.xy, s14					// 5th sample
-	dp2add r25.x, r24, r4.xy, c110.w		// copy to r25
-	texld r24, r21.zw, s14					// 6th sample
-	dp2add r25.y, r24, r4.xy, c110.w		// copy to r25
-	texld r24, r21.xy, s14					// 7th sample
-	dp2add r25.z, r24, r4.xy, c110.w		// copy to r25
-	texld r24, r23.zw, s14					// 8th sample
-	dp2add r25.w, r24, r4.xy, c110.w		// copy to r25
-	mad r25, r1.w, c66.w, r25				// depth bias
-	cmp r25, r25, c110.y, c110.w
-	dp4 r26.y, r25, -c110.x					// average
-	
-    mul r23, r22.yxxy, c116.xxyz			// offsets for 9th and 12th samples, respectively
-    mul r21, r22.yxxy, c117.xxyz        	// offsets for 11th and 10th samples, respectively
-	
-	mad_sat r23, r23, r20.x, r2.xyxy		// offset * texel size + UV
-	mad r23, r23, c77.w, c77.xyxy
-	mad_sat r21, r21, r20.x, r2.xyxy		// offset * texel size + UV
-	mad r21, r21, c77.w, c77.xyxy
-	texld r24, r23.xy, s14					// 9th sample
-	dp2add r25.x, r24, r4.xy, c110.w		// copy to r25
-	texld r24, r21.zw, s14					// 10th sample
-	dp2add r25.y, r24, r4.xy, c110.w		// copy to r25
-	texld r24, r21.xy, s14					// 11th sample
-	dp2add r25.z, r24, r4.xy, c110.w		// copy to r25
-	texld r24, r23.zw, s14					// 12th sample
-	dp2add r25.w, r24, r4.xy, c110.w		// copy to r25
-	mad r25, r1.w, c66.w, r25				// depth bias
-	cmp r25, r25, c110.y, c110.w
-	dp4 r26.z, r25, -c110.x					// average
-	
-	dp3 r0.w, r26, c112.z
+	mov r21.x, c110.y
+	if_lt c223.y, r21.x
+		dp2add r21.y, vPos, c112.xy, c112.w
+		mad r21.y, r21.y, c111.x, c111.y
+		frc r21.y, r21.y
+		mad r21.y, r21.y, c111.z, c111.w
+		sincos r22.xy, r21.y
+		mul r23, r22.yxxy, c110.xxyz
+		mul r21, r22.yxxy, c113.xxyz
+		mov r20.xy, c77.z
+		mad_sat r23, r23, r20.xyxy, r2.xyxy
+		mad r23, r23, c77.w, c77.xyxy
+		mad_sat r21, r21, r20.xyxy, r2.xyxy
+		mad r21, r21, c77.w, c77.xyxy
+		texldl r25, r23.xy, s14
+		dp2add r25.x, r25, r4.xy, c110.w
+		texldl r24, r21.zw, s14
+		dp2add r25.y, r24, r4.xy, c110.w
+		texldl r24, r21.xy, s14
+		dp2add r25.z, r24, r4.xy, c110.w
+		texldl r24, r23.zw, s14
+		dp2add r25.w, r24, r4.xy, c110.w
+		mad r25, r1.w, c66.w, r25
+		cmp r25, r25, c110.y, c110.w
+		dp4 r0.w, r25, -c110.x
+	else
+		mul r24.xy, vPos.xy, c112.w
+		texldl r24, r24, s10
+		mul r24.x, r24.z, c111.z
+		sincos r25.xy, r24.x
+		mul r25, r25.xyyx, c110.yzyy
+		mov r20.xy, c77.z
+		
+		mul r26, c130.xyxy, r25
+		add r27.xy, r26.xzxz, r26.ywyw
+		mul r26, c130.zwzw, r25
+		add r27.zw, r26.xzxz, r26.ywyw
+		mad_sat r26, r27, r20.xyxy, r2.xyxy
+		mad r26, r26, c77.w, c77.xyxy
+		texldl r28, r26.xy, s14
+		dp2add r28.x, r28, r4.xy, c110.w
+		texldl r27, r26.zw, s14
+		dp2add r28.y, r27, r4.xy, c110.w
+		mul r26, c131.xyxy, r25
+		add r27.xy, r26.xzxz, r26.ywyw
+		mul r26, c131.zwzw, r25
+		add r27.zw, r26.xzxz, r26.ywyw
+		mad_sat r26, r27, r20.xyxy, r2.xyxy
+		mad r26, r26, c77.w, c77.xyxy
+		texldl r27, r26.xy, s14
+		dp2add r28.z, r27, r4.xy, c110.w
+		texldl r27, r26.zw, s14
+		dp2add r28.w, r27, r4.xy, c110.w
+		mad r28, r1.w, c66.w, r28
+		cmp r28, r28, c110.y, c110.w
+		dp4 r29.x, r28, -c110.x
+		
+		mul r26, c132.xyxy, r25
+		add r27.xy, r26.xzxz, r26.ywyw
+		mul r26, c132.zwzw, r25
+		add r27.zw, r26.xzxz, r26.ywyw
+		mad_sat r26, r27, r20.xyxy, r2.xyxy
+		mad r26, r26, c77.w, c77.xyxy
+		texldl r28, r26.xy, s14
+		dp2add r28.x, r28, r4.xy, c110.w
+		texldl r27, r26.zw, s14
+		dp2add r28.y, r27, r4.xy, c110.w
+		mul r26, c133.xyxy, r25
+		add r27.xy, r26.xzxz, r26.ywyw
+		mul r26, c133.zwzw, r25
+		add r27.zw, r26.xzxz, r26.ywyw
+		mad_sat r26, r27, r20.xyxy, r2.xyxy
+		mad r26, r26, c77.w, c77.xyxy
+		texldl r27, r26.xy, s14
+		dp2add r28.z, r27, r4.xy, c110.w
+		texldl r27, r26.zw, s14
+		dp2add r28.w, r27, r4.xy, c110.w
+		mad r28, r1.w, c66.w, r28
+		cmp r28, r28, c110.y, c110.w
+		dp4 r29.y, r28, -c110.x
+		
+		mul r26, c134.xyxy, r25
+		add r27.xy, r26.xzxz, r26.ywyw
+		mul r26, c134.zwzw, r25
+		add r27.zw, r26.xzxz, r26.ywyw
+		mad_sat r26, r27, r20.xyxy, r2.xyxy
+		mad r26, r26, c77.w, c77.xyxy
+		texldl r28, r26.xy, s14
+		dp2add r28.x, r28, r4.xy, c110.w
+		texldl r27, r26.zw, s14
+		dp2add r28.y, r27, r4.xy, c110.w
+		mul r26, c135.xyxy, r25
+		add r27.xy, r26.xzxz, r26.ywyw
+		mul r26, c135.zwzw, r25
+		add r27.zw, r26.xzxz, r26.ywyw
+		mad_sat r26, r27, r20.xyxy, r2.xyxy
+		mad r26, r26, c77.w, c77.xyxy
+		texldl r27, r26.xy, s14
+		dp2add r28.z, r27, r4.xy, c110.w
+		texldl r27, r26.zw, s14
+		dp2add r28.w, r27, r4.xy, c110.w
+		mad r28, r1.w, c66.w, r28
+		cmp r28, r28, c110.y, c110.w
+		dp4 r29.z, r28, -c110.x
+		
+		mul r26, c136.xyxy, r25
+		add r27.xy, r26.xzxz, r26.ywyw
+		mul r26, c136.zwzw, r25
+		add r27.zw, r26.xzxz, r26.ywyw
+		mad_sat r26, r27, r20.xyxy, r2.xyxy
+		mad r26, r26, c77.w, c77.xyxy
+		texldl r28, r26.xy, s14
+		dp2add r28.x, r28, r4.xy, c110.w
+		texldl r27, r26.zw, s14
+		dp2add r28.y, r27, r4.xy, c110.w
+		mul r26, c137.xyxy, r25
+		add r27.xy, r26.xzxz, r26.ywyw
+		mul r26, c137.zwzw, r25
+		add r27.zw, r26.xzxz, r26.ywyw
+		mad_sat r26, r27, r20.xyxy, r2.xyxy
+		mad r26, r26, c77.w, c77.xyxy
+		texldl r27, r26.xy, s14
+		dp2add r28.z, r27, r4.xy, c110.w
+		texldl r27, r26.zw, s14
+		dp2add r28.w, r27, r4.xy, c110.w
+		mad r28, r1.w, c66.w, r28
+		cmp r28, r28, c110.y, c110.w
+		dp4 r29.w, r28, -c110.x
+		
+		dp4 r0.w, r29, -c110.x
+	endif
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     add r2.xyz, r1, c0.w
     dp3 r1.x, r1, r1
