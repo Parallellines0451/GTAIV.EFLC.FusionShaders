@@ -66,6 +66,10 @@
     add r20.y, -r20.x, c39.x
     texkill r20.y
     texld r0, v0, s0
+    mov r1.xy, c1_abs.wy
+    add r1.x, r1.x, -c207.x
+    cmp r1.y, -r1_abs.x, r1.y, c223.w
+    mul r0.w, r0.w, r1.y
     mul r0, r0, v1
     mov r1.x, c66.x
     mul r1.x, r1.x, c45.w
@@ -73,11 +77,6 @@
     mul r1.w, r0.w, c39.x
     mul oC0, r1, c51 */
     mul r0.xyz, r0, r1.x
-    mov r1.x, c1.w
-    add r1.x, r1.x, -c207.x
-    mov r1.y, -c1.y
-    cmp r1.y, -r1_abs.x, r1.y, c223.w
-    mul r0.w, r0.w, r1.y
     mul oC0, r0, c51
 	// ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------
 	if_ne v9.y, c127.y
