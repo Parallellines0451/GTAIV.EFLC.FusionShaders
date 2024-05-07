@@ -418,8 +418,8 @@
     mov r2.xyz, r31.xyz
     mad r1.xyz, v1, -r0.x, c3.w
 	// ----------------------------------------------------------- Console Tree Lighting ------------------------------------------------------------
-	texld r21, v0, s5
-	add r21.yz, r21.x, -c22
+	texld r4, v0, s5
+	add r21.yz, r4.x, -c22
 	add_sat r21.yz, -r21_abs, c23.x
 	add r21.x, r21.y, r21.z
 	mov r21.y, c223.x
@@ -440,7 +440,7 @@
 		mul r3.w, r2.z, c2.w
 		mov_sat r3.w, r3.w
 		mul r3.w, r3.w, c72.y
-		texld r4, v0, s5
+		// texld r4, v0, s5 sample stencil before
 		
 		// add r4.x, -r4.x, c2.z
 		// cmp r3.w, r4.x, r3.w, c0.x

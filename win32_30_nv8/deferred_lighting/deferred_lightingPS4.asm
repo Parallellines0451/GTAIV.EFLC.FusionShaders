@@ -61,8 +61,8 @@
     dcl_2d s5
     dcl_2d s6
 	
-	texld r21, v0, s5
-	add r21.yz, r21.x, -c22
+	texld r22, v0, s5
+	add r21.yz, r22.x, -c22
 	add_sat r21.yz, -r21_abs, c23.x
 	add r21.x, r21.y, r21.z
 	mov r21.y, c223.x
@@ -124,7 +124,8 @@
 		mul r0.y, r1.z, c2.w
 		mov_sat r0.y, r0.y
 		mul r0.y, r0.y, c72.y
-		texld r3, v0, s5
+		// texld r3, v0, s5 sample stencil before
+		mov r3, r22
 		
 		// add r0.z, -r3.x, c2.z
 		// cmp r0.y, r0.z, r0.y, c0.x
