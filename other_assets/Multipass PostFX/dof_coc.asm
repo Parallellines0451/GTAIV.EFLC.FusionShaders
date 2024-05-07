@@ -26,7 +26,7 @@
     ps_3_0
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c1, 0, 0.212500006, 0.715399981, 0.0720999986
-    def c2, 0.25, 1, 256, 0
+    def c2, 0.25, 1, 0.5, 0
     def c4, -0.5, -1.5, 1.5, 0.5
 	
     dcl_texcoord v0.xy
@@ -57,7 +57,6 @@
     mul r0.z, r0.z, -c77.x
     mad r0.x, c77.y, -r0.y, r0.x
     rcp r0.x, r0.x
-    mul r0.y, r0.z, r0.x
 	
     mov r3, c4
     texld r7.xyz, v0, s2
@@ -79,11 +78,9 @@
     max r0.z, r0.x, r0.z // cutscene
     mul r1.w, r0.z, r0.z
 	
-	texld r24, v0, s8
+	texld r3, v0, s8
 	
-    add r0.z, -r1.w, c2.y
-	mul r3.xyz, r24, r1.w
-	mad oC0.xyz, r7, r0.z, r3
+	lrp oC0.xyz, r1.w, r3, r7
     mov oC0.w, c2.y
 
 // approximately 176 instruction slots used (14 texture, 162 arithmetic)

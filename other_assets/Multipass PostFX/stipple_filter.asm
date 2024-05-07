@@ -19,7 +19,7 @@
 
     ps_3_0
     def c1, 0, 0.212500006, 0.715399981, 0.0720999986
-    def c2, 0.25, 1, 256, 0
+    def c2, 0.25, 1, 0.5, 0
     def c4, -0.5, -1.5, 1.5, 0.5
 	
 	def c8, 0.012156862745098, 0.016078431372549, 0.0435294117647059, 0.0474509803921569 // 3.1, 4.1, 11.1, 12.1
@@ -50,8 +50,8 @@
     add r0.x, r0.x, -r0.z
     mad r0.x, r0.x, r0.x, -r2.w
 	
-	mov r31, c1.x
-	if_ne r31.x, c223.z // Definition mask
+	mov r31, c2.w
+	if_ne r31.x, c223.z // Stipple mask
 		mov r21, c76
 		
 		texld r22, v0, s7
@@ -103,13 +103,12 @@
 		cmp r0.x, -r20_abs.x, -c2.y, r0.x
 	endif
 	
-    cmp r0.xz, r0.x, c2.yyww, c2.wwyy
+    cmp r0.x, r0.x, c2.y, c2.w
 	add r3.xyz, r3, r4
 	add r3.xyz, r3, r5
 	add r3.xyz, r3, r6
 	mul r3.xyz, r3, c2.x
-	mul r3.xyz, r3, r0.x
-	mad oC0.xyz, r7, r0.z, r3
+	lrp oC0.xyz, r0.x, r3, r7
     mov oC0.w, c2.y
 
 // approximately 176 instruction slots used (14 texture, 162 arithmetic)

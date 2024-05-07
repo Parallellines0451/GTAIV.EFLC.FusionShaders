@@ -220,96 +220,20 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rage_postfx\rage_postfxPS11.asm</File>
-				<Variables value="15" >
+				<Variables value="24" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>AdapLumSampler</Name>
-						<Index value="4" />
+						<Index value="5" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>BloomSampler</Name>
-						<Index value="3" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>ColorCorrect</Name>
-						<Index value="78" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>ColorShift</Name>
-						<Index value="79" />
-					</Item>
-					<Item>
-						<Type>float</Type>
-						<Name>Exposure</Name>
-						<Index value="66" />
-					</Item>
-					<Item>
-						<Type>sampler</Type>
-						<Name>GBufferTextureSampler2</Name>
-						<Index value="0" />
-					</Item>
-					<Item>
-						<Type>sampler</Type>
-						<Name>GBufferTextureSampler3</Name>
-						<Index value="1" />
-					</Item>
-					<Item>
-						<Type>sampler</Type>
-						<Name>HDRSampler</Name>
-						<Index value="2" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>TexelSize</Name>
-						<Index value="72" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>ToneMapParams</Name>
-						<Index value="76" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>deSatContrastGamma</Name>
-						<Index value="77" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>dofBlur</Name>
-						<Index value="75" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>dofDist</Name>
-						<Index value="74" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>dofProj</Name>
-						<Index value="73" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>NearFarPlane</Name>
-						<Index value="128" />
-					</Item>
-				</Variables>
-			</Item>
-			<Item>
-				<DataType>asm</DataType>
-				<File>rage_postfx\rage_postfxPS12.asm</File>
-				<Variables value="21" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>AdapLumSampler</Name>
 						<Index value="4" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>
-						<Name>BloomSampler</Name>
+						<Name>BlurSampler</Name>
 						<Index value="3" />
 					</Item>
 					<Item>
@@ -345,17 +269,22 @@
 					<Item>
 						<Type>sampler</Type>
 						<Name>JitterSampler</Name>
-						<Index value="5" />
+						<Index value="6" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NoiseParams</Name>
+						<Index value="85" />
 					</Item>
 					<Item>
 						<Type>float</Type>
 						<Name>PLAYER_MASK</Name>
-						<Index value="85" />
+						<Index value="86" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>StencilCopySampler</Name>
-						<Index value="6" />
+						<Index value="7" />
 					</Item>
 					<Item>
 						<Type>float4</Type>
@@ -406,6 +335,137 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
+				</Variables>
+			</Item>
+			<Item>
+				<DataType>asm</DataType>
+				<File>rage_postfx\rage_postfxPS12.asm</File>
+				<Variables value="24" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>AdapLumSampler</Name>
+						<Index value="5" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>BloomSampler</Name>
+						<Index value="4" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>BlurSampler</Name>
+						<Index value="3" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>ColorCorrect</Name>
+						<Index value="83" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>ColorShift</Name>
+						<Index value="84" />
+					</Item>
+					<Item>
+						<Type>float</Type>
+						<Name>Exposure</Name>
+						<Index value="66" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>GBufferTextureSampler2</Name>
+						<Index value="0" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>GBufferTextureSampler3</Name>
+						<Index value="1" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>HDRSampler</Name>
+						<Index value="2" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>JitterSampler</Name>
+						<Index value="6" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NoiseParams</Name>
+						<Index value="85" />
+					</Item>
+					<Item>
+						<Type>float</Type>
+						<Name>PLAYER_MASK</Name>
+						<Index value="86" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>StencilCopySampler</Name>
+						<Index value="7" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>TexelSize</Name>
+						<Index value="76" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>ToneMapParams</Name>
+						<Index value="81" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>deSatContrastGamma</Name>
+						<Index value="82" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>dofBlur</Name>
+						<Index value="79" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>dofDist</Name>
+						<Index value="78" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>dofProj</Name>
+						<Index value="77" />
+					</Item>
+					<Item>
+						<Type>float</Type>
+						<Name>gDirectionalMotionBlurLength</Name>
+						<Index value="80" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
+					<Item>
+						<Type>float4x4</Type>
+						<Name>motionBlurMatrix</Name>
+						<Index value="72" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NearFarPlane</Name>
+						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
 					</Item>
 				</Variables>
 			</Item>
@@ -493,15 +553,20 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rage_postfx\rage_postfxPS14.asm</File>
-				<Variables value="21" >
+				<Variables value="24" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>AdapLumSampler</Name>
-						<Index value="4" />
+						<Index value="5" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>BloomSampler</Name>
+						<Index value="4" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>BlurSampler</Name>
 						<Index value="3" />
 					</Item>
 					<Item>
@@ -537,17 +602,22 @@
 					<Item>
 						<Type>sampler</Type>
 						<Name>JitterSampler</Name>
-						<Index value="5" />
+						<Index value="6" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NoiseParams</Name>
+						<Index value="85" />
 					</Item>
 					<Item>
 						<Type>float</Type>
 						<Name>PLAYER_MASK</Name>
-						<Index value="85" />
+						<Index value="86" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>StencilCopySampler</Name>
-						<Index value="6" />
+						<Index value="7" />
 					</Item>
 					<Item>
 						<Type>float4</Type>
@@ -598,6 +668,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
 					</Item>
 				</Variables>
 			</Item>
@@ -1223,7 +1298,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rage_postfx\rage_postfxPS24.asm</File>
-				<Variables value="23" >
+				<Variables value="24" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>AdapLumSampler</Name>
@@ -1338,6 +1413,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
 					</Item>
 				</Variables>
 			</Item>
@@ -1612,21 +1692,31 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rage_postfx\rage_postfxPS28.asm</File>
-				<Variables value="19" >
+				<Variables value="24" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>AdapLumSampler</Name>
+						<Index value="5" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>BloomSampler</Name>
+						<Index value="4" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>BlurSampler</Name>
 						<Index value="3" />
 					</Item>
 					<Item>
 						<Type>float4</Type>
 						<Name>ColorCorrect</Name>
-						<Index value="82" />
+						<Index value="83" />
 					</Item>
 					<Item>
 						<Type>float4</Type>
 						<Name>ColorShift</Name>
-						<Index value="83" />
+						<Index value="84" />
 					</Item>
 					<Item>
 						<Type>float</Type>
@@ -1651,17 +1741,22 @@
 					<Item>
 						<Type>sampler</Type>
 						<Name>JitterSampler</Name>
-						<Index value="4" />
+						<Index value="6" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>NoiseParams</Name>
+						<Index value="85" />
 					</Item>
 					<Item>
 						<Type>float</Type>
 						<Name>PLAYER_MASK</Name>
-						<Index value="84" />
+						<Index value="86" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>StencilCopySampler</Name>
-						<Index value="5" />
+						<Index value="7" />
 					</Item>
 					<Item>
 						<Type>float4</Type>
@@ -1671,16 +1766,21 @@
 					<Item>
 						<Type>float4</Type>
 						<Name>ToneMapParams</Name>
-						<Index value="80" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>deSatContrastGamma</Name>
 						<Index value="81" />
 					</Item>
 					<Item>
 						<Type>float4</Type>
+						<Name>deSatContrastGamma</Name>
+						<Index value="82" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
 						<Name>dofBlur</Name>
+						<Index value="79" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>dofDist</Name>
 						<Index value="78" />
 					</Item>
 					<Item>
@@ -1691,7 +1791,7 @@
 					<Item>
 						<Type>float</Type>
 						<Name>gDirectionalMotionBlurLength</Name>
-						<Index value="79" />
+						<Index value="80" />
 					</Item>
 					<Item>
 						<Type>float4</Type>
@@ -1707,6 +1807,11 @@
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
 						<Index value="128" />
+					</Item>
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
 					</Item>
 				</Variables>
 			</Item>
@@ -2687,7 +2792,7 @@
 				</Item>
 				<Item>
 					<VertexShader>0</VertexShader>
-					<PixelShader>26</PixelShader>
+					<PixelShader>12</PixelShader>
 					<Params value="2" >
 						<Item>
 							<Type value="10" />
@@ -2715,7 +2820,7 @@
 				</Item>
 				<Item>
 					<VertexShader>0</VertexShader>
-					<PixelShader>26</PixelShader>
+					<PixelShader>14</PixelShader>
 					<Params value="2" >
 						<Item>
 							<Type value="10" />
@@ -2855,7 +2960,7 @@
 				</Item>
 				<Item>
 					<VertexShader>0</VertexShader>
-					<PixelShader>26</PixelShader>
+					<PixelShader>24</PixelShader>
 					<Params value="2" >
 						<Item>
 							<Type value="10" />
@@ -2911,7 +3016,7 @@
 				</Item>
 				<Item>
 					<VertexShader>0</VertexShader>
-					<PixelShader>26</PixelShader>
+					<PixelShader>28</PixelShader>
 					<Params value="2" >
 						<Item>
 							<Type value="10" />
