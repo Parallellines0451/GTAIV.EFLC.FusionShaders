@@ -23,7 +23,7 @@
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.1981101870e-42 // 855
     def c0, 0.00390625, 0.707106769, 2, -1
     def c1, 0.146446615, 0.5, 0, -0.5
-	def c2, 10, 1, 1, 1
+    def c77, 10, 0, 0, 0
     dcl_texcoord v0.xy
     dcl_color v1
     dcl_2d s0
@@ -34,7 +34,7 @@
     mad r0.z, r1.x, c0.z, c0.w
     add r0.w, r1.z, -v1.z
     mul r0.z, r0.z, v1.w
-    mul r0.z, r0.z, c2.x // water fix
+    mul r0.z, r0.z, c77.x
     cmp r0.z, r0.w, c1.z, r0.z
     mov r1.x, c0.x
     mad r2.yz, c66.x, -r1.x, r0.xyxw
