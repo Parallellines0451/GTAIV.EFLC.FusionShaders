@@ -1769,7 +1769,11 @@
 				<Item>
 					<VertexShader>2</VertexShader>
 					<PixelShader>2</PixelShader>
-					<Params value="2" >
+					<Params value="3" >
+						<Item>
+							<Type value="2" />
+							<Value value="0" />
+						</Item>
 						<Item>
 							<Type value="4" />
 							<Value value="5" />
@@ -1788,7 +1792,11 @@
 				<Item>
 					<VertexShader>3</VertexShader>
 					<PixelShader>2</PixelShader>
-					<Params value="2" >
+					<Params value="3" >
+						<Item>
+							<Type value="2" />
+							<Value value="0" />
+						</Item>
 						<Item>
 							<Type value="4" />
 							<Value value="5" />
