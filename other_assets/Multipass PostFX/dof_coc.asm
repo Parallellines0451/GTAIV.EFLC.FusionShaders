@@ -6,6 +6,7 @@
 //   sampler2D GBufferTextureSampler3;
 //   sampler2D HDRSampler;
 //   sampler2D DOFBlurSampler;
+//   float4 TexelSize;
 //   float4 dofBlur;
 //   float4 dofDist;
 //   float4 dofProj;
@@ -15,6 +16,7 @@
 //
 //   Name                         Reg   Size
 //   ---------------------------- ----- ----
+//   TexelSize                    c76      1
 //   dofProj                      c77      1
 //   dofDist                      c78      1
 //   dofBlur                      c79      1
@@ -78,7 +80,8 @@
     max r0.z, r0.x, r0.z // cutscene
     mul r1.w, r0.z, r0.z
 	
-	texld r3, v0, s8
+	add r3.xy, v0.xy, c76.xy // fix pixel offset
+	texld r3, r3, s8
 	
 	lrp oC0.xyz, r1.w, r3, r7
     mov oC0.w, c2.y
