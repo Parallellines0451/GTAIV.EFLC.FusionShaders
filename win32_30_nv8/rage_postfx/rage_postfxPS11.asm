@@ -73,7 +73,6 @@
     dcl_2d s5
     dcl_2d s6
     dcl_2d s7
-    mov r31, c2.w
     texld r0, v0, s1
 	// ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
 	if_ne r0.x, c127.y
@@ -163,12 +162,14 @@
     mov r8.y, c2.y
     add r0.w, -r8.y, c82.z
     pow r2.x, r1.x, r0.w
-    mul_sat r0.xyz, r0, r2.x
-	
-	if_ne r31.x, c222.z
-		pow r0.x, r0.x, c11.x
-		pow r0.y, r0.y, c11.x
-		pow r0.z, r0.z, c11.x
+    mov r31, c2.w
+	if_eq r31.x, c222.z
+		mul oC0.xyz, r0, r2.x
+	else
+		mul_sat r0.xyz, r0, r2.x
+		pow oC0.x, r0.x, c11.x
+		pow oC0.y, r0.y, c11.x
+		pow oC0.z, r0.z, c11.x
 	endif
 	
     mov oC0.w, c2.y
