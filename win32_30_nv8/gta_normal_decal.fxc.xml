@@ -2417,7 +2417,16 @@
 				<Item>
 					<VertexShader>7</VertexShader>
 					<PixelShader>5</PixelShader>
-					<Params />
+					<Params value="2" >
+						<Item>
+							<Type value="10" />
+							<Value value="0" />
+						</Item>
+						<Item>
+							<Type value="3" />
+							<Value value="0" />
+						</Item>
+					</Params>
 				</Item>
 			</Passes>
 		</Item>
@@ -2427,7 +2436,16 @@
 				<Item>
 					<VertexShader>8</VertexShader>
 					<PixelShader>5</PixelShader>
-					<Params />
+					<Params value="2" >
+						<Item>
+							<Type value="10" />
+							<Value value="0" />
+						</Item>
+						<Item>
+							<Type value="3" />
+							<Value value="0" />
+						</Item>
+					</Params>
 				</Item>
 			</Passes>
 		</Item>
@@ -2437,7 +2455,16 @@
 				<Item>
 					<VertexShader>7</VertexShader>
 					<PixelShader>6</PixelShader>
-					<Params />
+					<Params value="2" >
+						<Item>
+							<Type value="10" />
+							<Value value="0" />
+						</Item>
+						<Item>
+							<Type value="3" />
+							<Value value="0" />
+						</Item>
+					</Params>
 				</Item>
 			</Passes>
 		</Item>
@@ -2447,7 +2474,16 @@
 				<Item>
 					<VertexShader>8</VertexShader>
 					<PixelShader>6</PixelShader>
-					<Params />
+					<Params value="2" >
+						<Item>
+							<Type value="10" />
+							<Value value="0" />
+						</Item>
+						<Item>
+							<Type value="3" />
+							<Value value="0" />
+						</Item>
+					</Params>
 				</Item>
 			</Passes>
 		</Item>
