@@ -196,12 +196,11 @@
     dp3 r2.y, r4.xyww, r4.xyww
     rsq r2.y, r2.y
     rcp r2.y, r2.y
+    /* removed 1.0.6.0 filter
     rcp r3.w, c53.w
     mul r3.w, r2.y, r3.w
-    mul r3.w, r3.w, r3.w // improved shadow fadeout
     mul r3.w, r3.w, r3.w
     mul r3.w, r3.w, c1.y
-    /* removed 1.0.6.0 filter
     mad r2.zw, c53.y, r2, r0
     texld r6, r2.zwzw, s15
     add r2.z, r4.z, -r6.x
@@ -262,8 +261,13 @@
     add r0.z, r4.z, -r6.x
     cmp r0.z, r0.z, c5.w, c5.x
     add r0.z, r2.z, r0.z
+    mad r0.z, r0.z, c2.z, r3.w
+    add r0.w, r2.y, -c53.w
+    cmp r2.yz, r0.w, c5.xwyw, c5.xxzw
+    add r0.w, r0.z, r2.z
+    cmp_sat r0.z, r0.w, r0.z, r2.y
     removed 1.0.6.0 filter */
-	// ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
+// ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
 	mov r20.xy, c53.y
 	rcp r20.z, c58.x
 	mul r20.z, r20.z, c57.x
@@ -420,14 +424,14 @@
 		add r28, r4.z, -r28
 		cmp r28, r28, c110.y, c110.w
 		dp4 r29.w, r28, -c110.x
-		dp4 r0.z, r29, -c110.x
+		dp4 r20.x, r29, -c110.x
 	endif
+    
+    rcp r20.y, c53.w
+    mul_sat r20.y, r20.y, r2.y
+    mul r20.y, r20.y, r20.y
+    lrp r0.z, r20.y, c110.y, r20.x // improved fadeout
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
-    add r0.z, r0.z, r3.w // mad r0.z, r0.z, c2.z, r3.w 1.0.6.0 filter average
-    add r0.w, r2.y, -c53.w
-    cmp r2.yz, r0.w, c5.xwyw, c5.xxzw
-    add r0.w, r0.z, r2.z
-    cmp_sat r0.z, r0.w, r0.z, r2.y
     mul r2.xyz, r5, r2.x
     mul r2.xyz, r0.z, r2
     mul r4.xyz, r5, r0.y
