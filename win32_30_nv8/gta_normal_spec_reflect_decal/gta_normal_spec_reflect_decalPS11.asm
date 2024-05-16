@@ -125,9 +125,6 @@
 	def c120, 0, 0.25, 0.5, 0.75 // UV clamps
 	def c121, 0.2499, 0.4999, 0.7499, 1
 	
-	def c122, -17, 6, 0.045, 0 // PCSS constants
-    defi i1, 6, 0, 0, 0
-	
 	def c130, 0.18993645671348536, 0.027087114076591513, -0.21261242652069953, 0.23391293246949066
 	def c131, 0.04771781344140756, -0.3666840644525993, 0.297730981239584, 0.398259878229082
 	def c132, -0.509063425827436, -0.06528681462854097, 0.507855152944665, -0.2875976005206389
@@ -315,20 +312,20 @@
 	add r22, c53.w, -r22 // cascade distances
 	dp4 r23.x, r21_abs, r22
 	dp4 r23.y, r21_abs, r22.xxyz
-	add r23.z, r0.z, -r23.y
-	dp4 r23.w, r21_abs, c119.xxyz
-	mul_sat r22.y, r23.z, r23.w
-	rcp r23.w, r23.x
-	mul r22.z, r23.w, r23.y
-	lrp r23.y, r22.y, c110.y, r22.z
-	mul r20.xy, r20.xy, r23.y // apply pseudo cascade blending
+	dp4 r23.z, r21_abs, c119.xxyz
+	add r23.w, v9.w, -r23.y
+	mul_sat r23.z, r23.z, r23.w
+	rcp r23.x, r23.x
+	mul r23.w, r23.x, r23.y
+	lrp r20.z, r23.z, c110.y, r23.w
+	mul r20.xy, r20.xy, r20.z // apply pseudo cascade blending
 	
 	mov r24, c118
 	add r24, r24, -c221.y
 	add_sat r24, c110.y, -r24_abs
 	m4x4 r25, r21_abs, c114
-	dp4 r24.x, r25, r24
-	add r6.z, r6.z, -r24.x // apply per cascade bias
+	dp4 r25.x, r25, r24
+	add r6.z, r6.z, -r25.x // apply per cascade bias
 	
 	dp4 r20.z, r21_abs, c120 // fix pixels leaking into other cascades
 	dp4 r20.w, r21_abs, c121
@@ -358,7 +355,7 @@
 		mov r25.w, r24.x
 		add r25, r6.z, -r25
 		cmp r25, r25, c110.y, c110.w
-		dp4 r2.w, r25, -c110.x
+		dp4 r20.x, r25, -c110.x
 	else
 		mul r24.xy, vPos.xy, c112.z
 		texldl r24, r24, s10
