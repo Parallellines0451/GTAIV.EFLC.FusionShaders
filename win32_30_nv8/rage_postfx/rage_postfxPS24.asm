@@ -3,12 +3,14 @@
 //
 // Parameters:
 //
+//   sampler2D StippleTexture;
 //   sampler2D AdapLumSampler;
 //   sampler2D BloomSampler;
 //   sampler2D BlurSampler;
 //   float4 ColorCorrect;
 //   float4 ColorShift;
 //   float Exposure;
+//   sampler2D GBufferTextureSampler2;
 //   sampler2D GBufferTextureSampler3;
 //   sampler2D HDRSampler;
 //   sampler2D JitterSampler;
@@ -30,6 +32,7 @@
 //
 //   Name                         Reg   Size
 //   ---------------------------- ----- ----
+//   StippleTexture               s10      1
 //   globalScreenSize             c44      1
 //   Exposure                     c66      1
 //   motionBlurMatrix             c72      4
@@ -44,6 +47,7 @@
 //   ColorShift                   c84      1
 //   NoiseParams                  c85      1
 //   PLAYER_MASK                  c86      1
+//   GBufferTextureSampler2       s0       1
 //   GBufferTextureSampler3       s1       1
 //   HDRSampler                   s2       1
 //   BlurSampler                  s3       1
@@ -64,24 +68,11 @@
     def c5, 2, -1, 0.125, 0
     def c6, 1.10000002, 0, 0, 0
 	
-	def c8, 0.012156862745098, 0.016078431372549, 0.0435294117647059, 0.0474509803921569 // 3.1, 4.1, 11.1, 12.1
-	def c9, 0.5141176470588235, 0.5180392156862745, 0.5454901960784314, 0.5494117647058824 // 131.1, 132.1, 139.1, 140.1
-	def c10, 0.027843137254902, 0.0007843137254902, 0, 0 // 7.1, 0.2
-	
-	def c11, 1.2, 0.0078125, 0.00390625, 0
-	
-	def c14, 0.0035, 0.0625, 0, 0
-	def c15, 0.18993645671348536, 0.027087114076591513, -0.21261242652069953, 0.23391293246949066
-	def c16, 0.04771781344140756, -0.3666840644525993, 0.297730981239584, 0.398259878229082
-	def c17, -0.509063425827436, -0.06528681462854097, 0.507855152944665, -0.2875976005206389
-	def c18, -0.15230616564632418, 0.6426121151781916, -0.30240170651828074, -0.5805072900736001
-	def c19, 0.6978019230005561, 0.2771173334141519, -0.6990963248129052, 0.3210960724922725
-	def c20, 0.3565142601623699, -0.7066415061851589, 0.266890002328106, 0.8360191043249159
-	def c21, -0.7515861305520581, -0.41609876195815027, 0.9102937449894895, -0.17014527555321657
-	def c22, -0.5343471434373126, 0.8058593459499529, -0.1133270115046468, -0.9490025827627441
+	def c11, 1.2, 0.00390625, 0, 0
 	
     defi i0, 7, 0, 0, 0
     dcl_texcoord v0.xy
+    dcl_2d s0
     dcl_2d s1
     dcl_2d s2
     dcl_2d s3
@@ -90,9 +81,11 @@
     dcl_2d s6
     dcl_2d s7
     dcl_2d s10
+	texld r3, v0, s2
+	
+	// motion blur
     mov r31, c2.w
-    add r31.y, c222.y, c222.w // DOF || MB
-	if_ne r31.y, c2.w
+	if_ne r31.x, c222.w
 		texld r0, v0, s1
 		// ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
 		if_ne r0.x, c127.y
@@ -118,159 +111,6 @@
 		mad r0.x, c77.y, -r0.y, r0.x
 		rcp r0.x, r0.x
 		mul r0.y, r0.z, r0.x
-	endif
-	
-	// samples used by DOF and stipple filter
-    mov r3, c4
-    mad r4, c76.xyxy, r3.xyzx, v0.xyxy
-    mad r6, c76.xyxy, r3.wzyw, v0.xyxy
-    texld r7.xyz, v0, s2
-    texld r3.xyz, r4.xy, s2
-    texld r4.xyz, r4.zw, s2
-    texld r5.xyz, r6.xy, s2
-    texld r6.xyz, r6.zw, s2
-	
-	// depth of field
-	if_ne r31.x, c222.y
-		mad r0.x, r0.z, r0.x, -c78.w
-		mad r0.x, c78.y, -r3.w, r0.x
-		max r1.w, r0.x, c1.x
-		rcp r0.z, c78.z
-		mul r0.z, r1.w, r0.z
-		lrp r1.w, r0.z, c79.z, c79.y
-		min r0.z, c79.z, r1.w
-		mul r1.w, r0.z, r0.z
-		
-		mov r20, c76.xyxy
-		mul r20, r20, c44.y
-		mul r20, r20, c14.x
-		
-		mad r22, r20, c15, v0.xyxy
-		texldl r21.xyz, r22.xy, s2
-		texldl r23.xyz, r22.zw, s2
-		add r21.xyz, r21, r23
-		
-		mad r22, r20, c16, v0.xyxy
-		texldl r23.xyz, r22.xy, s2
-		add r21.xyz, r21, r23
-		texldl r23.xyz, r22.zw, s2
-		add r21.xyz, r21, r23
-		
-		mad r22, r20, c17, v0.xyxy
-		texldl r23.xyz, r22.xy, s2
-		add r21.xyz, r21, r23
-		texldl r23.xyz, r22.zw, s2
-		add r21.xyz, r21, r23
-		
-		mad r22, r20, c18, v0.xyxy
-		texldl r23.xyz, r22.xy, s2
-		add r21.xyz, r21, r23
-		texldl r23.xyz, r22.zw, s2
-		add r21.xyz, r21, r23
-		
-		mad r22, r20, c19, v0.xyxy
-		texldl r23.xyz, r22.xy, s2
-		add r21.xyz, r21, r23
-		texldl r23.xyz, r22.zw, s2
-		add r21.xyz, r21, r23
-		
-		mad r22, r20, c20, v0.xyxy
-		texldl r23.xyz, r22.xy, s2
-		add r21.xyz, r21, r23
-		texldl r23.xyz, r22.zw, s2
-		add r21.xyz, r21, r23
-		
-		mad r22, r20, c21, v0.xyxy
-		texldl r23.xyz, r22.xy, s2
-		add r21.xyz, r21, r23
-		texldl r23.xyz, r22.zw, s2
-		add r21.xyz, r21, r23
-		
-		mad r22, r20, c22, v0.xyxy
-		texldl r23.xyz, r22.xy, s2
-		add r21.xyz, r21, r23
-		texldl r23.xyz, r22.zw, s2
-		add r21.xyz, r21, r23
-		
-		mul r24.xyz, r21, c14.y
-	else
-		mov r1.w, c2.w
-		
-		add r24.xyz, r3, r4
-		add r24.xyz, r24, r5
-		add r24.xyz, r24, r6
-		mul r24.xyz, r24, c2.x
-	endif
-	
-	// stipple filter
-    dp3 r0.x, r7, c1.yzww
-    dp3 r8.x, r3, c1.yzww
-    dp3 r8.y, r4, c1.yzww
-    dp3 r8.z, r5, c1.yzww
-    dp3 r8.w, r6, c1.yzww
-    dp4 r0.z, r8, c2.x
-    add r8, r8, -r0.z
-    dp4 r2.w, r8, r8
-    add r0.x, r0.x, -r0.z
-    mad r0.x, r0.x, r0.x, -r2.w
-	if_ne r31.x, c223.z // Stipple mask
-		mov r21, c76
-		
-		texld r22, v0, s7
-		add r23, r22.x, -c8
-		add_sat r20, -r23_abs, c10.y
-		add r23, r22.x, -c9
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23.x, r22.x, -c10.x
-		add_sat r23.x, -r23_abs, c10.y
-		add r20.x, r20, r23
-		
-		mad r21, r21.xyxy, c2.yyww, v0.xyxy
-		
-		texldl r22, r21.xw, s7
-		add r23, r22.x, -c8
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23, r22.x, -c9
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23.x, r22.x, -c10.x
-		add_sat r23.x, -r23_abs, c10.y
-		add r20.x, r20, r23
-		
-		texldl r22, r21.zy, s7
-		add r23, r22.x, -c8
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23, r22.x, -c9
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23.x, r22.x, -c10.x
-		add_sat r23.x, -r23_abs, c10.y
-		add r20.x, r20, r23
-		
-		texldl r22, r21.xy, s7
-		add r23, r22.x, -c8
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23, r22.x, -c9
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23.x, r22.x, -c10.x
-		add_sat r23.x, -r23_abs, c10.y
-		add r20.x, r20, r23
-		
-		dp4 r20.x, r20, c2.y
-		cmp r0.x, -r20_abs.x, -c2.y, r0.x
-	endif
-    cmp r0.x, r0.x, c2.y, r1.w
-	
-	// depth of field and stipple filter average
-	lrp r3.xyz, r0.x, r24, r7
-	
-	// motion blur
-	if_ne r31.x, c222.w
 		mad r4.xyz, v0.yxyw, c5.x, c5.y
 		mul r0.z, r4.y, c77.z
 		mul r0.z, r0.y, r0.z
@@ -316,10 +156,7 @@
 		dp2add r0.y, r0.yzzw, r0.yzzw, c1.x
 		rsq r0.y, r0.y
 		rcp r0.y, r0.y
-		mul r0.y, r0.y, c4.w
-		add r0.x, r0.x, c2.y
-		rcp r0.x, r0.x
-		mul_sat r0.x, r0.y, r0.x
+		mul_sat r0.x, r0.y, c4.w
 		mad r4.xyz, r5, r2.w, -r3
 		mad r0.xyz, r0.x, r4, r3
 		cmp r3.xyz, r1.w, r3, r0
@@ -377,11 +214,11 @@
 		pow r0.z, r0.z, c11.x
 	endif
 	
-	// blue noise deband
+	// dithering
 	mul r1.xy, v0.xy, c44.xy
-	mul r1.xy, r1.xy, c11.z
+	mul r1.xy, r1.xy, c11.y
 	texld r1, r1, s10
-	add r1.z, r1.z, c4.x
+	mad r1.z, r1.z, c5.x, c5.y
 	mad_sat oC0.xyz, r1.z, c11.y, r0
     mov oC0.w, c2.y
 

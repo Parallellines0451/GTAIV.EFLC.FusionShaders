@@ -9,6 +9,7 @@
 //   float4 ColorCorrect;
 //   float4 ColorShift;
 //   float Exposure;
+//   sampler2D GBufferTextureSampler2;
 //   sampler2D GBufferTextureSampler3;
 //   sampler2D HDRSampler;
 //   sampler2D JitterSampler;
@@ -44,6 +45,7 @@
 //   ColorShift                   c84      1
 //   NoiseParams                  c85      1
 //   PLAYER_MASK                  c86      1
+//   GBufferTextureSampler2       s0       1
 //   GBufferTextureSampler3       s1       1
 //   HDRSampler                   s2       1
 //   BlurSampler                  s3       1
@@ -66,6 +68,7 @@
     def c11, 1.2, 0, 0, 0
     defi i0, 7, 0, 0, 0
     dcl_texcoord v0.xy
+    dcl_2d s0
     dcl_2d s1
     dcl_2d s2
     dcl_2d s3
