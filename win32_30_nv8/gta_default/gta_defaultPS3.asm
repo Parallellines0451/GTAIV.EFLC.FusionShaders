@@ -25,7 +25,7 @@
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 0.176470593, -1, -0, 9.99999975e-006
     def c1, 0.5, 0, 1, 0.25
-    def c2, 2, 0.125, 1.6, 0
+    def c2, 1.6, 0.125, 0, 0
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_color v2.xw
@@ -33,13 +33,13 @@
     dcl vPos.xy
     dcl_2d s0
     texld r0, v0, s0
+    mul_sat r0.w, r0.w, c2.x
     // mul r0.w, r0.w, v2.w disabled vertex alpha
-	mov r22.x, c223.z
-	if_eq r22.x, c2.x
-		add r22.y, r0.w, -c1.w
-		cmp r0.w, r22.y, -c0.y, c0.z
+	mov r20.x, c223.z
+	if_gt r20.x, c1.z
+		add r20.x, r0.w, -c1.x
+		cmp r0.w, r20.x, -c0.y, c0.z
 	endif
-    mul_sat r0.w, r0.w, c2.z
     mul r1.x, r0.w, c39.x
     mov r2.xyz, c0
     /* removed alpha threshold
