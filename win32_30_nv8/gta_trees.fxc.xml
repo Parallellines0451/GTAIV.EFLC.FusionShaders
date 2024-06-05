@@ -162,7 +162,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_trees\gta_treesPS3.asm</File>
-				<Variables value="2" >
+				<Variables value="3" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>TextureSampler</Name>
@@ -235,7 +240,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_trees\gta_treesPS6.asm</File>
-				<Variables value="2" >
+				<Variables value="3" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>TextureSampler</Name>

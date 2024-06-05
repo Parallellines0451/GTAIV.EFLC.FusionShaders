@@ -652,7 +652,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_terrain_va_3lyr\gta_terrain_va_3lyrPS4.asm</File>
-				<Variables value="6" >
+				<Variables value="7" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>TextureSampler_layer0</Name>

@@ -629,7 +629,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_reflect\gta_reflectPS3.asm</File>
-				<Variables value="6" >
+				<Variables value="7" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>EnvironmentSampler</Name>

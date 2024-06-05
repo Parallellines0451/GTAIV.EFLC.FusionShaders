@@ -614,7 +614,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rage_default\rage_defaultPS3.asm</File>
-				<Variables value="6" >
+				<Variables value="7" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>TextureSampler</Name>

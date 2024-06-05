@@ -479,7 +479,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissivestrong\gta_emissivestrongPS3.asm</File>
-				<Variables value="5" >
+				<Variables value="6" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>TextureSampler</Name>

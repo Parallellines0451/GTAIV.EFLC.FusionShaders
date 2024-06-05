@@ -654,7 +654,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_parallax_specmap\gta_parallax_specmapPS3.asm</File>
-				<Variables value="11" >
+				<Variables value="12" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
