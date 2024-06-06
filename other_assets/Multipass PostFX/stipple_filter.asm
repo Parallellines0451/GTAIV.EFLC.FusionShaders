@@ -22,13 +22,9 @@
     def c2, 0.25, 1, 0.5, 0
     def c4, -0.5, -1.5, 1.5, 0.5
 	
-	def c8, 0.012156862745098, 0.016078431372549, 0.0435294117647059, 0.0474509803921569 // 3.1, 4.1, 11.1, 12.1
-	def c9, 0.5141176470588235, 0.5180392156862745, 0.5454901960784314, 0.5494117647058824 // 131.1, 132.1, 139.1, 140.1
-	def c10, 0.027843137254902, 0.0007843137254902, 0, 0 // 7.1, 0.2
-	
     dcl_texcoord v0.xy
     dcl_2d s2
-    dcl_2d s7
+    dcl_2d s0
 	
     mov r3, c4
     mad r4, c76.xyxy, r3.xyzx, v0.xyxy
@@ -53,54 +49,15 @@
 	mov r31, c2.w
 	if_ne r31.x, c223.z // Stipple mask
 		mov r21, c76
-		
-		texld r22, v0, s7
-		add r23, r22.x, -c8
-		add_sat r20, -r23_abs, c10.y
-		add r23, r22.x, -c9
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23.x, r22.x, -c10.x
-		add_sat r23.x, -r23_abs, c10.y
-		add r20.x, r20, r23
-		
+		texld r22, v0, s0
 		mad r21, r21.xyxy, c2.yyww, v0.xyxy
-		
-		texldl r22, r21.xw, s7
-		add r23, r22.x, -c8
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23, r22.x, -c9
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23.x, r22.x, -c10.x
-		add_sat r23.x, -r23_abs, c10.y
-		add r20.x, r20, r23
-		
-		texldl r22, r21.zy, s7
-		add r23, r22.x, -c8
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23, r22.x, -c9
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23.x, r22.x, -c10.x
-		add_sat r23.x, -r23_abs, c10.y
-		add r20.x, r20, r23
-		
-		texldl r22, r21.xy, s7
-		add r23, r22.x, -c8
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23, r22.x, -c9
-		add_sat r23, -r23_abs, c10.y
-		add r20, r20, r23
-		add r23.x, r22.x, -c10.x
-		add_sat r23.x, -r23_abs, c10.y
-		add r20.x, r20, r23
-		
-		dp4 r20.x, r20, c2.y
-		cmp r0.x, -r20_abs.x, -c2.y, r0.x
+		texldl r23, r21.xw, s0
+		add r22.w, r22, r23
+		texldl r23, r21.zy, s0
+		add r22.w, r22, r23
+		texldl r23, r21.xy, s0
+		add r22.w, r22, r23
+		cmp r0.x, -r22_abs.w, -c2.y, r0.x
 	endif
 	
     cmp r0.x, r0.x, c2.y, c2.w

@@ -2229,7 +2229,12 @@
 				<Item>
 					<VertexShader>4</VertexShader>
 					<PixelShader>3</PixelShader>
-					<Params />
+					<Params value="1" >
+						<Item>
+							<Type value="21" />
+							<Value value="15" />
+						</Item>
+					</Params>
 				</Item>
 			</Passes>
 		</Item>
@@ -2249,7 +2254,12 @@
 				<Item>
 					<VertexShader>6</VertexShader>
 					<PixelShader>3</PixelShader>
-					<Params />
+					<Params value="1" >
+						<Item>
+							<Type value="21" />
+							<Value value="15" />
+						</Item>
+					</Params>
 				</Item>
 			</Passes>
 		</Item>

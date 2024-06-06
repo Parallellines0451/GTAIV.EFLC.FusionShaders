@@ -1568,10 +1568,14 @@
 				<Item>
 					<VertexShader>4</VertexShader>
 					<PixelShader>5</PixelShader>
-					<Params value="1" >
+					<Params value="2" >
 						<Item>
 							<Type value="16" />
 							<Value value="4" />
+						</Item>
+						<Item>
+							<Type value="21" />
+							<Value value="15" />
 						</Item>
 					</Params>
 				</Item>
