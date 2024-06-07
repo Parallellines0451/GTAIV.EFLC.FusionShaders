@@ -47,8 +47,7 @@
     def c4, 0.75, 0.25, 5, 10
 	def c20, 1.6666667, 0, 0, 0	// Reflection intensity multiplier
 	def c21, 3, 2, 1, 0	// Console tree lighting constants
-	def c22, 0.012156862745098, 0.023921568627451, 0.027843137254902, 0 // 3.1, 6.1, 7.1, 0.0
-	def c23, 0.0007843137254902, 0, 0, 0 // 0.2
+	def c22, 0.012156862745098, 0.0007843137254902, 0, 0 // 3.1, 0.2
     def c24, 0.212500006, 0.715399981, 0.0720999986, 0.35
     dcl_texcoord v0.xy
     dcl_texcoord1 v1
@@ -58,11 +57,9 @@
     dcl_2d s4
     dcl_2d s5
     dcl_2d s6
-	
 	texld r21, v0, s6
-	add r21.yz, r21.x, -c22
-	add_sat r21.yz, -r21_abs, c23.x
-	add r21.x, r21.y, r21.z
+	add r21.x, r21.x, -c22.x
+	add_sat r21.x, -r21_abs.x, c22.y
 	mov r21.y, c223.x
 	add r21.y, r21.y, -c21.y
 	cmp r21.y, -r21_abs.y, r21.x, c0.w	// Console tree lighting toggle
