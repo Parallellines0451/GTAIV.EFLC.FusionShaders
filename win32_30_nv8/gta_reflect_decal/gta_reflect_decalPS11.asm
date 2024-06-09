@@ -96,19 +96,20 @@
 //
 
     ps_3_0
-	// ----------------------------------------------------- Improved Shadow Filter Constants -------------------------------------------------------
+	// -------------------------------------------------------------- Shadow Constants --------------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
     def c112, 3, 7.13800001, 0.00390625, 0
     def c113, 0.75, -0.5, 0.5, 0
 	
-    def c114, 0.1, 0.22, 0.5, 0.8 // c114-c117 = biases for each cascade of each quality setting
-    def c115, 0.22, 0.42, 1.07, 1.22
-    def c116, 0.28, 0.53, 0.98, 1.08
-    def c117, 0.5, 0.8, 1.35, 1.5
+    def c114, 0.14, 0.24, 0.5, 0.75 // static bias
+    def c115, 0.24, 0.44, 1.1, 1.15
+    def c116, 0.3, 0.54, 1.1, 0.95
+    def c117, 0.64, 1.04, 2.2, 2.3
 	
-	def c118, 4, 3, 2, 1 // quality ID's
-	def c119, 0.16, 0.08, 0.04, 0 // 1/blend_distance
+	def c118, 0.04, 0, 0, 0 // normal offset bias
+    
+	def c119, 0.33, 2, 3, 0 // blend distance
 	
 	def c120, 0, 0.25, 0.5, 0.75 // UV clamps
 	def c121, 0.2499, 0.4999, 0.7499, 1
@@ -123,7 +124,6 @@
 	def c137, -0.5343471434373126, 0.8058593459499529, -0.1133270115046468, -0.9490025827627441
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 7.3428039531e-43 // 524
-    def c99, 0.1, 0, 0, 0 // normal offset bias magnitude
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, 9.99999975e-006, 1, -0.5, -0.00999999978
     def c1, 100, -0.5, 0.5, -0.25
@@ -189,7 +189,42 @@
     cmp r5.yzw, r5.xxyz, c2.y, c2.z
     mov r5.x, c0.y
     mad r21, r5, c110.yyyw, -r5.yzww // shadow cascade mask
-    mad r4.xyz, r20.xyz, c99.x, r4 // normal offset bias
+    // ---------------------------------------------------------------- Shadow Fixes -----------------------------------------------------------------
+    add r22, c54.w, -c54
+    add r22, c53.w, -r22 // cascade ranges
+    dp4 r23.x, r21_abs, r22
+    dp4 r23.y, r21_abs, r22.yzww
+    rcp r23.z, r22.x
+    mul r23.zw, r23.xyxy, r23.z
+    mul r23.zw, r23, c118.x
+    mul r24.x, r23.x, c119.x
+    rcp r24.y, r24.x
+    add r24.x, r23.x, -r24.x
+    add r24.x, v9.w, -r24.x
+    mul_sat r24.x, r24.x, r24.y // blending factor
+    mul r24.y, r24.x, r24.x
+    mad r24.z, -c119.y, r24.x, c119.z
+    mul r24.x, r24.y, r24.z
+    rcp r24.y, r23.x
+    mul r23.xy, r23.xy, r24.y
+    lrp r22.xy, r24.x, r23.yw, r23.xz
+    
+    m4x4 r24, r21_abs, c114
+    dp4 r24.x, r24, c220
+    add r4.z, r4.z, -r24.x // undo static bias
+    
+    mad r4.xyz, r20.xyz, r22.y, r4 // normal offset bias
+    
+    mov r20.xy, c53.y
+    rcp r20.x, c58.x
+    mul r20.x, r20.x, c57.x
+    mul r20.x, r20.x, r20.y // fix filter stretching
+    
+    mul r20.xy, r20.xy, r22.x // blend blur
+    
+    dp4 r20.z, r21_abs, c120 // fix pixels leaking into other cascades
+    dp4 r20.w, r21_abs, c121
+    // ----------------------------------------------------------------------------------------------------------------------------------------------
     dp4 r6.x, r5, c57
     dp4 r6.y, r5, c58
     dp4 r7.x, r5, c59
@@ -270,36 +305,9 @@
     add r1.w, r2.w, r4.y
     cmp_sat r1.w, r1.w, r2.w, r4.x
     removed 1.0.6.0 filter */
-// ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
-	mov r20.xy, c53.y
-	rcp r20.z, c58.x
-	mul r20.z, r20.z, c57.x
-	mul r20.x, r20.x, r20.z // fix filter stretching
-	
-	add r22, c54.w, -c54
-	add r22, c53.w, -r22 // cascade distances
-	dp4 r23.x, r21_abs, r22
-	dp4 r23.y, r21_abs, r22.xxyz
-	dp4 r23.z, r21_abs, c119.xxyz
-	add r23.w, v9.w, -r23.y
-	mul_sat r23.z, r23.z, r23.w
-	rcp r23.x, r23.x
-	mul r23.w, r23.x, r23.y
-	lrp r20.z, r23.z, c110.y, r23.w
-	mul r20.xy, r20.xy, r20.z // apply pseudo cascade blending
-	
-	mov r24, c118
-	add r24, r24, -c221.y
-	add_sat r24, c110.y, -r24_abs
-	m4x4 r25, r21_abs, c114
-	dp4 r25.x, r25, r24
-	add r4.z, r4.z, -r25.x // apply per cascade bias
-	
-	dp4 r20.z, r21_abs, c120 // fix pixels leaking into other cascades
-	dp4 r20.w, r21_abs, c121
-	
+	// ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
 	mov r21.x, c110.y
-	if_lt c223.y, r21.x
+	if_lt c223.z, r21.x
 		dp2add r21.y, vPos, c112.xy, c112.w
 		mad r21.y, r21.y, c111.x, c111.y
 		frc r21.y, r21.y

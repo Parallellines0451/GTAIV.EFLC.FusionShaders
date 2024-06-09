@@ -153,7 +153,7 @@
     removed original filter */
 	// ----------------------------------------------------------- Improved Shadow Filter -----------------------------------------------------------
 	mov r21.x, c110.y
-	if_lt c223.y, r21.x
+	if_lt c223.z, r21.x
 		dp2add r21.y, vPos, c112.xy, c112.w
 		mad r21.y, r21.y, c111.x, c111.y
 		frc r21.y, r21.y
