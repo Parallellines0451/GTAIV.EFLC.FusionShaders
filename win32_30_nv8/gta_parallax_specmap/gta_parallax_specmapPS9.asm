@@ -193,12 +193,12 @@
     mad r2.yzw, v6.x, c60.xxyw, r2
     mad r2.yzw, v6.z, c62.xxyw, r2
     add r2.yzw, r2, c63.xxyw
-    mad r2.yzw, r20.xxyz, c99.x, r2 // normal offset bias
     dp3 r0.w, c14, v6
     add r6.xyz, -r0.w, -c54
     cmp r6.yzw, r6.xxyz, -c1.y, -c1.z
     mov r6.x, -c1.y
     mad r21, r6, c110.yyyw, -r6.yzww // shadow cascade mask
+    mad r2.yzw, r20.xxyz, c99.x, r2 // normal offset bias
     dp4 r3.x, r6, c57
     dp4 r3.y, r6, c58
     dp4 r7.x, r6, c59
