@@ -59,22 +59,15 @@
     dcl_2d s4
     dcl_2d s5
     dcl_2d s6
-	texld r22, v0, s5
-	add r21.x, r22.x, -c22.x
-	add_sat r21.x, -r21_abs.x, c22.y
-	mov r21.y, c223.x
-	add r21.y, r21.y, -c21.y
-	cmp r21.y, -r21_abs.y, r21.x, c0.x	// Console tree lighting toggle
-	if_eq r21.y, c0.x
-		texld r0, v0, s1
-		mul r1.xyz, r0.w, c1
-		frc r1.xyz, r1
-		add r2.xyz, r1, r1
-		mad r2.xy, r1.yzzw, -c1.w, r2
-		mad r0.xyz, r0, c2.x, r2
-		add r0.xyz, r0, c2.y
-		nrm r1.xyz, r0
-		texld r0, v0, s4
+    texld r0, v0, s1
+    mul r1.xyz, r0.w, c1
+    frc r1.xyz, r1
+    add r2.xyz, r1, r1
+    mad r2.xy, r1.yzzw, -c1.w, r2
+    mad r0.xyz, r0, c2.x, r2
+    add r0.xyz, r0, c2.y
+    nrm r1.xyz, r0
+    texld r0, v0, s4
 	// ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
 	if_ne r0.x, c127.y
 		rcp r20.x, c128.x
@@ -92,12 +85,19 @@
 		min r0, r20.w, c127.x		// FP error hack
 	endif
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
-		mad r0.x, r0.x, c66.z, -c66.w
-		mul r0.x, r0.x, v1.w
-		rcp r0.x, r0.x
-		mad r0.yzw, v1.xxyz, -r0.x, c3.w
-		mul r2.xyz, r0.x, v1
-		nrm r3.xyz, r0.yzww
+    mad r0.x, r0.x, c66.z, -c66.w
+    mul r0.x, r0.x, v1.w
+    rcp r0.x, r0.x
+    mad r0.yzw, v1.xxyz, -r0.x, c3.w
+    mul r2.xyz, r0.x, v1
+    nrm r3.xyz, r0.yzww
+	texld r22, v0, s5
+	add r21.x, r22.x, -c22.x
+	add_sat r21.x, -r21_abs.x, c22.y
+	mov r21.y, c223.x
+	add r21.y, r21.y, -c21.y
+	cmp r21.y, -r21_abs.y, r21.x, c0.x	// Console tree lighting toggle
+	if_eq r21.y, c0.x
 		dp3 r0.x, r3, r1
 		add r0.y, r0.x, r0.x
 		add r0.x, -r0_abs.x, c3.z
@@ -122,8 +122,8 @@
 		mov_sat r0.y, r0.y
 		mul r0.y, r0.y, c72.y
 		// texld r3, v0, s5 sample stencil before
-		mov r3, r22
-		add r0.z, -r3.x, c2.z
+		// add r0.z, -r3.x, c2.z
+		add r0.z, -r22.x, c2.z
 		cmp r0.y, r0.z, r0.y, c0.x
 		texld r3, v0, s2
 		mul r0.z, r3.y, r3.y
@@ -171,39 +171,6 @@
 		mad oC0.xyz, r2, r1, r0.xzww
 		mov oC0.w, c3.z
 	else
-		texld r0, v0, s1
-		mul r1.xyz, r0.w, c1
-		frc r1.xyz, r1
-		add r2.xyz, r1, r1
-		mad r2.xy, r1.yzzw, -c1.w, r2
-		mad r0.xyz, r0, c2.x, r2
-		add r0.xyz, r0, c2.y
-		nrm r1.xyz, r0
-		
-		texld r0, v0, s4
-	// ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
-	if_ne r0.x, c127.y
-		rcp r20.x, c128.x
-		mul r20.x, r20.x, c128.y
-		pow r20.x, r20.x, r0.x
-		mul r20.x, r20.x, c128.x	// W_clip
-		
-		add r20.y, r20.x, -c128.x
-		add r20.z, c128.y, -c128.x
-		mul r20.y, r20.y, c128.y
-		mul r20.z, r20.z, r20.x
-		rcp r20.z, r20.z
-		mul r20.w, r20.y, r20.z		// Linear depth
-		
-		min r0, r20.w, c127.x		// FP error hack
-	endif
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
-		mad r0.x, r0.x, c66.z, -c66.w
-		mul r0.x, r0.x, v1.w
-		rcp r0.x, r0.x
-		mad r0.yzw, v1.xxyz, -r0.x, c3.w
-		nrm r3.xyz, r0.yzww
-
 		//dot(viewDir, normal)
 		dp3 r4.y, r3.xyz, r1.xyz
 		//saturate(viewDir.z)
