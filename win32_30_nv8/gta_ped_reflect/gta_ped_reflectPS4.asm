@@ -272,7 +272,7 @@
     
     mad r24, r22.xxyz, -c110.wyyy, r22
     dp4 r24.x, r21_abs, r24 // curr_range - prev_range
-    mul r24.x, r24.x, c118.y
+    mul r24.x, r24.x, c218.z
     rcp r24.z, r24.x
     add r24.x, r23.x, -r24.x
     add r24.x, v9.w, -r24.x
@@ -287,12 +287,16 @@
     dp4 r24.x, r24, c220
     add r6.z, r6.z, -r24.x // undo static bias
     
+    mul r22.y, r22.y, c223.y // scale bias with FOV
+    mul r22.y, r22.y, c218.y
     mad r6.xyz, r20.xyz, r22.y, r6 // normal offset bias
     
     mul r20.xy, r22.x, c53.y
     rcp r20.x, c58.x
     mul r20.x, r20.x, c57.x
     mul r20.x, r20.x, r20.y // fix filter stretching
+    
+    mul r20.xy, r20.xy, c218.x
     
     dp4 r20.z, r21_abs, c119 // fix pixels leaking into other cascades
     dp4 r20.w, r21_abs, c120
