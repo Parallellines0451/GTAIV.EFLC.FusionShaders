@@ -755,7 +755,7 @@
 			AddressW Wrap
 			AddressW Wrap
 			MipFilter Linear
-			MinFilter Anisotropic
+			MinFilter Linear
 			MagFilter Linear
 		</Values>
 		</Item>
@@ -810,13 +810,14 @@
 					<Value>Diffuse Billboard Texture</Value>
 				</Item>
 			</Annotation>
-			<Values value="12" >
+			<Values value="14" >
 			AddressU Clamp
 			AddressV Clamp
 			AddressW Clamp
 			MipFilter None
-			MinFilter Linear
-			MagFilter Linear
+			MinFilter Point
+			MagFilter Point
+			MipMapLodBias 8
 		</Values>
 		</Item>
 		<Item>

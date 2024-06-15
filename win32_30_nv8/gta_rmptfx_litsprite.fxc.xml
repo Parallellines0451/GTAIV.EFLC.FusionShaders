@@ -1870,7 +1870,7 @@
 				</Item>
 			</Annotation>
 			<Values value="10" >
-			MinFilter Anisotropic
+			MinFilter Linear
 			MagFilter Linear
 			MipFilter Linear
 			AddressU Clamp

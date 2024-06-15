@@ -1050,7 +1050,7 @@
 			AddressV Border
 			AddressW Border
 			MipFilter Linear
-			MinFilter Anisotropic
+			MinFilter Linear
 			MagFilter Linear
 		</Values>
 		</Item>
@@ -1072,7 +1072,7 @@
 			AddressW Wrap
 			AddressW Wrap
 			MipFilter Linear
-			MinFilter Anisotropic
+			MinFilter Linear
 			MagFilter Linear
 		</Values>
 		</Item>
