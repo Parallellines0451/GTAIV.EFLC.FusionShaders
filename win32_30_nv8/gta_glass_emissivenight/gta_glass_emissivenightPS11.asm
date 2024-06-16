@@ -110,14 +110,14 @@
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
     def c112, 3, 7.13800001, 0.00390625, 0
-    def c113, 0.75, -0.5, 0.5, 1.5
+    def c113, 0.75, -0.5, 0.5, 0
 	
     def c114, 0.14, 0.24, 0.5, 0.75 // static bias
     def c115, 0.24, 0.44, 1.1, 1.15
     def c116, 0.3, 0.54, 1.1, 0.95
     def c117, 0.64, 1.04, 2.2, 2.3
 	
-	def c118, 4, 0.3, 0, 0 // normal offset bias and blend params
+	def c118, 8, 0.3, 0, 0 // normal offset bias and blend params
 	
 	def c119, 0, 0.25, 0.5, 0.75 // UV clamps
 	def c120, 0.2499, 0.4999, 0.7499, 1
@@ -244,12 +244,12 @@
     rcp r23.z, r22.x
     mul r23.zw, r23.xyxy, r23.z // (curr_range, next_range) / first_range
     mul r24.x, r22.x, c53.y
-    mul r24.x, r24.x, c118.x
+    mul r24.x, r24.x, c218_abs.y
     mul r23.zw, r23, r24.x // bias magnitude
     
     mad r24, r22.xxyz, -c110.wyyy, r22
     dp4 r24.x, r21_abs, r24 // curr_range - prev_range
-    mul r24.x, r24.x, c218.z
+    mul r24.x, r24.x, c218_abs.z
     rcp r24.z, r24.x
     add r24.x, r23.x, -r24.x
     add r24.x, v9.w, -r24.x
@@ -265,7 +265,6 @@
     add r5.z, r5.z, -r24.x // undo static bias
     
     mul r22.y, r22.y, c223.y // scale bias with FOV
-    mul r22.y, r22.y, c218.y
     mad r5.xyz, r20.xyz, r22.y, r5 // normal offset bias
     
     mul r20.xy, r22.x, c53.y
@@ -273,7 +272,7 @@
     mul r20.x, r20.x, c57.x
     mul r20.x, r20.x, r20.y // fix filter stretching
     
-    mul r20.xy, r20.xy, c218.x
+    mul r20.xy, r20.xy, c218_abs.x
     
     dp4 r20.z, r21_abs, c119 // fix pixels leaking into other cascades
     dp4 r20.w, r21_abs, c120
@@ -359,8 +358,6 @@
     cmp_sat r1.w, r1.w, r2.w, r5.x
     removed 1.0.6.0 filter */
 	// ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
-    mul r20.xy, r20.xy, c113.w // blur factor
-    
 	mov r21.x, c110.y
 	if_lt c223.z, r21.x
 		dp2add r21.y, vPos, c112.xy, c112.w
