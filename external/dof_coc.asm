@@ -80,7 +80,8 @@
     max r0.z, r0.x, r0.z // cutscene
     mul r1.w, r0.z, r0.z
 	
-	add r3.xy, v0.xy, c76.xy // fix pixel offset
+    mov r3.xy, c76
+    mad r3.xy, r3.xy, c4.w, v0.xy // fix pixel offset
 	texld r3, r3, s8
 	
 	lrp oC0.xyz, r1.w, r3, r7
