@@ -42,7 +42,7 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [ro
 # Reflections
 - Fixed excessive specularity of several surfaces, especially when it rains
 - Fixed blocky vehicle reflections
-- Reduced corona intensity in reflections
+- Added parameter to control corona reflection intensity
 - Fixed anisotropic filtering affecting reflection intensity
 - Restored console vehicle reflection intensity relative to dirt level
 - Increased global reflection intensity to match consoles
