@@ -1,7 +1,9 @@
 # GTAIV.EFLC.FusionShaders
-Various shader fixes and improvements for GTA IV FusionFix.
+Various shader fixes and improvements for Grand Theft Auto IV and Episodes From Liberty City.
 
 Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [robi29](https://github.com/robi29/) and [\_CP_](https://github.com/cpmodding) for directly contributing fixes, to [RaphaelK12](https://github.com/RaphaelK12) for fixes and for making a [realtime shader editor](https://github.com/RaphaelK12/ShadowResFix), to [Shvab](https://github.com/d3g0n-byte) for making RAGE Shader Editor, to [ThirteenAG](https://github.com/ThirteenAG) for implementing features we requested into FusionFix and to everyone else from the Fusion Team for their support.
+
+[FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix) is strictly required for these shaders to work. [Console Visuals](https://gtaforums.com/topic/989098-console-visuals-the-complete-edition/) and [Various Fixes](https://gtaforums.com/topic/975211-various-fixes/) are highly recommended.
 
 # General
 - Fixed z-fighting
@@ -60,6 +62,7 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [ro
 - Ported fence mipmap bias from consoles and previous patches
 - Added parameters to control shadow softness, shadow bias and tree transparency
 - Fixed wrong texture filtering used in several shaders
+- Added support to toggle between different rain streak textures at runtime
 - Added AO to gta_normal_spec_reflect_emissive if emissivity is 0 so it can be used to disable night shadows for certain objects
 - Partially fixed mirror depth
 - Fixed lights that were made invisible with patch 1.0.6.0
