@@ -45,6 +45,7 @@
     dp4 r2.w, r8, r8
     add r0.x, r0.x, -r0.z
     mad r0.x, r0.x, r0.x, -r2.w
+    cmp r0.x, r0.x, c2.y, c2.w
 	
 	mov r31, c2.w
 	if_ne r31.x, c223.z // Stipple mask
@@ -56,11 +57,10 @@
 		texldl r23, r21.zy, s0
 		add r22.w, r22, r23
 		texldl r23, r21.xy, s0
-		add r22.w, r22, r23
-		cmp r0.x, -r22_abs.w, -c2.y, r0.x
+		add_sat r22.w, r22, r23
+		mul r0.x, r0.x, r22.w
 	endif
 	
-    cmp r0.x, r0.x, c2.y, c2.w
 	add r3.xyz, r3, r4
 	add r3.xyz, r3, r5
 	add r3.xyz, r3, r6
