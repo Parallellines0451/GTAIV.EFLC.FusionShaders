@@ -35,6 +35,7 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [ro
 - Fixed depth of field and bloom not scaling correctly at resolutions higher than 720p
 - Fixed excessively blurry screen compared to consoles caused by leftover anti aliasing code
 - Ported console bloom and auto exposure
+- Restored console timecyc gamma boost
 - Fixed instantaneous auto exposure in some weathers
 - Fixed motion blur not scaling properly at high framerates
 - Fixed TLAD noise being affected by water quality and corrected its aspect ratio
@@ -50,7 +51,7 @@ Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [ro
 - Restored console mirror blur
 # Particles
 - Restored soft particles
-- Improved rain visibility, especially at night
+- Fixed rain being almost invisible, especially at night
 - Fixed rain streaks becoming shorter at high framerates
 # Water
 - Fixed water texture tiling on all quality settings
