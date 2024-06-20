@@ -65,7 +65,7 @@
     def c4, -0.5, -1.5, 1.5, 0.5
     def c5, 2, -1, 0.125, 0
     def c6, 1.10000002, 0, 0, 0
-    def c11, 1.06, 0.00390625, 1.2, 0
+    def c11, 1.06, 0.00390625, 1.15, 0
     defi i0, 7, 0, 0, 0
     dcl_texcoord v0.xy
     dcl_2d s0
@@ -167,6 +167,8 @@
     mad r0.w, r20.x, c82.z, -r8.y // boost timecyc gamma
     pow r2.x, r1.x, r0.w
     mov r31, c2.w
+	
+	// XBOX-like gamma, just an approximation
 	if_eq r31.x, c222.z
 		mul oC0.xyz, r0, r2.x
 	else
@@ -176,10 +178,9 @@
 		pow r20.z, r0.z, c11.z
 		add r21.xyz, c2.y, -r0
 		mul r21.xyz, r21, r21
-		mul r22.xyz, r21, r21
-		mul r22.xyz, r22, r22
-		mad r22.xyz, r22, -r21, c2.y
-		mul_sat oC0.xyz, r20, r22
+		mul r21.xyz, r21, r21
+		mad r21.xyz, r21, -r21, c2.y
+		mul_sat r0.xyz, r20, r21
 	endif
 	
     mov oC0.w, c2.y
