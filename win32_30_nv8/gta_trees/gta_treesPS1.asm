@@ -32,9 +32,7 @@
     dcl_texcoord9 v9
     dcl_2d s0
     dcl_2d s10
-    mov r0.xy, v0.xy
-    mov r0.w, c1.y
-    texldb r0, r0, s0
+    texld r0, v0, s0
     mul_sat r0.w, r0.w, c221_abs.w
 	mov r20.x, c223.z
 	if_gt r20.x, -c1.y
