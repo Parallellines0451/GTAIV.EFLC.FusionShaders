@@ -19,10 +19,9 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 5.8434145962e-43 // 417
-    def c152, 0.2, 0.6, 0.8, 0.4 // c152-c153 = new stipple constants
-    def c153, 0.5, 2, 1, 0
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, 0, -1, -0, 0
+    def c150, 0.00390625, 255, 1, 0.00389105058
     dcl_texcoord v0.xyz
     dcl vPos.xy
     dcl_2d s0
@@ -47,12 +46,10 @@
     cmp r1, -r1.y, c1.y, c1.z
     texkill r1
     removed stipple */
-    mul r20.xy, vPos.xy, c153.x
-    frc r20.xy, r20.xy
-    mad r20, r20.xxyy, -c153.y, c153.zwzw
-    mul r20, r20.xxyy, r20.zwzw
-    dp4 r20.x, r20_abs, c152
-    add r20.y, -r20.x, r0.x
+    mul r20.xy, vPos.xy, c150.x
+    texld r20, r20.xy, s10
+    mad r20.y, r20.z, c150.y, c150.z
+    mad r20.y, r20.y, -c150.w, r0.x
     texkill r20.y
     mov oC0.xyz, v0.x
     mov oC0.w, r0.x
