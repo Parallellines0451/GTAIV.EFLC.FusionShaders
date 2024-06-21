@@ -70,9 +70,9 @@
     mov oC1.w, r0.w
     mad oC2.xyz, v2.x, c2.yyzw, c2.ywyw
     // mov oC2.w, r0.w
-    mov r20.x, -c0.y
-    add r20.x, -r20.x, c39.x
-    cmp oC2.w, r20.x, c0.z, -c0.y
+    mov r20.x, -c152.z
+    add r20.x, r20.x, c39.x
+    cmp oC2.w, r20.x, c153.w, c153.z
     mov r0.yz, c0
     mul oC3, -r0.yzzz, c52.x
 	// ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------

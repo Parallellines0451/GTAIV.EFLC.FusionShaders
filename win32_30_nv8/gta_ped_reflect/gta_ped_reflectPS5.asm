@@ -161,9 +161,9 @@
     rcp oC2.y, r0.x
     mul oC0.w, r0.w, c39.x
     // mov oC2.w, c2.y
-    mov r20.x, c2.y
-    add r20.x, -r20.x, c39.x
-    cmp oC2.w, r20.x, c2.x, c2.y
+    mov r20.x, -c152.z
+    add r20.x, r20.x, c39.x
+    cmp oC2.w, r20.x, c153.w, c153.z
     mov r0.xy, c2
     mul oC3, r0.yxxx, c52.x
 	// ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------

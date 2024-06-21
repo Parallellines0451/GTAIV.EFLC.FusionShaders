@@ -133,9 +133,9 @@
     add r1.x, r1.x, -c1.y
     cmp oC2.z, -r1_abs.x, v5.x, c39.z // apply vertex AO if emissivity == 0, makes this shader useful for excluding objects from casting night shadows
     // mov oC2.w, r0.x
-    mov r20.x, -c2.y
-    add r20.x, -r20.x, c39.x
-    cmp oC2.w, r20.x, c2.z, -c2.y
+    mov r20.x, -c152.z
+    add r20.x, r20.x, c39.x
+    cmp oC2.w, r20.x, c153.w, c153.z
     mov r0.xw, c2
     mul oC3, r0.wxxx, c52.x
 	// ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------

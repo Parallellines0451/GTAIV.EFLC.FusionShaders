@@ -63,8 +63,8 @@
     mov oC1.w, r1.x
     mad oC2.xyz, v2.x, c1.yyzw, c1.ywyw
     // mov oC2.w, r1.x
-    add r20.x, c0.y, r1.x
-    cmp oC2.w, r20.x, c0.z, -c0.y
+    add r20.x, -c152.z, r1.x
+    cmp oC2.w, r20.x, c153.w, c153.z
     mul oC3, -r2.yzzz, c52.x
 	// ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------
 	if_ne v9.y, c127.y

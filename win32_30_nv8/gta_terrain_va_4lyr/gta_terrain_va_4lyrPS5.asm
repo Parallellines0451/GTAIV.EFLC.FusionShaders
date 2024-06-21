@@ -69,9 +69,9 @@
     mul r21.xy, r21.xy, c1.x
     mov oC2.xyz, r21.xyz
     // mov oC2.w, c39.x
-    mov r20.x, c0.z
-    add r20.x, -r20.x, c39.x
-    cmp oC2.w, r20.x, c0.y, c0.z
+    mov r20.x, -c152.z
+    add r20.x, r20.x, c39.x
+    cmp oC2.w, r20.x, c153.w, c153.z
     mov r0.yz, c0
     mul oC3, r0.zyyy, c52.x
 	// ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------
