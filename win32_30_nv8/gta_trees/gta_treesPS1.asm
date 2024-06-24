@@ -34,11 +34,9 @@
     dcl_2d s10
     texld r0, v0, s0
     mul_sat r0.w, r0.w, c221_abs.w
-	mov r20.x, c223.z
-	if_gt r20.x, -c1.y
-		add r20.x, r0.w, -c1.w
-		cmp r0.w, r20.x, -c1.y, c1.x
-	endif
+    add r20.x, r0.w, -c1.w
+    cmp r20.x, r20.x, -c1.y, c1.x
+    cmp r0.w, -c223_abs.z, r0.w, r20.x
     mul r0.w, r0.w, c39.x
     /* removed stipple
     mov_sat r1.x, r0.w

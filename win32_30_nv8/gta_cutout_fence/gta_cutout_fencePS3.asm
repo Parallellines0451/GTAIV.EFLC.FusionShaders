@@ -34,11 +34,9 @@
     texld r0, v0, s0
     mul_sat r0.w, r0.w, c2.x
     // mul r0.w, r0.w, v2.w disabled vertex alpha
-	mov r20.x, c223.z
-	if_gt r20.x, c1.z
-		add r20.x, r0.w, -c1.x
-		cmp r0.w, r20.x, -c0.y, c0.z
-	endif
+    add r20.x, r0.w, -c1.x
+    cmp r20.x, r20.x, -c0.y, c0.z
+    cmp r0.w, -c223_abs.z, r0.w, r20.x
     mul r1.x, r0.w, c39.x
     mov r2.xyz, c0
     /* removed alpha threshold
