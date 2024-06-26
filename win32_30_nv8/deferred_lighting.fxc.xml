@@ -4295,7 +4295,7 @@
 						</Item>
 						<Item>
 							<Type value="0" />
-							<Value value="1" />
+							<Value value="0" />
 						</Item>
 						<Item>
 							<Type value="7" />
@@ -4317,7 +4317,7 @@
 						</Item>
 						<Item>
 							<Type value="0" />
-							<Value value="1" />
+							<Value value="0" />
 						</Item>
 						<Item>
 							<Type value="7" />
@@ -4339,7 +4339,7 @@
 						</Item>
 						<Item>
 							<Type value="0" />
-							<Value value="1" />
+							<Value value="0" />
 						</Item>
 						<Item>
 							<Type value="7" />
@@ -4366,7 +4366,7 @@
 						</Item>
 						<Item>
 							<Type value="0" />
-							<Value value="1" />
+							<Value value="0" />
 						</Item>
 						<Item>
 							<Type value="7" />
@@ -4388,7 +4388,7 @@
 						</Item>
 						<Item>
 							<Type value="0" />
-							<Value value="1" />
+							<Value value="0" />
 						</Item>
 						<Item>
 							<Type value="7" />
@@ -5603,7 +5603,7 @@
 				<Item>
 					<VertexShader>19</VertexShader>
 					<PixelShader>39</PixelShader>
-					<Params value="5" >
+					<Params value="7" >
 						<Item>
 							<Type value="6" />
 							<Value value="1" />
@@ -5619,6 +5619,14 @@
 						<Item>
 							<Type value="7" />
 							<Value value="8" />
+						</Item>
+						<Item>
+							<Type value="3" />
+							<Value value="0" />
+						</Item>
+						<Item>
+							<Type value="10" />
+							<Value value="0" />
 						</Item>
 						<Item>
 							<Type value="3" />
