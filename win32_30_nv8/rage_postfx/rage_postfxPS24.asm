@@ -166,7 +166,6 @@
     mov r1.zw, c0
     mad r1.xy, v0, r1.zwzw, c85
     frc r1.xy, r1
-    mul r1.xy, r1.xy, c221.x // fix noise tiling being affected by water quality
     mul r1.x, r1.x, c44.x
     mul r1.x, r1.x, c44.w // fix noise aspect ratio
     texld r1, r1, s3
