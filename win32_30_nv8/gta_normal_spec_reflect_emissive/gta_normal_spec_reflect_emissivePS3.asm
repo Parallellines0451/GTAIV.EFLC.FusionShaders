@@ -39,7 +39,7 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 5.5071029648e-43 // 393
-    def c152, 0.2, 0.6, 0.8, 0.4 // c152-c153 = new stipple constants
+    def c152, 0.125, 0.25, 0.375, 0.5 // c152-c153 = new stipple constants
     def c153, 0.5, 2, 1, 0
     def c127, 0.9999999, 1, 0, 0	// LogDepth constants
     def c0, -0.5, 9.99999975e-006, 0.5, 0.001953125
@@ -79,7 +79,7 @@
     frc r20.xy, r20.xy
     mad r20, r20.xxyy, -c153.y, c153.zwzw
     mul r20, r20.xxyy, r20.zwzw
-    dp4 r20.x, r20_abs, c152
+    dp4 r20.x, r20_abs, c152.xzwy
     add r20.y, -r20.x, c39.x
     texkill r20.y
     texld r0, v0, s1
@@ -133,7 +133,7 @@
     add r1.x, r1.x, -c1.y
     cmp oC2.z, -r1_abs.x, v5.x, c39.z // apply vertex AO if emissivity == 0, makes this shader useful for excluding objects from casting night shadows
     // mov oC2.w, r0.x
-    mov r20.x, -c152.z
+    mov r20.x, -c152.w
     add r20.x, r20.x, c39.x
     cmp oC2.w, r20.x, c2.z, -c2.y
     mov r0.xw, c2
