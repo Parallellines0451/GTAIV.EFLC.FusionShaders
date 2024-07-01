@@ -92,7 +92,9 @@
     def c0, 0, 0.5, -0.5, 0.699999988
     def c1, 0.0500000007, -10, 0.100000001, 9.99999975e-006
     def c2, 1, 1.11111116, 0.200000003, 0
-    def c3, 0.015, 0.005, 0, 0
+    def c73, 0.015, 0, 0, 0 // gMotionBlur at 30 FPS = 0.015, beware that this prevents streaks from shortening during slow motion, but it's not a big deal
+    // def c78, 0.6, 0, 0, 0
+    // def c79, 0.4, 0, 0, 0
     def c80, 0.4, 0, 0, 0
     dcl_position v0
     dcl_texcoord v1
@@ -117,10 +119,7 @@
       mul r5.xyz, r3.zxyw, r4
       mad r4.xyz, r3.yzxw, r4.yzxw, -r5
       nrm r5.xyz, r4
-      mov r6.x, c2.w
-      sge r6.x, -c233_abs.y, r6.x
-      lrp r7.x, r6.x, c3.x, c3.y
-      mul r1.xyz, r1, r7.x // c73.x at 30 FPS == 0.015, this will prevent streaks from becoming shorter during slow motion but it's arguably a good tradeoff
+      mul r1.xyz, r1, c233_abs.y
       mad r1.xyz, c74.x, r3, r1
       mul r3.xyz, r5, c74.x
       add r2.w, c0.w, -v1.y
@@ -309,6 +308,7 @@
     mad r1.xyz, r1, c18.w, r7
     mad r1.xyz, r6, c80.x, r1
     add r1.xyz, r5, r1
+    // mul r1.xyz, r1, c0.y // average
     mul o1.xyz, r2, r1
     add r0.xyz, -r0, c15
     dp3 r0.x, r0, r0
