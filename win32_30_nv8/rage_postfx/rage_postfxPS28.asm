@@ -68,7 +68,7 @@
     def c5, 2, -1, 0.125, 0
     def c6, 1.10000002, 0, 0, 0
 	
-	def c11, 1.06, 0.00390625, 1.15, 0
+	def c11, 1.06, 0.002, 1.15, 0.03125
 	
     defi i0, 7, 0, 0, 0
     dcl_texcoord v0.xy
@@ -199,7 +199,7 @@
 	
 	// dithering
 	mul r1.xy, v0.xy, c44.xy
-	mul r1.xy, r1.xy, c11.y
+	mul r1.xy, r1.xy, c11.w
 	texld r1, r1, s10
 	mad r1.z, r1.z, c5.x, c5.y
 	mad_sat oC0.xyz, r1.z, c11.y, r0
