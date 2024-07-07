@@ -58,33 +58,33 @@
 //
 
     ps_3_0
-	// -------------------------------------------------------------- Shadow Constants --------------------------------------------------------------
+    // -------------------------------------------------------------- Shadow Constants --------------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
     def c112, 3, 7.13800001, 0.03125, 0
     def c113, 0.75, -0.5, 0.5, 0
-	
+    
     def c114, 0.14, 0.24, 0.5, 0.75 // static bias
     def c115, 0.24, 0.44, 1.1, 1.15
     def c116, 0.3, 0.54, 1.1, 0.95
     def c117, 0.64, 1.04, 2.2, 2.3
-	
-	def c118, 8, 0.3, 0, 0 // normal offset bias and blend params
-	
-	def c119, 0, 0.25, 0.5, 0.75 // UV clamps
-	def c120, 0.2499, 0.4999, 0.7499, 1
-	
-	def c130, 0.18993645671348536, 0.027087114076591513, -0.21261242652069953, 0.23391293246949066
-	def c131, 0.04771781344140756, -0.3666840644525993, 0.297730981239584, 0.398259878229082
-	def c132, -0.509063425827436, -0.06528681462854097, 0.507855152944665, -0.2875976005206389
-	def c133, -0.15230616564632418, 0.6426121151781916, -0.30240170651828074, -0.5805072900736001
-	def c134, 0.6978019230005561, 0.2771173334141519, -0.6990963248129052, 0.3210960724922725
-	def c135, 0.3565142601623699, -0.7066415061851589, 0.266890002328106, 0.8360191043249159
-	def c136, -0.7515861305520581, -0.41609876195815027, 0.9102937449894895, -0.17014527555321657
-	def c137, -0.5343471434373126, 0.8058593459499529, -0.1133270115046468, -0.9490025827627441
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
+    
+    def c118, 8, 0.3, 0, 0 // normal offset bias and blend params
+    
+    def c119, 0, 0.25, 0.5, 0.75 // UV clamps
+    def c120, 0.2499, 0.4999, 0.7499, 1
+    
+    def c130, 0.18993645671348536, 0.027087114076591513, -0.21261242652069953, 0.23391293246949066
+    def c131, 0.04771781344140756, -0.3666840644525993, 0.297730981239584, 0.398259878229082
+    def c132, -0.509063425827436, -0.06528681462854097, 0.507855152944665, -0.2875976005206389
+    def c133, -0.15230616564632418, 0.6426121151781916, -0.30240170651828074, -0.5805072900736001
+    def c134, 0.6978019230005561, 0.2771173334141519, -0.6990963248129052, 0.3210960724922725
+    def c135, 0.3565142601623699, -0.7066415061851589, 0.266890002328106, 0.8360191043249159
+    def c136, -0.7515861305520581, -0.41609876195815027, 0.9102937449894895, -0.17014527555321657
+    def c137, -0.5343471434373126, 0.8058593459499529, -0.1133270115046468, -0.9490025827627441
+    // ----------------------------------------------------------------------------------------------------------------------------------------------
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.1953075901e-42 // 853
-    def c127, 0.9999999, 1, 0, 0	// LogDepth constants
+    def c127, 0.9999999, 1, 0, 0 // LogDepth constants
     def c0, 0.125, 0.00200000009, 0.0511999987, 9.99999975e-006
     def c1, 0.00039999999, 0.00111111114, 1, 0
     def c2, 0.00999999978, 0.0454545468, 0.256000012, 1.02400005
@@ -142,7 +142,7 @@
     mad r3.xyz, v2.x, c60.xyww, r3
     mad r3.xyz, r0.z, c62.xyww, r3
     add r8.xyz, r3, c63.xyww
-	/* moved shadows to after normal
+    /* moved shadows to after normal
     dp4 r4.x, r3, c57
     dp4 r4.y, r3, c58
     dp4 r5.x, r3, c59
@@ -221,7 +221,7 @@
     mad r0.x, r0.y, c9.x, r0.x
     add r0.y, r1.z, r0.x
     cmp_sat r0.x, r0.y, r0.x, r1.x
-	moved shadows to after normal */
+    moved shadows to after normal */
     mul r0.yz, c0.y, v2.xxyw
     texld r3, r0.yzzw, s0
     add r3, r3.zwzw, c3.x
@@ -371,152 +371,152 @@
     add r6.y, r7.z, r6.x
     cmp_sat r0.x, r6.y, r6.x, r7.x
     removed 1.0.6.0 filter */
-	// ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
-	mov r21.x, c110.y
-	if_lt c223.z, r21.x
-		mov r21.xy, c112.xy
-		mul r21.xy, r21.xy, c44.xy
-		add r22.xy, v0.xy, c44.zw
-		rcp r22.z, v0.z
-		mul r22.xy, r22.xy, r22.z
-		dp2add r21.y, r22, r21, c112.w
-		mad r21.y, r21.y, c111.x, c111.y
-		frc r21.y, r21.y
-		mad r21.y, r21.y, c111.z, c111.w
-		sincos r22.xy, r21.y
-		mul r23, r22.yxxy, c110.xxyz
-		mul r21, r22.yxxy, c113.xxyz
-		mad r23, r23, r20.xyxy, r6.yzyz
-		mad r21, r21, r20.xyxy, r6.yzyz
-		max r23.xz, r23, r20.z
-		min r23.xz, r23, r20.w
-		max r21.xz, r21, r20.z
-		min r21.xz, r21, r20.w
-		texldl r25, r23.xy, s15
-		texldl r24, r21.zw, s15
-		mov r25.y, r24.x
-		texldl r24, r21.xy, s15
-		mov r25.z, r24.x
-		texldl r24, r23.zw, s15
-		mov r25.w, r24.x
-		add r25, r8.z, -r25
-		cmp r25, r25, c110.y, c110.w
-		dp4 r20.x, r25, -c110.x
-	else
-		add r24.xy, v0.xy, c44.zw
-		mul r24.xy, r24.xy, c44.xy
-		rcp r24.z, v0.z
-		mul r24.xy, r24.xy, r24.z
-		mul r24.xy, r24.xy, c112.z
-		texldl r24, r24, s10
-		mul r24.x, r24.z, c111.z
-		sincos r25.xy, r24.x
-		mul r25, r25.xyyx, c110.yzyy
-		mul r26, c130.xyxy, r25
-		add r27.xy, r26.xzxz, r26.ywyw
-		mul r26, c130.zwzw, r25
-		add r27.zw, r26.xzxz, r26.ywyw
-		mad r26, r27, r20.xyxy, r6.yzyz
-		max r26.xz, r26, r20.z
-		min r26.xz, r26, r20.w
-		texldl r28, r26.xy, s15
-		texldl r27, r26.zw, s15
-		mov r28.y, r27.x
-		mul r26, c131.xyxy, r25
-		add r27.xy, r26.xzxz, r26.ywyw
-		mul r26, c131.zwzw, r25
-		add r27.zw, r26.xzxz, r26.ywyw
-		mad r26, r27, r20.xyxy, r6.yzyz
-		max r26.xz, r26, r20.z
-		min r26.xz, r26, r20.w
-		texldl r27, r26.xy, s15
-		mov r28.z, r27.x
-		texldl r27, r26.zw, s15
-		mov r28.w, r27.x
-		add r28, r8.z, -r28
-		cmp r28, r28, c110.y, c110.w
-		dp4 r29.x, r28, -c110.x
-		mul r26, c132.xyxy, r25
-		add r27.xy, r26.xzxz, r26.ywyw
-		mul r26, c132.zwzw, r25
-		add r27.zw, r26.xzxz, r26.ywyw
-		mad r26, r27, r20.xyxy, r6.yzyz
-		max r26.xz, r26, r20.z
-		min r26.xz, r26, r20.w
-		texldl r28, r26.xy, s15
-		texldl r27, r26.zw, s15
-		mov r28.y, r27.x
-		mul r26, c133.xyxy, r25
-		add r27.xy, r26.xzxz, r26.ywyw
-		mul r26, c133.zwzw, r25
-		add r27.zw, r26.xzxz, r26.ywyw
-		mad r26, r27, r20.xyxy, r6.yzyz
-		max r26.xz, r26, r20.z
-		min r26.xz, r26, r20.w
-		texldl r27, r26.xy, s15
-		mov r28.z, r27.x
-		texldl r27, r26.zw, s15
-		mov r28.w, r27.x
-		add r28, r8.z, -r28
-		cmp r28, r28, c110.y, c110.w
-		dp4 r29.y, r28, -c110.x
-		mul r26, c134.xyxy, r25
-		add r27.xy, r26.xzxz, r26.ywyw
-		mul r26, c134.zwzw, r25
-		add r27.zw, r26.xzxz, r26.ywyw
-		mad r26, r27, r20.xyxy, r6.yzyz
-		max r26.xz, r26, r20.z
-		min r26.xz, r26, r20.w
-		texldl r28, r26.xy, s15
-		texldl r27, r26.zw, s15
-		mov r28.y, r27.x
-		mul r26, c135.xyxy, r25
-		add r27.xy, r26.xzxz, r26.ywyw
-		mul r26, c135.zwzw, r25
-		add r27.zw, r26.xzxz, r26.ywyw
-		mad r26, r27, r20.xyxy, r6.yzyz
-		max r26.xz, r26, r20.z
-		min r26.xz, r26, r20.w
-		texldl r27, r26.xy, s15
-		mov r28.z, r27.x
-		texldl r27, r26.zw, s15
-		mov r28.w, r27.x
-		add r28, r8.z, -r28
-		cmp r28, r28, c110.y, c110.w
-		dp4 r29.z, r28, -c110.x
-		mul r26, c136.xyxy, r25
-		add r27.xy, r26.xzxz, r26.ywyw
-		mul r26, c136.zwzw, r25
-		add r27.zw, r26.xzxz, r26.ywyw
-		mad r26, r27, r20.xyxy, r6.yzyz
-		max r26.xz, r26, r20.z
-		min r26.xz, r26, r20.w
-		texldl r28, r26.xy, s15
-		texldl r27, r26.zw, s15
-		mov r28.y, r27.x
-		mul r26, c137.xyxy, r25
-		add r27.xy, r26.xzxz, r26.ywyw
-		mul r26, c137.zwzw, r25
-		add r27.zw, r26.xzxz, r26.ywyw
-		mad r26, r27, r20.xyxy, r6.yzyz
-		max r26.xz, r26, r20.z
-		min r26.xz, r26, r20.w
-		texldl r27, r26.xy, s15
-		mov r28.z, r27.x
-		texldl r27, r26.zw, s15
-		mov r28.w, r27.x
-		add r28, r8.z, -r28
-		cmp r28, r28, c110.y, c110.w
-		dp4 r29.w, r28, -c110.x
-		dp4 r20.x, r29, -c110.x
-	endif
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
+    mov r21.x, c110.y
+    if_lt c223.z, r21.x
+      mov r21.xy, c112.xy
+      mul r21.xy, r21.xy, c44.xy
+      add r22.xy, v0.xy, c44.zw
+      rcp r22.z, v0.z
+      mul r22.xy, r22.xy, r22.z
+      dp2add r21.y, r22, r21, c112.w
+      mad r21.y, r21.y, c111.x, c111.y
+      frc r21.y, r21.y
+      mad r21.y, r21.y, c111.z, c111.w
+      sincos r22.xy, r21.y
+      mul r23, r22.yxxy, c110.xxyz
+      mul r21, r22.yxxy, c113.xxyz
+      mad r23, r23, r20.xyxy, r6.yzyz
+      mad r21, r21, r20.xyxy, r6.yzyz
+      max r23.xz, r23, r20.z
+      min r23.xz, r23, r20.w
+      max r21.xz, r21, r20.z
+      min r21.xz, r21, r20.w
+      texldl r25, r23.xy, s15
+      texldl r24, r21.zw, s15
+      mov r25.y, r24.x
+      texldl r24, r21.xy, s15
+      mov r25.z, r24.x
+      texldl r24, r23.zw, s15
+      mov r25.w, r24.x
+      add r25, r8.z, -r25
+      cmp r25, r25, c110.y, c110.w
+      dp4 r20.x, r25, -c110.x
+    else
+      add r24.xy, v0.xy, c44.zw
+      mul r24.xy, r24.xy, c44.xy
+      rcp r24.z, v0.z
+      mul r24.xy, r24.xy, r24.z
+      mul r24.xy, r24.xy, c112.z
+      texldl r24, r24, s10
+      mul r24.x, r24.z, c111.z
+      sincos r25.xy, r24.x
+      mul r25, r25.xyyx, c110.yzyy
+      mul r26, c130.xyxy, r25
+      add r27.xy, r26.xzxz, r26.ywyw
+      mul r26, c130.zwzw, r25
+      add r27.zw, r26.xzxz, r26.ywyw
+      mad r26, r27, r20.xyxy, r6.yzyz
+      max r26.xz, r26, r20.z
+      min r26.xz, r26, r20.w
+      texldl r28, r26.xy, s15
+      texldl r27, r26.zw, s15
+      mov r28.y, r27.x
+      mul r26, c131.xyxy, r25
+      add r27.xy, r26.xzxz, r26.ywyw
+      mul r26, c131.zwzw, r25
+      add r27.zw, r26.xzxz, r26.ywyw
+      mad r26, r27, r20.xyxy, r6.yzyz
+      max r26.xz, r26, r20.z
+      min r26.xz, r26, r20.w
+      texldl r27, r26.xy, s15
+      mov r28.z, r27.x
+      texldl r27, r26.zw, s15
+      mov r28.w, r27.x
+      add r28, r8.z, -r28
+      cmp r28, r28, c110.y, c110.w
+      dp4 r29.x, r28, -c110.x
+      mul r26, c132.xyxy, r25
+      add r27.xy, r26.xzxz, r26.ywyw
+      mul r26, c132.zwzw, r25
+      add r27.zw, r26.xzxz, r26.ywyw
+      mad r26, r27, r20.xyxy, r6.yzyz
+      max r26.xz, r26, r20.z
+      min r26.xz, r26, r20.w
+      texldl r28, r26.xy, s15
+      texldl r27, r26.zw, s15
+      mov r28.y, r27.x
+      mul r26, c133.xyxy, r25
+      add r27.xy, r26.xzxz, r26.ywyw
+      mul r26, c133.zwzw, r25
+      add r27.zw, r26.xzxz, r26.ywyw
+      mad r26, r27, r20.xyxy, r6.yzyz
+      max r26.xz, r26, r20.z
+      min r26.xz, r26, r20.w
+      texldl r27, r26.xy, s15
+      mov r28.z, r27.x
+      texldl r27, r26.zw, s15
+      mov r28.w, r27.x
+      add r28, r8.z, -r28
+      cmp r28, r28, c110.y, c110.w
+      dp4 r29.y, r28, -c110.x
+      mul r26, c134.xyxy, r25
+      add r27.xy, r26.xzxz, r26.ywyw
+      mul r26, c134.zwzw, r25
+      add r27.zw, r26.xzxz, r26.ywyw
+      mad r26, r27, r20.xyxy, r6.yzyz
+      max r26.xz, r26, r20.z
+      min r26.xz, r26, r20.w
+      texldl r28, r26.xy, s15
+      texldl r27, r26.zw, s15
+      mov r28.y, r27.x
+      mul r26, c135.xyxy, r25
+      add r27.xy, r26.xzxz, r26.ywyw
+      mul r26, c135.zwzw, r25
+      add r27.zw, r26.xzxz, r26.ywyw
+      mad r26, r27, r20.xyxy, r6.yzyz
+      max r26.xz, r26, r20.z
+      min r26.xz, r26, r20.w
+      texldl r27, r26.xy, s15
+      mov r28.z, r27.x
+      texldl r27, r26.zw, s15
+      mov r28.w, r27.x
+      add r28, r8.z, -r28
+      cmp r28, r28, c110.y, c110.w
+      dp4 r29.z, r28, -c110.x
+      mul r26, c136.xyxy, r25
+      add r27.xy, r26.xzxz, r26.ywyw
+      mul r26, c136.zwzw, r25
+      add r27.zw, r26.xzxz, r26.ywyw
+      mad r26, r27, r20.xyxy, r6.yzyz
+      max r26.xz, r26, r20.z
+      min r26.xz, r26, r20.w
+      texldl r28, r26.xy, s15
+      texldl r27, r26.zw, s15
+      mov r28.y, r27.x
+      mul r26, c137.xyxy, r25
+      add r27.xy, r26.xzxz, r26.ywyw
+      mul r26, c137.zwzw, r25
+      add r27.zw, r26.xzxz, r26.ywyw
+      mad r26, r27, r20.xyxy, r6.yzyz
+      max r26.xz, r26, r20.z
+      min r26.xz, r26, r20.w
+      texldl r27, r26.xy, s15
+      mov r28.z, r27.x
+      texldl r27, r26.zw, s15
+      mov r28.w, r27.x
+      add r28, r8.z, -r28
+      cmp r28, r28, c110.y, c110.w
+      dp4 r29.w, r28, -c110.x
+      dp4 r20.x, r29, -c110.x
+    endif
+    // ----------------------------------------------------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------- Improved Fadeout --------------------------------------------------------------
     rcp r20.y, c53.w
     mul_sat r20.y, r20.y, r0.x
     mul r20.y, r20.y, r20.y
     lrp r0.x, r20.y, c110.y, r20.x // improved fadeout
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------------------------------------
     mad r0.w, r0.w, c10.x, c10.y
     mov r4.xyz, c38
     mad r4.xyz, r4, r0.w, c37
@@ -546,23 +546,23 @@
     mul r7.xyz, r7, r0.x
     mad r7.xyz, r7, c3.xxyw, c3.y
     texld r8, r7.zyzw, s2
-	// ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
-	if_ne r8.x, c127.y
-		rcp r20.x, c128.x
-		mul r20.x, r20.x, c128.y
-		pow r20.x, r20.x, r8.x
-		mul r20.x, r20.x, c128.x	// W_clip
-		
-		add r20.y, r20.x, -c128.x
-		add r20.z, c128.y, -c128.x
-		mul r20.y, r20.y, c128.y
-		mul r20.z, r20.z, r20.x
-		rcp r20.z, r20.z
-		mul r20.w, r20.y, r20.z		// Linear depth
-		
-		min r8, r20.w, c127.x		// FP error hack
-	endif
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
+    if_ne r8.x, c127.y
+      rcp r20.x, c128.x
+      mul r20.x, r20.x, c128.y
+      pow r20.x, r20.x, r8.x
+      mul r20.x, r20.x, c128.x // W_clip
+      
+      add r20.y, r20.x, -c128.x
+      add r20.z, c128.y, -c128.x
+      mul r20.y, r20.y, c128.y
+      mul r20.z, r20.z, r20.x
+      rcp r20.z, r20.z
+      mul r20.w, r20.y, r20.z // Linear depth
+      
+      min r8, r20.w, c127.x // FP error hack
+    endif
+    // ----------------------------------------------------------------------------------------------------------------------------------------------
     add r0.x, -c75.x, c75.y
     rcp r0.x, r0.x
     mad r0.w, c75.y, -r0.x, r8.x
@@ -637,19 +637,19 @@
     mad r1.xyz, r1.xzww, c9.w, r2
     lrp r2.xyz, r0.z, r1, r0.xyww
     mul oC0.xyz, r2, c39.y
-	// ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------
-	if_ne v9.y, c127.y
-		rcp r20.z, c128.x
-		mul r20.x, v9.w, r20.z
-		mul r20.y, c128.y, r20.z
-		log r20.x, r20.x
-		log r20.y, r20.y
-		rcp r20.y, r20.y
-	else
-		mov r20.x, v9.z
-		rcp r20.y, v9.w
-	endif
-	mul oDepth, r20.x, r20.y
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------
+    if_ne v9.y, c127.y
+      rcp r20.z, c128.x
+      mul r20.x, v9.w, r20.z
+      mul r20.y, c128.y, r20.z
+      log r20.x, r20.x
+      log r20.y, r20.y
+      rcp r20.y, r20.y
+    else
+      mov r20.x, v9.z
+      rcp r20.y, v9.w
+    endif
+    mul oDepth, r20.x, r20.y
+    // ----------------------------------------------------------------------------------------------------------------------------------------------
 
 // approximately 243 instruction slots used (19 texture, 224 arithmetic)

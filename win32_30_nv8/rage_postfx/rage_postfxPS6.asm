@@ -20,17 +20,17 @@
     def c0, 0.5, -0.5, 1, 0
     dcl_texcoord v0.xy
     dcl_2d s0
-	mov r0.xy, c66.xy
-	
-	mad r0, r0.xyxy, c0.xyyx, v0.xyxy
-	texld r2, r0.zy, s0
-	texld r3, r0.xy, s0
-	texld r4, r0.zw, s0
-	texld r5, r0.xw, s0
+    mov r0.xy, c66.xy
+    
+    mad r0, r0.xyxy, c0.xyyx, v0.xyxy
+    texld r2, r0.zy, s0
+    texld r3, r0.xy, s0
+    texld r4, r0.zw, s0
+    texld r5, r0.xw, s0
 
     max r2.xyz, r2.xyz, r3.xyz
     max r2.xyz, r2.xyz, r4.xyz
     max oC0.xyz, r2.xyz, r5.xyz
-	mov oC0.w, c0.z
+    mov oC0.w, c0.z
 
 // approximately 5 instruction slots used (1 texture, 4 arithmetic)

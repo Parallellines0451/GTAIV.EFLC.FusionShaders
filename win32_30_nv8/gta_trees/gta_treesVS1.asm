@@ -25,7 +25,7 @@
     mad r0.xy, v0.x, c8.zwzw, r0
     mad r0.xy, v0.z, c10.zwzw, r0
     add o0.zw, r0.xyxy, c11
-	add o10.zw, r0.xyxy, c11
+    add o10.zw, r0.xyxy, c11
     mov o0.xy, c0.x
     mov o1.xy, v1
     mov r20.x, c8.w

@@ -5546,37 +5546,37 @@ vs_v = {
 
 function addSignature()
 for k, v in ipairs(ps) do
-	file = io.open(dir..v, "r")
-	if file then
-		src = file:read("*all")
-		src = string.gsub(src, "ps_3_0", "ps_3_0\n    def c219, "..ps_v[k] , 1)
-		file:close()
+    file = io.open(dir..v, "r")
+    if file then
+        src = file:read("*all")
+        src = string.gsub(src, "ps_3_0", "ps_3_0\n    def c219, "..ps_v[k] , 1)
+        file:close()
 
-		file = io.open(dir .. v , "w+")
-		if file then
-			file:write(src)
-			file:close()
-		end
-	else
-		print(v)
-	end
+        file = io.open(dir .. v , "w+")
+        if file then
+            file:write(src)
+            file:close()
+        end
+    else
+        print(v)
+    end
 end
 
 for k, v in ipairs(vs) do
-	file = io.open(dir..v, "r")
-	if file then
-		src = file:read("*all")
-		src = string.gsub(src, "vs_3_0", "vs_3_0\n    def c230, "..vs_v[k] , 1)
-		file:close()
+    file = io.open(dir..v, "r")
+    if file then
+        src = file:read("*all")
+        src = string.gsub(src, "vs_3_0", "vs_3_0\n    def c230, "..vs_v[k] , 1)
+        file:close()
 
-		file = io.open(dir .. v , "w+")
-		if file then
-			file:write(src)
-			file:close()
-		end
-	else
-		print(v)
-	end
+        file = io.open(dir .. v , "w+")
+        if file then
+            file:write(src)
+            file:close()
+        end
+    else
+        print(v)
+    end
 end
 end
 

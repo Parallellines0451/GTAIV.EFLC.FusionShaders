@@ -57,7 +57,7 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.1616764269e-42 // 829
-    def c127, 0.9999999, 1, 0, 0	// LogDepth constants
+    def c127, 0.9999999, 1, 0, 0 // LogDepth constants
     def c0, 58.1640015, 47.1300011, 3.20000005, 1.79999995
     def c1, 0, 0.212500006, 0.715399981, 0.0720999986
     def c2, 0.25, 1, 0.5, 0
@@ -75,25 +75,25 @@
     dcl_2d s5
     dcl_2d s6
     dcl_2d s7
-	// depth used by DOF and motion blur
+    // depth used by DOF and motion blur
     texld r0, v0, s1
-	// ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
-	if_ne r0.x, c127.y
-		rcp r20.x, c128.x
-		mul r20.x, r20.x, c128.y
-		pow r20.x, r20.x, r0.x
-		mul r20.x, r20.x, c128.x	// W_clip
-		
-		add r20.y, r20.x, -c128.x
-		add r20.z, c128.y, -c128.x
-		mul r20.y, r20.y, c128.y
-		mul r20.z, r20.z, r20.x
-		rcp r20.z, r20.z
-		mul r20.w, r20.y, r20.z		// Linear depth
-		
-		min r0, r20.w, c127.x		// FP error hack
-	endif
-	// ----------------------------------------------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
+    if_ne r0.x, c127.y
+      rcp r20.x, c128.x
+      mul r20.x, r20.x, c128.y
+      pow r20.x, r20.x, r0.x
+      mul r20.x, r20.x, c128.x // W_clip
+      
+      add r20.y, r20.x, -c128.x
+      add r20.z, c128.y, -c128.x
+      mul r20.y, r20.y, c128.y
+      mul r20.z, r20.z, r20.x
+      rcp r20.z, r20.z
+      mul r20.w, r20.y, r20.z // Linear depth
+      
+      min r0, r20.w, c127.x // FP error hack
+    endif
+    // ----------------------------------------------------------------------------------------------------------------------------------------------
     add r0.y, -c77.x, c77.y
     rcp r0.y, r0.y
     mul r0.z, r0.y, c77.y
@@ -101,8 +101,8 @@
     mad r0.x, c77.y, -r0.y, r0.x
     rcp r0.x, r0.x
     mul r0.y, r0.z, r0.x // remove if motion blur is removed
-	
-	// samples used by DOF and stipple filter
+    
+    // samples used by DOF and stipple filter
     mov r3, c4
     mad r4, c76.xyxy, r3.xyzx, v0.xyxy
     mad r6, c76.xyxy, r3.wzyw, v0.xyxy
@@ -111,8 +111,8 @@
     texld r4.xyz, r4.zw, s2
     texld r5.xyz, r6.xy, s2
     texld r6.xyz, r6.zw, s2
-	
-	// depth of field
+    
+    // depth of field
     mad r1.w, r0.z, -r0.x, c78.w // cutscene
     mad r1.w, c78.y, -r3.w, r1.w // cutscene
     max r2.w, r1.w, c1.x // cutscene
@@ -129,8 +129,8 @@
     min r0.z, c79.z, r1.w
     max r0.z, r0.x, r0.z // cutscene
     mul r1.w, r0.z, r0.z
-	
-	// stipple filter
+    
+    // stipple filter
     dp3 r0.x, r7, c1.yzww
     dp3 r8.x, r3, c1.yzww
     dp3 r8.y, r4, c1.yzww
@@ -142,15 +142,15 @@
     add r0.x, r0.x, -r0.z
     mad r0.x, r0.x, r0.x, -r2.w
     cmp r0.x, r0.x, c2.y, r1.w // replace with "cmp r0.xw, r0.x, c2.yzzz, c2.wyyy" if DOF is removed
-	
-	// depth of field and stipple filter average
-	add r3.xyz, r3, r4
-	add r3.xyz, r3, r5
-	add r3.xyz, r3, r6
-	mul r3.xyz, r3, c2.x
-	lrp r3.xyz, r0.x, r3, r7 // replace "r0.x" with "r1.w" if the stipple filter is removed
-	
-	// motion blur, add "texld r3, v0, s2" if DOF and stipple filter are removed
+    
+    // depth of field and stipple filter average
+    add r3.xyz, r3, r4
+    add r3.xyz, r3, r5
+    add r3.xyz, r3, r6
+    mul r3.xyz, r3, c2.x
+    lrp r3.xyz, r0.x, r3, r7 // replace "r0.x" with "r1.w" if the stipple filter is removed
+    
+    // motion blur, add "texld r3, v0, s2" if DOF and stipple filter are removed
     mad r4.xyz, v0.yxyw, c5.x, c5.y
     mul r0.z, r4.y, c77.z
     mul r0.z, r0.y, r0.z
@@ -201,8 +201,8 @@
     mad r4.xyz, r5, r2.w, -r3
     mad r0.xyz, r0.x, r4, r3
     cmp r3.xyz, r1.w, r3, r0
-	
-	// TLAD noise
+    
+    // TLAD noise
     mov r1.zw, c0
     mad r1.xy, v0, r1.zwzw, c85
     frc r1.xy, r1
@@ -210,13 +210,13 @@
     add r0.w, r1.z, c4.x
     mul r0.w, r0.w, c85.z
     mad r3.xyz, r0.w, c6.x, r3
-	
-	// tonemap and color correction
+    
+    // tonemap and color correction
     texld r1, c1.x, s5
     rcp r0.w, r1.x
     mul r0.w, r0.w, c81.y
-	
-	// bloom, to remove replace with "mul r0.xyz, r3, c66.x"
+    
+    // bloom, to remove replace with "mul r0.xyz, r3, c66.x"
     rcp r1.x, r0.w
     mul r1.x, r1.x, c81.x
     texld r2, v0, s4
@@ -225,8 +225,8 @@
     mul r2.xyz, r2, c2.x
     cmp r1.xyz, r1, r2, c1.x
     mad r0.xyz, r3, c66.x, r1
-	
-	// tonemap and color correction
+    
+    // tonemap and color correction
     mul r1.xyz, r0.w, r0
     dp3 r1.x, r1, c1.yzww
     mad r0.xyz, r0, r0.w, -r1.x

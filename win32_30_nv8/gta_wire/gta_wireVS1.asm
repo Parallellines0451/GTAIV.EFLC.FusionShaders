@@ -94,7 +94,7 @@
     mad r0.x, r0.x, c39.z, -r0.y
     mad o3.xy, c40.z, r0.x, r0.y
     mov o0.zw, r0
-	mov o10.zw, r0
+    mov o10.zw, r0
     mov o2.w, r0.w
     mov o3.zw, v5
     mov o4.w, c0.y

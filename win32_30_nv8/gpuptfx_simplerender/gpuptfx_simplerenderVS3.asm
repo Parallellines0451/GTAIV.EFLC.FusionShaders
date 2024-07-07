@@ -78,7 +78,7 @@
       mad r1, r0.y, c8, r1
       mad r1, r0.w, c10, r1
       add o0, r1, c11
-    add o10.zw, r1, c11
+      add o10.zw, r1, c11
       mov o1, c67
       mov o3.xyz, r0.yzww
       mov r1.x, v2.x
@@ -96,7 +96,7 @@
       mad r2, r0.x, c8, r2
       mad r2, r0.z, c10, r2
       add o0, r2, c11
-    add o10.zw, r2, c11
+      add o10.zw, r2, c11
       mad r0.w, v0.w, c66.x, -c66.y
       frc r1.z, r0.w
       add r1.w, r0.w, -r1.z

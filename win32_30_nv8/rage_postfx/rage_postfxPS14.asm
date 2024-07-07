@@ -59,7 +59,7 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.1448608454e-42 // 817
-    def c127, 0.9999999, 1, 0, 0	// LogDepth constants
+    def c127, 0.9999999, 1, 0, 0 // LogDepth constants
     def c0, 58.1640015, 47.1300011, 3.20000005, 1.79999995
     def c1, 0, 0.212500006, 0.715399981, 0.0720999986
     def c2, 0.25, 1, 0.5, 0
@@ -67,9 +67,9 @@
     def c4, -0.5, -1.5, 1.5, 0.5
     def c5, 2, -1, 0.125, 0
     def c6, 1.10000002, 0, 0, 0
-	
-	def c11, 1.06, 0.002, 1.15, 0.03125
-	
+    
+    def c11, 1.06, 0.002, 1.15, 0.03125
+    
     defi i0, 7, 0, 0, 0
     dcl_texcoord v0.xy
     dcl_2d s0
@@ -81,93 +81,93 @@
     dcl_2d s6
     dcl_2d s7
     dcl_2d s10
-	texld r3, v0, s2
-	
-	// motion blur
+    texld r3, v0, s2
+    
+    // motion blur
     mov r31, c2.w
-	if_ne r31.x, c222.w
-		texld r0, v0, s1
-		// ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
-		if_ne r0.x, c127.y
-			rcp r20.x, c128.x
-			mul r20.x, r20.x, c128.y
-			pow r20.x, r20.x, r0.x
-			mul r20.x, r20.x, c128.x	// W_clip
-			
-			add r20.y, r20.x, -c128.x
-			add r20.z, c128.y, -c128.x
-			mul r20.y, r20.y, c128.y
-			mul r20.z, r20.z, r20.x
-			rcp r20.z, r20.z
-			mul r20.w, r20.y, r20.z		// Linear depth
-			
-			min r0, r20.w, c127.x		// FP error hack
-		endif
-		// ----------------------------------------------------------------------------------------------------------------------------------------------
-		add r0.y, -c77.x, c77.y
-		rcp r0.y, r0.y
-		mul r0.z, r0.y, c77.y
-		mul r0.z, r0.z, -c77.x
-		mad r0.x, c77.y, -r0.y, r0.x
-		rcp r0.x, r0.x
-		mul r0.y, r0.z, r0.x
-		mad r4.xyz, v0.yxyw, c5.x, c5.y
-		mul r0.z, r4.y, c77.z
-		mul r0.z, r0.y, r0.z
-		mul r1.w, -r4.x, c77.w
-		mul r1.w, r0.y, r1.w
-		mul r5.xyz, r1.w, c73
-		mad r5.xyz, r0.z, c72, r5
-		mad r5.xyz, -r0.y, c74, r5
-		add r5.xyz, r5, c75
-		mul r0.y, -r5.z, c77.z
-		rcp r0.y, r0.y
-		mul r6.x, r5.x, r0.y
-		mul r0.y, r5.z, c77.w
-		rcp r0.y, r0.y
-		mul r6.y, r5.y, r0.y
-		add r0.yz, -r4, r6.xxyw
-		mov r20.x, c221.z
-		mul_sat r20.x, r20.x, c80.x
-		mul r0.yz, r0, r20.x // fix motion blur at high fps
-		mul r4.xy, r0.yzzw, c5.z
-		texld r5, v0, s7
-		add r1.w, r5.x, -c86.x
-		mul r4.zw, c0.xyxy, v0.xyxy
-		mad r4.zw, r3.xyxy, c3.w, r4
-		texldl r5, r4.zwzw, s6
-		add r2.w, r5.x, c4.x
-		mad r4.zw, r4.xyxy, r2.w, v0.xyxy
-		mov r5.xyz, r3
-		mov r2.w, c2.y
-		mov r3.w, c2.y
-		rep i0
-			mad r6.xy, r4, r3.w, r4.zwzw
-			texldl r7, r6, s7
-			add r5.w, r7.x, -c86.x
-			cmp r5.w, r5.w, c2.w, c2.y
-			texldl r6, r6, s2
-			mad r5.xyz, r6, r5.w, r5
-			add r2.w, r2.w, r5.w
-			add r3.w, r3.w, c2.y
-		endrep
-		rcp r2.w, r2.w
-		mul r0.yz, r0, c44.xxyw
-		dp2add r0.y, r0.yzzw, r0.yzzw, c1.x
-		rsq r0.y, r0.y
-		rcp r0.y, r0.y
-		mul_sat r0.x, r0.y, c4.w
-		mad r4.xyz, r5, r2.w, -r3
-		mad r0.xyz, r0.x, r4, r3
-		cmp r3.xyz, r1.w, r3, r0
-	endif
-	
-	// tonemap and color correction
+    if_ne r31.x, c222.w
+      texld r0, v0, s1
+      // ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
+      if_ne r0.x, c127.y
+        rcp r20.x, c128.x
+        mul r20.x, r20.x, c128.y
+        pow r20.x, r20.x, r0.x
+        mul r20.x, r20.x, c128.x // W_clip
+        
+        add r20.y, r20.x, -c128.x
+        add r20.z, c128.y, -c128.x
+        mul r20.y, r20.y, c128.y
+        mul r20.z, r20.z, r20.x
+        rcp r20.z, r20.z
+        mul r20.w, r20.y, r20.z // Linear depth
+        
+        min r0, r20.w, c127.x // FP error hack
+      endif
+      // ----------------------------------------------------------------------------------------------------------------------------------------------
+      add r0.y, -c77.x, c77.y
+      rcp r0.y, r0.y
+      mul r0.z, r0.y, c77.y
+      mul r0.z, r0.z, -c77.x
+      mad r0.x, c77.y, -r0.y, r0.x
+      rcp r0.x, r0.x
+      mul r0.y, r0.z, r0.x
+      mad r4.xyz, v0.yxyw, c5.x, c5.y
+      mul r0.z, r4.y, c77.z
+      mul r0.z, r0.y, r0.z
+      mul r1.w, -r4.x, c77.w
+      mul r1.w, r0.y, r1.w
+      mul r5.xyz, r1.w, c73
+      mad r5.xyz, r0.z, c72, r5
+      mad r5.xyz, -r0.y, c74, r5
+      add r5.xyz, r5, c75
+      mul r0.y, -r5.z, c77.z
+      rcp r0.y, r0.y
+      mul r6.x, r5.x, r0.y
+      mul r0.y, r5.z, c77.w
+      rcp r0.y, r0.y
+      mul r6.y, r5.y, r0.y
+      add r0.yz, -r4, r6.xxyw
+      mov r20.x, c221.z
+      mul_sat r20.x, r20.x, c80.x
+      mul r0.yz, r0, r20.x // fix motion blur at high fps
+      mul r4.xy, r0.yzzw, c5.z
+      texld r5, v0, s7
+      add r1.w, r5.x, -c86.x
+      mul r4.zw, c0.xyxy, v0.xyxy
+      mad r4.zw, r3.xyxy, c3.w, r4
+      texldl r5, r4.zwzw, s6
+      add r2.w, r5.x, c4.x
+      mad r4.zw, r4.xyxy, r2.w, v0.xyxy
+      mov r5.xyz, r3
+      mov r2.w, c2.y
+      mov r3.w, c2.y
+      rep i0
+        mad r6.xy, r4, r3.w, r4.zwzw
+        texldl r7, r6, s7
+        add r5.w, r7.x, -c86.x
+        cmp r5.w, r5.w, c2.w, c2.y
+        texldl r6, r6, s2
+        mad r5.xyz, r6, r5.w, r5
+        add r2.w, r2.w, r5.w
+        add r3.w, r3.w, c2.y
+      endrep
+      rcp r2.w, r2.w
+      mul r0.yz, r0, c44.xxyw
+      dp2add r0.y, r0.yzzw, r0.yzzw, c1.x
+      rsq r0.y, r0.y
+      rcp r0.y, r0.y
+      mul_sat r0.x, r0.y, c4.w
+      mad r4.xyz, r5, r2.w, -r3
+      mad r0.xyz, r0.x, r4, r3
+      cmp r3.xyz, r1.w, r3, r0
+    endif
+    
+    // tonemap and color correction
     texld r1, c1.x, s5
     rcp r0.w, r1.x
     mul r0.w, r0.w, c81.y
-	
-	// bloom
+    
+    // bloom
     rcp r1.x, r0.w
     mul r1.x, r1.x, c81.x
     texld r2, v0, s4
@@ -176,8 +176,8 @@
     mul r2.xyz, r2, c2.x
     cmp r1.xyz, r1, r2, c1.x
     mad r0.xyz, r3, c66.x, r1
-	
-	// tonemap and color correction
+    
+    // tonemap and color correction
     mul r1.xyz, r0.w, r0
     dp3 r1.x, r1, c1.yzww
     mad r0.xyz, r0, r0.w, -r1.x
@@ -195,25 +195,25 @@
     mad r0.w, r20.x, c82.z, -r8.y // boost timecyc gamma
     pow r2.x, r1.x, r0.w
     mul_sat r0.xyz, r0, r2.x
-	
-	// XBOX-like gamma, just an approximation
-	if_ne r31.x, c222.z
-		pow r20.x, r0.x, c11.z
-		pow r20.y, r0.y, c11.z
-		pow r20.z, r0.z, c11.z
-		add r21.xyz, c2.y, -r0
-		mul r21.xyz, r21, r21
-		mul r21.xyz, r21, r21
-		mad r21.xyz, r21, -r21, c2.y
-		mul_sat r0.xyz, r20, r21
-	endif
-	
-	// dithering
-	mul r1.xy, v0.xy, c44.xy
-	mul r1.xy, r1.xy, c11.w
-	texld r1, r1, s10
-	mad r1.z, r1.z, c5.x, c5.y
-	mad_sat oC0.xyz, r1.z, c11.y, r0
+    
+    // XBOX-like gamma, just an approximation
+    if_ne r31.x, c222.z
+      pow r20.x, r0.x, c11.z
+      pow r20.y, r0.y, c11.z
+      pow r20.z, r0.z, c11.z
+      add r21.xyz, c2.y, -r0
+      mul r21.xyz, r21, r21
+      mul r21.xyz, r21, r21
+      mad r21.xyz, r21, -r21, c2.y
+      mul_sat r0.xyz, r20, r21
+    endif
+    
+    // dithering
+    mul r1.xy, v0.xy, c44.xy
+    mul r1.xy, r1.xy, c11.w
+    texld r1, r1, s10
+    mad r1.z, r1.z, c5.x, c5.y
+    mad_sat oC0.xyz, r1.z, c11.y, r0
     mov oC0.w, c2.y
 
 // approximately 176 instruction slots used (14 texture, 162 arithmetic)

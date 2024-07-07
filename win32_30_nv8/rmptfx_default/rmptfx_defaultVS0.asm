@@ -61,7 +61,7 @@
     add r1, r1, c11
     mov r0.zw, c0.w
     add o1, r0, r1
-	add o10.zw, r0, r1
+    add o10.zw, r0, r1
     mov o0, v2
     mov o2, v3
     mov o3, v4

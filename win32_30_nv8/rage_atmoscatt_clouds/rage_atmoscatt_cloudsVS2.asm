@@ -126,7 +126,7 @@
     mad o1.z, r0.z, -r1.z, c4.x
     mul r1.z, r0.z, r1.z
     mov o0.z, r1.z
-	mov o10.z, r1.z
+    mov o10.z, r1.z
     mul_sat r1.y, r1.y, c68.x
     mad r1.x, r1.x, c4.y, c4.y
     add r1.y, -r1.y, c4.x
@@ -144,7 +144,7 @@
     rcp r0.z, r0.z
     mul r0.xyz, r0.z, r0.xyxw
     mad o0.xyw, r0.xyzz, -c7.zyzw, -c7.zwzy
-	mad o10.w, r0.xyzz, -c7.zyzw, -c7.zwzy
+    mad o10.w, r0.xyzz, -c7.zyzw, -c7.zwzy
     mov o1.xy, v1
     mov r20.x, c8.w
     add r20.x, r20.x, c9.w

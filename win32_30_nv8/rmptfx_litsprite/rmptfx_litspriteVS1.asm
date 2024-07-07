@@ -81,7 +81,7 @@
     rcp r1.x, r0.w
     mul o4.zw, r0.xyxy, r1.x
     mov o1, r0
-	mov o10.zw, r0
+    mov o10.zw, r0
     mov o0, v2
     mov o2, v3
     mov o3, v4
