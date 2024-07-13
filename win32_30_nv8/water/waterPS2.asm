@@ -373,7 +373,7 @@
     removed 1.0.6.0 filter */
     // ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
     mov r21.x, c110.y
-    if_lt c223.z, r21.x
+    if_lt c221.x, r21.x
       mov r21.xy, c112.xy
       mul r21.xy, r21.xy, c44.xy
       add r22.xy, v0.xy, c44.zw
