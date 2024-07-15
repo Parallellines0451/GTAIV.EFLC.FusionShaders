@@ -1,89 +1,95 @@
 # GTAIV.EFLC.FusionShaders
-Various shader fixes and improvements for Grand Theft Auto IV and Episodes From Liberty City.
+Grand Theft Auto IV on PC is a very subpar port to say the least. Countless graphical effects were broken, removed or changed for the worse compared to the console releases and even previous versions of the game on PC. This repository seeks to fix as many of these issues as possible, as well as add some new features while staying true to the original art direction.
 
-Special thanks to my friends [AssaultKifle47](https://github.com/akifle47/), [robi29](https://github.com/robi29/) and [\_CP_](https://github.com/cpmodding) for directly contributing fixes, to [RaphaelK12](https://github.com/RaphaelK12) for fixes and for making a [realtime shader editor](https://github.com/RaphaelK12/ShadowResFix), to [Shvab](https://github.com/d3g0n-byte) for making RAGE Shader Editor, to [ThirteenAG](https://github.com/ThirteenAG) for implementing features we requested into FusionFix and to everyone else from the Fusion Team for their support.
+## Prerequisites and recommendations
+[FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix) is strictly required for these shaders to work. All game versions post 1.0.6.0 are supported.
 
-[FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix) is strictly required for these shaders to work. [Console Visuals](https://gtaforums.com/topic/989098-console-visuals-the-complete-edition/) and [Various Fixes](https://gtaforums.com/topic/975211-various-fixes/) are highly recommended.
+#### Recommended additions:
+- [DXVK](https://github.com/doitsujin/dxvk/) to improve performance in draw call heavy scenarios, **but only if your setup is not GPU-limited**
+- [Console Visuals](https://github.com/Tomasak/Console-Visuals) to restore trees, suits, animations and several other features from consoles
+- [Various Fixes](https://github.com/valentyn-l/GTAIV.EFLC.Various.Fixes) to fix hundreds of bugs and oversights around the map
+- [Ash_735's Workshop](https://gtaforums.com/topic/887527-ash_735s-workshop/) to faithfully improve the texture quality of various game assets
+- [_AG's repositories](https://github.com/gennariarmando) for interface improvements and other interesting features
 
-# General
+## Feature list
+#### General
 - Fixed z-fighting
-- Fixed LOD pop-in
+- Fixed object pop-in caused by version 1.0.6.0
 - Improved screen door transparency
-# Lighting
+#### Lighting
 - Fixed volumetric lights occlusion
-- Ported console foliage translucency
-- Added a new tree lighting mode faithful to PC with fixed orange glow and AO
-- Fixed mismatched intensity of shadow casting lights
-# Shadows
-- Ported shadow filter from patches prior to 1.0.6.0
-- Added a custom shadow filter for new definition modes
-- Fixed shadow artifacts visible at high altitudes
-- Fixed shadows being erroneously blurred before the lighting pass
+- Restored console foliage translucency
+- Added an improved tree lighting mode based on PC
+- Fixed mismatched intensity of shadow casting lights causing visible pop-in
+- Fixed lights that were made invisible with version 1.0.6.0
+- Fixed black normal map halos on several surfaces such as asphalt, sidewalks and rocks
+#### Shadows
+- Restored shadow filter from versions prior to 1.0.6.0 and also added an improved one based on it
+- Fixed large shadow artifacts visible from high altitudes
+- Fixed shadowmap being erroneously blurred before the lighting pass
 - Fixed shadows stretching at certain camera angles
-- Improved shadow view distance and fixed cutoff penumbras of distant shadows
-- Fixed disconnected shadows on all graphics settings
-- Fixed cuts between shadow cascades under some conditions
-- Added "pseudo" shadow cascade blending
-- Fixed pitch black vehicle shadows
-- Added wind sway for tree shadows
+- Fixed shadow view distance being lower than the actual rendered distance
+- Fixed cutoff penumbras of distant shadows
+- Restored normal offset bias from versions prior to 1.0.6.0
+- Fixed disconnected night shadows
+- Fixed blur artifacts between shadow cascades under some conditions
+- Added "pseudo" shadow cascade blending to reduce the disparity between cascades
+- Fixed pitch black static vehicle shadows
+- Added wind sway for dynamic tree shadows
 - Fixed incorrectly offset shadows on water
 - Fixed flickering when shadows of transparent objects overlap
-# Post processing
-- Split depth of field, motion blur and stipple filter into separate passes to prevent overlap
+- Added parameters to control shadow softness and bias
+#### Post processing
+- Split depth of field, motion blur and stippling filter into separate passes to prevent overlap
 - Fixed color banding, most noticeably in the sky
-- Added new "definition" modes using a mask to selectively filter transparency
+- Added a mask to selectively filter screen door transparency
 - Fixed depth of field and bloom not scaling correctly at resolutions higher than 720p
 - Fixed excessively blurry screen compared to consoles caused by leftover anti aliasing code
-- Ported console bloom and auto exposure
-- Restored console timecyc gamma boost
-- Fixed instantaneous auto exposure in some weathers
-- Fixed motion blur not scaling properly at high framerates
-- Fixed TLAD noise being affected by water quality and corrected its aspect ratio
-- Added console-like gamma
-# Reflections
-- Fixed excessive specularity of several surfaces, especially when it rains
-- Fixed blocky vehicle reflections
-- Added parameter to control corona reflection intensity
-- Fixed anisotropic filtering affecting reflection intensity
-- Restored console vehicle reflection intensity relative to dirt level
-- Increased global reflection intensity to match consoles
+- Restored console bloom and auto exposure
+- Restored console timecyc gamma bump
+- Fixed flickering auto exposure
+- Fixed motion blur losing intensity at high framerates
+- Fixed incorrect TLAD noise tiling on water quality levels other than medium
+- Fixed TLAD noise aspect ratio
+- Added a console-like gamma toggle
+#### Reflections
+- Restored console behavior for tree and terrain reflections
+- Fixed excessive specularity of several meshes in Alderney
+- Fixed distorted vehicle reflections
+- Restored corona depth test in water reflections
+- Added a parameter to control corona reflection intensity
+- Fixed anisotropic filtering affecting vehicle reflection intensity
+- Restored console vehicle reflection behavior relative to dirt level
+- Restored console environment reflection intensity
 - Fixed distorted mirror reflections at certain camera angles
 - Restored console mirror blur
-# Particles
-- Restored soft particles
+#### Particles
+- Fixed soft particles
+- Fixed stuttery particle animations caused by version 1.0.5.0
 - Fixed rain being almost invisible, especially at night
 - Fixed rain streaks becoming shorter at high framerates
-# Water
-- Fixed water texture tiling on all quality settings
-- Fixed flat water surface on AMD graphics cards
-# Misc
-- Fixed normal map halos on several surfaces such as asphalt, sidewalks and rocks
-- Partially fixed building windows glowing through the fog at very long distances if emissive depth write is disabled
-- Adjusted tree mipmap bias to improve texture detail at long distances
-- Ported fence mipmap bias from consoles and previous patches
-- Added parameters to control shadow softness, shadow bias and tree transparency
-- Fixed wrong texture filtering used in several shaders
-- Added support to toggle between different rain streak textures at runtime
+#### Water
+- Fixed incorrect water texture tiling on quality levels other than medium
+- Fixed flat, mirror-like water surface on AMD graphics cards
+- Removed broken shore foam effect
+#### Misc
+- Fixed outlines around objects when using DXVK
+- Fixed terrain pop-in
+- Reduced procobj pop-in, but only up to about 25 view and detail distance
+- Partially fixed building windows visible near the far plane if emissive depth write is disabled
+- Adjusted tree mipmap bias
+- Restored fence mipmap bias from versions prior to 1.0.6.0
+- Fixed incorrect texture filtering used in several shaders
+- Added a parameter to control the alpha threshold of tree leaves
+- Added support to toggle between different rain streak textures
 - Added AO to gta_normal_spec_reflect_emissive if emissivity is 0 so it can be used to disable night shadows for certain objects
 - Partially fixed mirror depth
-- Fixed lights that were made invisible with patch 1.0.6.0
-- Added support to instantaneously toggle lampposts alongside their lighting
-# Screenshots
-[![pic1.png](https://i.postimg.cc/kgjksBM7/pic1.png)](https://postimg.cc/18qC5RNd)
-[![pic2.png](https://i.postimg.cc/fLdpMCcb/pic2.png)](https://postimg.cc/njH0kvw8)
-[![pic3.png](https://i.postimg.cc/HxbZqxmc/pic3.png)](https://postimg.cc/bDN9bqsp)
-[![pic4.png](https://i.postimg.cc/W1fHrCS3/pic4.png)](https://postimg.cc/hXTsRCkW)
-[![pic5.png](https://i.postimg.cc/PJz7wqFs/pic5.png)](https://postimg.cc/PvJKGdj2)
-[![pic6.png](https://i.postimg.cc/KcnwV9cq/pic6.png)](https://postimg.cc/z3GxHFgK)
-[![treefx.png](https://i.postimg.cc/KY6ppT6h/treefx.png)](https://postimg.cc/bGRRsZYm)
-[![amdwater.png](https://i.postimg.cc/t40bP1gw/amdwater.png)](https://postimg.cc/ykT2C8cy)
-[![cars.png](https://i.postimg.cc/BQRSgYmh/cars.png)](https://postimg.cc/zVSYDjZW)
-[![depthbias.png](https://i.postimg.cc/ZKWY6txB/depthbias.png)](https://postimg.cc/Xp000Ph4)
-[![depthbias2.png](https://i.postimg.cc/V6NP1n7r/depthbias2.png)](https://postimg.cc/d7gxjkcw)
-[![dof.png](https://i.postimg.cc/0NJGHyRT/dof.png)](https://postimg.cc/3yYDk7w1)
-[![emissivestrong.png](https://i.postimg.cc/HkQgtpcx/emissivestrong.png)](https://postimg.cc/pmX4WMBb)
-[![forwardstipple.png](https://i.postimg.cc/52tWzZdY/forwardstipple.png)](https://postimg.cc/JGSFVYhM)
-[![softparticles.png](https://i.postimg.cc/Qt6sW0BJ/softparticles.png)](https://postimg.cc/5YFDh5SX)
-[![vertexao.png](https://i.postimg.cc/L8kc1Nwg/vertexao.png)](https://postimg.cc/LJXQdBHm)
-[![volumetrics.png](https://i.postimg.cc/bNnczzRT/volumetrics.png)](https://postimg.cc/GHbSKnV8)
-[![wetness.png](https://i.postimg.cc/mrb0N7WX/wetness.png)](https://postimg.cc/K1HqmkzB)
+- Added support to instantaneously turn lamppost bulbs on or off
+
+## Conclusion
+Special thanks to [RaphaelK12](https://github.com/RaphaelK12), [AssaultKifle47](https://github.com/akifle47/), [robi29](https://github.com/robi29/), [\_CP_](https://github.com/cpmodding), [Shvab](https://github.com/d3g0n-byte), [ThirteenAG](https://github.com/ThirteenAG) and [brokensymmetry](https://github.com/sTc2201) for helping make it all possible.
+
+Tools and resources used:
+- [Rage Shader Editor](https://gtaforums.com/topic/984675-rage-shader-editor/)
+- [ShadowResFix](https://github.com/RaphaelK12/ShadowResFix)
+- [Logarithmic Depth Buffer](https://github.com/Parallellines0451/GTAIV.EFLC.LogDepth)
