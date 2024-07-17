@@ -75,7 +75,7 @@
     def c20, 1.6666667, 0, 0, 0
     def c21, 3, 2, 1, 0 // Console tree lighting constants
     def c22, 0.012156862745098, 0.0007843137254902, 0, 0 // 3.1, 0.2
-    def c24, 0.212500006, 0.715399981, 0.0720999986, 0.35
+    def c24, 0.212500006, 0.715399981, 0.0720999986, 0.5
     // -------------------------------------------------------------- Shadow Constants --------------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
@@ -485,13 +485,13 @@
       dp3 r1.x, r2, -c17
       mad_sat r1.y, r2.z, c4.x, c4.y
       mov r2.xyz, c38
-      mad r1.yzw, r2.xxyz, r1.y, c37.xxyz
       
+      dp3 r21.y, r2, c24
+      lrp r22.xyz, c24.w, r2, r21.y
       mul r21.x, r21.x, c223.x
-      dp3 r10.x, r1.yzw, c24
-      lrp r11.yzw, c24.w, r1, r10.x
-      cmp r1.yzw, -r21_abs.x, r1, r11 // Tree orange glow tweak
+      cmp r2.xyz, -r21_abs.x, r2, r22 // Tree orange glow tweak
       
+      mad r1.yzw, r2.xxyz, r1.y, c37.xxyz
       mul r1.yzw, r4.z, r1
       add r1.x, r1.x, -c1.x
       mul_sat r1.x, r1.x, c2.x

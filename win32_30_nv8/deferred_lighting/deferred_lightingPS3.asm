@@ -48,7 +48,7 @@
     def c20, 1.6666667, 0, 0, 0
     def c21, 3, 2, 1, 0 // Console tree lighting constants
     def c22, 0.012156862745098, 0.0007843137254902, 0, 0 // 3.1, 0.2
-    def c24, 0.212500006, 0.715399981, 0.0720999986, 0.35
+    def c24, 0.212500006, 0.715399981, 0.0720999986, 0.5
     dcl_texcoord v0.xy
     dcl_texcoord1 v1
     dcl_2d s0
@@ -137,13 +137,13 @@
       add r1.x, r1.x, -c1.w
       mul_sat r1.x, r1.x, c2.w
       mov r2.xyz, c38
-      mad r1.yzw, r2.xxyz, r0.w, c37.xxyz
       
+      dp3 r21.y, r2, c24
+      lrp r22.xyz, c24.w, r2, r21.y
       mul r21.x, r21.x, c223.x
-      dp3 r10.x, r1.yzw, c24
-      lrp r11.yzw, c24.w, r1, r10.x
-      cmp r1.yzw, -r21_abs.x, r1, r11 // Tree orange glow tweak
+      cmp r2.xyz, -r21_abs.x, r2, r22 // Tree orange glow tweak
       
+      mad r1.yzw, r2.xxyz, r0.w, c37.xxyz
       mul r1.yzw, r3.z, r1
       mul r2.xyz, c18.w, c18
       mad r1.xyz, r2, r1.x, r1.yzww
