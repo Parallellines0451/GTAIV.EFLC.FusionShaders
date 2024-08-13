@@ -24,7 +24,7 @@
     def c127, 0.9999999, 1, 0, 0 // LogDepth constants
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, 0, -1, -0, 0.5
-    def c2, 0.0117647058823529, 0, 0, 0
+    def c2, 0.0117647058823529, 0.3125, 0, 0
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_texcoord2 v2
@@ -34,7 +34,7 @@
     dcl_2d s10
     texld r0, v0, s0
     mul_sat r0.w, r0.w, c221_abs.w
-    add r20.x, r0.w, -c1.w
+    add r20.x, r0.w, -c2.y
     cmp r0.w, r20.x, -c1.y, c1.x
     mul r0.w, r0.w, c39.x
     /* removed stipple
