@@ -19,7 +19,7 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 #### Lighting
 - Fixed volumetric lights occlusion
 - Restored console foliage translucency
-- Added an improved tree lighting mode based on PC
+- Fixed orange glow under trees
 - Fixed mismatched intensity of shadow casting lights causing visible pop-in
 - Fixed lights that were made invisible with version 1.0.6.0
 - Fixed black normal map halos on several surfaces such as asphalt, sidewalks and rocks
