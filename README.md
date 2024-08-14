@@ -46,7 +46,6 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - Fixed depth of field and bloom not scaling correctly at resolutions higher than 720p
 - Fixed excessively blurry screen compared to consoles caused by leftover anti aliasing code
 - Restored console bloom and auto exposure
-- Restored console timecyc gamma bump
 - Fixed flickering auto exposure
 - Fixed motion blur losing intensity at high framerates
 - Fixed incorrect TLAD noise tiling on water quality levels other than medium

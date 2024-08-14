@@ -68,7 +68,7 @@
     def c5, 2, -1, 0.125, 0
     def c6, 1.10000002, 0, 0, 0
     
-    def c11, 1.06, 0.002, 1.15, 0.03125
+    def c11, 0.002, 1.15, 0.03125, 0
     
     defi i0, 7, 0, 0, 0
     dcl_texcoord v0.xy
@@ -180,16 +180,15 @@
     add r0.xyz, r0, r0
     mov_sat r1.x, r1.x
     mov r8.y, c2.y
-    mov r20.x, c11.x
-    mad r0.w, r20.x, c82.z, -r8.y // boost timecyc gamma
+    add r0.w, -r8.y, c82.z
     pow r2.x, r1.x, r0.w
     mul_sat r0.xyz, r0, r2.x
     
     // XBOX-like gamma, just an approximation
     if_ne r31.x, c222.z
-      pow r20.x, r0.x, c11.z
-      pow r20.y, r0.y, c11.z
-      pow r20.z, r0.z, c11.z
+      pow r20.x, r0.x, c11.y
+      pow r20.y, r0.y, c11.y
+      pow r20.z, r0.z, c11.y
       add r21.xyz, c2.y, -r0
       mul r21.xyz, r21, r21
       mul r21.xyz, r21, r21
@@ -199,10 +198,10 @@
     
     // dithering
     mul r1.xy, v0.xy, c44.xy
-    mul r1.xy, r1.xy, c11.w
+    mul r1.xy, r1.xy, c11.z
     texld r1, r1, s10
     mad r1.z, r1.z, c5.x, c5.y
-    mad_sat oC0.xyz, r1.z, c11.y, r0
+    mad_sat oC0.xyz, r1.z, c11.x, r0
     mov oC0.w, c2.y
 
 // approximately 176 instruction slots used (14 texture, 162 arithmetic)
