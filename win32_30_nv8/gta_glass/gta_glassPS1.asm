@@ -248,11 +248,8 @@
     dp4 r23.x, r21_abs, r22
     dp4 r23.y, r21_abs, r22.yzww
     
-    rcp r23.z, r22.x
-    mul r23.zw, r23.xyxy, r23.z // (curr_range, next_range) / first_range
-    mul r24.x, r22.x, c53.y
-    mul r24.x, r24.x, c218_abs.y
-    mul r23.zw, r23, r24.x // bias magnitude
+    mul r23.zw, r23.xyxy, c53.y
+    mul r23.zw, r23, c218_abs.y // (curr_range, next_range) * resY * bias_magnitnude
     
     mad r24, r22.xxyz, -c110.wyyy, r22
     dp4 r24.x, r21_abs, r24 // curr_range - prev_range
