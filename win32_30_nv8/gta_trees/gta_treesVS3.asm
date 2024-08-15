@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 CustomWindSway;
 //   row_major float4x4 gShadowMatrix;
 //   float4 colorize;
 //   row_major float4x4 gWorld;

@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 CustomWindSway;
 //   float4 colorize;
 //   float4 gDayNightEffects;
 //   row_major float4x4 gWorld;
