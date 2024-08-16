@@ -13,4 +13,4 @@ echo D | xcopy "%%i" "%win32_30%" /K /H /Y
 del "%%i"
 )
 
-echo D | xcopy "%cd%/assets/Custom_Stipple" "%cd%/update" /K /H /Y /S
+echo D | xcopy "%cd%/resources" "%cd%/update" /K /H /Y /S
