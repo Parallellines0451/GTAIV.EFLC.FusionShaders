@@ -222,7 +222,7 @@
     dp4 r23.x, r21_abs, r22
     dp4 r23.y, r21_abs, r22.yzww
     
-    mul r23.zw, r23.xyxy, c53.y
+    mul r23.zw, r23.xyxy, c53.z
     mul r23.zw, r23, c218_abs.y // (curr_range, next_range) * resY * bias_magnitnude
     
     mad r24, r22.xxyz, -c110.wyyy, r22
@@ -245,7 +245,7 @@
     mul r22.y, r22.y, c223.y // scale bias with FOV
     mad r7.xyz, r20.xyz, r22.y, r7 // normal offset bias
     
-    mul r20.xy, r22.x, c53.y
+    mul r20.xy, r22.x, c53.z
     rcp r20.x, c58.x
     mul r20.x, r20.x, c57.x
     mul r20.x, r20.x, r20.y // fix filter stretching
