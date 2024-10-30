@@ -24,13 +24,14 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - Fixed lights that were made invisible with version 1.0.6.0
 - Fixed black normal map halos on several surfaces such as asphalt, sidewalks and rocks
 #### Shadows
-- Restored shadow filter from versions prior to 1.0.6.0 and also added an improved one based on it
+- Restored rotated disk filter from versions prior to 1.0.6.0
 - Fixed large shadow artifacts visible from high altitudes
 - Fixed shadowmap being erroneously blurred before the lighting pass
 - Fixed shadows stretching at certain camera angles
 - Fixed shadow view distance being lower than the actual rendered distance
 - Fixed cutoff penumbras of distant shadows
 - Restored normal offset bias from versions prior to 1.0.6.0
+- Added contact hardening shadows
 - Fixed disconnected night shadows
 - Fixed blur artifacts between shadow cascades under some conditions
 - Added "pseudo" shadow cascade blending to reduce the disparity between cascades
