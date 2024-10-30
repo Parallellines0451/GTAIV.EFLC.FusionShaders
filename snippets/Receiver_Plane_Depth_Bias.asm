@@ -1,3 +1,6 @@
+// Receiver Plane Depth Bias
+// Adapted from: http://web.archive.org/web/20170830044834/http://developer.amd.com/wordpress/media/2012/10/Isidoro-ShadowMapping.pdf
+
     mov r22.xy, r0.zw // UV
     mov r22.z, r1.z // light depth
     dsx r20.xyz, r22.xyz
