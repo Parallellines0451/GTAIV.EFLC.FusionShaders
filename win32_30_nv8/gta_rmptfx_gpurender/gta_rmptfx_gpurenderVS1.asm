@@ -92,10 +92,8 @@
     def c0, 0, 0.5, -0.5, 0.699999988
     def c1, 0.0500000007, -10, 0.100000001, 9.99999975e-006
     def c2, 1, 1.11111116, 0.200000003, 0
-    def c73, 0.015, 0, 0, 0 // gMotionBlur at 30 FPS = 0.015, beware that this prevents streaks from shortening during slow motion, but it's not a big deal
-    // def c78, 0.6, 0, 0, 0
-    // def c79, 0.4, 0, 0, 0
-    def c80, 0.4, 0, 0, 0
+    def c78, 0.6, 0, 0, 0
+    def c80, 0.6, 0, 0, 0
     dcl_position v0
     dcl_texcoord v1
     dcl_2d s0
@@ -119,7 +117,7 @@
       mul r5.xyz, r3.zxyw, r4
       mad r4.xyz, r3.yzxw, r4.yzxw, -r5
       nrm r5.xyz, r4
-      mul r1.xyz, r1, c233_abs.y
+      mul r1.xyz, r1, c233_abs.y // 0.015
       mad r1.xyz, c74.x, r3, r1
       mul r3.xyz, r5, c74.x
       add r2.w, c0.w, -v1.y
@@ -224,6 +222,7 @@
     mul r5, r5, r6
     mul r7, r14, r6
     mul r6, r13, r6
+    
     add r8, -r1.x, c64
     add r10, -r1.y, c65
     add r11, -r1.z, c66
@@ -281,6 +280,7 @@
     mul r9, r10, r8
     mul r10, r16, r8
     mul r11, r15, r8
+    
     mul r0.w, r8.x, c79.x
     dp3 r1.x, r3, -c17
     mad_sat r0.w, r1.x, c78.x, r0.w
@@ -298,6 +298,7 @@
     mov r6.xyz, c38
     mad r6.xyz, r6, r0.w, c37
     mad r5.xyz, r6, c80.x, r5
+    
     mul r7, r3.x, r9
     mad r7, r3.y, r10, r7
     mad r3, r3.z, r11, r7
@@ -307,8 +308,9 @@
     dp4 r7.z, c31, r3
     mad r1.xyz, r1, c18.w, r7
     mad r1.xyz, r6, c80.x, r1
-    add r1.xyz, r5, r1
-    // mul r1.xyz, r1, c0.y // average
+    
+    max r1.xyz, r5, r1
+    
     mul o1.xyz, r2, r1
     add r0.xyz, -r0, c15
     dp3 r0.x, r0, r0
@@ -325,5 +327,5 @@
     add r20.x, r20.x, c9.w
     add r20.x, r20.x, c10.w
     add o10.y, r20.x, c11.w
-
+    
 // approximately 247 instruction slots used (4 texture, 243 arithmetic)
