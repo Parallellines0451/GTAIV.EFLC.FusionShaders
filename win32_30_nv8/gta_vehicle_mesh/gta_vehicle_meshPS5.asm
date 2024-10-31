@@ -43,7 +43,7 @@
     def c0, 1, -0.5, 9.99999975e-006, 0
     def c1, 0.09765625, 0, 0, 0
     def c100, 10, 1, 0, 0
-    def c76, 1, 1, 1, 1 // disable IDE dirt influence
+    // def c76, 1, 1, 1, 1 // disable IDE dirt influence
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_texcoord4 v2.xyz

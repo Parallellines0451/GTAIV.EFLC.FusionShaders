@@ -42,7 +42,7 @@
     def c127, 0.9999999, 1, 0, 0 // LogDepth constants
     def c0, 1, -0.5, 9.99999975e-006, 0.5
     def c1, 0.001953125, 1, 0, 0
-    def c77, 1, 1, 1, 1 // disable IDE dirt influence
+    // def c77, 1, 1, 1, 1 // disable IDE dirt influence
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_texcoord4 v2.xyz

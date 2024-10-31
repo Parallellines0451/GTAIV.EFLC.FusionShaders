@@ -45,7 +45,7 @@
     def c0, 9.99999975e-006, 0, 1, 0.5
     def c1, 0.001953125, 0, 0, 0
     def c100, 10, 1, 0, 0
-    def c78, 1, 1, 1, 1 // disable IDE dirt influence
+    // def c78, 1, 1, 1, 1 // disable IDE dirt influence
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_color v2

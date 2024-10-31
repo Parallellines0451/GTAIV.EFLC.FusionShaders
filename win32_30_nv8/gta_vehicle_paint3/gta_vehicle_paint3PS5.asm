@@ -58,11 +58,11 @@
     def c3, -13.2877121, 64, 8, 4
     def c4, 32, 4, 1, 0.00392156886
     def c100, 10, 1, 0, 0
-    def c75, 1, 1, 1, 1 // disable IDE dirt influence
-    def c76, 1, 1, 1, 1 // disable IDE dirt influence
-    def c78, 1, 1, 1, 1 // disable IDE dirt influence
-    def c79, 1, 1, 1, 1 // disable IDE dirt influence
-    def c81, 1, 1, 1, 1 // disable IDE dirt influence
+    // def c75, 1, 1, 1, 1 // disable IDE dirt influence
+    // def c76, 1, 1, 1, 1 // disable IDE dirt influence
+    // def c78, 1, 1, 1, 1 // disable IDE dirt influence
+    // def c79, 1, 1, 1, 1 // disable IDE dirt influence
+    // def c81, 1, 1, 1, 1 // disable IDE dirt influence
     dcl_texcoord v0
     dcl_texcoord1 v1.xyz
     dcl_texcoord3 v2.xyz

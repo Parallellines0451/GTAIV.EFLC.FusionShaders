@@ -134,7 +134,7 @@
     def c10, 0.962339997, -0.194983006, 0.473434001, -0.480026007
     def c11, -0.69591397, 0.457136989, -0.203345001, 0.620715976
     def c12, -0.326211989, -0.405809999, -0.840143979, -0.0735799968
-    def c76, 1, 1, 1, 1 // disable IDE dirt influence
+    // def c76, 1, 1, 1, 1 // disable IDE dirt influence
     dcl vPos.xy
     dcl_texcoord v0
     dcl_texcoord1 v1
