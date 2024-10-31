@@ -154,7 +154,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_rmptfx_gpurender\gta_rmptfx_gpurenderVS1.asm</File>
-				<Variables value="38" >
+				<Variables value="39" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>PositionTexSampler</Name>
@@ -164,6 +164,11 @@
 						<Type>sampler</Type>
 						<Name>VelocityTexSampler</Name>
 						<Index value="1" />
+					</Item>
+					<Item>
+						<Type>float</Type>
+						<Name>gDiffuse</Name>
+						<Index value="81" />
 					</Item>
 					<Item>
 						<Type>float</Type>
