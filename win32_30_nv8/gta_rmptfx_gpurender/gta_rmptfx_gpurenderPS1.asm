@@ -33,7 +33,7 @@
     mad r1, c46.x, r1.xxxy, r1.yyyx
     mul r0, r0, r1
     texld r2, v1, s1
-    cmp r2.w, -c218_abs.w, r2.w, r2.y
+    cmp r2.w, -c221_abs.y, r2.w, r2.y
     mov r2.xyz, c0.y
     mul r2, r2, v0
     mul r1, r1, r2

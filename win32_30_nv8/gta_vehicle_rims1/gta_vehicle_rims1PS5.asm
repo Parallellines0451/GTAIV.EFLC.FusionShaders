@@ -77,7 +77,7 @@
     mov r21.w, c73.x
     mov r22.x, c100.y
     mul_sat r22.y, r21.w, c100.x
-    cmp r21, -c218_abs.w, r21, r22.xxxy
+    cmp r21, -c221_abs.y, r21, r22.xxxy
     texld r0, v0, s0
     add r1.xyz, c0.x, v1
     dp3 r1.w, r1, r1
