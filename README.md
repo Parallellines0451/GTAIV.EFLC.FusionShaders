@@ -69,6 +69,8 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - Fixed rain being almost invisible, especially at night
 - Fixed rain streaks becoming shorter at high framerates
 #### Water
+- Fixed flickering outlines around shores and thin objects
+- Improved transparency near the shores
 - Fixed incorrect water texture tiling on quality levels other than medium
 - Fixed flat, mirror-like water surface on AMD graphics cards
 - Removed broken shore foam effect
