@@ -104,7 +104,7 @@
     def c20, 0.962339997, -0.194983006, 0.473434001, -0.480026007
     def c21, -0.69591397, 0.457136989, -0.203345001, 0.620715976
     def c22, -0.326211989, -0.405809999, -0.840143979, -0.0735799968
-    def c23, 1.2132, 0.5, 1, 0
+    def c23, 2.7182818, 0, 0, 0
     dcl_texcoord v0
     dcl_texcoord1 v1
     dcl_texcoord2 v2
@@ -733,9 +733,9 @@
     // mul r0.x, r0.x, c3.w
     // pow r1.x, r0_abs.x, c3.w
     // add_sat r0.x, r1.x, c0.x
-    mad r20.xy, r0.x, c23.xz, c23.wy
-    rcp r20.y, r20.y
-    mad_sat r0.x, r20.x, r20.y, c0.w
+    mul r0.x, r0.x, c11.w
+    pow r1.x, c23.x, r0.x
+    add_sat r0.x, c5.z, -r1.x
     
     add r0.w, -r0.w, c3.z
     mul r0.w, r0.w, r0.w
