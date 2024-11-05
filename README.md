@@ -73,7 +73,7 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - Improved transparency near the shores
 - Fixed incorrect water texture tiling on quality levels other than medium
 - Fixed flat, mirror-like water surface on AMD graphics cards
-- Removed broken shore foam effect
+- Fixed water foam
 #### Misc
 - Fixed outlines around objects when using DXVK
 - Partially restored console object fade speed
