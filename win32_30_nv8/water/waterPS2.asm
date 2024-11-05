@@ -117,7 +117,6 @@
     dcl_2d s10
     dcl_2d s15
     // mov r0.xy, v2
-    mov r0.xyz, v2
     mov r1, v2
     add r1.xyz, r1, -v3
     dp3 r0.w, r1, r1
@@ -126,8 +125,8 @@
     mad r1.xy, r0.w, -c1, c1.z
     max r0.w, r1.x, c1.w
     // mul r0.z, r0.w, v2.z
-    dp3 r1.x, c14, r0
-    add r3.xyz, -r0, c15
+    dp3 r1.x, c14, v2
+    add r3.xyz, -v2, c15
     dp3 r0.x, r3, r3
     rsq r0.x, r0.x
     rcp r0.x, r0.x
@@ -141,7 +140,7 @@
     dp4 r10.y, r3, c56
     mul r3.xyz, c61.xyww, v2.y
     mad r3.xyz, v2.x, c60.xyww, r3
-    mad r3.xyz, r0.z, c62.xyww, r3
+    mad r3.xyz, v2.z, c62.xyww, r3
     add r8.xyz, r3, c63.xyww
     /* moved shadows to after normal
     dp4 r4.x, r3, c57
@@ -730,12 +729,16 @@
     cmp r0.x, r0.x, r0.x, c1.w
     mul r0.x, r0.x, c72.w
     
-    // mul r0.x, r0.x, c3.w
-    // pow r1.x, r0_abs.x, c3.w
-    // add_sat r0.x, r1.x, c0.x
-    mul r0.x, r0.x, c11.w
-    pow r1.x, c23.x, r0.x
-    add_sat r0.x, c5.z, -r1.x
+    mov r1.x, c1.w
+    if_eq r1.x, c222.y
+      mul r0.x, r0.x, c3.w
+      pow r1.x, r0_abs.x, c3.w
+      add_sat r0.x, r1.x, c0.x
+    else
+      mul r0.x, r0.x, c11.w
+      pow r1.x, c23.x, r0.x
+      add_sat r0.x, c5.z, -r1.x
+    endif
     
     add r0.w, -r0.w, c3.z
     mul r0.w, r0.w, r0.w
