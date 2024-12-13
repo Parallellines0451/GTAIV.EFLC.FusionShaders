@@ -866,7 +866,7 @@
 					<Value>Diffuse Texture</Value>
 				</Item>
 			</Annotation>
-			<Values value="16" >
+			<Values value="14" >
 			AddressU Wrap
 			AddressV Wrap
 			AddressW Wrap
@@ -874,7 +874,6 @@
 			MipFilter Linear
 			MinFilter Anisotropic
 			MagFilter Linear
-			MipMapLodBias -1
 		</Values>
 		</Item>
 		<Item>
