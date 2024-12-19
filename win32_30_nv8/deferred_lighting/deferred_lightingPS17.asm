@@ -240,6 +240,7 @@
       dp4 r1.x, r25, -c110.x
     else
       mul r21.xy, vPos.xy, c112.z
+      mov r21.zw, c110.w
       texldl r21, r21, s10
       mul r21.x, r21.z, c111.z
       sincos r22.xy, r21.x

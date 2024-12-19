@@ -219,7 +219,7 @@
     
     mul r20.x, r20.x, c218_abs.y
     mul r20.x, r20.x, c223.y // scale bias with FOV
-    mad r5.xyz, r22.xyz, r20.x, r5 // normal offset bias
+    mad r5.xyz, r22, r20.x, r5 // normal offset bias
     
     rcp r20.x, c58.x
     mul r20.x, r20.x, c57.x
@@ -310,7 +310,7 @@
     removed 1.0.6.0 filter */
     // ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
     mul r21.xy, vPos.xy, c112.z
-    texldl r21, r21, s10
+    texld r21, r21, s10
     mul r21.x, r21.z, c111.z
     sincos r22.xy, r21.x
     mul r22, r22.xyyx, c110.yzyy

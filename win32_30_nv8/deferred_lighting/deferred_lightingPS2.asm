@@ -279,7 +279,7 @@
     // ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
     mul r21.xy, c44.xy, v0.xy
     mul r21.xy, r21.xy, c112.z
-    texldl r21, r21, s10
+    texld r21, r21, s10
     mul r21.x, r21.z, c111.z
     sincos r22.xy, r21.x
     mul r22, r22.xyyx, c110.yzyy
