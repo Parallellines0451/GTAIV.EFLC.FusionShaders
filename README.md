@@ -45,6 +45,7 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - Fixed color banding, most noticeably in the sky
 - Added a mask to selectively filter screen door transparency
 - Fixed depth of field and bloom not scaling correctly at resolutions higher than 720p
+- Improved bloom weights and stability in motion
 - Fixed excessively blurry screen compared to consoles caused by leftover anti aliasing code
 - Restored console bloom and auto exposure
 - Fixed flickering auto exposure
