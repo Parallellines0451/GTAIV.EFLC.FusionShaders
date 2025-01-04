@@ -766,7 +766,7 @@
     add r1.x, r2.y, -r0.y
     cmp r2.z, r1.x, r2.y, r0.y
     mov r2.w, c1.w
-    add r2.xz, r2, c220.x // half pixel offset
+    add r2.xz, r2, c220.xy // half pixel offset
     texldl r2, r2.xzww, s1
     mul r3.xyz, r2, c74.x
     mov r1.x, c74.x
