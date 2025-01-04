@@ -63,7 +63,6 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - Restored console vehicle reflection behavior relative to dirt level
 - Restored console environment reflection intensity
 - Fixed distorted mirror reflections at certain camera angles
-- Partially restored console mirror blur
 #### Particles
 - Fixed soft particles
 - Fixed stuttery particle animations caused by version 1.0.5.0

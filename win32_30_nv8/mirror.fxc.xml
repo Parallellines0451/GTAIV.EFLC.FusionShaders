@@ -31,12 +31,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>mirror\mirrorPS1.asm</File>
-				<Variables value="5" >
-					<Item>
-						<Type>float4</Type>
-						<Name>globalScreenSize</Name>
-						<Index value="44" />
-					</Item>
+				<Variables value="4" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>ReflectTextureSampler</Name>
