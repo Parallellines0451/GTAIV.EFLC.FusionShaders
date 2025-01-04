@@ -68,8 +68,7 @@
     mov r3, c0
     cmp r3.x, -c222_abs.x, r3.y, r3.x // autoexposure toggle
     
-    mov r2.y, c66.x
-    mul r2.y, r2.y, r3.x
-    mul oC0, r2.y, r2.x
+    mul r2.x, r2.x, c66.x
+    mul oC0, r2.x, r3.x
 
 // approximately 14 instruction slots used (4 texture, 10 arithmetic)
