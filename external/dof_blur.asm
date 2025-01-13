@@ -19,6 +19,7 @@
 
     ps_3_0
     def c14, 0.00006, 0.0625, 1, 0
+    // Small kernel from https://github.com/Unity-Technologies/PostProcessing/blob/v2/PostProcessing/Shaders/Builtins/DiskKernels.hlsl
     def c15, 0, 0, 0.54545456, 0
     def c16, 0.16855472, 0.5187581, -0.44128203, 0.3206101
     def c17, -0.44128197, -0.3206102, 0.1685548, -0.5187581

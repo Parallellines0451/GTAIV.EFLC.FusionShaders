@@ -179,10 +179,11 @@
     mov r8.y, c2.y
     add r0.w, -r8.y, c82.z
     pow r2.x, r1.x, r0.w
-    mul_sat r0.xyz, r0, r2.x
+    mul r0.xyz, r0, r2.x
     
     // XBOX-like gamma, just an approximation
     if_ne r31.x, c222.z
+      mov_sat r0.xyz, r0.xyz
       pow r20.x, r0.x, c11.y
       pow r20.y, r0.y, c11.y
       pow r20.z, r0.z, c11.y
