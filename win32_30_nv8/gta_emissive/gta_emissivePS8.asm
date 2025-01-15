@@ -25,8 +25,9 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 2.6064151436e-43 // 186
-    def c152, 0.125, 0.25, 0.375, 0.5 // c152-c153 = new stipple constants
+    def c152, 0.2, 0.4, 0.6, 0.8 // c152-c154 = new stipple constants
     def c153, 0.5, 2, 1, 0
+    def c154, 1.6, 0, 0, 0
     def c127, 0.9999999, 1, 0, 0 // LogDepth constants
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, 0, -1, -0, 0
@@ -38,6 +39,7 @@
     dcl_2d s0
     dcl_2d s10
     texld r0, v0, s0
+    mul_sat r0.w, r0.w, c154.x
     mul r0.w, r0.w, v2.w
     mul r0.w, r0.w, c39.x
     /* removed stipple
