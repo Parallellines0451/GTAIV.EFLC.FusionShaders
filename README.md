@@ -79,11 +79,11 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 #### Misc
 - Fixed outlines around objects when using DXVK
 - Fixed terrain pop-in
+- Added shader for procedural objects to reduce pop-in
 - Partially fixed building windows visible near the far plane if emissive depth write is disabled
 - Restored fence mipmap bias from versions prior to 1.0.6.0
 - Fixed incorrect texture filtering used in several shaders
 - Added a parameter to control the alpha threshold of tree leaves
-- Added support to control vehicle dirt color, rain streak length and textures
 - Added AO to gta_normal_spec_reflect_emissive if emissivity is 0 so it can be used to disable night shadows for certain objects
 - Partially fixed mirror depth
 - Added support to instantaneously turn lamppost bulbs on or off

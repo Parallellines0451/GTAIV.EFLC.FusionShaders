@@ -24,3 +24,29 @@ Add to C:\Users\USERNAME\AppData\Local\New Technology Studio\Apps\OpenIV\Games\I
 			<item type="spTexture" name="specsampler" custom="True"/>
 		</params>
 	</shader>
+    
+	<!--  gta_procobj  -->
+	<shader key="gta_procobj.sps">
+		<index>111</index>
+		<name>gta_procobj</name>
+		<vertexFormat>0x4059</vertexFormat>
+		<drawBucket>0</drawBucket>
+		<effectSize>352</effectSize>
+		<skinned>True</skinned>
+		<params>
+			<item type="spVector4" name="globalanimuv0" custom="False">1.00000000;0.00000000;0.00000000;0.00000000</item>
+			<item type="spVector4" name="globalanimuv1" custom="False">0.00000000;1.00000000;0.00000000;0.00000000</item>
+			<item type="spTexture" name="texturesampler" custom="True"/>
+			<item type="spFloat" name="shadowmap_res" custom="False">1280</item>
+			<item type="spMatrix" name="facetmask" custom="False">-1.00000000;0.00000000;0.00000000;0.00000000;1.00000000;0.00000000;0.00000000;0.00000000;0.00000000;-1.00000000;0.00000000;0.00000000;0.00000000;1.00000000;0.00000000;0.00000000</item>
+			<item type="spFloat" name="specularfactor" custom="True"/>
+			<item type="spFloat" name="specularcolorfactor" custom="True"/>
+			<item type="spVector4" name="specmapintmask" custom="True"/>
+			<item type="spFloat" name="bumpiness" custom="True"/>
+			<item type="spFloat" name="reflectivepower" custom="True"/>
+			<item type="spVector4" name="luminanceconstants" custom="False">0.21250000;0.71540000;0.07210000;0.00000000</item>
+			<item type="spTexture" name="bumpsampler" custom="True"/>
+			<item type="spTexture" name="specsampler" custom="True"/>
+			<item type="spTexture" name="environmentsampler" custom="True"/>
+		</params>
+	</shader>
