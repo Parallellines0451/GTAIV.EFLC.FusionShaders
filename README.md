@@ -78,9 +78,8 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - Fixed flat, mirror-like water surface on AMD graphics cards
 #### Misc
 - Fixed outlines around objects when using DXVK
-- Partially restored console object fade speed
 - Fixed terrain pop-in
-- Reduced procobj pop-in for the default view and detail distance values
+- Reduced procobj pop-in, but only up to about 25 view and detail distance
 - Partially fixed building windows visible near the far plane if emissive depth write is disabled
 - Restored fence mipmap bias from versions prior to 1.0.6.0
 - Fixed incorrect texture filtering used in several shaders
