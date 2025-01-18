@@ -70,6 +70,17 @@
     
     def c11, 0.002, 1.15, 0.03125, 0
     
+    def c20, 2.20000005, -0.532000005, 1, 0
+    def c21, -3.08268166, 0.467999995, 1, 0.454545468
+    
+    def c22, 1.60475004, -0.531080008, -0.0736699998, 1
+    def c23, 0.0759999976, 0.908339977, 0.0156599991, 0.0245785993
+    def c24, 0.0284000002, 0.133829996, 0.837769985, -9.05370034e-005
+    def c25, 0.983729005, 0.432951003, 0.238080993, 0.454545468
+    def c26, 2.20000005, 0.597190022, 0.354579985, 0.0482299998
+    def c27, -0.102080002, 1.10812998, -0.00604999997, 0
+    def c28, -0.00326999999, -0.0727600008, 1.07602, 0
+    
     defi i0, 7, 0, 0, 0
     dcl_texcoord v0.xy
     dcl_2d s0
@@ -195,6 +206,67 @@
     pow r2.x, r1.x, r0.w
     mul r0.xyz, r0, r2.x
     
+    // https://github.com/dmnsgn/glsl-tone-map/blob/main/uchimura.glsl
+    /*
+      log r0.x, r0.x
+      log r0.y, r0.y
+      log r0.z, r0.z
+      mul r0.xyz, r0, c20.x
+      exp r1.x, r0.x
+      exp r1.y, r0.y
+      exp r1.z, r0.z
+      add r0.xyz, r1, c20.y
+      mul r2.xyz, r0, c21.x
+      exp r3.x, r2.x
+      exp r3.y, r2.y
+      exp r3.z, r2.z
+      mad r2.xyz, r3, -c21.y, c21.z
+      cmp r3.xyz, r0, c20.z, c20.w
+      cmp r0.xyz, r0, c20.w, c20.z
+      mul r2.xyz, r2, r3
+      mad r0.xyz, r1, r0, r2
+      log r1.x, r0.x
+      log r1.y, r0.y
+      log r1.z, r0.z
+      mul r0.xyz, r1, c21.w
+      exp r0.x, r0.x
+      exp r0.y, r0.y
+      exp r0.z, r0.z
+    */
+    
+    // https://github.com/TheRealMJP/BakingLab/blob/master/BakingLab/ACES.hlsl
+    /*
+      log r0.x, r0.x
+      log r0.y, r0.y
+      log r0.z, r0.z
+      mul r0.xyz, r0, c26.x
+      exp r1.x, r0.x
+      exp r1.y, r0.y
+      exp r1.z, r0.z
+      add r0.xyz, r1, r1
+      dp3 r1.x, c26.yzww, r0
+      dp3 r1.y, c23, r0
+      dp3 r1.z, c24, r0
+      add r0.xyz, r1, c23.w
+      mad r0.xyz, r1, r0, c24.w
+      mad r2.xyz, r1, c25.x, c25.y
+      mad r1.xyz, r1, r2, c25.z
+      rcp r2.x, r1.x
+      rcp r2.y, r1.y
+      rcp r2.z, r1.z
+      mul r0.xyz, r0, r2
+      dp3_sat r0.w, c22, r0
+      log r1.x, r0.w
+      dp3_sat r0.w, c27, r0
+      dp3_sat r0.x, c28, r0
+      log r1.z, r0.x
+      log r1.y, r0.w
+      mul r0.xyz, r1, c25.w
+      exp r0.x, r0.x
+      exp r0.y, r0.y
+      exp r0.z, r0.z
+    */
+    
     // XBOX-like gamma, just an approximation
     if_ne r31.x, c222.z
       mov_sat r0.xyz, r0.xyz
@@ -205,7 +277,7 @@
       mul r21.xyz, r21, r21
       mul r21.xyz, r21, r21
       mad r21.xyz, r21, -r21, c2.y
-      mul_sat r0.xyz, r20, r21
+      mul r0.xyz, r20, r21
     endif
     
     // dithering
