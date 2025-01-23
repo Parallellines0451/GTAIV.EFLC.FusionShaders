@@ -15,27 +15,8 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.1672816208e-42 // 833
-    def c127, 0.9999999, 1, 0, 0 // LogDepth constants
     dcl_texcoord v0.xy
     dcl_2d s15
-    texld r0, v0, s15
-    // ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
-    if_ne r0.x, c127.y
-      rcp r20.x, c128.x
-      mul r20.x, r20.x, c128.y
-      pow r20.x, r20.x, r0.x
-      mul r20.x, r20.x, c128.x // W_clip
-      
-      add r20.y, r20.x, -c128.x
-      add r20.z, c128.y, -c128.x
-      mul r20.y, r20.y, c128.y
-      mul r20.z, r20.z, r20.x
-      rcp r20.z, r20.z
-      mul r20.w, r20.y, r20.z // Linear depth
-      
-      min r0, r20.w, c127.x // FP error hack
-    endif
-    // ----------------------------------------------------------------------------------------------------------------------------------------------
-    mov oC0, r0
+    texld oC0, v0, s15
 
 // approximately 1 instruction slot used (1 texture, 0 arithmetic)

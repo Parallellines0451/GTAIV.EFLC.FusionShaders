@@ -39,7 +39,7 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 4.7644147787e-44 // 34
-    def c127, 0.9999999, 1, 0, 0 // LogDepth constants
+    def c127, 1, 0.99, 0, 0 // LogDepth constants
     def c0, 0.50999999, 2, -0.999989986, 2.20000005
     def c1, 1.79999995, 0.5, 0, 1
     def c2, 3, 0, 0, 0
@@ -55,30 +55,19 @@
     add r1.xy, c0.x, vPos
     mul r1.xy, r1, c78.zwzw
     texld r2, r1, s2
-    // ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
-    if_ne r2.x, c127.y
-      rcp r20.x, c128.x
-      mul r20.x, r20.x, c128.y
-      pow r20.x, r20.x, r2.x
-      mul r20.x, r20.x, c128.x // W_clip
-      
-      add r20.y, r20.x, -c128.x
-      add r20.z, c128.y, -c128.x
-      mul r20.y, r20.y, c128.y
-      mul r20.z, r20.z, r20.x
-      rcp r20.z, r20.z
-      mul r20.w, r20.y, r20.z // Linear depth
-      
-      min r2, r20.w, c127.x // FP error hack
-    endif
-    // ----------------------------------------------------------------------------------------------------------------------------------------------
     texld r1, r1, s1
     mad r1.xyz, r1, c0.y, c0.z
     nrm r3.xyz, r1
     dp3 r0.w, c72, r3
-    mad r1.x, r2.x, c79.z, -c79.w
-    mul r1.x, r1.x, v0.w
-    rcp r1.x, r1.x
+    
+    // LogDepth Read
+    rcp r20.x, c128.x
+    mul r20.x, r20.x, c128.y
+    pow r20.x, r20.x, r2.x
+    mul r2.y, r20.x, c128.x
+    
+    rcp r1.x, v0.w
+    mul r1.x, r1.x, r2.y
     mad r1.xyz, v0, -r1.x, c15
     add r1.xyz, -r1, c66
     dp3 r0.x, r0, r1
@@ -110,19 +99,20 @@
     mul oC0.w, r0.x, c77.w
     // mul oC0.w, r0.x, c2.x
     mov oC0.xyz, c1.z
-    // ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------
-    if_ne v9.y, c127.y
-      rcp r20.z, c128.x
-      mul r20.x, v9.w, r20.z
-      mul r20.y, c128.y, r20.z
+    
+    // LogDepth Write
+    if_ne v9.y, c127.x
+      rcp r20.x, c128.x
+      mul r20.y, r20.x, v9.w
+      mul r20.x, r20.x, c128.y
       log r20.x, r20.x
       log r20.y, r20.y
-      rcp r20.y, r20.y
+      rcp r20.x, r20.x
+      mul r20.x, r20.x, r20.y
     else
-      mov r20.x, v9.z
-      rcp r20.y, v9.w
+      rcp r20.x, v9.w
+      mul r20.x, r20.x, v9.z
     endif
-    mul oDepth, r20.x, r20.y
-    // ----------------------------------------------------------------------------------------------------------------------------------------------
+    mov oDepth, r20.x
 
 // approximately 47 instruction slots used (4 texture, 43 arithmetic)

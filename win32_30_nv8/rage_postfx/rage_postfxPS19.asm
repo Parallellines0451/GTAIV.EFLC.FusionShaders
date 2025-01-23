@@ -33,7 +33,6 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.1518673377e-42 // 822
-    def c127, 0.9999999, 1, 0, 0 // LogDepth constants
     def c0, -0.0196078438, 0.0313725509, 1, 0
     def c1, 0.212500006, 0.715399981, 0.0720999986, 1.00000001e-007
     def c2, 0.100000001, 0.0909089968, 0, 0
@@ -52,30 +51,14 @@
     add r0.z, -c16.z, c16.w
     rcp r0.z, r0.z
     texld r1, v0, s0
-    // ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
-    if_ne r1.x, c127.y
-      rcp r20.x, c128.x
-      mul r20.x, r20.x, c128.y
-      pow r20.x, r20.x, r1.x
-      mul r20.x, r20.x, c128.x // W_clip
-      
-      add r20.y, r20.x, -c128.x
-      add r20.z, c128.y, -c128.x
-      mul r20.y, r20.y, c128.y
-      mul r20.z, r20.z, r20.x
-      rcp r20.z, r20.z
-      mul r20.w, r20.y, r20.z // Linear depth
-      
-      min r1, r20.w, c127.x // FP error hack
-    endif
-    // ----------------------------------------------------------------------------------------------------------------------------------------------
-    add r0.w, -c66.x, c66.y
-    rcp r0.w, r0.w
-    mad r1.x, c66.y, -r0.w, r1.x
-    mul r0.w, r0.w, c66.y
-    mul r0.w, r0.w, -c66.x
-    rcp r1.x, r1.x
-    mad r1.y, r0.w, -r1.x, c16.w
+    
+    // LogDepth Read
+    rcp r20.x, c128.x
+    mul r20.x, r20.x, c128.y
+    pow r20.x, r20.x, r1.x
+    mul r4.x, r20.x, c128.x
+    
+    add r1.y, -r4.x, c16.w
     mul_sat r0.z, r0.z, r1.y
     add r0.z, -r0.z, c0.z
     mul r0.z, r0.x, r0.z
@@ -91,13 +74,12 @@
     mul r1.yzw, r3.xxyz, r2.x
     mad r2.xyz, r3, -r2.x, c43
     mad r1.yzw, r0.y, r2.xxyz, r1
-    mad r0.y, r0.w, r1.x, -c41.x
-    mul r0.z, r0.w, r1.x
+    add r0.y, r4.x, -c41.x
     add r0.w, -c41.x, c41.y
     rcp r0.w, r0.w
     mul_sat r0.y, r0.y, r0.w
     rcp r0.w, c41.x
-    mul_sat r0.w, r0.z, r0.w
+    mul_sat r0.w, r4.x, r0.w
     lrp r1.x, c41.w, r0.w, r0.y
     add r0.w, r1.x, c41.z
     mul r0.x, r0.x, r0.w
@@ -108,7 +90,7 @@
     add r0.xyw, -r3.xyzz, c43.xyzz
     texld r1, v0, s3
     mad r1.x, r1.x, c72.x, c72.y
-    min r2.x, r1.x, r0.z
+    min r2.x, r1.x, r4.x
     add r0.z, r2.x, -c72.y
     max r1.x, r0.z, c0.w
     min r0.z, r2.x, r1.x

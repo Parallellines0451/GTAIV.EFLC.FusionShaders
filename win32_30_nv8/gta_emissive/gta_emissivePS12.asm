@@ -120,7 +120,7 @@
     def c139, 1000, 0, 0, 0 // shadowmap depth offset
     // ----------------------------------------------------------------------------------------------------------------------------------------------
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 2.6624670822e-43 // 190
-    def c127, 0.9999999, 1, 0, 0 // LogDepth constants
+    def c127, 1, 0.99, 0, 0 // LogDepth constants
     def c0, 9.99999975e-006, -0.5, 0.5, -0.25
     def c1, 1.33333337, 1, 0, 1.5
     def c2, 0.0833333358, -0.100000001, 1.11111116, 3.99600005
@@ -662,22 +662,23 @@
     texkill r1
     removed stipple */
     mov oC0, r0
-    // ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------
-    if_ne v9.y, c127.y
-      rcp r20.z, c128.x
-      min r20.w, v9.w, c128.y
-      mul r20.x, r20.w, r20.z
-      mul r20.y, c128.y, r20.z
+    
+    // LogDepth Write (emissive)
+    if_ne v9.y, c127.x
+      mov r20.x, c127.y
+      mad r20.x, r20.x, c128.y, -v9.w
+      texkill r20.x
+      rcp r20.x, c128.x
+      mul r20.y, r20.x, v9.w
+      mul r20.x, r20.x, c128.y
       log r20.x, r20.x
       log r20.y, r20.y
-      rcp r20.y, r20.y
-      mad r20.z, r20.x, r20.y, -v9.x
+      rcp r20.x, r20.x
+      mad r20.x, r20.x, r20.y, -v9.x
     else
-      mov r20.x, v9.z
-      rcp r20.y, v9.w
-      mul r20.z, r20.x, r20.y
+      rcp r20.x, v9.w
+      mul r20.x, r20.x, v9.z
     endif
-    mov oDepth, r20.z
-    // ----------------------------------------------------------------------------------------------------------------------------------------------
+    mov oDepth, r20.x
 
 // approximately 190 instruction slots used (15 texture, 175 arithmetic)

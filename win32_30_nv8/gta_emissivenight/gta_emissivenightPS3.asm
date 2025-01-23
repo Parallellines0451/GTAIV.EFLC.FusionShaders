@@ -24,7 +24,7 @@
     def c152, 0.2, 0.4, 0.6, 0.8 // c152-c154 = new stipple constants
     def c153, 0.5, 2, 1, 0
     def c154, 1.6, 0, 0, 0
-    def c127, 0.9999999, 1, 0, 0 // LogDepth constants
+    def c127, 1, 0.99, 0, 0 // LogDepth constants
     def c0, 0.176470593, -1, -0, 9.99999975e-006
     def c1, 0.5, 0, 1, 0.25
     dcl_texcoord v0.xy
@@ -65,19 +65,20 @@
     add r20.x, -c152.w, r1.x
     cmp oC2.w, r20.x, c0.z, -c0.y
     mul oC3, -r2.yzzz, c52.x
-    // ----------------------------------------------------------------- Linear2Log -----------------------------------------------------------------
-    if_ne v9.y, c127.y
-      rcp r20.z, c128.x
-      mul r20.x, v9.w, r20.z
-      mul r20.y, c128.y, r20.z
+    
+    // LogDepth Write
+    if_ne v9.y, c127.x
+      rcp r20.x, c128.x
+      mul r20.y, r20.x, v9.w
+      mul r20.x, r20.x, c128.y
       log r20.x, r20.x
       log r20.y, r20.y
-      rcp r20.y, r20.y
+      rcp r20.x, r20.x
+      mul r20.x, r20.x, r20.y
     else
-      mov r20.x, v9.z
-      rcp r20.y, v9.w
+      rcp r20.x, v9.w
+      mul r20.x, r20.x, v9.z
     endif
-    mul oDepth, r20.x, r20.y
-    // ----------------------------------------------------------------------------------------------------------------------------------------------
+    mov oDepth, r20.x
 
 // approximately 20 instruction slots used (1 texture, 19 arithmetic)

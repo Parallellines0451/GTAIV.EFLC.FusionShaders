@@ -41,7 +41,6 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.1434595469e-42 // 816
-    def c127, 0.9999999, 1, 0, 0 // LogDepth constants
     def c0, -0.5, -1.5, 1.5, 0.5
     def c1, 0, 0.212500006, 0.715399981, 0.0720999986
     def c2, 0, 2, 4, 8
@@ -54,31 +53,15 @@
     dcl_2d s3
     dcl_2d s4
     texld r0, v0, s1
-    // ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
-    if_ne r0.x, c127.y
-      rcp r20.x, c128.x
-      mul r20.x, r20.x, c128.y
-      pow r20.x, r20.x, r0.x
-      mul r20.x, r20.x, c128.x // W_clip
-      
-      add r20.y, r20.x, -c128.x
-      add r20.z, c128.y, -c128.x
-      mul r20.y, r20.y, c128.y
-      mul r20.z, r20.z, r20.x
-      rcp r20.z, r20.z
-      mul r20.w, r20.y, r20.z // Linear depth
-      
-      min r0, r20.w, c127.x // FP error hack
-    endif
-    // ----------------------------------------------------------------------------------------------------------------------------------------------
-    add r0.y, -c73.x, c73.y
-    rcp r0.y, r0.y
-    mad r0.x, c73.y, -r0.y, r0.x
-    mul r0.y, r0.y, c73.y
-    mul r0.y, r0.y, -c73.x
-    rcp r0.x, r0.x
-    mad r0.z, r0.y, -r0.x, c74.w
-    mad r0.x, r0.y, r0.x, -c74.w
+    
+    // LogDepth Read
+    rcp r20.x, c128.x
+    mul r20.x, r20.x, c128.y
+    pow r20.x, r20.x, r0.x
+    mul r0.x, r20.x, c128.x
+    
+    add r0.z, -r0.x, c74.w
+    add r0.x, r0.x, -c74.w
     mov r1, c0
     mad r0.x, c74.y, -r1.w, r0.x
     max r2.x, r0.x, c1.x

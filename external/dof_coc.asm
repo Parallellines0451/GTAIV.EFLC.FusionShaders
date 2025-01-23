@@ -26,7 +26,6 @@
 //
 
     ps_3_0
-    def c127, 0.9999999, 1, 0, 0 // LogDepth constants
     def c1, 0, 0.212500006, 0.715399981, 0.0720999986
     def c2, 0.25, 1, 0.5, 0
     def c4, -0.5, -1.5, 1.5, 0.5
@@ -36,37 +35,20 @@
     dcl_2d s2
     dcl_2d s8
     texld r0, v0, s1
-    // ----------------------------------------------------------------- Log2Linear -----------------------------------------------------------------
-    if_ne r0.x, c127.y
-      rcp r20.x, c128.x
-      mul r20.x, r20.x, c128.y
-      pow r20.x, r20.x, r0.x
-      mul r20.x, r20.x, c128.x // W_clip
-      
-      add r20.y, r20.x, -c128.x
-      add r20.z, c128.y, -c128.x
-      mul r20.y, r20.y, c128.y
-      mul r20.z, r20.z, r20.x
-      rcp r20.z, r20.z
-      mul r20.w, r20.y, r20.z // Linear depth
-      
-      min r0, r20.w, c127.x // FP error hack
-    endif
-    // ----------------------------------------------------------------------------------------------------------------------------------------------
-    add r0.y, -c77.x, c77.y
-    rcp r0.y, r0.y
-    mul r0.z, r0.y, c77.y
-    mul r0.z, r0.z, -c77.x
-    mad r0.x, c77.y, -r0.y, r0.x
-    rcp r0.x, r0.x
+    
+    // LogDepth Read
+    rcp r20.x, c128.x
+    mul r20.x, r20.x, c128.y
+    pow r20.x, r20.x, r0.x
+    mul r0.y, r20.x, c128.x
     
     mov r3, c4
     texld r7.xyz, v0, s2
     
-    mad r1.w, r0.z, -r0.x, c78.w // cutscene
+    add r1.w, -r0.y, c78.w // cutscene
     mad r1.w, c78.y, -r3.w, r1.w // cutscene
     max r2.w, r1.w, c1.x // cutscene
-    mad r0.x, r0.z, r0.x, -c78.w
+    add r0.x, r0.y, -c78.w
     mad r0.x, c78.y, -r3.w, r0.x
     max r1.w, r0.x, c1.x
     rcp r0.x, c78.x // cutscene
