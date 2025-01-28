@@ -29,7 +29,7 @@
     def c0, 0.50999999, 9.99999975e-006, 16, 1
     def c1, 0, 0, 0, 0
     def c2, 0.5, 0.125, 3.14159274, 1.5
-    def c3, 0.662, 0.053525835, -2, 3
+    def c3, 0.662, 0.053525835, 0, 0
     dcl_texcoord v0
     dcl_texcoord1 v1.xyz
     dcl_texcoord2 v2.xyz
@@ -59,7 +59,7 @@
     nrm r2.xyz, r1
     dp3 r0.w, r2, v0
     
-    // https://www.desmos.com/calculator/mvwzgj4pvn
+    // https://www.desmos.com/calculator/xfxns11ene
     mov r20.x, c0.w
     max r20.x, c66.x, r20.x
     mul r20.y, r20.x, c3.x
@@ -67,31 +67,17 @@
     add r20.z, r20.y, -r0.w
     rcp r20.y, r20.y
     mul_sat r20.y, r20.y, r20.z
-    
-    //mad r20.z, r20.y, c3.z, c3.w
-    //mul r20.z, r20.y, r20.z
-    //mul r20.y, r20.y, r20.z
-    
     mul r20.y, r20.y, r20.x
     mul r20.y, r20.y, r20.x
     mul r20.y, r20.y, c3.y
     
-    mul r0.w, r0.w, r0.w
     mul r1.x, c66.x, c66.x
     rcp r1.x, r1.x
     mul r1.x, r1.x, c0.z
     min r2.x, r1.x, c0.z
-    mad r0.w, r0.w, r2.x, c0.w
-    rsq r0.w, r0.w
-    rsq r1.x, r2.x
-    rcp r1.x, r1.x
-    mul r1.x, r0.w, r1.x
-    rcp r0.w, r0.w
-    mul r0.xyz, r0, r1.x
-    mul r1.xyz, r1.x, v0
     dp3 r1.w, r0, r0
-    dp3 r0.x, r0, r1
-    dp3 r0.y, r1, r1
+    dp3 r0.x, r0, v0
+    dp3 r0.y, v0, v0
     add r0.y, r0.y, c0.y
     rsq r0.y, r0.y
     add r0.z, r1.w, c0.y
@@ -102,9 +88,6 @@
     mov r0.x, c2.y
     texld r1, r0, s0
     mul r0.x, r2.x, r1.x
-    //mul r0.y, r2.x, c2.w
-    //mul r0.y, r0.w, r0.y
-    //rcp r0.y, r0.y
     mul r0.x, r0.x, c2.z
     mul r0.x, r20.y, r0.x
     mul oC0.xyz, -r0.x, v2
