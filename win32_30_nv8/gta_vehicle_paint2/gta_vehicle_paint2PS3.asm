@@ -77,6 +77,8 @@
     // def c116, 0.3, 0.54, 1.1, 0.95
     // def c117, 0.64, 1.04, 2.2, 2.3
     
+    def c118, 0.06711056, 0.00583715, 52.9829189, 0
+    
     def c119, -1, 0.25, 0.5, 0.75
     def c120, 0.25, 0.5, 0.75, 2
     
@@ -298,9 +300,13 @@
     cmp_sat r1.w, r1.w, r2.w, r5.x
     removed 1.0.6.0 filter */
     // ---------------------------------------------------------- Improved Shadow Filter ------------------------------------------------------------
+    // dp2add r21.x, vPos.xy, c118.xy, c118.w
+    // frc r21.x, r21.x
+    // mul r21.x, r21.x, c118.z
+    // frc r21.x, r21.x
     mul r21.xy, vPos.xy, c112.z
-    texld r21, r21, s10
-    mul r21.x, r21.z, c111.z
+    texld r21.x, r21.xy, s10.z
+    mul r21.x, r21.x, c111.z
     sincos r22.xy, r21.x
     mul r22, r22.xyyx, c110.yzyy
     

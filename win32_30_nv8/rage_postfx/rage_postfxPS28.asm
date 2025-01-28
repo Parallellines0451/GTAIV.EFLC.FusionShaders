@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   sampler2D StippleTexture;
 //   sampler2D AdapLumSampler;
 //   sampler2D BloomSampler;
 //   sampler2D BlurSampler;
@@ -32,7 +31,6 @@
 //
 //   Name                         Reg   Size
 //   ---------------------------- ----- ----
-//   StippleTexture               s10      1
 //   globalScreenSize             c44      1
 //   Exposure                     c66      1
 //   motionBlurMatrix             c72      4
@@ -67,7 +65,7 @@
     def c5, 2, -1, 0.125, 0
     def c6, 1.10000002, 0, 0, 0
     
-    def c11, 0.002, 1.15, 0.03125, 0
+    def c11, 1.15, 0.003921568627, 0.0019607843137, 0
     
     def c20, 2.20000005, -0.532000005, 1, 0
     def c21, -3.08268166, 0.467999995, 1, 0.454545468
@@ -80,6 +78,8 @@
     def c27, -0.102080002, 1.10812998, -0.00604999997, 0
     def c28, -0.00326999999, -0.0727600008, 1.07602, 0
     
+    def c118, 0.06711056, 0.00583715, 52.9829189, 0
+    
     defi i0, 7, 0, 0, 0
     dcl_texcoord v0.xy
     dcl_2d s0
@@ -90,7 +90,6 @@
     dcl_2d s5
     dcl_2d s6
     dcl_2d s7
-    dcl_2d s10
     texld r3, v0, s2
     
     // motion blur
@@ -241,9 +240,9 @@
     // XBOX-like gamma, just an approximation
     if_ne r31.x, c222.z
       mov_sat r0.xyz, r0.xyz
-      pow r20.x, r0.x, c11.y
-      pow r20.y, r0.y, c11.y
-      pow r20.z, r0.z, c11.y
+      pow r20.x, r0.x, c11.x
+      pow r20.y, r0.y, c11.x
+      pow r20.z, r0.z, c11.x
       add r21.xyz, c2.y, -r0
       mul r21.xyz, r21, r21
       mul r21.xyz, r21, r21
@@ -253,10 +252,12 @@
     
     // dithering
     mul r1.xy, v0.xy, c44.xy
-    mul r1.xy, r1.xy, c11.z
-    texld r1, r1, s10
-    mad r1.z, r1.z, c5.x, c5.y
-    mad_sat oC0.xyz, r1.z, c11.x, r0
+    dp2add r1.x, r1.xy, c118.xy, c118.w
+    frc r1.x, r1.x
+    mul r1.x, r1.x, c118.z
+    frc r1.x, r1.x
+    mad r1.x, r1.x, c11.y, -c11.z
+    add_sat oC0.xyz, r0, r1.x
     mov oC0.w, c2.y
 
 // approximately 176 instruction slots used (14 texture, 162 arithmetic)

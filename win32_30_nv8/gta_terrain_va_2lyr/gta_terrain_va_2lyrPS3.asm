@@ -36,7 +36,6 @@
     dcl vPos.xy
     dcl_2d s0
     dcl_2d s1
-    dcl_2d s10
     mul r20.xy, vPos.xy, c153.x
     frc r20.xy, r20.xy
     mad r20, r20.xxyy, -c153.y, c153.zwzw

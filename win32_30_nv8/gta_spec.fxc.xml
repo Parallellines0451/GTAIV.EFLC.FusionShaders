@@ -724,12 +724,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_spec\gta_specPS3.asm</File>
-				<Variables value="9" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="8" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>SpecSampler</Name>

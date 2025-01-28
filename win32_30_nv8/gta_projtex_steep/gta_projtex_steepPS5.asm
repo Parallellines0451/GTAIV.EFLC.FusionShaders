@@ -21,7 +21,8 @@
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 6.9364273984e-43 // 495
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, 0, -1, -0, 0
-    def c150, 0.03125, 0.992217898, 0.00389105058, 0
+    def c118, 0.06711056, 0.00583715, 52.9829189, 0
+    def c150, 0.992217898, 0.00389105058, 0.03125, 0
     dcl_texcoord v0.xyz
     dcl vPos.xy
     dcl_2d s0
@@ -46,9 +47,13 @@
     cmp r1, -r1.y, c1.y, c1.z
     texkill r1
     removed stipple */
-    mul r20.xy, vPos.xy, c150.x
-    texld r20, r20.xy, s10
-    mad r20.y, r20.z, c150.y, c150.z
+    // dp2add r20.x, vPos.xy, c118.xy, c118.w
+    // frc r20.x, r20.x
+    // mul r20.x, r20.x, c118.z
+    // frc r20.x, r20.x
+    mul r20.xy, vPos.xy, c150.z
+    texld r20.x, r20.xy, s10.z
+    mad r20.y, r20.x, c150.x, c150.y
     add r20.y, -r20.y, r0.x
     texkill r20.y
     mov oC0.xyz, v0.x
