@@ -171,62 +171,37 @@
     rcp r1.x, r1.x
     mul r2.xy, r2, r1.x
     mad r2.xy, r2, c3, c3.x
-    /* removed original filter
-    dp2add r1.x, vPos, c4, c4.z
-    mad r1.x, r1.x, c3.z, c3.x
-    frc r1.x, r1.x
-    mad r1.x, r1.x, c5.x, c5.y
-    sincos r9.xy, r1.x
-    mul r2.zw, r9.xyyx, c77.z
-    mul r10, r9.xyxy, c5.zwwz
-    mul r4.zw, -r9.xyyx, c77.z
-    mul r9.xy, r10, c77.z
-    mad_sat r9.zw, r10, c77.z, r2.xyxy
-    mad_sat r2.zw, r2, c2.w, r2.xyxy
-    mad_sat r9.xy, r9, c1.y, r2
-    mad_sat r2.xy, r4.zwzw, c3.w, r2
-    mad r4.zw, r9, c77.w, c77.xyxy
-    mad r2.zw, r2, c77.w, c77.xyxy
-    mad r9.xy, r9, c77.w, c77
-    mad r2.xy, r2, c77.w, c77
-    texld r10, r4.zwzw, s14
-    dp2add r10.x, r10, r4, c1.z
-    texld r11, r2.zwzw, s14
-    dp2add r10.y, r11, r4, c1.z
-    texld r9, r9, s14
-    dp2add r10.z, r9, r4, c1.z
-    texld r2, r2, s14
-    dp2add r10.w, r2, r4, c1.z
-    mad r2, r1.y, c66.w, r10
-    cmp r2, r2, c1.x, c1.z
-    dp4 r1.x, r2, c3.w
-    removed original filter */
     // ----------------------------------------------------------- Improved Shadow Filter -----------------------------------------------------------
     mov r21.x, c110.y
     if_lt c221.x, r21.x
-      dp2add r21.y, vPos, c112.xy, c112.w
-      mad r21.y, r21.y, c111.x, c111.y
-      frc r21.y, r21.y
-      mad r21.y, r21.y, c111.z, c111.w
-      sincos r22.xy, r21.y
-      mul r21, r22.yxxy, c110.xxyz
-      mul r22, r22.yxxy, c113.xxyz
-      mov r20.xy, c77.z
-      mad_sat r21, r21, r20.xyxy, r2.xyxy
-      mad r21, r21, c77.w, c77.xyxy
-      mad_sat r22, r22, r20.xyxy, r2.xyxy
-      mad r22, r22, c77.w, c77.xyxy
-      texldl r25, r21.xy, s14
-      dp2add r25.x, r25, r4.xy, c110.w
-      texldl r24, r22.zw, s14
-      dp2add r25.y, r24, r4.xy, c110.w
-      texldl r24, r22.xy, s14
-      dp2add r25.z, r24, r4.xy, c110.w
-      texldl r24, r21.zw, s14
-      dp2add r25.w, r24, r4.xy, c110.w
-      mad r25, r1.y, c66.w, r25
-      cmp r25, r25, c110.y, c110.w
-      dp4 r1.x, r25, -c110.x
+      dp2add r1.x, vPos, c4, c4.z
+      mad r1.x, r1.x, c3.z, c3.x
+      frc r1.x, r1.x
+      mad r1.x, r1.x, c5.x, c5.y
+      sincos r9.xy, r1.x
+      mul r2.zw, r9.xyyx, c77.z
+      mul r10, r9.xyxy, c5.zwwz
+      mul r4.zw, -r9.xyyx, c77.z
+      mul r9.xy, r10, c77.z
+      mad_sat r9.zw, r10, c77.z, r2.xyxy
+      mad_sat r2.zw, r2, c2.w, r2.xyxy
+      mad_sat r9.xy, r9, c1.y, r2
+      mad_sat r2.xy, r4.zwzw, c3.w, r2
+      mad r4.zw, r9, c77.w, c77.xyxy
+      mad r2.zw, r2, c77.w, c77.xyxy
+      mad r9.xy, r9, c77.w, c77
+      mad r2.xy, r2, c77.w, c77
+      texldl r10, r4.zwzw, s14
+      dp2add r10.x, r10, r4, c1.z
+      texldl r11, r2.zwzw, s14
+      dp2add r10.y, r11, r4, c1.z
+      texldl r9, r9, s14
+      dp2add r10.z, r9, r4, c1.z
+      texldl r2, r2, s14
+      dp2add r10.w, r2, r4, c1.z
+      mad r2, r1.y, c66.w, r10
+      cmp r2, r2, c1.x, c1.z
+      dp4 r1.x, r2, c3.w
     else
       mul r21.xy, vPos.xy, c112.z
       mov r21.zw, c110.w
@@ -234,13 +209,12 @@
       mul r21.x, r21.z, c111.z
       sincos r22.xy, r21.x
       mul r22, r22.xyyx, c110.yzyy
-      mov r20.xy, c77.z
       
       mul r21, c130.xyxy, r22
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c130.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, r20.xyxy, r2.xyxy
+      mad_sat r21, r23, c77.z, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r24, r21.xy, s14
       dp2add r24.x, r24, r4.xy, c110.w
@@ -250,7 +224,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c131.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, r20.xyxy, r2.xyxy
+      mad_sat r21, r23, c77.z, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r23, r21.xy, s14
       dp2add r24.z, r23, r4.xy, c110.w
@@ -264,7 +238,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c132.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, r20.xyxy, r2.xyxy
+      mad_sat r21, r23, c77.z, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r24, r21.xy, s14
       dp2add r24.x, r24, r4.xy, c110.w
@@ -274,7 +248,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c133.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, r20.xyxy, r2.xyxy
+      mad_sat r21, r23, c77.z, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r23, r21.xy, s14
       dp2add r24.z, r23, r4.xy, c110.w
@@ -288,7 +262,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c134.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, r20.xyxy, r2.xyxy
+      mad_sat r21, r23, c77.z, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r24, r21.xy, s14
       dp2add r24.x, r24, r4.xy, c110.w
@@ -298,7 +272,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c135.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, r20.xyxy, r2.xyxy
+      mad_sat r21, r23, c77.z, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r23, r21.xy, s14
       dp2add r24.z, r23, r4.xy, c110.w
@@ -312,7 +286,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c136.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, r20.xyxy, r2.xyxy
+      mad_sat r21, r23, c77.z, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r24, r21.xy, s14
       dp2add r24.x, r24, r4.xy, c110.w
@@ -322,7 +296,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c137.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, r20.xyxy, r2.xyxy
+      mad_sat r21, r23, c77.z, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r23, r21.xy, s14
       dp2add r24.z, r23, r4.xy, c110.w
