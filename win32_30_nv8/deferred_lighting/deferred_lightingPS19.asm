@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D GBufferTextureSampler3;
 //   float gDeferredLightRadius;
 //   sampler2D gDeferredLightSampler2;
@@ -15,6 +16,7 @@
 //
 //   Name                       Reg   Size
 //   -------------------------- ----- ----
+//   NearFarPlane               c128     1
 //   gDeferredLightRadius       c66      1
 //   gooDeferredLightScreenSize c72      1
 //   gDeferredProjParams        c73      1

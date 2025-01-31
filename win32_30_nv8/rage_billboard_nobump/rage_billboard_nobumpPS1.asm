@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   float4 g_ImposterSize;
 //   sampler2D imposterSampler;
 //   float3 normTable[16];
@@ -12,6 +13,7 @@
 //
 //   Name            Reg   Size
 //   --------------- ----- ----
+//   NearFarPlane    c128     1
 //   g_ImposterSize  c66      1
 //   normTable       c72     16
 //   imposterSampler s0       1

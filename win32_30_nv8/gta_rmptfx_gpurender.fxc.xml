@@ -568,7 +568,7 @@
 			</Item>
 		</PixelShaders>
 	</Shaders>
-	<GlobalVariables value="62" >
+	<GlobalVariables value="61" >
 		<Item>
 			<Type>float4</Type>
 			<ArrayCount value="64" />
@@ -1181,14 +1181,6 @@
 			AddressU Clamp
 			AddressV Clamp
 		</Values>
-		</Item>
-		<Item>
-			<Type>float4</Type>
-			<ArrayCount value="0" />
-			<Name1>NearFarPlane</Name1>
-			<Name2>NearFarPlane</Name2>
-			<Annotation />
-			<Values />
 		</Item>
 	</GlobalVariables>
 	<LocalVariables value="23" >

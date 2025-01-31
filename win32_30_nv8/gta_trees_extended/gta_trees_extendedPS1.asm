@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D BumpSampler;
 //   sampler2D SpecSampler;
 //   sampler2D TextureSampler;
@@ -17,6 +18,7 @@
 //
 //   Name                Reg   Size
 //   ------------------- ----- ----
+//   NearFarPlane        c128     1
 //   globalScalars       c39      1
 //   specularFactor      c66      1
 //   specularColorFactor c72      1

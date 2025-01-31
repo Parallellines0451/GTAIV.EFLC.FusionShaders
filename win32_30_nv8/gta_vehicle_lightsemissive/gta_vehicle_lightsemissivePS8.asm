@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D DirtSampler;
 //   sampler2D TextureSampler;
 //   float3 dirtColor;
@@ -15,6 +16,7 @@
 //
 //   Name            Reg   Size
 //   --------------- ----- ----
+//   NearFarPlane    c128     1
 //   globalScalars   c39      1
 //   matDiffuseColor c66      1
 //   dirtLevel       c72      1

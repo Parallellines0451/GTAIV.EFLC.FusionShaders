@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D StippleTexture;
 //   sampler2D TextureSampler;
 //   float4 colorize;
@@ -52,6 +53,7 @@
 //
 //   Name                 Reg   Size
 //   -------------------- ----- ----
+//   NearFarPlane         c128     1
 //   gViewInverse         c12      4
 //   gDirectionalLight    c17      1
 //   gDirectionalColour   c18      1

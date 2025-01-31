@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D YPlaneSampler;
 //   row_major float4x4 YUVtoRGB;
 //   sampler2D cBPlaneSampler;
@@ -13,6 +14,7 @@
 //
 //   Name           Reg   Size
 //   -------------- ----- ----
+//   NearFarPlane   c128     1
 //   YUVtoRGB       c64      4
 //   YPlaneSampler  s0       1
 //   cRPlaneSampler s1       1

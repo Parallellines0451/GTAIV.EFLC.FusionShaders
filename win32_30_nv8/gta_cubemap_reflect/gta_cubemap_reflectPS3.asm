@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   samplerCUBE EnvironmentSampler;
 //   sampler2D TextureSampler;
 //   float4 globalScalars;
@@ -14,6 +15,7 @@
 //
 //   Name               Reg   Size
 //   ------------------ ----- ----
+//   NearFarPlane       c128     1
 //   globalScalars      c39      1
 //   stencil            c52      1
 //   reflectivePower    c66      1

@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D StippleTexture;
 //   sampler2D TextureGrassSampler;
 //   float4 stencil;
@@ -12,6 +13,7 @@
 //
 //   Name                Reg   Size
 //   ------------------- ----- ----
+//   NearFarPlane        c128     1
 //   stencil             c52      1
 //   TextureGrassSampler s0       1
 //   StippleTexture      s10      1

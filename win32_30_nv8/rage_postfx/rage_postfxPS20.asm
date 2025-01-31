@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D GBufferTextureSampler3;
 //   sampler2D HDRSampler;
 //   float4 dofProj;
@@ -16,6 +17,7 @@
 //
 //   Name                   Reg   Size
 //   ---------------------- ----- ----
+//   NearFarPlane           c128     1
 //   gDepthFxParams         c16      1
 //   globalFogParams        c41      1
 //   globalFogColor         c42      1

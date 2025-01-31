@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D StippleTexture;
 //   sampler2D TextureSampler;
 //   float3 dirtDecalMask;
@@ -16,6 +17,7 @@
 //
 //   Name                Reg   Size
 //   ------------------- ----- ----
+//   NearFarPlane        c128     1
 //   globalScalars       c39      1
 //   stencil             c52      1
 //   dirtDecalMask       c66      1

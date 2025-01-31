@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D BumpSampler;
 //   samplerCUBE EnvironmentSampler;
 //   sampler2D StippleTexture;
@@ -17,6 +18,7 @@
 //
 //   Name               Reg   Size
 //   ------------------ ----- ----
+//   NearFarPlane       c128     1
 //   globalScalars      c39      1
 //   stencil            c52      1
 //   bumpiness          c66      1

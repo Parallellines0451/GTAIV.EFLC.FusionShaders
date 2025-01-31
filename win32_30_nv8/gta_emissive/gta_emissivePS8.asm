@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D StippleTexture;
 //   sampler2D TextureSampler;
 //   float emissiveMultiplier;
@@ -15,6 +16,7 @@
 //
 //   Name               Reg   Size
 //   ------------------ ----- ----
+//   NearFarPlane       c128     1
 //   globalScalars      c39      1
 //   globalFogParams    c41      1
 //   globalFogColor     c42      1

@@ -53,16 +53,11 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rmptfx_collision\rmptfx_collisionPS2.asm</File>
-				<Variables value="2" >
+				<Variables value="1" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DepthTextureSampler0</Name>
 						<Index value="15" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>NearFarPlane</Name>
-						<Index value="128" />
 					</Item>
 				</Variables>
 			</Item>

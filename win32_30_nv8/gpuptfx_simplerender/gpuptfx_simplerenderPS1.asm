@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D DiffuseSampler;
 //
 //
@@ -10,6 +11,7 @@
 //
 //   Name           Reg   Size
 //   -------------- ----- ----
+//   NearFarPlane   c128     1
 //   DiffuseSampler s0       1
 //
 

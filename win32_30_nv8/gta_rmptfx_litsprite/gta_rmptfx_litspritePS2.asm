@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D DepthMapTexSampler;
 //   sampler2D DiffuseTexSampler;
 //   float HybridAdd;
@@ -14,6 +15,7 @@
 //
 //   Name               Reg   Size
 //   ------------------ ----- ----
+//   NearFarPlane       c128     1
 //   gSoftness          c66      1
 //   HybridAdd          c72      1
 //   gInvScreenSize     c129     1

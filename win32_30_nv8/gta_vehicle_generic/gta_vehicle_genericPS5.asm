@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D BumpSampler;
 //   float3 LuminanceConstants;
 //   sampler2D SpecSampler;
@@ -22,6 +23,7 @@
 //
 //   Name                Reg   Size
 //   ------------------- ----- ----
+//   NearFarPlane        c128     1
 //   globalScalars       c39      1
 //   stencil             c52      1
 //   matDiffuseColor     c66      1

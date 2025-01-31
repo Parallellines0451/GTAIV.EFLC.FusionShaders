@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D TextureSampler_layer0;
 //   float4 gDepthFxParams;
 //   float4 gDirectionalColour;
@@ -43,6 +44,7 @@
 //
 //   Name                  Reg   Size
 //   --------------------- ----- ----
+//   NearFarPlane          c128     1
 //   gDepthFxParams        c16      1
 //   gDirectionalLight     c17      1
 //   gDirectionalColour    c18      1

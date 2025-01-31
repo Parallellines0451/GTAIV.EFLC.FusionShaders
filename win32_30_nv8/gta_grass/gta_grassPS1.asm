@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D TextureGrassSampler;
 //   float4 globalScalars;
 //
@@ -11,6 +12,7 @@
 //
 //   Name                Reg   Size
 //   ------------------- ----- ----
+//   NearFarPlane        c128     1
 //   globalScalars       c39      1
 //   TextureGrassSampler s0       1
 //

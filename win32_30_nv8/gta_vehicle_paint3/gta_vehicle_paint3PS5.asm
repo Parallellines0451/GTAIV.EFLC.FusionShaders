@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D DirtSampler;
 //   float3 LuminanceConstants;
 //   sampler2D SpecSampler;
@@ -28,6 +29,7 @@
 //
 //   Name                      Reg   Size
 //   ------------------------- ----- ----
+//   NearFarPlane              c128     1
 //   gDirectionalLight         c17      1
 //   globalScalars             c39      1
 //   stencil                   c52      1

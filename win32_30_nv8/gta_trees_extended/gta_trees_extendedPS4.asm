@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D StippleTexture;
 //   sampler2D TextureSampler;
 //   float altRemap[16];
@@ -14,6 +15,7 @@
 //
 //   Name           Reg   Size
 //   -------------- ----- ----
+//   NearFarPlane   c128     1
 //   colorize       c51      1
 //   normTable      c72     16
 //   altRemap       c88     16

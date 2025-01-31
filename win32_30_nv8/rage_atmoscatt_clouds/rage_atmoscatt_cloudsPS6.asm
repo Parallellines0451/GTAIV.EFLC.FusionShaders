@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   float3 HDRExposureClamp;
 //   float HDRSunExposure;
 //   float3 SunCentre;
@@ -14,6 +15,7 @@
 //
 //   Name             Reg   Size
 //   ---------------- ----- ----
+//   NearFarPlane     c128     1
 //   SunCentre        c64      1
 //   SunDirection     c65      1
 //   SunColor         c66      1

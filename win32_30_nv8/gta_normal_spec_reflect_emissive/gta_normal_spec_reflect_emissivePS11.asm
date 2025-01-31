@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D BumpSampler;
 //   sampler2D EnvironmentSampler;
 //   sampler2D SpecSampler;
@@ -58,6 +59,7 @@
 //
 //   Name                 Reg   Size
 //   -------------------- ----- ----
+//   NearFarPlane         c128     1
 //   gViewInverse         c12      4
 //   gDirectionalLight    c17      1
 //   gDirectionalColour   c18      1

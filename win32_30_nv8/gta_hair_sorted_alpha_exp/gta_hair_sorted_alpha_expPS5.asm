@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   float4 stencil;
 //
 //
@@ -10,6 +11,7 @@
 //
 //   Name         Reg   Size
 //   ------------ ----- ----
+//   NearFarPlane c128     1
 //   stencil      c52      1
 //
 

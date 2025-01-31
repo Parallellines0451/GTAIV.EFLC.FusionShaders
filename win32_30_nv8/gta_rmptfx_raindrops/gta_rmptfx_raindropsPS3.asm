@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D DiffuseTexSampler;
 //   sampler2D FrameMapTexSampler;
 //   float gBlurAmount;
@@ -16,6 +17,7 @@
 //
 //   Name                  Reg   Size
 //   --------------------- ----- ----
+//   NearFarPlane          c128     1
 //   globalScreenSize      c44      1
 //   gBlurAmount           c66      1
 //   gRefraction           c72      1

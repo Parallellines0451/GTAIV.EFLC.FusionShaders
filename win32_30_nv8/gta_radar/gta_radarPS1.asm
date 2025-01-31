@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D TextureSampler;
 //   float4 diffuseCol;
 //
@@ -11,6 +12,7 @@
 //
 //   Name           Reg   Size
 //   -------------- ----- ----
+//   NearFarPlane   c128     1
 //   diffuseCol     c66      1
 //   TextureSampler s0       1
 //

@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D DiffuseTexSampler;
 //   sampler2D TextureSampler;
 //   float gInvColorExpBias;
@@ -12,6 +13,7 @@
 //
 //   Name              Reg   Size
 //   ----------------- ----- ----
+//   NearFarPlane      c128     1
 //   gInvColorExpBias  c46      1
 //   DiffuseTexSampler s0       1
 //   TextureSampler    s1       1

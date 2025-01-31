@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D DepthBufferSampler;
 //   sampler2D ReflectTextureSampler;
 //   sampler2D SurfaceTextureSampler;
@@ -32,6 +33,7 @@
 //
 //   Name                  Reg   Size
 //   --------------------- ----- ----
+//   NearFarPlane          c128     1
 //   gViewInverse          c12      4
 //   gDirectionalLight     c17      1
 //   gDirectionalColour    c18      1
@@ -684,6 +686,7 @@
     mov r20.xy, c44.zw
     mad r7.xyz, r20.xyx, c3.y, r7
     texld r8, r7.zy, s2
+    
     // LogDepth Read
     rcp r20.x, c128.x
     mul r20.x, r20.x, c128.y

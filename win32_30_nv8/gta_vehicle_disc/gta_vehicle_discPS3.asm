@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D BumpSampler;
 //   float DiskBrakeGlow;
 //   float3 LuminanceConstants;
@@ -38,6 +39,7 @@
 //
 //   Name                 Reg   Size
 //   -------------------- ----- ----
+//   NearFarPlane         c128     1
 //   gViewInverse         c12      4
 //   gDepthFxParams       c16      1
 //   gDirectionalLight    c17      1

@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D DiffuseTexSampler;
 //   sampler2D FrameMapTexSampler;
 //   float HybridAdd;
@@ -14,6 +15,7 @@
 //
 //   Name               Reg   Size
 //   ------------------ ----- ----
+//   NearFarPlane       c128     1
 //   HybridAdd          c64      1
 //   gHeatHaze          c65      1
 //   gHeatPhase         c66      1

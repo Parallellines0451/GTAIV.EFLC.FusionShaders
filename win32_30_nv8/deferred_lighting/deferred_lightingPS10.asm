@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D GBufferTextureSampler0;
 //   sampler2D GBufferTextureSampler1;
 //   sampler2D GBufferTextureSampler3;
@@ -21,6 +22,7 @@
 //
 //   Name                             Reg   Size
 //   -------------------------------- ----- ----
+//   NearFarPlane                     c128     1
 //   gViewInverse                     c12      4
 //   gDeferredLightPosition           c66      1
 //   gDeferredLightDirection          c72      1

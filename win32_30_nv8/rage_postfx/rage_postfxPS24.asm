@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D AdapLumSampler;
 //   sampler2D BloomSampler;
 //   sampler2D BlurSampler;
@@ -31,6 +32,7 @@
 //
 //   Name                         Reg   Size
 //   ---------------------------- ----- ----
+//   NearFarPlane                 c128     1
 //   globalScreenSize             c44      1
 //   Exposure                     c66      1
 //   motionBlurMatrix             c72      4

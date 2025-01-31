@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D TextureSampler_layer0;
 //   sampler2D TextureSampler_layer1;
 //   float4 globalScalars;
@@ -13,6 +14,7 @@
 //
 //   Name                  Reg   Size
 //   --------------------- ----- ----
+//   NearFarPlane          c128     1
 //   globalScalars         c39      1
 //   stencil               c52      1
 //   TextureSampler_layer0 s0       1

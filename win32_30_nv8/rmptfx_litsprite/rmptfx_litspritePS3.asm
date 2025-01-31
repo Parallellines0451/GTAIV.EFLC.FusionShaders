@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   float4 NearFarPlane;
 //   sampler2D DiffuseTexSampler;
 //   float HybridAdd;
 //   float3 LightColor;
@@ -13,6 +14,7 @@
 //
 //   Name                Reg   Size
 //   ------------------- ----- ----
+//   NearFarPlane        c128     1
 //   HybridAdd           c64      1
 //   LightColor          c65      1
 //   DiffuseTexSampler   s0       1
