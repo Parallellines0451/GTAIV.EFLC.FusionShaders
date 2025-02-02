@@ -51,23 +51,6 @@
     dcl_2d s10
     add r0, c0.x, v2.z
     texkill r0
-    /* removed stipple
-    mov_sat r0.x, c39.x
-    mul r0.x, r0.x, c0.y
-    frc r0.y, r0.x
-    mul r0.z, r0.y, c0.z
-    frc r0.w, r0.z
-    add r1.xy, r0.zxzw, -r0.wyzw
-    mul r0.xy, c0.w, vPos
-    frc r0.xy, r0_abs
-    cmp r0.xy, vPos, r0, -r0
-    mul r0.xy, r0, c3.x
-    mad r0.xy, r1, c3.x, r0
-    mov r0.zw, c3.y
-    texldl r0, r0, s10
-    cmp r0, -r0.y, c3.z, c3.w
-    texkill r0
-    removed stipple */
     mul r20.xy, vPos.xy, c153.x
     frc r20.xy, r20.xy
     mad r20, r20.xxyy, -c153.y, c153.zwzw

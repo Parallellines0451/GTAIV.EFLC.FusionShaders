@@ -79,7 +79,7 @@
     dcl_2d s0
     dcl_2d s1
     dcl_2d s2
-    dcl_2d s10
+    dcl_2d s10 // added noise texture
     dcl_2d s14
     add r0.xy, c0.x, vPos
     mul r0.xy, r0, c84.zwzw
@@ -115,8 +115,7 @@
     mul r2.xy, r2, r0.w
     mad r2.xy, r2, c2.zwzw, c2.z
     // ----------------------------------------------------------- Improved Shadow Filter -----------------------------------------------------------
-    mov r21.x, c110.y
-    if_lt c221.x, r21.x
+    if_eq -c221_abs.x, c221_abs.x
       dp2add r0.w, vPos, c3, c3.z
       mad r0.w, r0.w, c4.x, c4.y
       frc r0.w, r0.w

@@ -92,7 +92,6 @@
     dcl_2d s5
     dcl_2d s6
     dcl_2d s7
-    mov r31, c2.w
     // depth used by DOF
     texld r0, v0, s1
     
@@ -237,7 +236,7 @@
     */
     
     // XBOX-like gamma, just an approximation
-    if_ne r31.x, c222.z
+    if_ne -c222_abs.z, c222_abs.z
       mov_sat r0.xyz, r0.xyz
       pow r20.x, r0.x, c11.x
       pow r20.y, r0.y, c11.x

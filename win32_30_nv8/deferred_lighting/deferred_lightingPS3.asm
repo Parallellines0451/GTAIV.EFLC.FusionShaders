@@ -46,7 +46,6 @@
     def c2, 256, -127.999992, 9.99999975e-006, 1.33333337
     def c3, -0.5, 0.5, 0.0199999996, 0.00999999978
     def c4, 0.75, 0.25, 5, 10
-    def c20, 1.6666667, 0, 0, 0 // reflection intensity multiplier
     def c21, 3, 2, 1, 0 // Console tree lighting constants
     def c22, 0.012156862745098, 0.0007843137254902, 0, 0 // 3.1, 0.2
     def c24, 0.212500006, 0.715399981, 0.0720999986, 0.5
@@ -115,7 +114,6 @@
       mul r0.yzw, r1.w, r0
       mul r0.yzw, r3.z, r0
       mul r0.yzw, r0, c39.w
-      // mul r0.yzw, r0, c20.x // boost reflection intensity
       mul r0.xyz, r0.x, r0.yzww
       add r0.w, r3.x, r3.x
       mul r0.xyz, r0, r0.w

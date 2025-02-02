@@ -95,8 +95,7 @@
     texld r3, v0, s2
     
     // motion blur
-    mov r31, c2.w
-    if_ne r31.x, c222.w
+    if_ne -c222_abs.w, c222_abs.w
       texld r0, v0, s1
       
       // LogDepth Read
@@ -128,19 +127,20 @@
       texld r5, v0, s7
       add r1.w, r5.x, -c86.x
       mul r4.zw, c0.xyxy, v0.xyxy
-      mad r4.zw, r3.xyxy, c3.w, r4
-      texldl r5, r4.zwzw, s6
+      mad r8.xy, r3.xyxy, c3.w, r4.zw
+      mov r8.zw, c1.x
+      texldl r5, r8, s6
       add r2.w, r5.x, c4.x
       mad r4.zw, r4.xyxy, r2.w, v0.xyxy
       mov r5.xyz, r3
       mov r2.w, c2.y
       mov r3.w, c2.y
       rep i0
-        mad r6.xy, r4, r3.w, r4.zwzw
-        texldl r7, r6, s7
+        mad r8.xy, r4, r3.w, r4.zwzw
+        texldl r7, r8, s7
         add r5.w, r7.x, -c86.x
         cmp r5.w, r5.w, c2.w, c2.y
-        texldl r6, r6, s2
+        texldl r6, r8, s2
         mad r5.xyz, r6, r5.w, r5
         add r2.w, r2.w, r5.w
         add r3.w, r3.w, c2.y
@@ -251,7 +251,7 @@
     */
     
     // XBOX-like gamma, just an approximation
-    if_ne r31.x, c222.z
+    if_ne -c222_abs.z, c222_abs.z
       mov_sat r0.xyz, r0.xyz
       pow r20.x, r0.x, c11.x
       pow r20.y, r0.y, c11.x

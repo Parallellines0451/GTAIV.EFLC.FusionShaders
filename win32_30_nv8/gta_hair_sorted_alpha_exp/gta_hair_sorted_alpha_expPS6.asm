@@ -60,23 +60,6 @@
         mad r0.xyz, r0, r2.x, r1
       endif
     endif
-    /* removed stipple
-    mov_sat r1.x, c39.x
-    mul r1.x, r1.x, c2.z
-    frc r1.y, r1.x
-    mul r1.z, r1.y, c2.w
-    frc r1.w, r1.z
-    add r2.xy, r1.zxzw, -r1.wyzw
-    mul r1.xy, c0.x, vPos
-    frc r1.xy, r1_abs
-    cmp r1.xy, vPos, r1, -r1
-    mul r1.xy, r1, c0.y
-    mad r1.xy, r2, c0.y, r1
-    mov r1.zw, c2.x
-    texldl r1, r1, s10
-    cmp r1, -r1.y, -c2.y, -c2.x
-    texkill r1
-    removed stipple */
     texld r1, v0, s2
     add r1.z, -r1.w, c2.y
     add r1.z, -r1.x, r1.z

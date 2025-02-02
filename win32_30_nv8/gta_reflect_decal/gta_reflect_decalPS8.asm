@@ -64,24 +64,6 @@
     mov r1.w, c1.y
     mul r2, r0, r1
     mul r0.w, r2.w, c39.x
-    /* removed stipple
-    mov_sat r1.w, r0.w
-    mul r1.w, r1.w, c1.z
-    frc r2.w, r1.w
-    mul r3.x, r2.w, c1.w
-    frc r3.y, r3.x
-    add r3.x, r3.x, -r3.y
-    add r3.y, r1.w, -r2.w
-    mul r3.zw, c2.x, vPos.xyxy
-    frc r3.zw, r3_abs
-    cmp r3.zw, vPos.xyxy, r3, -r3
-    mul r3.zw, r3, -c0.w
-    mad r3.xy, r3, -c0.w, r3.zwzw
-    mov r3.zw, c2.y
-    texldl r3, r3, s10
-    cmp r3, -r3.y, c2.z, c2.w
-    texkill r3
-    removed stipple */
     mul r20.xy, vPos.xy, c153.x
     frc r20.xy, r20.xy
     mad r20, r20.xxyy, -c153.y, c153.zwzw

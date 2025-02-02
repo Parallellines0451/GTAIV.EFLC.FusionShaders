@@ -31,24 +31,6 @@
     add r20.x, r0.w, -c1.w
     cmp r0.w, r20.x, -c1.y, c1.x
     mul r0.x, r0.w, c39.x
-    /* removed stipple
-    mov_sat r0.y, r0.x
-    mul r0.y, r0.y, c0.x
-    frc r0.z, r0.y
-    mul r0.w, r0.z, c0.y
-    frc r1.x, r0.w
-    add r1.x, r0.w, -r1.x
-    add r1.y, r0.y, -r0.z
-    mul r0.yz, c0.z, vPos.xxyw
-    frc r0.yz, r0_abs
-    cmp r0.yz, vPos.xxyw, r0, -r0
-    mul r0.yz, r0, c0.w
-    mad r1.xy, r1, c0.w, r0.yzzw
-    mov r1.zw, c1.x
-    texldl r1, r1, s10
-    cmp r1, -r1.y, c1.y, c1.z
-    texkill r1
-    removed stipple */
     // dp2add r20.x, vPos.xy, c118.xy, c118.w
     // frc r20.x, r20.x
     // mul r20.x, r20.x, c118.z

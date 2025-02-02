@@ -101,23 +101,6 @@
         mov r2.xy, r4
       endif
     endif
-    /* removed stipple
-    mov_sat r1.x, c39.x
-    mul r1.x, r1.x, c1.w
-    frc r1.y, r1.x
-    mul r1.z, r1.y, c0.x
-    frc r1.w, r1.z
-    add r3.xy, r1.zxzw, -r1.wyzw
-    mul r1.xy, c0.y, vPos
-    frc r1.xy, r1_abs
-    cmp r1.xy, vPos, r1, -r1
-    mul r1.xy, r1, c0.z
-    mad r1.xy, r3, c0.z, r1
-    mov r1.zw, c1.x
-    texldl r1, r1, s10
-    cmp r1, -r1.y, -c1.y, -c1.x
-    texkill r1
-    removed stipple */
     mul r20.xy, vPos.xy, c153.x
     frc r20.xy, r20.xy
     mad r20, r20.xxyy, -c153.y, c153.zwzw

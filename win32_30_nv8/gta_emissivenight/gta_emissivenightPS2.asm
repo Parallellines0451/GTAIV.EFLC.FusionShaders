@@ -22,7 +22,7 @@
 //   gDayNightEffects   c45      1
 //   colorize           c51      1
 //   emissiveMultiplier c66      1
-//   shadowmap_res      c207     1 // model identifier
+//   shadowmap_res      c207     1
 //   TextureSampler     s0       1
 //   StippleTexture     s10      1
 //
@@ -38,23 +38,6 @@
     dcl_texcoord9 v9
     dcl_2d s0
     dcl_2d s10
-    /* removed stipple
-    mov_sat r0.x, c39.x
-    mul r0.x, r0.x, c0.x
-    frc r0.y, r0.x
-    mul r0.z, r0.y, c0.y
-    frc r0.w, r0.z
-    add r1.xy, r0.zxzw, -r0.wyzw
-    mul r0.xy, c0.z, vPos
-    frc r0.xy, r0_abs
-    cmp r0.xy, vPos, r0, -r0
-    mul r0.xy, r0, c0.w
-    mad r0.xy, r1, c0.w, r0
-    mov r0.zw, c1.x
-    texldl r0, r0, s10
-    cmp r0, -r0.y, c1.y, c1.z
-    texkill r0
-    removed stipple */
     texld r0, v0, s0
     mov r1.xy, c1_abs.wy
     add r1.x, r1.x, -c207.x

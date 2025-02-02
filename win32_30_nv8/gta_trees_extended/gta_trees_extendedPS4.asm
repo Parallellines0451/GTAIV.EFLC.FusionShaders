@@ -48,24 +48,6 @@
     dcl_2d s10
     texld r0, v0, s0
     mul_sat r0.w, r0.w, c154.x
-    /* removed stipple
-    mov_sat r0.x, r0.w
-    mul r0.x, r0.x, c1.x
-    frc r0.y, r0.x
-    mul r0.z, r0.y, c1.y
-    frc r1.x, r0.z
-    add r1.x, r0.z, -r1.x
-    add r1.y, r0.x, -r0.y
-    mul r0.xy, c1.z, vPos
-    frc r0.xy, r0_abs
-    cmp r0.xy, vPos, r0, -r0
-    mul r0.xy, r0, c1.w
-    mad r1.xy, r1, c1.w, r0
-    mov r1.zw, c2.x
-    texldl r1, r1, s10
-    cmp r1, -r1.y, c2.y, c2.z
-    texkill r1
-    removed stipple */
     mul r20.xy, vPos.xy, c153.x
     frc r20.xy, r20.xy
     mad r20, r20.xxyy, -c153.y, c153.zwzw

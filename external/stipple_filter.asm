@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   sampler2D GBufferTextureSampler2;
 //   sampler2D HDRSampler;
 //   sampler2D StencilCopySampler;
 //   float4 TexelSize;
@@ -13,6 +14,7 @@
 //   Name                         Reg   Size
 //   ---------------------------- ----- ----
 //   TexelSize                    c76      1
+//   GBufferTextureSampler2       s0       1
 //   HDRSampler                   s2       1
 //   StencilCopySampler           s7       1
 //
@@ -47,18 +49,18 @@
     mad r0.x, r0.x, r0.x, -r2.w
     cmp r0.x, r0.x, c2.y, c2.w
     
-    mov r31, c2.w
-    if_ne r31.x, c223.z // Stipple mask
-      mov r21, c76
-      texld r22, v0, s0
-      mad r21, r21.xyxy, c2.yyww, v0.xyxy
-      texldl r23, r21.xw, s0
-      add r22.w, r22, r23
-      texldl r23, r21.zy, s0
-      add r22.w, r22, r23
-      texldl r23, r21.xy, s0
-      add_sat r22.w, r22, r23
-      mul r0.x, r0.x, r22.w
+    if_ne -c223_abs.z, c223_abs.z // Stipple mask
+      texld r22.x, v0, s0.w
+      add r21.xy, v0, c76
+      mov r21.zw, c2.w
+      texldl r22.y, r21, s0.w
+      mov r23.xy, c76
+      mad r21.xy, r23, c2.yw, v0
+      texldl r22.z, r21, s0.w
+      mad r21.xy, r23, c2.wy, v0
+      texldl r22.w, r21, s0.w
+      dp4_sat r22.x, r22, c2.y
+      mul r0.x, r0.x, r22.x
     endif
     
     add r3.xyz, r3, r4

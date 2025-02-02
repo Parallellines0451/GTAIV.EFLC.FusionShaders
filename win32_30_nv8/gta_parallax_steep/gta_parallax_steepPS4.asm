@@ -69,23 +69,6 @@
       mov r3.yzw, r5.xxyw
       cmp r2, r0.z, r2, r3
     endrep
-    /* removed stipple
-    mov_sat r0.x, c39.x
-    mul r0.x, r0.x, c3.x
-    frc r0.y, r0.x
-    mul r0.z, r0.y, c3.y
-    frc r0.w, r0.z
-    add r1.xy, r0.zxzw, -r0.wyzw
-    mul r0.xy, -c0.w, vPos
-    frc r0.xy, r0_abs
-    cmp r0.xy, vPos, r0, -r0
-    mul r0.xy, r0, c3.z
-    mad r0.xy, r1, c3.z, r0
-    mov r0.zw, c3.w
-    texldl r0, r0, s10
-    cmp r0, -r0.y, c1.x, c1.y
-    texkill r0
-    removed stipple */
     texld r0, r1.zwzw, s0
     add r1.xy, r2.yzzw, c1.z
     mul r1.xy, r1, c74.x
