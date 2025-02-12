@@ -109,7 +109,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_terrain_va_3lyr\gta_terrain_va_3lyrPS1.asm</File>
-				<Variables value="35" >
+				<Variables value="36" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gViewInverse</Name>
+						<Index value="12" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>TextureSampler_layer0</Name>
@@ -290,7 +295,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_terrain_va_3lyr\gta_terrain_va_3lyrPS2.asm</File>
-				<Variables value="35" >
+				<Variables value="36" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gViewInverse</Name>
+						<Index value="12" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>TextureSampler_layer1</Name>
@@ -471,7 +481,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_terrain_va_3lyr\gta_terrain_va_3lyrPS3.asm</File>
-				<Variables value="35" >
+				<Variables value="36" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gViewInverse</Name>
+						<Index value="12" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>TextureSampler_layer2</Name>
