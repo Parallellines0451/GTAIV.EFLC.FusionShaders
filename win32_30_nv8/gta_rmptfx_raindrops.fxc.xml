@@ -8,7 +8,17 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_rmptfx_raindrops\gta_rmptfx_raindropsVS0.asm</File>
-				<Variables value="10" >
+				<Variables value="12" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gWorld</Name>
+						<Index value="0" />
+					</Item>
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gViewInverse</Name>
+						<Index value="12" />
+					</Item>
 					<Item>
 						<Type>float</Type>
 						<Name>gAmbientAmount</Name>
@@ -64,7 +74,17 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_rmptfx_raindrops\gta_rmptfx_raindropsVS1.asm</File>
-				<Variables value="7" >
+				<Variables value="9" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gWorld</Name>
+						<Index value="0" />
+					</Item>
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gViewInverse</Name>
+						<Index value="12" />
+					</Item>
 					<Item>
 						<Type>float4</Type>
 						<Name>gAspectRatio</Name>
@@ -105,7 +125,17 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_rmptfx_raindrops\gta_rmptfx_raindropsVS2.asm</File>
-				<Variables value="6" >
+				<Variables value="8" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gWorld</Name>
+						<Index value="0" />
+					</Item>
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gViewInverse</Name>
+						<Index value="12" />
+					</Item>
 					<Item>
 						<Type>float4</Type>
 						<Name>gDepthFxParams</Name>
