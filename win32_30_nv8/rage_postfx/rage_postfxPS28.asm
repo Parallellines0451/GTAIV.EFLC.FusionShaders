@@ -69,9 +69,6 @@
     
     def c11, 1.15, 0.003921568627, 0.0019607843137, 0
     
-    def c20, 2.20000005, -0.532000005, 1, 0
-    def c21, -3.08268166, 0.467999995, 1, 0.454545468
-    
     def c22, 1.60475004, -0.531080008, -0.0736699998, 1
     def c23, 0.0759999976, 0.908339977, 0.0156599991, 0.0245785993
     def c24, 0.0284000002, 0.133829996, 0.837769985, -9.05370034e-005
@@ -180,31 +177,18 @@
     
     if_ne -c220_abs.z, c220_abs.z
       mov r1.x, c2.y
-      if_eq c220.z, r1.x // https://github.com/dmnsgn/glsl-tone-map/blob/main/uchimura.glsl
-        log r0.x, r0.x
-        log r0.y, r0.y
-        log r0.z, r0.z
-        mul r0.xyz, r0, c20.x
-        exp r1.x, r0.x
-        exp r1.y, r0.y
-        exp r1.z, r0.z
-        add r0.xyz, r1, c20.y
-        mul r2.xyz, r0, c21.x
-        exp r3.x, r2.x
-        exp r3.y, r2.y
-        exp r3.z, r2.z
-        mad r2.xyz, r3, -c21.y, c21.z
-        cmp r3.xyz, r0, c20.z, c20.w
-        cmp r0.xyz, r0, c20.w, c20.z
-        mul r2.xyz, r2, r3
-        mad r0.xyz, r1, r0, r2
-        log r1.x, r0.x
-        log r1.y, r0.y
-        log r1.z, r0.z
-        mul r0.xyz, r1, c21.w
-        exp r0.x, r0.x
-        exp r0.y, r0.y
-        exp r0.z, r0.z
+      if_eq c220.z, r1.x // modified Reinhard
+        mul r1.xyz, r0, r0
+        mul r1.xyz, r1, r1
+        mad r1.xyz, r1, r1, c2.y
+        log r1.x, r1.x
+        log r1.y, r1.y
+        log r1.z, r1.z
+        mul r1.xyz, r1, -c5.z
+        exp r1.x, r1.x
+        exp r1.y, r1.y
+        exp r1.z, r1.z
+        mul r0.xyz, r0, r1
       else // https://github.com/TheRealMJP/BakingLab/blob/master/BakingLab/ACES.hlsl
         log r0.x, r0.x
         log r0.y, r0.y
@@ -241,14 +225,18 @@
     // XBOX-like gamma, just an approximation
     if_ne -c222_abs.z, c222_abs.z
       mov_sat r0.xyz, r0.xyz
-      pow r20.x, r0.x, c11.x
-      pow r20.y, r0.y, c11.x
-      pow r20.z, r0.z, c11.x
-      add r21.xyz, c2.y, -r0
-      mul r21.xyz, r21, r21
-      mul r21.xyz, r21, r21
-      mad r21.xyz, r21, -r21, c2.y
-      mul r0.xyz, r20, r21
+      log r1.x, r0.x
+      log r1.y, r0.y
+      log r1.z, r0.z
+      mul r1.xyz, r1, c11.x
+      exp r1.x, r1.x
+      exp r1.y, r1.y
+      exp r1.z, r1.z
+      add r2.xyz, c2.y, -r0
+      mul r2.xyz, r2, r2
+      mul r2.xyz, r2, r2
+      mad r2.xyz, r2, -r2, c2.y
+      mul r0.xyz, r1, r2
     endif
     
     // dithering
