@@ -34,7 +34,6 @@
     def c140, 1e-6, 0.5, -0.0625, 0.9375
     def c141, 0.6, 4, 1, 30
     def c142, 0.003, 0.015, 0.7, 0.5 // density, height falloff, altitude compensation, color mixing
-    def c211, 1, 0, 0, 0
     
     // 07:00 SUNNY, assuming that SunSize.x = 1.0 and HDRExposureClamp.xyz = 30.0
     // def c212, 0.384, 0.812, 0.871, 1.86              // AzimuthColor.xyz, AzimuthHeight.x
@@ -76,7 +75,7 @@
     mul r1.yzw, r3.xxyz, r2.x
     mad r2.xyz, r3, -r2.x, c43
     mad r1.yzw, r0.w, r2.xxyz, r1
-    if_eq -c211_abs.x, c211_abs.x
+    if_eq -c210_abs.y, c210_abs.y
       add r0.x, r0.y, -c41.x
       add r0.z, -c41.x, c41.y
       rcp r0.z, r0.z
@@ -142,8 +141,8 @@
       lrp r22.xyz, c41.w, r22, r21 // globalFogParams.w mixes far color with near color
       
       mov r20.x, c15.z
-      mul r20.xy, r20.xz, c142.y     // hb, zb
-      mul r20.x, r20.x, c142.z       // high altitude density compensation
+      mul r20.xy, r20.xz, c211.y     // hb, zb
+      mul r20.x, r20.x, c211.z       // high altitude density compensation
       exp r20.x, -r20.x              // 2^(-hb)
       
       add r20.z, r20_abs.y, -c140.x
@@ -155,7 +154,7 @@
       mul r20.y, r20.y, r20.z        // (1 - 2^(-zbx))/(zb)
       
       mul r20.x, r20.x, r20.y        // 2^(-hb) * (1 - 2^(-zbx))/(zb)
-      mul r20.xy, r20.xw, c142.x     // density
+      mul r20.xy, r20.xw, c211.x     // density
       mul r20.y, r20.y, c142.w
       
       exp r20.x, -r20.x
