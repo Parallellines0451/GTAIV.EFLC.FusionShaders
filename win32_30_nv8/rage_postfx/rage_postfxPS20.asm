@@ -34,6 +34,7 @@
     def c140, 1e-6, 0.5, -0.0625, 0.9375
     def c141, 0.6, 4, 1, 30
     def c142, 0.003, 0.015, 0.7, 0.5 // density, height falloff, altitude compensation, color mixing
+    def c143, 1000, 0, 0, 0
     
     // 07:00 SUNNY, assuming that SunSize.x = 1.0 and HDRExposureClamp.xyz = 30.0
     // def c212, 0.384, 0.812, 0.871, 1.86              // AzimuthColor.xyz, AzimuthHeight.x
@@ -75,7 +76,10 @@
     mul r1.yzw, r3.xxyz, r2.x
     mad r2.xyz, r3, -r2.x, c43
     mad r1.yzw, r0.w, r2.xxyz, r1
-    if_eq -c210_abs.y, c210_abs.y
+    mov r20.x, c143.x
+    add r20.x, c41.x, -r20.x
+    mul r20.x, r20.x, c210.y
+    if_ge r20.x, r20_abs.x // check vanilla fog start value and volumetric fog toggle
       add r0.x, r0.y, -c41.x
       add r0.z, -c41.x, c41.y
       rcp r0.z, r0.z
