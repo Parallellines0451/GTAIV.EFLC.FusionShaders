@@ -77,7 +77,7 @@
     def c27, -0.102080002, 1.10812998, -0.00604999997, 0
     def c28, -0.00326999999, -0.0727600008, 1.07602, 0
     
-    def c118, 0.06711056, 0.00583715, 52.9829189, 0
+    def c118, 0.75487766, 0.56984029, 0, 0
     
     defi i0, 7, 0, 0, 0
     dcl_texcoord v0.xy
@@ -264,8 +264,6 @@
     // dithering
     mul r1.xy, v0.xy, c44.xy
     dp2add r1.x, r1.xy, c118.xy, c118.w
-    frc r1.x, r1.x
-    mul r1.x, r1.x, c118.z
     frc r1.x, r1.x
     mad r1.x, r1.x, c11.y, -c11.z
     add_sat oC0.xyz, r0, r1.x
