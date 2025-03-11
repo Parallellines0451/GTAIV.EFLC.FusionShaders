@@ -42,8 +42,7 @@
     def c34, -0.5, 0.5, 0, 0
     def c140, 1e-6, 0.5, -0.0625, 0.9375
     def c141, 0.6, 4, 1, 30
-    def c142, 0.003, 0.015, 0.7, 0.5 // density, height falloff, altitude compensation, color mixing
-    def c143, 1000, 0, 0, 0
+    def c142, 1000, 0, 0, 0
     dcl_position v0
     dcl_normal v1
     dcl_color v2
@@ -96,7 +95,7 @@
     mul_sat r1.x, r1.x, r1.y
     add r1.x, -r1.x, -c32.x
     mad o3.zw, r1.x, r1, -c32.x
-    mov r20.x, c143.x
+    mov r20.x, c142.x
     add r20.x, c41.x, -r20.x
     mul r20.x, r20.x, c236.y
     if_ge r20.x, r20_abs.x
@@ -159,7 +158,7 @@
       
       mov r20.x, c15.z
       mul r20.xy, r20.xz, c235.y
-      mul r20.x, r20.x, c235.z
+      mul r20.x, r20.x, c236.x
       exp r20.x, -r20.x
       
       sge r21.x, r20_abs.y, c140.x
@@ -172,11 +171,16 @@
       
       mul r20.x, r20.x, r20.y
       mul r20.xy, r20.xw, c235.x
-      mul r20.y, r20.y, c142.w
       
       exp r20.x, -r20.x
       exp r20.y, -r20.y
       add r20.xy, -r20.xy, c141.z
+      
+      log r20.x, r20.x
+      log r20.y, r20.y
+      mul r20.xy, r20.xy, c235.zw
+      exp r20.x, r20.x
+      exp r20.y, r20.y
       
       lrp r22.xyz, r20.y, r22, c43
       mov o5.xyz, r22

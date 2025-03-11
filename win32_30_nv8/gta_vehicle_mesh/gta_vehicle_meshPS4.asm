@@ -120,8 +120,7 @@
     def c127, 1, 0.99, 0, 0 // LogDepth constants
     def c140, 1e-6, 0.5, -0.0625, 0.9375
     def c141, 0.6, 4, 1, 30
-    def c142, 0.003, 0.015, 0.7, 0.5 // density, height falloff, altitude compensation, color mixing
-    def c143, 1000, 0, 0, 0
+    def c142, 1000, 0, 0, 0
     def c0, 1, -0.5, 9.99999975e-006, 12.5
     def c1, 50, 9.99999975e-005, 1.5, 0.0833333358
     def c2, 0, 1, -0, -0.25
@@ -610,7 +609,7 @@
     add r0.x, r1.x, c4.z
     pow r2.w, r0_abs.x, r1.y
     mul r0.xyz, r2, r2.w
-    mov r20.x, c143.x
+    mov r20.x, c142.x
     add r20.x, c41.x, -r20.x
     mul r20.x, r20.x, c210.y
     if_ge r20.x, r20_abs.x
@@ -671,7 +670,7 @@
       
       mov r20.x, c15.z
       mul r20.xy, r20.xz, c211.y
-      mul r20.x, r20.x, c211.z
+      mul r20.x, r20.x, c210.x
       exp r20.x, -r20.x
       
       add r20.z, r20_abs.y, -c140.x
@@ -684,11 +683,16 @@
       
       mul r20.x, r20.x, r20.y
       mul r20.xy, r20.xw, c211.x
-      mul r20.y, r20.y, c142.w
       
       exp r20.x, -r20.x
       exp r20.y, -r20.y
       add r20.xy, -r20.xy, c141.z
+      
+      log r20.x, r20.x
+      log r20.y, r20.y
+      mul r20.xy, r20.xy, c211.zw
+      exp r20.x, r20.x
+      exp r20.y, r20.y
       
       lrp r22.xyz, r20.y, r22, c43
       lrp oC0.xyz, r20.x, r22, r0

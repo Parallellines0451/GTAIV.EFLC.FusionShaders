@@ -92,8 +92,7 @@
     def c3, 1.00000001e-007, 0, 0, 0
     def c140, 1e-6, 0.5, -0.0625, 0.9375
     def c141, 0.6, 4, 1, 30
-    def c142, 0.003, 0.015, 0.7, 0.5 // density, height falloff, altitude compensation, color mixing
-    def c143, 1000, 0, 0, 0
+    def c142, 1000, 0, 0, 0
     dcl_texcoord v0.xyw
     dcl_color v1
     dcl_texcoord2 v2.xyz
@@ -196,7 +195,7 @@
     add r0.w, r0.w, c3.x
     pow r2.x, r0_abs.w, r1.x
     mul r1.xyz, r0, r2.x
-    mov r20.x, c143.x
+    mov r20.x, c142.x
     add r20.x, c41.x, -r20.x
     mul r20.x, r20.x, c210.y
     if_ge r20.x, r20_abs.x
@@ -257,7 +256,7 @@
       
       mov r20.x, c15.z
       mul r20.xy, r20.xz, c211.y
-      mul r20.x, r20.x, c211.z
+      mul r20.x, r20.x, c210.x
       exp r20.x, -r20.x
       
       add r20.z, r20_abs.y, -c140.x
@@ -270,11 +269,16 @@
       
       mul r20.x, r20.x, r20.y
       mul r20.xy, r20.xw, c211.x
-      mul r20.y, r20.y, c142.w
       
       exp r20.x, -r20.x
       exp r20.y, -r20.y
       add r20.xy, -r20.xy, c141.z
+      
+      log r20.x, r20.x
+      log r20.y, r20.y
+      mul r20.xy, r20.xy, c211.zw
+      exp r20.x, r20.x
+      exp r20.y, r20.y
       
       lrp r22.xyz, r20.y, r22, c43
       lrp r0.xyz, r20.x, r22, r1

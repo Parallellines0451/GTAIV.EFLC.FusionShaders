@@ -33,8 +33,7 @@
     def c1, -1, 1, 0, 1.00000001e-007
     def c140, 1e-6, 0.5, -0.0625, 0.9375
     def c141, 0.6, 4, 1, 30
-    def c142, 0.003, 0.015, 0.7, 0.5 // density, height falloff, altitude compensation, color mixing
-    def c143, 1000, 0, 0, 0
+    def c142, 1000, 0, 0, 0
     
     // 07:00 SUNNY, assuming that SunSize.x = 1.0 and HDRExposureClamp.xyz = 30.0
     // def c212, 0.384, 0.812, 0.871, 1.86              // AzimuthColor.xyz, AzimuthHeight.x
@@ -76,7 +75,7 @@
     mul r1.yzw, r3.xxyz, r2.x
     mad r2.xyz, r3, -r2.x, c43
     mad r1.yzw, r0.w, r2.xxyz, r1
-    mov r20.x, c143.x
+    mov r20.x, c142.x
     add r20.x, c41.x, -r20.x
     mul r20.x, r20.x, c210.y
     if_ge r20.x, r20_abs.x // check vanilla fog start value and volumetric fog toggle
@@ -94,7 +93,7 @@
       add r0.x, r2.w, c41.z
       mul r0.x, r1.x, r0.x
       mad oC0.xyz, r0.x, r2, r1.yzww
-    else
+    else // https://www.desmos.com/calculator/8zvekzvd3j
       mad r20.xyz, v1, -r0.y, c140.x
       add r21.x, r20.z, c15.z
       dp3 r20.w, r20, r20
@@ -146,7 +145,7 @@
       
       mov r20.x, c15.z
       mul r20.xy, r20.xz, c211.y     // hb, zb
-      mul r20.x, r20.x, c211.z       // high altitude density compensation
+      mul r20.x, r20.x, c210.x       // high altitude density compensation
       exp r20.x, -r20.x              // 2^(-hb)
       
       add r20.z, r20_abs.y, -c140.x
@@ -159,11 +158,16 @@
       
       mul r20.x, r20.x, r20.y        // 2^(-hb) * (1 - 2^(-zbx))/(zb)
       mul r20.xy, r20.xw, c211.x     // density
-      mul r20.y, r20.y, c142.w
       
       exp r20.x, -r20.x
       exp r20.y, -r20.y
       add r20.xy, -r20.xy, c141.z    // fog factor, color factor
+      
+      log r20.x, r20.x
+      log r20.y, r20.y
+      mul r20.xy, r20.xy, c211.zw
+      exp r20.x, r20.x
+      exp r20.y, r20.y
       
       lrp r22.xyz, r20.y, r22, c43
       lrp oC0.xyz, r20.x, r22, r1.yzw
