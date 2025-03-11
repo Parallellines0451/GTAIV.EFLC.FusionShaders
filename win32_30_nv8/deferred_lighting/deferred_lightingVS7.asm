@@ -43,7 +43,6 @@
     def c3, 0.25, 0, 0, 0
     def c140, 1e-6, 0.5, -0.0625, 0.9375
     def c141, 0.6, 4, 1, 30
-    def c142, 1000, 0, 0, 0
     dcl_position v0
     dcl_position o0
     dcl_texcoord9 o10
@@ -139,10 +138,7 @@
     mov r0.xyz, c15
     add o1.xyz, r0, -c209
     mov r0.w, c216.w
-    mov r20.w, c142.x
-    add r20.w, c41.x, -r20.w
-    mul r20.w, r20.w, c236.y
-    if_lt r20.w, r20_abs.w
+    if_ne -c236_abs.y, c236_abs.y
       add r20.xyz, -r0, c209
       dp3 r20.w, r20, r20
       rsq r20.w, r20.w

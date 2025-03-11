@@ -78,10 +78,11 @@
     mul r1.yzw, r3.xxyz, r2.x
     mad r2.xyz, r3, -r2.x, c43
     mad r1.yzw, r0.w, r2.xxyz, r1
-    mov r20.w, c142.x
-    add r20.w, c41.x, -r20.w
-    mul r20.w, r20.w, c210.y
-    if_ge r20.w, r20_abs.w // check vanilla fog start value and volumetric fog toggle
+    // mov r20.w, c142.x
+    // add r20.w, c41.x, -r20.w
+    // mul r20.w, r20.w, c210.y
+    // if_ge r20.w, r20_abs.w // check vanilla fog start value and volumetric fog toggle
+    if_eq -c210_abs.y, c210_abs.y
       add r0.x, r0.y, -c41.x
       add r0.z, -c41.x, c41.y
       rcp r0.z, r0.z
