@@ -95,10 +95,10 @@
     mul_sat r1.x, r1.x, r1.y
     add r1.x, -r1.x, -c32.x
     mad o3.zw, r1.x, r1, -c32.x
-    mov r20.x, c142.x
-    add r20.x, c41.x, -r20.x
-    mul r20.x, r20.x, c236.y
-    if_ge r20.x, r20_abs.x
+    mov r20.w, c142.x
+    add r20.w, c41.x, -r20.w
+    mul r20.w, r20.w, c236.y
+    if_ge r20.w, r20_abs.w
       add r1.x, -c41.x, c41.y
       rcp r1.x, r1.x
       add r1.y, -r2.x, -c41.x

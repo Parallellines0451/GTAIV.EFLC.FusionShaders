@@ -139,10 +139,10 @@
     mov r0.xyz, c15
     add o1.xyz, r0, -c209
     mov r0.w, c216.w
-    mov r20.x, c142.x
-    add r20.x, c41.x, -r20.x
-    mul r20.x, r20.x, c236.y
-    if_lt r20.x, r20_abs.x
+    mov r20.w, c142.x
+    add r20.w, c41.x, -r20.w
+    mul r20.w, r20.w, c236.y
+    if_lt r20.w, r20_abs.w
       add r20.xyz, -r0, c209
       dp3 r20.w, r20, r20
       rsq r20.w, r20.w

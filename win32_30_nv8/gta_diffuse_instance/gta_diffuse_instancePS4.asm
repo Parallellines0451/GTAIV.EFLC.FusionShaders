@@ -468,10 +468,10 @@
     add r1.x, r2.x, c3.w
     pow r3.x, r1_abs.x, r2.w
     mul r1.xyz, r0, r3.x
-    mov r20.x, c142.x
-    add r20.x, c41.x, -r20.x
-    mul r20.x, r20.x, c210.y
-    if_ge r20.x, r20_abs.x
+    mov r20.w, c142.x
+    add r20.w, c41.x, -r20.w
+    mul r20.w, r20.w, c210.y
+    if_ge r20.w, r20_abs.w
       rcp r1.w, c41.x
       mul_sat r1.w, r1.w, v3.w
       add r2.x, -c41.x, v3.w

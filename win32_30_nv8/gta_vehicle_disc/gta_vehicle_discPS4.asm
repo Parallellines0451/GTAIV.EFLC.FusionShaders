@@ -601,10 +601,10 @@
     add r0.x, r0.w, c3.w
     pow r2.w, r0_abs.x, r1.x
     mul r0.xyz, r2, r2.w
-    mov r20.x, c142.x
-    add r20.x, c41.x, -r20.x
-    mul r20.x, r20.x, c210.y
-    if_ge r20.x, r20_abs.x
+    mov r20.w, c142.x
+    add r20.w, c41.x, -r20.w
+    mul r20.w, r20.w, c210.y
+    if_ge r20.w, r20_abs.w
       add r0.w, -c41.x, c41.y
       rcp r0.w, r0.w
       add r1.x, -c41.x, v1.w

@@ -422,10 +422,10 @@
     add r1.x, -r1.x, c34.z
     add r1.yz, r8.x, c16.xxyw
     mad o3.zw, r1.x, r1.xyyz, c34.z
-    mov r20.x, c142.x
-    add r20.x, c41.x, -r20.x
-    mul r20.x, r20.x, c236.y
-    if_ge r20.x, r20_abs.x
+    mov r20.w, c142.x
+    add r20.w, c41.x, -r20.w
+    mul r20.w, r20.w, c236.y
+    if_ge r20.w, r20_abs.w
       rcp r1.x, c41.x
       mul_sat r1.x, r0.w, r1.x
       add r1.y, r0.w, -c41.x

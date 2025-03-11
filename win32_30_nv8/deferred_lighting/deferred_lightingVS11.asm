@@ -202,10 +202,10 @@
     add o0, r0, c11
     add o10.zw, r0, c11
     mul r0.xyz, r4.w, v1
-    mov r20.x, c142.x
-    add r20.x, c41.x, -r20.x
-    mul r20.x, r20.x, c236.y
-    if_lt r20.x, r20_abs.x
+    mov r20.w, c142.x
+    add r20.w, c41.x, -r20.w
+    mul r20.w, r20.w, c236.y
+    if_lt r20.w, r20_abs.w
       mul r1.xyz, r4.y, c1
       mad r1.xyz, r4.x, c0, r1
       mad r1.xyz, r4.z, c2, r1
