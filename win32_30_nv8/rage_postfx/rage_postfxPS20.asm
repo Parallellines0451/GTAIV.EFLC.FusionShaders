@@ -62,6 +62,9 @@
     add r0.x, -r0.x, c1.y
     cmp r1.x, r0.w, c1.z, c1.y
     mov r2.xz, c1
+    mad r20.x, v1.z, -r0.y, c15.z
+    mul r20.x, r20.x, c210.y
+    cmp r0.w, r20.x, r0.w, c1.x // don't touch sky pixels below the horizon
     cmp r0.w, r0.w, c41.w, r2.z
     mul r0.x, r0.x, r1.x
     add r1.yz, r2.x, c16.xxyw
