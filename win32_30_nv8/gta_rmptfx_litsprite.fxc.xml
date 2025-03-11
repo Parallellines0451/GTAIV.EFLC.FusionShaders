@@ -686,12 +686,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_rmptfx_litsprite\gta_rmptfx_litspriteVS3.asm</File>
-				<Variables value="42" >
-					<Item>
-						<Type>float4x4</Type>
-						<Name>gWorld</Name>
-						<Index value="0" />
-					</Item>
+				<Variables value="41" >
 					<Item>
 						<Type>float</Type>
 						<Name>gAmbientAmount</Name>
@@ -1034,17 +1029,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_rmptfx_litsprite\gta_rmptfx_litspriteVS6.asm</File>
-				<Variables value="8" >
-					<Item>
-						<Type>float4x4</Type>
-						<Name>gWorld</Name>
-						<Index value="0" />
-					</Item>
-					<Item>
-						<Type>float4x4</Type>
-						<Name>gViewInverse</Name>
-						<Index value="12" />
-					</Item>
+				<Variables value="6" >
 					<Item>
 						<Type>float4</Type>
 						<Name>gDepthFxParams</Name>
