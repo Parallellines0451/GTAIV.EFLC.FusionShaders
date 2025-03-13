@@ -175,12 +175,11 @@
       mov r1.x, c2.y
       if_eq c220.z, r1.x // modified Reinhard
         mul r1.xyz, r0, r0
-        mul r1.xyz, r1, r1
         mad r1.xyz, r1, r1, c2.y
         log r1.x, r1.x
         log r1.y, r1.y
         log r1.z, r1.z
-        mul r1.xyz, r1, -c5.z
+        mul r1.xyz, r1, -c2.x
         exp r1.x, r1.x
         exp r1.y, r1.y
         exp r1.z, r1.z
