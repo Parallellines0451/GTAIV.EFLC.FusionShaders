@@ -68,10 +68,10 @@
     texld r0, v0, s4
     
     // LogDepth Read
-    rcp r20.x, c128.x
-    mul r20.x, r20.x, c128.y
+    rcp r20.x, c209.x
+    mul r20.x, r20.x, c209.y
     pow r20.x, r20.x, r0.x
-    mul r0.x, r20.x, c128.x
+    mul r0.x, r20.x, c209.x
     
     mad r0.yzw, v1.xxyz, -r0.x, c2.z
     mul r2.xyz, r0.x, v1

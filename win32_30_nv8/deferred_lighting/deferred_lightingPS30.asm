@@ -60,10 +60,10 @@
     nrm r4.xyz, r2
     
     // LogDepth Read
-    rcp r20.x, c128.x
-    mul r20.x, r20.x, c128.y
+    rcp r20.x, c209.x
+    mul r20.x, r20.x, c209.y
     pow r20.x, r20.x, r3.x
-    mul r3.y, r20.x, c128.x
+    mul r3.y, r20.x, c209.x
     
     rcp r1.w, v0.w
     mul r1.w, r1.w, r3.y
@@ -92,9 +92,9 @@
     
     // LogDepth Write
     if_ne v9.y, c127.x
-      rcp r20.x, c128.x
+      rcp r20.x, c209.x
       mul r20.y, r20.x, v9.w
-      mul r20.x, r20.x, c128.y
+      mul r20.x, r20.x, c209.y
       log r20.x, r20.x
       log r20.y, r20.y
       rcp r20.x, r20.x

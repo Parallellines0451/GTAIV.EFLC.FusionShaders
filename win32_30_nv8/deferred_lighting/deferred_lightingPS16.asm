@@ -66,10 +66,10 @@
     texld r3, r1, s1
     
     // LogDepth Read
-    rcp r20.x, c128.x
-    mul r20.x, r20.x, c128.y
+    rcp r20.x, c209.x
+    mul r20.x, r20.x, c209.y
     pow r20.x, r20.x, r2.x
-    mul r2.y, r20.x, c128.x
+    mul r2.y, r20.x, c209.x
     
     rcp r0.w, v0.w
     mul r0.w, r0.w, r2.y
@@ -146,9 +146,9 @@
     
     // LogDepth Write
     if_ne v9.y, c127.x
-      rcp r20.x, c128.x
+      rcp r20.x, c209.x
       mul r20.y, r20.x, v9.w
-      mul r20.x, r20.x, c128.y
+      mul r20.x, r20.x, c209.y
       log r20.x, r20.x
       log r20.y, r20.y
       rcp r20.x, r20.x

@@ -90,10 +90,10 @@
     mul r0.xyz, r2, c73.x
     
     // LogDepth Read
-    rcp r20.x, c128.x
-    mul r20.x, r20.x, c128.y
+    rcp r20.x, c209.x
+    mul r20.x, r20.x, c209.y
     pow r20.x, r20.x, r1.x
-    mul r1.x, r20.x, c128.x
+    mul r1.x, r20.x, c209.x
     
     add r1.x, r1.x, -v0.z
     mov r1.yz, c0
@@ -120,9 +120,9 @@
     
     // LogDepth Write
     if_ne v9.y, c127.x
-      rcp r20.x, c128.x
+      rcp r20.x, c209.x
       mul r20.y, r20.x, v9.w
-      mul r20.x, r20.x, c128.y
+      mul r20.x, r20.x, c209.y
       log r20.x, r20.x
       log r20.y, r20.y
       rcp r20.x, r20.x
