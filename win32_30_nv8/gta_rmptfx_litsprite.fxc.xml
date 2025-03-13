@@ -8,7 +8,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_rmptfx_litsprite\gta_rmptfx_litspriteVS0.asm</File>
-				<Variables value="41" >
+				<Variables value="42" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gWorld</Name>
+						<Index value="0" />
+					</Item>
 					<Item>
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
@@ -219,7 +224,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_rmptfx_litsprite\gta_rmptfx_litspriteVS1.asm</File>
-				<Variables value="44" >
+				<Variables value="45" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gWorld</Name>
+						<Index value="0" />
+					</Item>
 					<Item>
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
@@ -445,7 +455,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_rmptfx_litsprite\gta_rmptfx_litspriteVS2.asm</File>
-				<Variables value="44" >
+				<Variables value="45" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gWorld</Name>
+						<Index value="0" />
+					</Item>
 					<Item>
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
@@ -882,7 +897,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_rmptfx_litsprite\gta_rmptfx_litspriteVS4.asm</File>
-				<Variables value="11" >
+				<Variables value="12" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gWorld</Name>
+						<Index value="0" />
+					</Item>
 					<Item>
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>
@@ -943,7 +963,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_rmptfx_litsprite\gta_rmptfx_litspriteVS5.asm</File>
-				<Variables value="11" >
+				<Variables value="12" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gWorld</Name>
+						<Index value="0" />
+					</Item>
 					<Item>
 						<Type>float4</Type>
 						<Name>NearFarPlane</Name>

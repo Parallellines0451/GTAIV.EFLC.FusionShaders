@@ -604,7 +604,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingVS11.asm</File>
-				<Variables value="6" >
+				<Variables value="7" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gWorld</Name>
+						<Index value="0" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>GBufferTextureSampler3</Name>

@@ -31,8 +31,10 @@
     def c1, 0, 0.212500006, 0.715399981, 0.0720999986
     def c2, 0.25, 1, 0.5, 0
     def c4, -0.5, -1.5, 1.5, 0.5
+    def c5, 1e-6, 0, 0, 0
     
     dcl_texcoord v0.xy
+    dcl_texcoord1 v1.xyz
     dcl_2d s1
     dcl_2d s2
     dcl_2d s8
@@ -43,6 +45,13 @@
     mul r20.x, r20.x, c128.y
     pow r20.x, r20.x, r0.x
     mul r0.y, r20.x, c128.x
+    
+    if_ne -c210_abs.y, c210_abs.y // make depth of field radial alongside fog
+      mad r20.xyz, v1, -r0.y, c5.x
+      dp3 r20.x, r20, r20
+      rsq r20.x, r20.x
+      rcp r0.y, r20.x
+    endif
     
     mov r3, c4
     texld r7.xyz, v0, s2
