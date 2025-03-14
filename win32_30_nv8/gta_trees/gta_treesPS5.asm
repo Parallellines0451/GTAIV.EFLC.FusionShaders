@@ -22,7 +22,7 @@
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, 0, -1, -0, 0.5
     def c118, 0.06711056, 0.00583715, 52.9829189, 0
-    def c150, 0.992217898, 0.00389105058, 0.03125, 0
+    def c150, 0.992217898, 0.00389105058, 0, 0
     dcl_texcoord v0.xyz
     dcl vPos.xy
     dcl_2d s0
@@ -31,12 +31,10 @@
     add r20.x, r0.w, -c1.w
     cmp r0.w, r20.x, -c1.y, c1.x
     mul r0.x, r0.w, c39.x
-    // dp2add r20.x, vPos.xy, c118.xy, c118.w
-    // frc r20.x, r20.x
-    // mul r20.x, r20.x, c118.z
-    // frc r20.x, r20.x
-    mul r20.xy, vPos.xy, c150.z
-    texld r20.x, r20.xy, s10.z
+    dp2add r20.x, vPos.xy, c118.xy, c118.w
+    frc r20.x, r20.x
+    mul r20.x, r20.x, c118.z
+    frc r20.x, r20.x
     mad r20.y, r20.x, c150.x, c150.y
     add r20.y, -r20.y, r0.x
     texkill r20.y

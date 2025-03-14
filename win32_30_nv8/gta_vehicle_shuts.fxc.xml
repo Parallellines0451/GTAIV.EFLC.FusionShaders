@@ -237,12 +237,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_shuts\gta_vehicle_shutsPS2.asm</File>
-				<Variables value="51" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="50" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -498,12 +493,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_shuts\gta_vehicle_shutsPS3.asm</File>
-				<Variables value="27" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="26" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -639,12 +629,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_shuts\gta_vehicle_shutsPS4.asm</File>
-				<Variables value="39" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="38" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>

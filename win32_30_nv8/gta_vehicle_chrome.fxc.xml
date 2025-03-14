@@ -324,12 +324,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_chrome\gta_vehicle_chromePS2.asm</File>
-				<Variables value="55" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="54" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
@@ -605,12 +600,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_chrome\gta_vehicle_chromePS3.asm</File>
-				<Variables value="31" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="30" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
@@ -766,12 +756,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_chrome\gta_vehicle_chromePS4.asm</File>
-				<Variables value="43" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="42" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>

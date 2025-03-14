@@ -65,7 +65,7 @@
     // -------------------------------------------------------------- Shadow Constants --------------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
-    def c112, 3, 7.13800001, 0.03125, 0
+    def c112, 3, 7.13800001, 0, 0
     def c113, 0.75, -0.5, 0.5, 0.0008
     
     def c118, 0.06711056, 0.00583715, 52.9829189, 0
@@ -115,7 +115,6 @@
     dcl_2d s0
     dcl_2d s1
     dcl_2d s2
-    dcl_2d s10 // added noise texture
     dcl_2d s15
     mov r1, v2
     add r1.xyz, r1, -v3
@@ -224,12 +223,10 @@
     mul r21.xy, v0.xy, c44.xy
     rcp r21.z, v0.z
     mul r21.xy, r21.xy, r21.z
-    // dp2add r21.x, r21.xy, c118.xy, c118.w
-    // frc r21.x, r21.x
-    // mul r21.x, r21.x, c118.z
-    // frc r21.x, r21.x
-    mul r21.xy, r21.xy, c112.z
-    texld r21.x, r21.xy, s10.z
+    dp2add r21.x, r21.xy, c118.xy, c118.w
+    frc r21.x, r21.x
+    mul r21.x, r21.x, c118.z
+    frc r21.x, r21.x
     mul r21.x, r21.x, c111.z
     sincos r22.xy, r21.x
     mul r22, r22.xyyx, c110.yzyy

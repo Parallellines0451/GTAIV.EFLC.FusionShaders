@@ -214,12 +214,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_tire\gta_vehicle_tirePS2.asm</File>
-				<Variables value="54" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="53" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -490,12 +485,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_tire\gta_vehicle_tirePS3.asm</File>
-				<Variables value="30" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="29" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>
@@ -646,12 +636,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_tire\gta_vehicle_tirePS4.asm</File>
-				<Variables value="42" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="41" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>BumpSampler</Name>

@@ -67,7 +67,7 @@
     // ------------------------------------------------------ Improved Shadow Filter Constants ------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
-    def c112, 3, 4.27199984, 0.03125, 0
+    def c112, 3, 4.27199984, 0, 0
     def c113, 0.75, -0.5, 0.5, 0
     
     def c118, 0.06711056, 0.00583715, 52.9829189, 0
@@ -89,7 +89,6 @@
     dcl_2d s2
     dcl_2d s4
     dcl_2d s5
-    dcl_2d s10 // added noise texture
     dcl_2d s14
     mul r0.xyz, c85.w, c85
     add r1.xy, c0.x, vPos
@@ -206,13 +205,10 @@
       cmp r2, r2, c1.x, c1.z
       dp4 r1.x, r2, c3.w
     else
-      // dp2add r21.x, vPos.xy, c118.xy, c118.w
-      // frc r21.x, r21.x
-      // mul r21.x, r21.x, c118.z
-      // frc r21.x, r21.x
-      mul r21.xy, vPos.xy, c112.z
-      mov r21.zw, c110.w
-      texldl r21.x, r21, s10.z
+      dp2add r21.x, vPos.xy, c118.xy, c118.w
+      frc r21.x, r21.x
+      mul r21.x, r21.x, c118.z
+      frc r21.x, r21.x
       mul r21.x, r21.x, c111.z
       sincos r22.xy, r21.x
       mul r22, r22.xyyx, c110.yzyy

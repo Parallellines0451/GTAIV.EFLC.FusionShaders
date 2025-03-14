@@ -364,12 +364,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_lightsemissive\gta_vehicle_lightsemissivePS2.asm</File>
-				<Variables value="54" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="53" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
@@ -640,12 +635,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_lightsemissive\gta_vehicle_lightsemissivePS3.asm</File>
-				<Variables value="30" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="29" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>
@@ -796,12 +786,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_lightsemissive\gta_vehicle_lightsemissivePS4.asm</File>
-				<Variables value="42" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="41" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>DirtSampler</Name>

@@ -324,12 +324,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_interior2\gta_vehicle_interior2PS2.asm</File>
-				<Variables value="50" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="49" >
 					<Item>
 						<Type>float3</Type>
 						<Name>LuminanceConstants</Name>
@@ -580,12 +575,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_interior2\gta_vehicle_interior2PS3.asm</File>
-				<Variables value="26" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="25" >
 					<Item>
 						<Type>float3</Type>
 						<Name>LuminanceConstants</Name>
@@ -716,12 +706,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_vehicle_interior2\gta_vehicle_interior2PS4.asm</File>
-				<Variables value="38" >
-					<Item>
-						<Type>sampler</Type>
-						<Name>StippleTexture</Name>
-						<Index value="10" />
-					</Item>
+				<Variables value="37" >
 					<Item>
 						<Type>float3</Type>
 						<Name>LuminanceConstants</Name>
