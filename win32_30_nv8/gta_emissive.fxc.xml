@@ -624,7 +624,17 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_emissive\gta_emissivePS8.asm</File>
-				<Variables value="7" >
+				<Variables value="9" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gViewInverse</Name>
+						<Index value="12" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalFogColorN</Name>
+						<Index value="43" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>
