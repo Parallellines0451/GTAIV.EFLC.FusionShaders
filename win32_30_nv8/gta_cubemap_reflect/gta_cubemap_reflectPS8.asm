@@ -33,9 +33,7 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.0509738482e-43 // 75
-    def c152, 0.2, 0.4, 0.6, 0.8 // c152-c154 = new stipple constants
-    def c153, 0.5, 2, 1, 0
-    def c154, 1.6, 0, 0, 0
+    def c151, 0.3125, 0, 0, 0
     def c127, 1, 0.99, 0, 0 // LogDepth constants
     def c0, 9.99999975e-006, -0.5, 0.5, -0.25
     def c1, 1.33333337, 1, 3.99600005, 4
@@ -48,7 +46,6 @@
     dcl_2d s0
     dcl_2d s10
     texld r0, v0, s0
-    mul_sat r0.w, r0.w, c154.x
     add r1.xyz, c0.x, v1
     nrm r2.xyz, r1
     mul r0.w, r0.w, v2.w
@@ -63,14 +60,9 @@
     mad r1.xyz, r1, v2.x, r2
     mov r1.w, c1.y
     mul r2, r0, r1
+    add r20.x, r2.w, -c151.x
+    texkill r20.x
     mul r0.w, r2.w, c39.x
-    mul r20.xy, vPos.xy, c153.x
-    frc r20.xy, r20.xy
-    mad r20, r20.xxyy, -c153.y, c153.zwzw
-    mul r20, r20.xxyy, r20.zwzw
-    dp4 r20.x, r20_abs, c152.xzwy
-    add r20.y, -r20.x, r0.w
-    texkill r20.y
     add r1.w, -c41.x, v1.w
     add r2.w, -c41.x, c41.y
     rcp r2.w, r2.w
