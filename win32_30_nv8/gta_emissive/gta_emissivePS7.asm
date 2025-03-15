@@ -25,9 +25,7 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 2.5924021590e-43 // 185
-    def c152, 0.2, 0.4, 0.6, 0.8 // c152-c154 = new stipple constants
-    def c153, 0.5, 2, 1, 0
-    def c154, 1.6, 0, 0, 0
+    def c151, 0.3125, 0, 0, 0
     def c0, -512, 3.99600005, 4, 0.125
     def c1, 0.25, 0, -1, -0
     def c2, 64, 0, 0, 0
@@ -41,16 +39,10 @@
     add r0, c0.x, v2.z
     texkill r0
     texld r0, v0, s0
-    mul_sat r0.w, r0.w, c154.x
     mul r0.w, r0.w, v3.w
+    add r20.x, r0.w, -c151.x
+    texkill r20.x
     mul r0.w, r0.w, c39.x
-    mul r20.xy, vPos.xy, c153.x
-    frc r20.xy, r20.xy
-    mad r20, r20.xxyy, -c153.y, c153.zwzw
-    mul r20, r20.xxyy, r20.zwzw
-    dp4 r20.x, r20_abs, c152.xzwy
-    add r20.y, -r20.x, r0.w
-    texkill r20.y
     mul r0.xyz, r0, v3
     mul r1.xyz, r0, c66.x
     add r1.w, -c41.x, v1.w
