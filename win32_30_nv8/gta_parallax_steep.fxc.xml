@@ -854,7 +854,17 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_parallax_steep\gta_parallax_steepPS8.asm</File>
-				<Variables value="12" >
+				<Variables value="14" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gViewInverse</Name>
+						<Index value="12" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalFogColorN</Name>
+						<Index value="43" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>StippleTexture</Name>

@@ -645,7 +645,17 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingVS12.asm</File>
-				<Variables value="1" >
+				<Variables value="3" >
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gWorld</Name>
+						<Index value="0" />
+					</Item>
+					<Item>
+						<Type>float4x4</Type>
+						<Name>gViewInverse</Name>
+						<Index value="12" />
+					</Item>
 					<Item>
 						<Type>float4x4</Type>
 						<Name>gWorldViewProj</Name>
