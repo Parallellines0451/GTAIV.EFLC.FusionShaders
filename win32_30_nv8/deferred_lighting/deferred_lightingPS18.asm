@@ -31,7 +31,7 @@
     def c0, 0.50999999, 9.99999975e-006, 16, 1
     def c1, 0, 0, 0, 0
     def c2, 0.5, 0.125, 3.14159274, 1.5
-    def c3, 0.662, 0.053525835, 0, 0
+    def c3, 0.662, 0.053525835, -2, 3
     dcl_texcoord v0
     dcl_texcoord1 v1.xyz
     dcl_texcoord2 v2.xyz
@@ -61,7 +61,7 @@
     nrm r2.xyz, r1
     dp3 r0.w, r2, v0
     
-    // https://www.desmos.com/calculator/xfxns11ene
+    // https://www.desmos.com/calculator/brpw3cvhrr
     mov r20.x, c0.w
     max r20.x, c66.x, r20.x
     mul r20.y, r20.x, c3.x
@@ -69,6 +69,9 @@
     add r20.z, r20.y, -r0.w
     rcp r20.y, r20.y
     mul_sat r20.y, r20.y, r20.z
+    mad r20.z, r20.y, c3.z, c3.w
+    mul r20.z, r20.y, r20.z
+    mul r20.y, r20.y, r20.z
     mul r20.y, r20.y, r20.x
     mul r20.y, r20.y, r20.x
     mul r20.y, r20.y, c3.y
