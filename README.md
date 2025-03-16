@@ -54,13 +54,14 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - Fixed incorrect TLAD noise tiling on water quality levels other than medium
 - Fixed TLAD noise aspect ratio
 - Added a console-like gamma toggle
+- Added radial height based exponential fog
 - Added tone mapping
 #### Reflections
 - Restored console behavior for tree and terrain reflections
 - Fixed excessive specularity of several meshes in Alderney
 - Fixed distorted vehicle reflections
 - Restored corona depth test in water reflections
-- Added a parameter to control corona reflection intensity
+- Added fading to coronas in paraboloid reflections
 - Fixed anisotropic filtering affecting vehicle reflection intensity
 - Restored console vehicle reflection behavior relative to dirt level
 - Restored console environment reflection intensity
