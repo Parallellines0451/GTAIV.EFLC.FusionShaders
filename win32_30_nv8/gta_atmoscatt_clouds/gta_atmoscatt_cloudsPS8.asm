@@ -121,7 +121,6 @@
     add_pp r0.xyz, r0, r1
     mad r0.w, r3.y, c0.z, c0.w
     mul_pp r1.x, r3.y, r3.y
-    mov r10, r0 // sun color (with sky color)
     mul r1.yz, c78.z, v2.xxyw
     texld r3, r1.yzzw, s3
     mul r1.y, r3.x, c78.w
@@ -160,13 +159,14 @@
     lrp_pp r2.yzw, r0.w, c75.xxyz, r1.xxyz
     mul_pp r0.w, r1.w, r2.x
     lrp_pp r1.xyz, r0.w, r2.yzww, r0
+    mul r2.xyz, r0, c81.x // r0.xyz = sky color + sun
+    min r2.xyz, r2, c83
+    mad oC1.xyz, -r0.w, r2, r2 // (1.0 - cloudmask) * skycolor
+    mov oC1.w, c1.y
     mul_pp r0.xyz, r1, c81.x
     min_pp r1.xyz, r0, c83
     min_pp r0.xyz, c83, r1
     add r1.xyz, -r0, c68
-    add r10.w, c1.y, -r0.w // clouds.a = 1 - clouds.a
-    mul oC1.xyz, r10.xyz, r10.w // diffuse = sun * clouds.a
-    mov oC1.w, c1.y
     add r0.w, c67.x, -v1.y
     mul_sat r0.w, r0.w, c67.y
     mad oC0.xyz, r0.w, r1, r0
