@@ -19,7 +19,7 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 #### Lighting
 - Fixed volumetric lights occlusion
 - Improved light volume transparency
-- Restored console foliage translucency
+- Restored XBOX foliage translucency
 - Improved PC foliage lighting
 - Fixed mismatched intensity of shadow casting lights causing visible pop-in
 - Fixed lights that were made invisible with version 1.0.6.0
@@ -53,7 +53,7 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - Fixed motion blur losing intensity at high framerates
 - Fixed incorrect TLAD noise tiling on water quality levels other than medium
 - Fixed TLAD noise aspect ratio
-- Added a console-like gamma toggle
+- Added an XBOX gamma toggle
 - Added radial height based exponential fog
 - Added tone mapping
 #### Reflections

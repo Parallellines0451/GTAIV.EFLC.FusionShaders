@@ -67,7 +67,9 @@
     def c5, 2, -1, 0.125, 0
     def c6, 1.10000002, 0, 0, 0
     
-    def c11, 1.15, 0.003921568627, 0.0019607843137, 0
+    def c11, 0.003921568627, 0.0019607843137, 0.996078, 0.00196078
+    def c12, 1.13813, 13.74594, 6.60102, 0.315889
+    def c13, 0.546024, 0, 0, 0
     
     def c22, 1.60475004, -0.531080008, -0.0736699998, 1
     def c23, 0.0759999976, 0.908339977, 0.0156599991, 0.0245785993
@@ -209,7 +211,7 @@
         exp r1.x, r1.x
         exp r1.y, r1.y
         exp r1.z, r1.z
-        mul r0.xyz, r0, r1
+        mul_sat r0.xyz, r0, r1
       else // https://github.com/TheRealMJP/BakingLab/blob/master/BakingLab/ACES.hlsl
         log r0.x, r0.x
         log r0.y, r0.y
@@ -237,35 +239,45 @@
         log r1.z, r0.x
         log r1.y, r0.w
         mul r0.xyz, r1, c25.w
-        exp r0.x, r0.x
-        exp r0.y, r0.y
-        exp r0.z, r0.z
+        exp_sat r0.x, r0.x
+        exp_sat r0.y, r0.y
+        exp_sat r0.z, r0.z
       endif
     endif
     
-    // XBOX-like gamma, just an approximation
+    // XBOX Color Curve: https://www.desmos.com/calculator/z1ezuvkg9v
     if_ne -c222_abs.z, c222_abs.z
-      mov_sat r0.xyz, r0.xyz
-      log r1.x, r0.x
-      log r1.y, r0.y
-      log r1.z, r0.z
-      mul r1.xyz, r1, c11.x
-      exp r1.x, r1.x
-      exp r1.y, r1.y
-      exp r1.z, r1.z
-      add r2.xyz, c2.y, -r0
-      mul r2.xyz, r2, r2
-      mul r2.xyz, r2, r2
-      mad r2.xyz, r2, -r2, c2.y
-      mul r0.xyz, r1, r2
+      mov_sat r1.xyz, r0
+      log r0.x, r1.x
+      log r0.y, r1.y
+      log r0.z, r1.z
+      mul r0.xyz, r0, c12.x
+      exp r0.x, r0.x
+      exp r0.y, r0.y
+      exp r0.z, r0.z
+      mul r2.xyz, r1, -c12.y
+      exp r2.x, r2.x
+      exp r2.y, r2.y
+      exp r2.z, r2.z
+      mad r0.xyz, r0, -r2, r0
+      mad_sat r2.xyz, r1, c12.z, c12.w
+      mul r1.xyz, r1, c13.x
+      lrp_sat r0.xyz, r2, r0, r1
+      
+      // Lookup table
+      // mov r1.w, c1.x
+      // mad r1.xyz, r1, c11.z, c11.w
+      // texldl r0.x, r1.xwww, s10.x
+      // texldl r0.y, r1.ywww, s10.x
+      // texldl r0.z, r1.zwww, s10.x
     endif
     
     // dithering
     mul r1.xy, v0.xy, c44.xy
     dp2add r1.x, r1.xy, c118.xy, c118.w
     frc r1.x, r1.x
-    mad r1.x, r1.x, c11.y, -c11.z
-    add_sat oC0.xyz, r0, r1.x
+    mad r1.x, r1.x, c11.x, -c11.y
+    add oC0.xyz, r0, r1.x
     mov oC0.w, c2.y
 
 // approximately 176 instruction slots used (14 texture, 162 arithmetic)
