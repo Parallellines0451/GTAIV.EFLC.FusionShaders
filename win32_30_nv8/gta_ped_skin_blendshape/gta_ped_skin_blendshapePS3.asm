@@ -605,21 +605,17 @@
       mul r20.y, r20.y, r20.z
       
       mul r20.x, r20.x, r20.y
-      mul r20.xy, r20.xw, c211.x
+      mul r20.x, r20.x, c211.x
       
       exp r20.x, -r20.x
-      exp r20.y, -r20.y
-      add r20.xy, -r20.xy, c141.z
+      add r20.x, -r20.x, c141.z
       
-      log r20.x, r20.x
-      log r20.y, r20.y
-      mul r20.xy, r20.xy, c211.zw
-      exp r20.x, r20.x
-      exp r20.y, r20.y
+      pow r20.x, r20.x, c211.z
       
-      lrp r22.xyz, r20.y, r22, c43
-      mov r21, r0
-      lrp r0.xzw, r20.x, r22.xxyz, r21
+      lrp r21.xyz, r20.x, r22, c43
+      lrp r21.xyz, c211.w, r21, r22
+      lrp r22.xyz, r20.x, r21, r0.yzw
+      mov r0.xzw, r22.xxyz
     endif
     mul oC0.xyz, r0.xzww, c66.x
     mov oC0.w, r0.y

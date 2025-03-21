@@ -161,20 +161,17 @@
       mul r20.y, r20.y, r20.z        // (1 - 2^(-zbx))/(zb)
       
       mul r20.x, r20.x, r20.y        // 2^(-hb) * (1 - 2^(-zbx))/(zb)
-      mul r20.xy, r20.xw, c211.x     // density
+      mul r20.x, r20.x, c211.x       // density
       
       exp r20.x, -r20.x
-      exp r20.y, -r20.y
-      add r20.xy, -r20.xy, c141.z    // fog factor, color factor
+      add r20.x, -r20.x, c141.z      // fog factor
       
-      log r20.x, r20.x
-      log r20.y, r20.y
-      mul r20.xy, r20.xy, c211.zw
-      exp r20.x, r20.x
-      exp r20.y, r20.y
+      pow r20.x, r20.x, c211.z
       
-      lrp r22.xyz, r20.y, r22, c43
-      lrp oC0.xyz, r20.x, r22, r1.yzw
+      cmp r20.y, -r1.x, c141.z, r20.x
+      lrp r21.xyz, r20.y, r22, c43
+      lrp r21.xyz, c211.w, r21, r22
+      lrp oC0.xyz, r20.x, r21, r1.yzw
     endif
     mov oC0.w, c1.y
 

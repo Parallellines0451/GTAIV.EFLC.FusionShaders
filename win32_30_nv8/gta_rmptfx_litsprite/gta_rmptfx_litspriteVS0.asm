@@ -493,20 +493,16 @@
       mul r20.y, r20.y, r20.z
       
       mul r20.x, r20.x, r20.y
-      mul r20.xy, r20.xw, c235.x
+      mul r20.x, r20.x, c235.x
       
       exp r20.x, -r20.x
-      exp r20.y, -r20.y
-      add r20.xy, -r20.xy, c141.z
+      add r20.x, -r20.x, c141.z
       
-      log r20.x, r20.x
-      log r20.y, r20.y
-      mul r20.xy, r20.xy, c235.zw
-      exp r20.x, r20.x
-      exp r20.y, r20.y
+      pow r20.x, r20.x, c235.z
       
-      lrp r22.xyz, r20.y, r22, c43
-      mov o5.xyz, r22
+      lrp r21.xyz, r20.x, r22, c43
+      lrp r21.xyz, c235.w, r21, r22
+      mov o5.xyz, r21
       mov o5.w, r20.x
     endif
     mov o0, r0
