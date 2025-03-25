@@ -93,7 +93,7 @@
     def c230, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 3.5508903086e-42 // 2534
     def c0, 0, 0.5, -0.5, 0.699999988
     def c1, 0.0500000007, -10, 0.100000001, 9.99999975e-006
-    def c2, 1, 1.11111116, 0.200000003, 1.5
+    def c2, 1, 1.11111116, 0.200000003, 0
     def c79, 0, 0, 0, 0 // override to prevent flickering lights
     dcl_position v0
     dcl_texcoord v1
@@ -282,13 +282,11 @@
     mul r10, r16, r8
     mul r11, r15, r8
     
-    mov r20.x, c80.x
-    mul r20.x, r20.x, c2.w // increase ambient influence a bit because rain.defaultlight doesn't work on PC
-    
     mul r0.w, r8.x, c79.x
     dp3 r1.x, r3, -c17
     mad_sat r0.w, r1.x, c78.x, r0.w
-    mul r1.xyz, r0.w, c18
+    mul r1.xyz, r0.w, c237
+    
     mul r5, r3.x, r5
     mad r5, r3.y, r7, r5
     mad r5, r3.z, r6, r5
@@ -296,12 +294,14 @@
     dp4 r6.x, c29, r5
     dp4 r6.y, c30, r5
     dp4 r6.z, c31, r5
-    mad r5.xyz, r1, c18.w, r6
+    mad r5.xyz, r1, c237.w, r6
+    
     dp3 r0.w, r3, c6
     mad_sat r0.w, r0.w, c0.z, c0.y
     mov r6.xyz, c38
     mad r6.xyz, r6, r0.w, c37
-    mad r5.xyz, r6, r20.x, r5
+    
+    mad r5.xyz, r6, c80.x, r5
     
     mul r7, r3.x, r9
     mad r7, r3.y, r10, r7
@@ -310,8 +310,9 @@
     dp4 r7.x, c29, r3
     dp4 r7.y, c30, r3
     dp4 r7.z, c31, r3
-    mad r1.xyz, r1, c18.w, r7
-    mad r1.xyz, r6, r20.x, r1
+    mad r1.xyz, r1, c237.w, r7
+    
+    mad r1.xyz, r6, c80.x, r1
     
     max r1.xyz, r5, r1
     
