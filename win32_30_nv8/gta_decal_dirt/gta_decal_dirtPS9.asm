@@ -152,7 +152,7 @@
     
     mad r24, r26.xxyz, -c110.wyyy, r26
     dp4 r24.x, r21_abs, r24 // curr_range - prev_range
-    mul r24.xy, r24.x, c218_abs.zw
+    mul r24.y, r24.x, c218_abs.w
     rcp r24.z, r24.x
     rcp r24.w, r24.y
     add r24.xy, r23.x, -r24.xy
