@@ -64,6 +64,7 @@
     def c3, 0.5, -0.5, 0.159154937, 0.25
     def c4, 3, 4.27199984, 0, 0
     def c5, 6.28318548, -3.14159274, -1, 1
+    def c8, 17.0666666, 1.3333333, 0, 0
     // ------------------------------------------------------ Improved Shadow Filter Constants ------------------------------------------------------
     def c110, -0.25, 1, -1, 0
     def c111, 0.159154937, 0.5, 6.28318548, -3.14159274
@@ -159,7 +160,9 @@
     add r1.x, r1.x, -c83.x
     mul_sat r1.x, r1.x, c84.x
     mul r0.xyz, r0, r1.x
-    mad r2.xyz, r5, c2.z, r2
+    mov r20.x, c77.z
+    mul r20.xy, r20.x, c8.xy
+    mad r2.xyz, r5, r20.x, r2 // scale bias with resolution
     mul r4.xyz, r2.y, c73
     mad r2.xyw, r2.x, c72.xyzz, r4.xyzz
     mad r2.xyz, r2.z, c74, r2.xyww
@@ -181,11 +184,11 @@
       frc r1.x, r1.x
       mad r1.x, r1.x, c5.x, c5.y
       sincos r9.xy, r1.x
-      mul r2.zw, r9.xyyx, c77.z
+      mul r2.zw, r9.xyyx, r20.y
       mul r10, r9.xyxy, c5.zwwz
-      mul r4.zw, -r9.xyyx, c77.z
-      mul r9.xy, r10, c77.z
-      mad_sat r9.zw, r10, c77.z, r2.xyxy
+      mul r4.zw, -r9.xyyx, r20.y
+      mul r9.xy, r10, r20.y
+      mad_sat r9.zw, r10, r20.y, r2.xyxy
       mad_sat r2.zw, r2, c2.w, r2.xyxy
       mad_sat r9.xy, r9, c1.y, r2
       mad_sat r2.xy, r4.zwzw, c3.w, r2
@@ -217,7 +220,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c130.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, c77.z, r2.xyxy
+      mad_sat r21, r23, r20.y, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r24, r21.xy, s14
       dp2add r24.x, r24, r4.xy, c110.w
@@ -227,7 +230,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c131.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, c77.z, r2.xyxy
+      mad_sat r21, r23, r20.y, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r23, r21.xy, s14
       dp2add r24.z, r23, r4.xy, c110.w
@@ -241,7 +244,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c132.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, c77.z, r2.xyxy
+      mad_sat r21, r23, r20.y, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r24, r21.xy, s14
       dp2add r24.x, r24, r4.xy, c110.w
@@ -251,7 +254,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c133.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, c77.z, r2.xyxy
+      mad_sat r21, r23, r20.y, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r23, r21.xy, s14
       dp2add r24.z, r23, r4.xy, c110.w
@@ -265,7 +268,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c134.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, c77.z, r2.xyxy
+      mad_sat r21, r23, r20.y, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r24, r21.xy, s14
       dp2add r24.x, r24, r4.xy, c110.w
@@ -275,7 +278,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c135.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, c77.z, r2.xyxy
+      mad_sat r21, r23, r20.y, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r23, r21.xy, s14
       dp2add r24.z, r23, r4.xy, c110.w
@@ -289,7 +292,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c136.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, c77.z, r2.xyxy
+      mad_sat r21, r23, r20.y, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r24, r21.xy, s14
       dp2add r24.x, r24, r4.xy, c110.w
@@ -299,7 +302,7 @@
       add r23.xy, r21.xzxz, r21.ywyw
       mul r21, c137.zwzw, r22
       add r23.zw, r21.xzxz, r21.ywyw
-      mad_sat r21, r23, c77.z, r2.xyxy
+      mad_sat r21, r23, r20.y, r2.xyxy
       mad r21, r21, c77.w, c77.xyxy
       texldl r23, r21.xy, s14
       dp2add r24.z, r23, r4.xy, c110.w

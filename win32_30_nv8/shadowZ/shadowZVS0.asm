@@ -26,12 +26,10 @@
     vs_3_0
     def c230, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 3.9642733556e-42 // 2829
     def c4, -0.5, 2, -1, 0.5
-    def c5, 0, -3, 1, 0.55
+    def c5, 0, -3, 1, 0
     dcl_position v0
     dcl_position o0
     dcl_texcoord1 o1
-    mov r20.x, c57.z
-    add r20.x, r20.x, -c5.w
     mul r0.xyz, c1, v0.y
     mad r0.xyz, v0.x, c0, r0
     mad r0.xyz, v0.z, c2, r0
@@ -67,7 +65,7 @@
         add r2.xyz, r1.yzww, c63
         mul r4.z, r2.z, c57.w
         mov r2.w, c4.w
-        mov r4.xy, r20.x
+        mov r4.xy, c5.z
         mul r3.xyz, r2.xyww, r4
         frc r0.w, c56.y
         add r0.w, -r0.w, c56.y
@@ -81,7 +79,7 @@
         mad r1.yzw, r0.x, c60.xxyz, r1
         mad r1.yzw, r0.z, c62.xxyz, r1
         add r1.yzw, r1, c63.xxyz
-        mul r3.xy, r1.yzzw, r20.x
+        mul r3.xy, r1.yzzw, c5.z
         mov r3.w, -r1.w
         mov r2.x, c57.x
         add r0.w, r2.x, -c59.w
