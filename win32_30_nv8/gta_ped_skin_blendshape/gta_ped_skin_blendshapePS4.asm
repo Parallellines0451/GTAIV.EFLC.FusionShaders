@@ -690,7 +690,7 @@
       
       lrp r21.xyz, r20.x, r22, c43
       lrp r21.xyz, c211.w, r21, r22
-      lrp r22.xyz, r20.x, r21, r0.yzw
+      lrp r22.xyz, r20.x, r21, r0.xzw
       mov r0.xzw, r22.xxyz
     endif
     mul oC0.xyz, r0.xzww, c66.x
