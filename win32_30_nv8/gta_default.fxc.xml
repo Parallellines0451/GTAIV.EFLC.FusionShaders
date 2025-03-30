@@ -689,7 +689,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_default\gta_defaultPS3.asm</File>
-				<Variables value="4" >
+				<Variables value="5" >
+					<Item>
+						<Type>float4</Type>
+						<Name>shadowmap_res</Name>
+						<Index value="207" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>TextureSampler</Name>
