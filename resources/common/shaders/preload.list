@@ -4,7 +4,6 @@ gta_default.fx
 gta_normal.fx
 gta_normal_spec.fx
 gta_normal_spec_reflect.fx
-gta_procobj.fx
 gta_normal_spec_reflect_emissive.fx
 gta_normal_spec_reflect_emissivenight.fx
 gta_normal_spec_cubemap_reflect.fx

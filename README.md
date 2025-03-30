@@ -81,7 +81,6 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 #### Misc
 - Fixed outlines around objects when using DXVK
 - Fixed terrain pop-in
-- Added shader for procedural objects to reduce pop-in
 - Partially fixed building windows visible near the far plane if emissive depth write is disabled
 - Restored fence mipmap bias from versions prior to 1.0.6.0
 - Fixed incorrect texture filtering used in several shaders
