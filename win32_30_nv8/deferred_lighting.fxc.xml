@@ -2275,7 +2275,7 @@
 					<Item>
 						<Type>float</Type>
 						<Name>gDeferredVolumeRadiusScale</Name>
-						<Index value="213" />
+						<Index value="74" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>
@@ -2316,7 +2316,7 @@
 					<Item>
 						<Type>float</Type>
 						<Name>gDeferredVolumeRadiusScale</Name>
-						<Index value="213" />
+						<Index value="74" />
 					</Item>
 					<Item>
 						<Type>sampler</Type>

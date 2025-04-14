@@ -20,7 +20,7 @@
 //   gDeferredLightRadius       c66      1
 //   gooDeferredLightScreenSize c72      1
 //   gDeferredProjParams        c73      1
-//   gDeferredVolumeRadiusScale c213     1
+//   gDeferredVolumeRadiusScale c74      1
 //   gDeferredLightSampler2     s0       1
 //   GBufferTextureSampler3     s1       1
 //
@@ -65,7 +65,7 @@
     mov r20.x, c0.w
     max r20.x, c66.x, r20.x
     mul r20.y, r20.x, c3.x
-    mul r20.y, r20.y, c213.x
+    mul r20.y, r20.y, c74.x
     add r20.z, r20.y, -r0.w
     rcp r20.y, r20.y
     mul_sat r20.y, r20.y, r20.z
