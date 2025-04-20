@@ -179,8 +179,7 @@
     pow r2.x, r1.x, r0.w
     mul r0.xyz, r0, r2.x
     
-    if_ne -c220_abs.z, c220_abs.z
-      mov r20.x, c2.y
+    if_ne -c217_abs.z, c217_abs.z
       mad r1.xyz, r0, c14.x, c14.y
       log r1.x, r1.x
       log r1.y, r1.y
@@ -192,7 +191,7 @@
       mul r2.xyz, r0, c14.w
       add r0.xyz, r0, c15.x
       cmp r0.xyz, r0, r1, r2
-      if_eq c220.z, r20.x // jodieRoboTonemap from: https://www.shadertoy.com/view/4dBcD1
+      if_gt -c217.z, c217.z // jodieRoboTonemap from: https://www.shadertoy.com/view/4dBcD1
         dp3 r0.w, r0, c1.yzw
         mad r1, r0, r0, c2.y
         rsq r1.x, r1.x

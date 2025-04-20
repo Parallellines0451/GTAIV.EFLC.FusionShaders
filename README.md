@@ -5,7 +5,7 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 [FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix) is strictly required for these shaders to work. All game versions post 1.0.6.0 are supported.
 
 #### Recommended additions:
-- [DXVK](https://github.com/doitsujin/dxvk/) to improve performance in draw call heavy scenarios, **but only if your setup is not GPU-limited**
+- [DXVK](https://github.com/doitsujin/dxvk/) to improve performance
 - [Console Visuals](https://github.com/Tomasak/Console-Visuals) to restore trees, suits, animations and several other features from consoles
 - [Various Fixes](https://github.com/valentyn-l/GTAIV.EFLC.Various.Fixes) to fix hundreds of bugs and oversights around the map
 - [Ash_735's Workshop](https://gtaforums.com/topic/887527-ash_735s-workshop/) to faithfully improve the texture quality of various game assets
@@ -24,6 +24,7 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - Fixed mismatched intensity of shadow casting lights causing visible pop-in
 - Fixed lights that were made invisible with version 1.0.6.0
 - Fixed black normal map halos on several surfaces such as asphalt, sidewalks and rocks
+- Added support to disable the directional lighting clamp
 #### Shadows
 - Restored rotated disk filter from versions prior to 1.0.6.0
 - Fixed large shadow artifacts visible from high altitudes
