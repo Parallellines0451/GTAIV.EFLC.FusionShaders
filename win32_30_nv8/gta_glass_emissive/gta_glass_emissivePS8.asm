@@ -170,12 +170,14 @@
       mad r20.x, r20.x, c209.y, -v9.w
       texkill r20.x
       rcp r20.x, c209.x
-      mul r20.y, r20.x, v9.w
+      add r20.y, c209.x, v9.x
+      rcp r20.y, r20.y
+      mul r20.y, r20.y, v9.w
       mul r20.x, r20.x, c209.y
       log r20.x, r20.x
       log r20.y, r20.y
       rcp r20.x, r20.x
-      mad r20.x, r20.x, r20.y, -v9.x
+      mul r20.x, r20.x, r20.y
     else
       rcp r20.x, v9.w
       mul r20.x, r20.x, v9.z
