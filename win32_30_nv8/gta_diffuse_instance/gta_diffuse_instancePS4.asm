@@ -80,7 +80,7 @@
     def c152, 0.2, 0.4, 0.6, 0.8 // c152-c154 = new stipple constants
     def c153, 0.5, 2, 1, 0
     def c154, 1.6, 0, 0, 0
-    def c127, 1, 0.99, 0, 0 // LogDepth constants
+    def c127, 1, 0, 0, 0 // LogDepth constants
     def c140, 1e-6, 0.5, -0.0625, 0.9375
     def c141, 0.6, 4, 1, 30
     def c142, 1000, 0, 0, 0

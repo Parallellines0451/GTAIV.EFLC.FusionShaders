@@ -27,7 +27,7 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 9.8090892503e-43 // 700
-    def c127, 1, 0.99, 0, 0 // LogDepth constants
+    def c127, 1, 0, 0, 0 // LogDepth constants
     def c0, 0, 0, 0, 0
     dcl_texcoord v0.xy
     dcl_color v1
