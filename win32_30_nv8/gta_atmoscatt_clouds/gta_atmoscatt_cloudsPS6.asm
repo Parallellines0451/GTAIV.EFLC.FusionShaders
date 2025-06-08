@@ -56,11 +56,11 @@
     min_pp oC0.xyz, c68, r0
     mov_pp oC0.w, c0.y
     
-    // LogDepth Write
+    // LogDepth Write (sky)
     if_ne v9.y, c127.x
-      rcp r20.x, c209.x
+      rcp r20.x, c209.z
       mul r20.y, r20.x, v9.w
-      mul r20.x, r20.x, c209.y
+      mul r20.x, r20.x, c209.w
       log r20.x, r20.x
       log r20.y, r20.y
       rcp r20.x, r20.x
