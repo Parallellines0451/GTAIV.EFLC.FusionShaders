@@ -4,7 +4,6 @@
 // Parameters:
 //
 //   sampler2D DOFBlurSampler;
-//   float4 TexelSize;
 //   float4 globalScreenSize;
 //
 //
@@ -13,12 +12,11 @@
 //   Name                         Reg   Size
 //   ---------------------------- ----- ----
 //   globalScreenSize             c44      1
-//   TexelSize                    c76      1
 //   DOFBlurSampler               s8       1
 //
 
     ps_3_0
-    def c14, 0.00006, 0.0625, 1, 0
+    def c14, 0.0036, -1.76, 0.0625, 1
     // Small kernel from https://github.com/Unity-Technologies/PostProcessing/blob/v2/PostProcessing/Shaders/Builtins/DiskKernels.hlsl
     def c15, 0, 0, 0.54545456, 0
     def c16, 0.16855472, 0.5187581, -0.44128203, 0.3206101
@@ -32,11 +30,9 @@
     dcl_texcoord v0.xy
     dcl_2d s8
     
-    rsq r20.x, c44.y
-    rcp r20.x, r20.x
-    mul r20.x, r20.x, c44.y
-    mul r20.x, r20.x, c14.x
-    mul r20, r20.x, c76.xyxy
+    mov r20.x, c44.y
+    mad r20.x, r20.x, c14.x, c14.y
+    mul_sat r20, r20.x, c44.zwzw
     
     mad r22, r20, c15, v0.xyxy
     texld r21.xyz, r22.xy, s8
@@ -85,7 +81,7 @@
     texld r23.xyz, r22.zw, s8
     add r21.xyz, r21, r23
     
-    mul oC0.xyz, r21, c14.y
-    mov oC0.w, c14.z
+    mul oC0.xyz, r21, c14.z
+    mov oC0.w, c14.w
 
 // approximately 176 instruction slots used (14 texture, 162 arithmetic)
