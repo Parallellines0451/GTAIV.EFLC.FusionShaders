@@ -170,10 +170,21 @@
     rcp r1.x, r0.w
     mul r1.x, r1.x, c81.x
     texld r2, v0, s4
-    mad r1.xyz, r2, c66.x, -r1.x
-    mul r2.xyz, r1, c81.z
-    mul r2.xyz, r2, c2.x
-    cmp r1.xyz, r1, r2, c1.x
+    if_eq -c218_abs.z, c218_abs.z
+      mad r1.xyz, r2, c66.x, -r1.x
+      mul r2.xyz, r1, c81.z
+      mul r2.xyz, r2, c2.x
+      cmp r1.xyz, r1, r2, c1.x
+    else
+      dp3 r1.y, r2, c1.yzw
+      mad r1.x, r1.y, c66.x, -r1.x
+      rcp r1.y, r1.y
+      mul r1.x, r1.x, r1.y
+      mul r1.x, r1.x, c81.z
+      mul r1.x, r1.x, c2.x
+      max r1.x, r1.x, c1.x
+      mul r1.xyz, r2, r1.x
+    endif
     mad r0.xyz, r3, c66.x, r1
     
     // tonemap and color correction

@@ -1,8 +1,7 @@
 # GTAIV.EFLC.FusionShaders
-Grand Theft Auto IV on PC is a very subpar port to say the least. Countless graphical effects were broken, removed or changed for the worse compared to the console releases and even previous versions of the game on PC. This repository seeks to fix as many of these issues as possible, as well as add some new features while staying true to the original art direction.
+Shaders repository of [FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix).
 
-## Prerequisites and recommendations
-[FusionFix](https://github.com/ThirteenAG/GTAIV.EFLC.FusionFix) is strictly required for these shaders to work. All game versions post 1.0.6.0 are supported.
+Grand Theft Auto IV on PC is a very subpar port to say the least. Countless graphical effects were broken, removed or changed for the worse compared to the console releases and even previous versions of the game on PC. This repository seeks to fix as many of these issues as possible, as well as add some new features while staying true to the original art direction.
 
 #### Recommended additions:
 - [DXVK](https://github.com/doitsujin/dxvk/) to improve performance
@@ -10,6 +9,7 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - [Various Fixes](https://github.com/valentyn-l/GTAIV.EFLC.Various.Fixes) to fix hundreds of bugs and oversights around the map
 - [Ash_735's Workshop](https://gtaforums.com/topic/887527-ash_735s-workshop/) to faithfully improve the texture quality of various game assets
 - [_AG's repositories](https://github.com/gennariarmando) for interface improvements and other interesting features
+- [Radio Restorer](https://github.com/Tomasak/GTA-Downgraders/releases/tag/iv-latest) to bring back the game's removed songs
 
 ## Feature list
 #### General
@@ -48,6 +48,7 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - Added a mask to selectively filter screen door transparency
 - Fixed depth of field and bloom not scaling correctly at resolutions higher than 720p
 - Improved bloom weights and stability in motion
+- Added optional circular bloom
 - Fixed excessively blurry screen compared to consoles caused by leftover anti aliasing code
 - Restored console bloom and auto exposure
 - Fixed flickering auto exposure
@@ -80,6 +81,7 @@ Grand Theft Auto IV on PC is a very subpar port to say the least. Countless grap
 - Fixed incorrect water texture tiling on quality levels other than medium
 - Fixed flat, mirror-like water surface on AMD graphics cards
 #### Misc
+- Added optional toggle for alternative cloud shading
 - Fixed outlines around objects when using DXVK
 - Fixed terrain pop-in
 - Partially fixed building windows visible near the far plane if emissive depth write is disabled
