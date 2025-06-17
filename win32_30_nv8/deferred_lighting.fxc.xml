@@ -2271,12 +2271,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingPS18.asm</File>
-				<Variables value="7" >
-					<Item>
-						<Type>float</Type>
-						<Name>gDeferredVolumeRadiusScale</Name>
-						<Index value="74" />
-					</Item>
+				<Variables value="6" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>GBufferTextureSampler3</Name>
@@ -2312,12 +2307,7 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingPS19.asm</File>
-				<Variables value="7" >
-					<Item>
-						<Type>float</Type>
-						<Name>gDeferredVolumeRadiusScale</Name>
-						<Index value="74" />
-					</Item>
+				<Variables value="6" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>GBufferTextureSampler3</Name>

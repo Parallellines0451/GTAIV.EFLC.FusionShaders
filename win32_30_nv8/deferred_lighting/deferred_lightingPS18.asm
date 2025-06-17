@@ -9,7 +9,6 @@
 //   sampler2D gDeferredLightSampler2;
 //   float4 gDeferredProjParams;
 //   float4 gooDeferredLightScreenSize;
-//   float gDeferredVolumeRadiusScale;
 //
 //
 // Registers:
@@ -20,7 +19,6 @@
 //   gDeferredLightRadius       c66      1
 //   gooDeferredLightScreenSize c72      1
 //   gDeferredProjParams        c73      1
-//   gDeferredVolumeRadiusScale c74      1
 //   gDeferredLightSampler2     s0       1
 //   GBufferTextureSampler3     s1       1
 //
@@ -31,7 +29,7 @@
     def c0, 0.50999999, 9.99999975e-006, 16, 1
     def c1, 0, 0, 0, 0
     def c2, 0.5, 0.125, 3.14159274, 1.5
-    def c3, 0.662, 0.053525835, -2, 3
+    def c3, 0.85, 0.0416666, -2, 3
     dcl_texcoord v0
     dcl_texcoord1 v1.xyz
     dcl_texcoord2 v2.xyz
@@ -61,40 +59,75 @@
     nrm r2.xyz, r1
     dp3 r0.w, r2, v0
     
-    // https://www.desmos.com/calculator/brpw3cvhrr
-    mov r20.x, c0.w
-    max r20.x, c66.x, r20.x
-    mul r20.y, r20.x, c3.x
-    mul r20.y, r20.y, c74.x
-    add r20.z, r20.y, -r0.w
-    rcp r20.y, r20.y
-    mul_sat r20.y, r20.y, r20.z
-    mad r20.z, r20.y, c3.z, c3.w
-    mul r20.z, r20.y, r20.z
-    mul r20.y, r20.y, r20.z
-    mul r20.y, r20.y, r20.x
-    mul r20.y, r20.y, r20.x
-    mul r20.y, r20.y, c3.y
+    if_eq -c210_abs.y, c210_abs.y
+      mul r0.w, r0.w, r0.w
+      mul r1.x, c66.x, c66.x
+      rcp r1.x, r1.x
+      mul r1.x, r1.x, c0.z
+      min r2.x, r1.x, c0.z
+      mad r0.w, r0.w, r2.x, c0.w
+      rsq r0.w, r0.w
+      rsq r1.x, r2.x
+      rcp r1.x, r1.x
+      mul r1.x, r0.w, r1.x
+      rcp r0.w, r0.w
+      mul r0.xyz, r0, r1.x
+      mul r1.xyz, r1.x, v0
+      dp3 r1.w, r0, r0
+      dp3 r0.x, r0, r1
+      dp3 r0.y, r1, r1
+      add r0.y, r0.y, c0.y
+      rsq r0.y, r0.y
+      add r0.z, r1.w, c0.y
+      rsq r0.z, r0.z
+      mul r0.y, r0.y, r0.z
+      mul r0.x, r0.x, r0.y
+      mad r1.y, r0.x, c2.x, c2.x
+      mov r1.x, c2.y
+      mov r1.zw, c1.x
+      texldl r1, r1, s0
+      mul r0.x, r2.x, r1.x
+      mul r0.y, r2.x, c2.w
+      mul r0.y, r0.w, r0.y
+      rcp r0.y, r0.y
+      mul r0.x, r0.x, c2.z
+      mul r0.x, r0.y, r0.x
+    else
+      // https://www.desmos.com/calculator/t7q9gm2qaa
+      mov r20.x, c66.x
+      max r20.y, r20.x, c0.w
+      mul r20.y, r20.y, r20.y
+      mul r20.xy, r20.xy, c3.xy
+      add r20.z, r20.x, -r0.w
+      rcp r20.x, r20.x
+      mul_sat r20.x, r20.x, r20.z
+      mad r20.z, r20.x, c3.z, c3.w
+      mul r20.z, r20.z, r20.x
+      mul r20.x, r20.z, r20.x
+      mul r20.x, r20.x, r20.y
     
-    mul r1.x, c66.x, c66.x
-    rcp r1.x, r1.x
-    mul r1.x, r1.x, c0.z
-    min r2.x, r1.x, c0.z
-    dp3 r1.w, r0, r0
-    dp3 r0.x, r0, v0
-    dp3 r0.y, v0, v0
-    add r0.y, r0.y, c0.y
-    rsq r0.y, r0.y
-    add r0.z, r1.w, c0.y
-    rsq r0.z, r0.z
-    mul r0.y, r0.y, r0.z
-    mul r0.x, r0.x, r0.y
-    mad r0.y, r0.x, c2.x, c2.x
-    mov r0.x, c2.y
-    texld r1, r0, s0
-    mul r0.x, r2.x, r1.x
-    mul r0.x, r0.x, c2.z
-    mul r0.x, r20.y, r0.x
+      mul r1.x, c66.x, c66.x
+      rcp r1.x, r1.x
+      mul r1.x, r1.x, c0.z
+      min r2.x, r1.x, c0.z
+      dp3 r1.w, r0, r0
+      dp3 r0.x, r0, v0
+      dp3 r0.y, v0, v0
+      add r0.y, r0.y, c0.y
+      rsq r0.y, r0.y
+      add r0.z, r1.w, c0.y
+      rsq r0.z, r0.z
+      mul r0.y, r0.y, r0.z
+      mul r0.x, r0.x, r0.y
+      mad r1.y, r0.x, c2.x, c2.x
+      mov r1.x, c2.y
+      mov r1.zw, c1.x
+      texldl r1, r1, s0
+      mul r0.x, r2.x, r1.x
+      mul r0.x, r0.x, c2.z
+      mul r0.x, r20.x, r0.x
+    endif
+    
     mul oC0.xyz, r0.x, v2
     mov oC0.w, c1.x
     
