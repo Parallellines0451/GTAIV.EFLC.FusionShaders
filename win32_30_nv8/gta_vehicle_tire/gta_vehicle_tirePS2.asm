@@ -301,7 +301,7 @@
     sincos r22.xy, r21.x
     mul r22, r22.xyyx, c110.yzyy
     
-    if_eq -c217_abs.w, c217_abs.w
+    if_eq -c218_abs.z, c218_abs.z
       mul r20.xy, r20.xy, c218_abs.x
     else
       mul r25.zw, r20.xyxy, c217_abs.x

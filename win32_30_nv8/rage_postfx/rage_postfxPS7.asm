@@ -34,7 +34,7 @@
     mul r1.xy, r1.xy, c7.x
     mov r2.w, c7.w
     
-    if_eq -c218_abs.z, c218_abs.z
+    if_eq -c217_abs.w, c217_abs.w
       mad r2.xy, r1.xy, c3.xw, v0.xy
       texldl r2.xyz, r2, s0
       add r2.xyz, r2, -r0
