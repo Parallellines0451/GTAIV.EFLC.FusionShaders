@@ -17,15 +17,12 @@
     def c230, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 3.9166292078e-42 // 2795
     dcl_position v0
     dcl_position o0
-    dcl_texcoord9 o10
+    dcl_texcoord9 o10 // LogDepth Interpolator
     mul r0, c9, v0.y
     mad r0, v0.x, c8, r0
     mad r0, v0.z, c10, r0
     mad o0, v0.w, c11, r0
     mad o10.zw, v0.w, c11, r0
-    mov r20.x, c8.w
-    add r20.x, r20.x, c9.w
-    add r20.x, r20.x, c10.w
-    add o10.y, r20.x, c11.w
-    
+    dp3 o10.xy, c10.xyw, c10.xyw
+
 // approximately 4 instruction slots used

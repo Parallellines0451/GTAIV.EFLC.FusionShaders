@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 NearFarPlane;
 //   sampler2D GBufferStencilTextureSampler;
 //   sampler2D GBufferTextureSampler3;
 //   sampler2D HDRSampler;
@@ -20,7 +19,6 @@
 //
 //   Name                         Reg   Size
 //   ---------------------------- ----- ----
-//   NearFarPlane                 c128     1
 //   gDepthFxParams               c16      1
 //   globalFogParams              c41      1
 //   globalFogColor               c42      1
@@ -55,10 +53,8 @@
     texld r1, v0, s0
     
     // LogDepth Read
-    rcp r20.x, c209.x
-    mul r20.x, r20.x, c209.y
-    pow r20.x, r20.x, r1.x
-    mul r4.x, r20.x, c209.x
+    pow r19.x, c209_abs.z, r1.x
+    mul r4.x, r19.x, c209.w
     
     add r1.y, -r4.x, c16.w
     mul_sat r0.z, r0.z, r1.y

@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 NearFarPlane;
 //   float4 g_ImposterSize;
 //   sampler2D imposterSampler;
 //   float3 normTable[16];
@@ -13,7 +12,6 @@
 //
 //   Name            Reg   Size
 //   --------------- ----- ----
-//   NearFarPlane    c128     1
 //   g_ImposterSize  c66      1
 //   normTable       c72     16
 //   imposterSampler s0       1
@@ -21,7 +19,6 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.0846050114e-42 // 774
-    def c127, 1, 0, 0, 0 // LogDepth constants
     def c0, 15.9377499, 16, 255.003998, 0.0625
     def c1, -0, -1, -2, -3
     def c2, -4, -5, -6, -7
@@ -118,18 +115,11 @@
     mov oC3, c6.wzzz
     
     // LogDepth Write
-    if_ne v9.y, c127.x
-      rcp r20.x, c209.x
-      mul r20.y, r20.x, v9.w
-      mul r20.x, r20.x, c209.y
-      log r20.x, r20.x
-      log r20.y, r20.y
-      rcp r20.x, r20.x
-      mul r20.x, r20.x, r20.y
-    else
-      rcp r20.x, v9.w
-      mul r20.x, r20.x, v9.z
-    endif
-    mov oDepth, r20.x
+    mul r19.x, v9.w, c209.x
+    log r19.x, r19.x
+    mul r19.x, r19.x, c209.y
+    rcp r19.y, v9.w
+    mul r19.y, r19.y, v9.z
+    cmp oDepth, -v9_abs.y, r19.y, r19.x
 
 // approximately 79 instruction slots used (3 texture, 76 arithmetic)

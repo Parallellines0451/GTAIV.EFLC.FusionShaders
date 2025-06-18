@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 NearFarPlane;
 //   sampler2D DepthMapTexSampler;
 //   sampler2D DiffuseTexSampler;
 //   float HybridAdd;
@@ -16,7 +15,6 @@
 //
 //   Name               Reg   Size
 //   ------------------ ----- ----
-//   NearFarPlane       c128     1
 //   globalScalars      c39      1
 //   gSoftness          c66      1
 //   HybridAdd          c72      1
@@ -27,7 +25,6 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 7.5670117074e-43 // 540
-    def c127, 1, 0, 0, 0 // LogDepth constants
     def c0, 0.5, 0.212500006, 0.715399981, 0.0720999986
     def c1, -1, 1, 0, 0
     dcl_color v0
@@ -44,10 +41,8 @@
     texld r0, r0, s12
     
     // LogDepth Read
-    rcp r20.x, c209.x
-    mul r20.x, r20.x, c209.y
-    pow r20.x, r20.x, r0.x
-    mul r0.x, r20.x, c209.x
+    pow r19.x, c209_abs.z, r0.x
+    mul r0.x, r19.x, c209.w
     
     add r0.x, r0.x, -v3.y
     mul r0.x, r0.x, r0.x
@@ -78,18 +73,11 @@
     max oC0, r0, c1.z
     
     // LogDepth Write
-    if_ne v9.y, c127.x
-      rcp r20.x, c209.x
-      mul r20.y, r20.x, v9.w
-      mul r20.x, r20.x, c209.y
-      log r20.x, r20.x
-      log r20.y, r20.y
-      rcp r20.x, r20.x
-      mul r20.x, r20.x, r20.y
-    else
-      rcp r20.x, v9.w
-      mul r20.x, r20.x, v9.z
-    endif
-    mov oDepth, r20.x
+    mul r19.x, v9.w, c209.x
+    log r19.x, r19.x
+    mul r19.x, r19.x, c209.y
+    rcp r19.y, v9.w
+    mul r19.y, r19.y, v9.z
+    cmp oDepth, -v9_abs.y, r19.y, r19.x
 
 // approximately 30 instruction slots used (3 texture, 27 arithmetic)

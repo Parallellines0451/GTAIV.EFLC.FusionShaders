@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 NearFarPlane;
 //   sampler2D AdapLumSampler;
 //   sampler2D BloomSampler;
 //   sampler2D BlurSampler;
@@ -32,7 +31,6 @@
 //
 //   Name                         Reg   Size
 //   ---------------------------- ----- ----
-//   NearFarPlane                 c128     1
 //   globalScreenSize             c44      1
 //   Exposure                     c66      1
 //   motionBlurMatrix             c72      4
@@ -101,10 +99,8 @@
     texld r0, v0, s1
     
     // LogDepth Read
-    rcp r20.x, c209.x
-    mul r20.x, r20.x, c209.y
-    pow r20.x, r20.x, r0.x
-    mul r0.y, r20.x, c209.x
+    pow r19.x, c209_abs.z, r0.x
+    mul r0.y, r19.x, c209.w
     
     // samples used by DOF and stipple filter
     mov r3, c4

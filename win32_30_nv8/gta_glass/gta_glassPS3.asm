@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 NearFarPlane;
 //   sampler2D BumpSampler;
 //   sampler2D EnvironmentSampler;
 //   sampler2D StippleTexture;
@@ -20,7 +19,6 @@
 //
 //   Name                Reg   Size
 //   ------------------- ----- ----
-//   NearFarPlane        c128     1
 //   globalScalars       c39      1
 //   stencil             c52      1
 //   specularFactor      c66      1
@@ -38,7 +36,6 @@
     def c152, 0.2, 0.4, 0.6, 0.8 // c152-c154 = new stipple constants
     def c153, 0.5, 2, 1, 0
     def c154, 1.6, 0, 0, 0
-    def c127, 1, 0, 0, 0 // LogDepth constants
     def c0, -0.5, 9.99999975e-006, 0.5, 0.001953125
     def c1, 3.99600005, 4, 0.125, 0.25
     def c2, 0, -1, -0, 1
@@ -108,18 +105,11 @@
     mul oC3, r0.wxxx, c52.x
     
     // LogDepth Write
-    if_ne v9.y, c127.x
-      rcp r20.x, c209.x
-      mul r20.y, r20.x, v9.w
-      mul r20.x, r20.x, c209.y
-      log r20.x, r20.x
-      log r20.y, r20.y
-      rcp r20.x, r20.x
-      mul r20.x, r20.x, r20.y
-    else
-      rcp r20.x, v9.w
-      mul r20.x, r20.x, v9.z
-    endif
-    mov oDepth, r20.x
+    mul r19.x, v9.w, c209.x
+    log r19.x, r19.x
+    mul r19.x, r19.x, c209.y
+    rcp r19.y, v9.w
+    mul r19.y, r19.y, v9.z
+    cmp oDepth, -v9_abs.y, r19.y, r19.x
 
 // approximately 64 instruction slots used (5 texture, 59 arithmetic)

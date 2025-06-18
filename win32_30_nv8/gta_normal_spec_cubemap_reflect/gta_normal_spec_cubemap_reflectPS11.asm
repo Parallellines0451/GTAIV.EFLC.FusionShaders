@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 NearFarPlane;
 //   sampler2D BumpSampler;
 //   samplerCUBE EnvironmentSampler;
 //   sampler2D SpecSampler;
@@ -58,7 +57,6 @@
 //
 //   Name                 Reg   Size
 //   -------------------- ----- ----
-//   NearFarPlane         c128     1
 //   gViewInverse         c12      4
 //   gDirectionalLight    c17      1
 //   gDirectionalColour   c18      1
@@ -133,7 +131,6 @@
     def c139, 0.0005, 0.5, 0, 0
     // ----------------------------------------------------------------------------------------------------------------------------------------------
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 4.9886225330e-43 // 356
-    def c127, 1, 0, 0, 0 // LogDepth constants
     def c0, 1, -0.5, 9.99999975e-006, -0.00999999978
     def c1, 100, -0.5, 0.5, -0.25
     def c2, 1.33333337, 1, 0, 1.5
@@ -650,18 +647,11 @@
     mov oC0.w, r0.y
     
     // LogDepth Write
-    if_ne v9.y, c127.x
-      rcp r20.x, c209.x
-      mul r20.y, r20.x, v9.w
-      mul r20.x, r20.x, c209.y
-      log r20.x, r20.x
-      log r20.y, r20.y
-      rcp r20.x, r20.x
-      mul r20.x, r20.x, r20.y
-    else
-      rcp r20.x, v9.w
-      mul r20.x, r20.x, v9.z
-    endif
-    mov oDepth, r20.x
+    mul r19.x, v9.w, c209.x
+    log r19.x, r19.x
+    mul r19.x, r19.x, c209.y
+    rcp r19.y, v9.w
+    mul r19.y, r19.y, v9.z
+    cmp oDepth, -v9_abs.y, r19.y, r19.x
 
 // approximately 272 instruction slots used (18 texture, 254 arithmetic)

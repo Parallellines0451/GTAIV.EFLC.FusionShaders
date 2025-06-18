@@ -36,7 +36,7 @@
     def c2, 9.99999975e-005, -2, 9.99999975e-006, 0.662
     dcl_position v0
     dcl_position o0
-    dcl_texcoord9 o10
+    dcl_texcoord9 o10 // LogDepth Interpolator
     dcl_texcoord o1
     mov r0.xyz, c210
     mul r1.xyz, r0.yzxw, c211.zxyw
@@ -125,9 +125,6 @@
     add o0, r0, c11
     add o10.zw, r0, c11
     mov o1, c0.w
-    mov r20.x, c8.w
-    add r20.x, r20.x, c9.w
-    add r20.x, r20.x, c10.w
-    add o10.y, r20.x, c11.w
-    
+    dp3 o10.xy, c10.xyw, c10.xyw
+
 // approximately 116 instruction slots used

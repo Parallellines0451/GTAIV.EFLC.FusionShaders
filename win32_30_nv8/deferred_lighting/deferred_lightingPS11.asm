@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 NearFarPlane;
 //   sampler2D GBufferStencilTextureSampler;
 //   sampler2D GBufferTextureSampler0;
 //   sampler2D GBufferTextureSampler1;
@@ -23,7 +22,6 @@
 //
 //   Name                             Reg   Size
 //   -------------------------------- ----- ----
-//   NearFarPlane                     c128     1
 //   gViewInverse                     c12      4
 //   gDeferredLightPosition           c66      1
 //   gDeferredLightDirection          c72      1
@@ -41,7 +39,6 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 2.2420775429e-44 // 16
-    def c127, 1, 0, 0, 0 // LogDepth constants
     def c0, 0.50999999, 2, -0.999989986, 255
     def c1, 255, -128, -0, -7.9000001
     def c2, 9.99999975e-006, 1, -0.333333343, 1.5
@@ -58,10 +55,8 @@
     texld r1, r0, s2
     
     // LogDepth Read
-    rcp r20.x, c209.x
-    mul r20.x, r20.x, c209.y
-    pow r20.x, r20.x, r1.x
-    mul r1.y, r20.x, c209.x
+    pow r19.x, c209_abs.z, r1.x
+    mul r1.y, r19.x, c209.w
     
     rcp r0.z, v0.w
     mul r0.z, r0.z, r1.y
@@ -99,18 +94,11 @@
     cmp oC0, r1.x, r0, -c1.z
     
     // LogDepth Write
-    if_ne v9.y, c127.x
-      rcp r20.x, c209.x
-      mul r20.y, r20.x, v9.w
-      mul r20.x, r20.x, c209.y
-      log r20.x, r20.x
-      log r20.y, r20.y
-      rcp r20.x, r20.x
-      mul r20.x, r20.x, r20.y
-    else
-      rcp r20.x, v9.w
-      mul r20.x, r20.x, v9.z
-    endif
-    mov oDepth, r20.x
+    mul r19.x, v9.w, c209.x
+    log r19.x, r19.x
+    mul r19.x, r19.x, c209.y
+    rcp r19.y, v9.w
+    mul r19.y, r19.y, v9.z
+    cmp oDepth, -v9_abs.y, r19.y, r19.x
 
 // approximately 42 instruction slots used (4 texture, 38 arithmetic)

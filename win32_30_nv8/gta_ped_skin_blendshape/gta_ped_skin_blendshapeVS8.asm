@@ -32,7 +32,7 @@
     dcl_normal1 v6
     dcl_tangent1 v7
     dcl_position o0
-    dcl_texcoord9 o10
+    dcl_texcoord9 o10 // LogDepth Interpolator
     dcl_texcoord o1.xy
     dcl_texcoord1 o2
     dcl_texcoord4 o3.xyz
@@ -82,9 +82,6 @@
     mov o5.w, v1.w
     mov o6.w, c4.z
     mov o7.x, c5.x
-    mov r20.x, c8.w
-    add r20.x, r20.x, c9.w
-    add r20.x, r20.x, c10.w
-    add o10.y, r20.x, c11.w
-    
+    dp3 o10.xy, c10.xyw, c10.xyw
+
 // approximately 45 instruction slots used

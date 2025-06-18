@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 NearFarPlane;
 //   sampler2D DiffuseTexSampler;
 //   sampler2D FrameMapTexSampler;
 //   float gBlurAmount;
@@ -17,7 +16,6 @@
 //
 //   Name                  Reg   Size
 //   --------------------- ----- ----
-//   NearFarPlane          c128     1
 //   globalScreenSize      c44      1
 //   gBlurAmount           c66      1
 //   gRefraction           c72      1
@@ -29,7 +27,6 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 7.7631934924e-43 // 554
-    def c127, 1, 0, 0, 0 // LogDepth constants
     def c0, 0.5, 1, 1.5915494, 0.125
     def c1, 6.28318548, -3.14159274, -0.00326212007, -0.00405809982
     def c2, -0.00791558996, -0.00597710023, 0, 0
@@ -100,18 +97,11 @@
     max oC0, r0, c2.z
     
     // LogDepth Write
-    if_ne v9.y, c127.x
-      rcp r20.x, c209.x
-      mul r20.y, r20.x, v9.w
-      mul r20.x, r20.x, c209.y
-      log r20.x, r20.x
-      log r20.y, r20.y
-      rcp r20.x, r20.x
-      mul r20.x, r20.x, r20.y
-    else
-      rcp r20.x, v9.w
-      mul r20.x, r20.x, v9.z
-    endif
-    mov oDepth, r20.x
+    mul r19.x, v9.w, c209.x
+    log r19.x, r19.x
+    mul r19.x, r19.x, c209.y
+    rcp r19.y, v9.w
+    mul r19.y, r19.y, v9.z
+    cmp oDepth, -v9_abs.y, r19.y, r19.x
 
 // approximately 69 instruction slots used (11 texture, 58 arithmetic)

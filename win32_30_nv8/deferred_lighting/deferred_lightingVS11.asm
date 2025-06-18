@@ -38,7 +38,7 @@
     dcl_normal v3
     dcl_2d s0
     dcl_position o0
-    dcl_texcoord9 o10
+    dcl_texcoord9 o10 // LogDepth Interpolator
     dcl_texcoord o1.xy
     dcl_texcoord1 o2.xyz
     mov r0.xyz, v3
@@ -72,14 +72,10 @@
       mad r1, v3.z, c10, r1
       add r1, r1, c11
       
-      // LogDepth Read
-      rcp r20.z, c227.x
-      mul r20.x, r1.w, r20.z
-      mul r20.y, c227.y, r20.z
-      log r20.x, r20.x
-      log r20.y, r20.y
-      rcp r20.y, r20.y
-      mul r1.z, r20.x, r20.y
+      // LogDepth Read - Corona
+      mul r19.x, r1.w, c227.x
+      log r19.x, r19.x
+      mul r1.z, r19.x, c227.y
       
       rcp r0.w, r1.w
       mul r1.xy, r1, r0.w
@@ -238,9 +234,6 @@
     mul o2.xyz, r0, v2.y
     mov o1.x, v2.x
     mov o1.y, v1.w
-    mov r20.x, c8.w
-    add r20.x, r20.x, c9.w
-    add r20.x, r20.x, c10.w
-    add o10.y, r20.x, c11.w
-    
+    dp3 o10.xy, c10.xyw, c10.xyw
+
 // approximately 166 instruction slots used (24 texture, 142 arithmetic)

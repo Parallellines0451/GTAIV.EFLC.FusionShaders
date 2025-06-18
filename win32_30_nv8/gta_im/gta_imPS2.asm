@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 NearFarPlane;
 //   sampler2D StippleTexture;
 //   sampler2D TextureSampler;
 //   float4 globalScalars;
@@ -13,7 +12,6 @@
 //
 //   Name           Reg   Size
 //   -------------- ----- ----
-//   NearFarPlane   c128     1
 //   globalScalars  c39      1
 //   TextureSampler s0       1
 //   StippleTexture s10      1
@@ -21,9 +19,9 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 3.9656746540e-43 // 283
-    def c127, 1, 25000, 0, 0 // LogDepth constants
     def c0, 3.99600005, 4, 0.125, 0.25
     def c1, 0, -1, -0, 0
+    def c2, 24999, 1, 0, 0
     dcl_texcoord v0.xy
     dcl_color v1
     dcl vPos.xy
@@ -36,22 +34,15 @@
     mul oC0.xyz, r0, c39.y
     mov oC0.w, r0.w
     
-    // LogDepth Write (sky bottom)
-    if_ne v9.y, c127.x
-      rcp r20.x, c209.x
-      mul r20.y, r20.x, v9.w
-      mov r20.z, c209.y
-      add r20.z, r20.z, -c127.y
-      cmp r20.z, r20.z, c209.w, c209.y
-      mul r20.x, r20.x, r20.z
-      log r20.x, r20.x
-      log r20.y, r20.y
-      rcp r20.x, r20.x
-      mul r20.x, r20.x, r20.y
-    else
-      rcp r20.x, v9.w
-      mul r20.x, r20.x, v9.z
-    endif
-    mov oDepth, r20.x
+    // LogDepth Write - Void
+    mul r19.x, v9.w, c209.x
+    log r19.x, r19.x
+    mul r19.x, r19.x, c209.y
+    mul r19.z, c209.z, c209.w
+    add r19.z, r19.z, -c2.x
+    cmp r19.x, r19.z, c2.y, r19.x
+    rcp r19.y, v9.w
+    mul r19.y, r19.y, v9.z
+    cmp oDepth, -v9_abs.y, r19.y, r19.x
 
 // approximately 21 instruction slots used (3 texture, 18 arithmetic)

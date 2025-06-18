@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 NearFarPlane;
 //   float CloudBias;
 //   float4 CloudColor;
 //   float CloudFadeOut;
@@ -42,7 +41,6 @@
 //
 //   Name                                        Reg   Size
 //   ------------------------------------------- ----- ----
-//   NearFarPlane                                c128     1
 //   SunCentre                                   c64      1
 //   SunDirection                                c65      1
 //   SunColor                                    c66      1
@@ -79,7 +77,6 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.0818024145e-42 // 772
-    def c127, 1, 0, 0, 0 // LogDepth constants
     def c0, 12.5799999, -0.0625, 0.5, 0.25
     def c1, -11.6163721, 0.9375, 0.5, 0.349999994
     def c2, 32, 0.600000024, -2, 3
@@ -225,18 +222,11 @@
     mov oC0.w, c3.y
     
     // LogDepth Write
-    if_ne v9.y, c127.x
-      rcp r20.x, c209.x
-      mul r20.y, r20.x, v9.w
-      mul r20.x, r20.x, c209.y
-      log r20.x, r20.x
-      log r20.y, r20.y
-      rcp r20.x, r20.x
-      mul r20.x, r20.x, r20.y
-    else
-      rcp r20.x, v9.w
-      mul r20.x, r20.x, v9.z
-    endif
-    mov oDepth, r20.x
+    mul r19.x, v9.w, c209.x
+    log r19.x, r19.x
+    mul r19.x, r19.x, c209.y
+    rcp r19.y, v9.w
+    mul r19.y, r19.y, v9.z
+    cmp oDepth, -v9_abs.y, r19.y, r19.x
 
 // approximately 127 instruction slots used (9 texture, 118 arithmetic)

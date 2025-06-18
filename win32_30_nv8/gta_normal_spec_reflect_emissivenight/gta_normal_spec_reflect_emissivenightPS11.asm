@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 NearFarPlane;
 //   sampler2D BumpSampler;
 //   sampler2D EnvironmentSampler;
 //   sampler2D SpecSampler;
@@ -59,7 +58,6 @@
 //
 //   Name                 Reg   Size
 //   -------------------- ----- ----
-//   NearFarPlane         c128     1
 //   gViewInverse         c12      4
 //   gDirectionalLight    c17      1
 //   gDirectionalColour   c18      1
@@ -135,7 +133,6 @@
     def c139, 0.0005, 0.5, 0, 0
     // ----------------------------------------------------------------------------------------------------------------------------------------------
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 5.4650640109e-43 // 390
-    def c127, 1, 0.99, 0, 0 // LogDepth constants
     def c0, -0.5, 9.99999975e-006, -0.00999999978, 100
     def c1, -0.5, 0.5, 1.33333337, 9.99999975e-005
     def c2, 1.5, -0.326211989, -0.405809999, 0.0833333358
@@ -147,6 +144,7 @@
     def c8, 0.473434001, -0.480026007, 0.519456029, 0.767022014
     def c9, -0.203345001, 0.620715976, 0.962339997, -0.194983006
     def c10, -0.840143979, -0.0735799968, -0.69591397, 0.457136989
+    def c11, 0.99, 0, 0, 0
     dcl_texcoord v0.xy
     dcl_texcoord1 v1.xyz
     dcl_texcoord3 v2.xyz
@@ -651,24 +649,15 @@
     mad oC0.xyz, r0.x, r0.yzww, r1
     mul oC0.w, r1.w, c39.x
     
-    // LogDepth Write (emissive)
-    if_ne v9.y, c127.x
-      mov r20.x, c127.y
-      mad r20.x, r20.x, c209.y, -v9.w
-      texkill r20.x
-      rcp r20.x, c209.x
-      add r20.y, c209.x, v9.x
-      rcp r20.y, r20.y
-      mul r20.y, r20.y, v9.w
-      mul r20.x, r20.x, c209.y
-      log r20.x, r20.x
-      log r20.y, r20.y
-      rcp r20.x, r20.x
-      mul r20.x, r20.x, r20.y
-    else
-      rcp r20.x, v9.w
-      mul r20.x, r20.x, v9.z
-    endif
-    mov oDepth, r20.x
+    // LogDepth Write - Emissive
+    mul r19.z, c209.z, c209.w
+    mad r19.z, r19.z, c11.x, -v9.w
+    texkill r19.z
+    mul r19.x, v9.w, v9.x
+    log r19.x, r19.x
+    mul r19.x, r19.x, c209.y
+    rcp r19.y, v9.w
+    mul r19.y, r19.y, v9.z
+    cmp oDepth, -v9_abs.y, r19.y, r19.x
 
 // approximately 272 instruction slots used (18 texture, 254 arithmetic)

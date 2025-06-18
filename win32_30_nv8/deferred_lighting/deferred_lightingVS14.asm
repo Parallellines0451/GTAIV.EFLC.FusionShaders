@@ -30,7 +30,7 @@
     dcl_position v0
     dcl_color v1
     dcl_position o0
-    dcl_texcoord9 o10
+    dcl_texcoord9 o10 // LogDepth Interpolator
     dcl_texcoord o1.xyz
     mov r0.xyz, c43
     add r0.xyz, -r0, c42
@@ -67,9 +67,6 @@
     lrp r1.x, c41.w, r2.w, r0.w
     add r0.w, r1.x, c41.z
     mad o1.xyz, r0.w, r0, r2
-    mov r20.x, c8.w
-    add r20.x, r20.x, c9.w
-    add r20.x, r20.x, c10.w
-    add o10.y, r20.x, c11.w
-    
+    dp3 o10.xy, c10.xyw, c10.xyw
+
 // approximately 36 instruction slots used

@@ -23,7 +23,7 @@
     dcl_blendindices v2
     dcl_normal v3
     dcl_position o0
-    dcl_texcoord9 o10
+    dcl_texcoord9 o10 // LogDepth Interpolator
     dcl_texcoord1 o1.xyz
     dcl_texcoord o2.x
     mul r0, c0.x, v2
@@ -58,9 +58,6 @@
     mul o2.x, r0.z, r1.x
     mov o0, r0
     mov o10.zw, r0
-    mov r20.x, c8.w
-    add r20.x, r20.x, c9.w
-    add r20.x, r20.x, c10.w
-    add o10.y, r20.x, c11.w
-    
+    dp3 o10.xy, c10.xyw, c10.xyw
+
 // approximately 31 instruction slots used

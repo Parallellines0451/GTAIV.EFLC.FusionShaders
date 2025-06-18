@@ -50,7 +50,7 @@
     dcl_color v3
     dcl_2d s3
     dcl_position o0
-    dcl_texcoord9 o10
+    dcl_texcoord9 o10 // LogDepth Interpolator
     dcl_color o1
     dcl_texcoord o2
     dcl_texcoord1 o3
@@ -332,9 +332,6 @@
     mov o10.zw, r0
     mov o2.w, r0.w
     mov o4.xyz, v1
-    mov r20.x, c8.w
-    add r20.x, r20.x, c9.w
-    add r20.x, r20.x, c10.w
-    add o10.y, r20.x, c11.w
-    
+    dp3 o10.xy, c10.xyw, c10.xyw
+
 // approximately 276 instruction slots used (24 texture, 252 arithmetic)

@@ -49,7 +49,6 @@
     dcl_position v0
     dcl_texcoord v1
     dcl_position o0
-    dcl_texcoord9 o10
     dcl_texcoord o1.xyz
     dcl_texcoord1 o2.xyz
     dcl_texcoord2 o3
@@ -126,8 +125,7 @@
     add o5.z, -r0.x, c4.w
     rcp r0.x, r1.w
     mad o1.z, r1.z, -r0.x, c4.w
-    mov o0, r1
-    mov o10.zw, r1
+    mov o0, r1.xyww // LogDepth Write - Sky
     mul_sat r0.x, r3.y, c68.x
     mad r0.y, r3.x, c7.x, c7.x
     add r0.x, -r0.x, c4.w
@@ -137,9 +135,5 @@
     mad r0.yzw, r0.y, r1.xxyz, c67.xxyz
     mad o6.xyz, r0.yzww, r0.x, c65
     mov o1.xy, v1
-    mov r20.x, c8.w
-    add r20.x, r20.x, c9.w
-    add r20.x, r20.x, c10.w
-    add o10.y, r20.x, c11.w
-    
+
 // approximately 80 instruction slots used

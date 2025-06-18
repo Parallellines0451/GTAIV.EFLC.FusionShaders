@@ -3,7 +3,6 @@
 //
 // Parameters:
 //
-//   float4 NearFarPlane;
 //   sampler2D StippleTexture;
 //   sampler2D TextureSampler;
 //   float emissiveMultiplier;
@@ -25,7 +24,6 @@
 //
 //   Name                Reg   Size
 //   ------------------- ----- ----
-//   NearFarPlane        c128     1
 //   gViewInverse        c12      1
 //   gDirectionalLight   c17      1
 //   gDirectionalColour  c18      1
@@ -45,13 +43,13 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 5.4230250569e-43 // 387
-    def c127, 1, 0.99, 0, 0 // LogDepth constants
     def c140, 1e-6, 0.5, -0.0625, 0.9375
     def c141, 0.6, 4, 1, 30
     def c142, 1000, 0, 0, 0
     def c0, 0, -1, -0, 9.99999975e-006
     def c1, -0.5, 0.5, 1.33333337, 9.99999975e-005
     def c2, 3.99600005, 4, 0.125, 0.25
+    def c11, 0.99, 0, 0, 0
     dcl_texcoord v0.xy
     dcl_texcoord1 v1
     dcl_texcoord3 v2.xyz
@@ -167,24 +165,15 @@
       lrp oC0.xyz, r20.x, r22, r0
     endif
     
-    // LogDepth Write (emissive)
-    if_ne v9.y, c127.x
-      mov r20.x, c127.y
-      mad r20.x, r20.x, c209.y, -v9.w
-      texkill r20.x
-      rcp r20.x, c209.x
-      add r20.y, c209.x, v9.x
-      rcp r20.y, r20.y
-      mul r20.y, r20.y, v9.w
-      mul r20.x, r20.x, c209.y
-      log r20.x, r20.x
-      log r20.y, r20.y
-      rcp r20.x, r20.x
-      mul r20.x, r20.x, r20.y
-    else
-      rcp r20.x, v9.w
-      mul r20.x, r20.x, v9.z
-    endif
-    mov oDepth, r20.x
+    // LogDepth Write - Emissive
+    mul r19.z, c209.z, c209.w
+    mad r19.z, r19.z, c11.x, -v9.w
+    texkill r19.z
+    mul r19.x, v9.w, v9.x
+    log r19.x, r19.x
+    mul r19.x, r19.x, c209.y
+    rcp r19.y, v9.w
+    mul r19.y, r19.y, v9.z
+    cmp oDepth, -v9_abs.y, r19.y, r19.x
 
 // approximately 60 instruction slots used (3 texture, 57 arithmetic)

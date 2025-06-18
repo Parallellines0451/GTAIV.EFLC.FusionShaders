@@ -41,10 +41,8 @@
     texld r0, v0, s1
     
     // LogDepth Read
-    rcp r20.x, c128.x
-    mul r20.x, r20.x, c128.y
-    pow r20.x, r20.x, r0.x
-    mul r0.y, r20.x, c128.x
+    pow r19.x, c209.z, r0.x
+    mul r0.y, r19.x, c209.w
     
     if_ne -c210_abs.y, c210_abs.y // make depth of field radial alongside fog
       mad r20.xyz, v1, -r0.y, c5.x
