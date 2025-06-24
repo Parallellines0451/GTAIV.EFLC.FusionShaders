@@ -54,7 +54,7 @@
     nrm r2.xyz, r1
     dp3 r0.y, r2, v0
     
-    if_eq -c210_abs.y, c210_abs.y
+    if_eq -c210_abs.z, c210_abs.z
       mov r1.z, c0.z
       mad r0.w, c66.x, -r1.z, r0.y
       cmp r0.w, r0.w, c1.x, c1.y

@@ -141,7 +141,7 @@
     endif
     mov r0.x, c220.x
     mul r0.x, r0.x, c219.x
-    mov r3.x, c236_abs.y
+    mov r3.x, c236_abs.z
     lrp r1.x, r3.x, c5.x, c5.y
     mul r0.x, r0.x, r1.x
     mul r0.yzw, r2.xxyz, r0.x

@@ -54,7 +54,7 @@
     nrm r2.xyz, r1
     dp3 r0.w, r2, v0
     
-    if_eq -c210_abs.y, c210_abs.y
+    if_eq -c210_abs.z, c210_abs.z
       mul r0.w, r0.w, r0.w
       mul r1.x, c66.x, c66.x
       rcp r1.x, r1.x

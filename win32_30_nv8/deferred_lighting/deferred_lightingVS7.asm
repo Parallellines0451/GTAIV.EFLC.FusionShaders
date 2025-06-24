@@ -40,7 +40,8 @@
     def c0, -4, 0.159154937, 0.5, 1
     def c1, 6.28318548, -3.14159274, -1.57079637, 1.57079637
     def c2, 9.99999975e-005, -2, 9.99999975e-006, 0.662
-    def c3, 0.25, 0.85, 0.662, 0
+    def c3, 0.25, 0, 0, 0
+    def c5, 0.85, 0.662, 0, 0
     def c140, 1e-6, 0.5, -0.0625, 0.9375
     def c141, 0.6, 4, 1, 30
     dcl_position v0
@@ -128,8 +129,8 @@
     endif
     mov r0.x, c213.x
     mul r0.x, r0.x, c212.x
-    mov r3.x, c236_abs.y
-    lrp r1.x, r3.x, c3.y, c3.z
+    mov r3.x, c236_abs.z
+    lrp r1.x, r3.x, c5.x, c5.y
     mul r0.x, r0.x, r1.x
     mad r0.xyz, r2, r0.x, c209
     mul r1, r0.y, c9
