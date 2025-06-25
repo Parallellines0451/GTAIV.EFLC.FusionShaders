@@ -121,7 +121,7 @@
       rcp r0.y, r0.y
       mul r6.y, r5.y, r0.y
       add r0.yz, -r4, r6.xxyw
-      mov r20.x, c221.z
+      mov r20.x, c222.w
       mul_sat r20.x, r20.x, c80.x
       mul r0.yz, r0, r20.x // fix motion blur at high fps
       mul r4.xy, r0.yzzw, c5.z
