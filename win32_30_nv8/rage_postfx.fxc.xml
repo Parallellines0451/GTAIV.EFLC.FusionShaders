@@ -31,16 +31,11 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rage_postfx\rage_postfxPS1.asm</File>
-				<Variables value="2" >
+				<Variables value="1" >
 					<Item>
 						<Type>sampler</Type>
 						<Name>HDRSampler</Name>
 						<Index value="0" />
-					</Item>
-					<Item>
-						<Type>float4</Type>
-						<Name>TexelSize</Name>
-						<Index value="66" />
 					</Item>
 				</Variables>
 			</Item>

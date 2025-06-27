@@ -18,7 +18,7 @@
     ps_3_0
     def c14, 0.0036, -1.76, 0.0625, 1
     // Small kernel from https://github.com/Unity-Technologies/PostProcessing/blob/v2/PostProcessing/Shaders/Builtins/DiskKernels.hlsl
-    def c15, 0, 0, 0.54545456, 0
+    def c15, 0.54545456, 0, 0, 0
     def c16, 0.16855472, 0.5187581, -0.44128203, 0.3206101
     def c17, -0.44128197, -0.3206102, 0.1685548, -0.5187581
     def c18, 1, 0, 0.809017, 0.58778524
@@ -30,58 +30,126 @@
     dcl_texcoord v0.xy
     dcl_2d s8
     
-    mov r20.x, c44.y
-    mad r20.x, r20.x, c14.x, c14.y
-    mul_sat r20, r20.x, c44.zwzw
+    mov r0.x, c44.y
+    mad r0.x, r0.x, c14.x, c14.y
+    mul_sat r0.xy, r0.x, c44.zwzw
     
-    mad r22, r20, c15, v0.xyxy
-    texld r21.xyz, r22.xy, s8
-    texld r23.xyz, r22.zw, s8
-    add r21.xyz, r21, r23
+    mad r2.xy, r0.xyxy, c15, v0.xyxy
+    texld r18.xyz, v0.xy, s8
+    texld r3.xyz, r2.xy, s8
+    add r1.xyz, r18, r3
     
-    mad r22, r20, c16, v0.xyxy
-    texld r23.xyz, r22.xy, s8
-    add r21.xyz, r21, r23
-    texld r23.xyz, r22.zw, s8
-    add r21.xyz, r21, r23
+    mad r2, r0.xyxy, c16, v0.xyxy
+    texld r4.xyz, r2.xy, s8
+    add r1.xyz, r1, r4
+    texld r5.xyz, r2.zw, s8
+    add r1.xyz, r1, r5
     
-    mad r22, r20, c17, v0.xyxy
-    texld r23.xyz, r22.xy, s8
-    add r21.xyz, r21, r23
-    texld r23.xyz, r22.zw, s8
-    add r21.xyz, r21, r23
+    mad r2, r0.xyxy, c17, v0.xyxy
+    texld r6.xyz, r2.xy, s8
+    add r1.xyz, r1, r6
+    texld r7.xyz, r2.zw, s8
+    add r1.xyz, r1, r7
     
-    mad r22, r20, c18, v0.xyxy
-    texld r23.xyz, r22.xy, s8
-    add r21.xyz, r21, r23
-    texld r23.xyz, r22.zw, s8
-    add r21.xyz, r21, r23
+    mad r2, r0.xyxy, c18, v0.xyxy
+    texld r8.xyz, r2.xy, s8
+    add r1.xyz, r1, r8
+    texld r9.xyz, r2.zw, s8
+    add r1.xyz, r1, r9
     
-    mad r22, r20, c19, v0.xyxy
-    texld r23.xyz, r22.xy, s8
-    add r21.xyz, r21, r23
-    texld r23.xyz, r22.zw, s8
-    add r21.xyz, r21, r23
+    mad r2, r0.xyxy, c19, v0.xyxy
+    texld r10.xyz, r2.xy, s8
+    add r1.xyz, r1, r10
+    texld r11.xyz, r2.zw, s8
+    add r1.xyz, r1, r11
     
-    mad r22, r20, c20, v0.xyxy
-    texld r23.xyz, r22.xy, s8
-    add r21.xyz, r21, r23
-    texld r23.xyz, r22.zw, s8
-    add r21.xyz, r21, r23
+    mad r2, r0.xyxy, c20, v0.xyxy
+    texld r12.xyz, r2.xy, s8
+    add r1.xyz, r1, r12
+    texld r13.xyz, r2.zw, s8
+    add r1.xyz, r1, r13
     
-    mad r22, r20, c21, v0.xyxy
-    texld r23.xyz, r22.xy, s8
-    add r21.xyz, r21, r23
-    texld r23.xyz, r22.zw, s8
-    add r21.xyz, r21, r23
+    mad r2, r0.xyxy, c21, v0.xyxy
+    texld r14.xyz, r2.xy, s8
+    add r1.xyz, r1, r14
+    texld r15.xyz, r2.zw, s8
+    add r1.xyz, r1, r15
     
-    mad r22, r20, c22, v0.xyxy
-    texld r23.xyz, r22.xy, s8
-    add r21.xyz, r21, r23
-    texld r23.xyz, r22.zw, s8
-    add r21.xyz, r21, r23
+    mad r2, r0.xyxy, c22, v0.xyxy
+    texld r16.xyz, r2.xy, s8
+    add r1.xyz, r1, r16
+    texld r17.xyz, r2.zw, s8
+    add r1.xyz, r1, r17
     
-    mul oC0.xyz, r21, c14.z
+    mul r1.xyz, r1, c14.z // blurred
+    
+    // subtract blurred result from each sample
+    
+    add r3.xyz, r3, -r1
+    max r3.xyz, r3, c15.w
+    
+    add r4.xyz, r4, -r1
+    max r4.xyz, r4, c15.w
+    add r3.xyz, r3, r4
+    
+    add r5.xyz, r5, -r1
+    max r5.xyz, r5, c15.w
+    add r3.xyz, r3, r5
+    
+    add r6.xyz, r6, -r1
+    max r6.xyz, r6, c15.w
+    add r3.xyz, r3, r6
+    
+    add r7.xyz, r7, -r1
+    max r7.xyz, r7, c15.w
+    add r3.xyz, r3, r7
+    
+    add r8.xyz, r8, -r1
+    max r8.xyz, r8, c15.w
+    add r3.xyz, r3, r8
+    
+    add r9.xyz, r9, -r1
+    max r9.xyz, r9, c15.w
+    add r3.xyz, r3, r9
+    
+    add r10.xyz, r10, -r1
+    max r10.xyz, r10, c15.w
+    add r3.xyz, r3, r10
+    
+    add r11.xyz, r11, -r1
+    max r11.xyz, r11, c15.w
+    add r3.xyz, r3, r11
+    
+    add r12.xyz, r12, -r1
+    max r12.xyz, r12, c15.w
+    add r3.xyz, r3, r12
+    
+    add r13.xyz, r13, -r1
+    max r13.xyz, r13, c15.w
+    add r3.xyz, r3, r13
+    
+    add r14.xyz, r14, -r1
+    max r14.xyz, r14, c15.w
+    add r3.xyz, r3, r14
+    
+    add r15.xyz, r15, -r1
+    max r15.xyz, r15, c15.w
+    add r3.xyz, r3, r15
+    
+    add r16.xyz, r16, -r1
+    max r16.xyz, r16, c15.w
+    add r3.xyz, r3, r16
+    
+    add r17.xyz, r17, -r1
+    max r17.xyz, r17, c15.w
+    add r3.xyz, r3, r17
+    
+    add r18.xyz, r18, -r1
+    max r18.xyz, r18, c15.w
+    add r3.xyz, r3, r18
+    
+    mad oC0.xyz, r3, c14.z, r1
+    
     mov oC0.w, c14.w
 
 // approximately 176 instruction slots used (14 texture, 162 arithmetic)
