@@ -19,19 +19,18 @@
 
     ps_3_0
     def c219, 1.8395173895e+25, 3.9938258725e+24, 4.5435787456e+30, 1.1364530546e-42 // 811
-    def c0, 0.08679773312394798, 0.0806253653375467, 0.0712976147405748, 0.060023213518740355
-    def c1, 0.048106698950546575, 0.03670572764175526, 0.02666264395010881, 0.01843795448161546
-    def c2, 0.012138411713396881, 0.007607651979998742, 0.0045392041505560145, 0.0025783998687757084
+    def c0, 0.08134568504722359, 0.07631773197960531, 0.06861857776497082, 0.059126718502383165 // 4.84 sigma
+    def c1, 0.04882618494284999, 0.038641056110215614, 0.029307031888653183, 0.021302008818731413
+    def c2, 0.014838655087075983, 0.009905891182752114, 0.0063374981526437705, 0.0038856896664016282
     def c3, 1, 2, 3, 0
     def c4, 4, 5, 6, 0
     def c5, 7, 8, 9, 0
     def c6, 10, 11, 12, 0
-    def c7, 0.0018518, 0.08895876108487324, 0, 0
-    def c8, 0.26182409186500555, 0.21135679370498187, 0.11116507019085924, 0.038077832469092236
-    def c9, 0.008488257702563926, 0, 0, 0
+    def c7, 0.0018518, 0.08309454171298661, 0, 0
+    def c8, 0.2734375, 0.21875, 0.109375, 0.03125 // binomial
+    def c9, 0.00390625, 0, 0, 0
     dcl_texcoord v0.xy
     dcl_2d s0
-    texld r0, v0, s0 // center sample
     mul r1.xy, c44.yy, c44.zw
     mul r1.xy, r1.xy, c7.x
     
@@ -53,7 +52,9 @@
     texld r9.xyz, r2, s0
     mad r2.xy, r1.xy, -c4.wx, v0.xy
     texld r2.xyz, r2, s0
-    mul r0, r0, c8.x
+    texld r10, v0, s0 // center sample
+    
+    mul r0, r10, c8.x
     mad r0, r3, c8.y, r0
     mad r0, r4, c8.y, r0
     mad r0, r5, c8.z, r0
@@ -71,29 +72,29 @@
     max r3.xyz, r3, c7.w
     mad r2.xyz, r3, c0.x, r2
     
-    add r4.xyz, r4, -r0
-    max r4.xyz, r4, c7.w
-    mad r2.xyz, r4, c0.y, r2
+    add r3.xyz, r4, -r0
+    max r3.xyz, r3, c7.w
+    mad r2.xyz, r3, c0.y, r2
     
-    add r5.xyz, r5, -r0
-    max r5.xyz, r5, c7.w
-    mad r2.xyz, r5, c0.y, r2
+    add r3.xyz, r5, -r0
+    max r3.xyz, r3, c7.w
+    mad r2.xyz, r3, c0.y, r2
     
-    add r6.xyz, r6, -r0
-    max r6.xyz, r6, c7.w
-    mad r2.xyz, r6, c0.z, r2
+    add r3.xyz, r6, -r0
+    max r3.xyz, r3, c7.w
+    mad r2.xyz, r3, c0.z, r2
     
-    add r7.xyz, r7, -r0
-    max r7.xyz, r7, c7.w
-    mad r2.xyz, r7, c0.z, r2
+    add r3.xyz, r7, -r0
+    max r3.xyz, r3, c7.w
+    mad r2.xyz, r3, c0.z, r2
     
-    add r8.xyz, r8, -r0
-    max r8.xyz, r8, c7.w
-    mad r2.xyz, r8, c0.w, r2
+    add r3.xyz, r8, -r0
+    max r3.xyz, r3, c7.w
+    mad r2.xyz, r3, c0.w, r2
     
-    add r9.xyz, r9, -r0
-    max r9.xyz, r9, c7.w
-    mad r3.xyz, r9, c0.w, r2
+    add r3.xyz, r9, -r0
+    max r3.xyz, r3, c7.w
+    mad r3.xyz, r3, c0.w, r2
     
     mad r2.xy, r1.xy, c4.wy, v0.xy
     texld r2.xyz, r2, s0
@@ -176,6 +177,10 @@
     add r2.xyz, r2, -r0
     max r2.xyz, r2, c7.w
     mad r3.xyz, r2, c2.w, r3
+    
+    add r2.xyz, r10, -r0
+    max r2.xyz, r2, c7.w
+    mad r3.xyz, r2, c7.y, r3 // also include center sample
     
     add oC0.xyz, r3, r0
     mov oC0.w, c7.w
