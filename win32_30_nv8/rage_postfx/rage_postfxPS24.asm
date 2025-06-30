@@ -177,7 +177,7 @@
     rcp r1.x, r0.w
     mul r1.x, r1.x, c81.x
     texld r2, v0, s4
-    if_eq -c217_abs.z, c217_abs.z // bloom threshold color shift
+    if_ge -c217.z, c217.z // bloom threshold color shift removal
       mad r1.xyz, r2, c66.x, -r1.x
       mul r2.xyz, r1, c81.z
       mul r2.xyz, r2, c2.x
