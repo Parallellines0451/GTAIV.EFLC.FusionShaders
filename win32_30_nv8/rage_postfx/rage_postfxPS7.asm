@@ -34,7 +34,7 @@
     mul r1.xy, c44.yy, c44.zw
     mul r1.xy, r1.xy, c7.x
     
-    // center blur
+    // smaller center blur
     
     mad r2.xy, r1.xy, c3.xw, v0.xy
     texld r3.xyz, r2, s0
@@ -52,6 +52,7 @@
     texld r9.xyz, r2, s0
     mad r2.xy, r1.xy, -c4.xw, v0.xy
     texld r2.xyz, r2, s0
+    
     texld r10, v0, s0 // center sample
     
     mul r0, r10, c8.x
@@ -64,37 +65,43 @@
     mad r0, r9, c9.x, r0
     mad r0, r2, c9.x, r0
     
-    add r2.xyz, r2, -r0
-    max r2.xyz, r2, c7.w
-    mul r2.xyz, r2, c0.x
+    // subtract center blur from each sample
     
     add r3.xyz, r3, -r0
     max r3.xyz, r3, c7.w
-    mad r2.xyz, r3, c0.x, r2
+    mul r3.xyz, r3, c0.x
     
-    add r3.xyz, r4, -r0
-    max r3.xyz, r3, c7.w
-    mad r2.xyz, r3, c0.y, r2
+    add r4.xyz, r4, -r0
+    max r4.xyz, r4, c7.w
+    mad r3.xyz, r4, c0.x, r3
     
-    add r3.xyz, r5, -r0
-    max r3.xyz, r3, c7.w
-    mad r2.xyz, r3, c0.y, r2
+    add r4.xyz, r5, -r0
+    max r4.xyz, r4, c7.w
+    mad r3.xyz, r4, c0.y, r3
     
-    add r3.xyz, r6, -r0
-    max r3.xyz, r3, c7.w
-    mad r2.xyz, r3, c0.z, r2
+    add r4.xyz, r6, -r0
+    max r4.xyz, r4, c7.w
+    mad r3.xyz, r4, c0.y, r3
     
-    add r3.xyz, r7, -r0
-    max r3.xyz, r3, c7.w
-    mad r2.xyz, r3, c0.z, r2
+    add r4.xyz, r7, -r0
+    max r4.xyz, r4, c7.w
+    mad r3.xyz, r4, c0.z, r3
     
-    add r3.xyz, r8, -r0
-    max r3.xyz, r3, c7.w
-    mad r2.xyz, r3, c0.w, r2
+    add r4.xyz, r8, -r0
+    max r4.xyz, r4, c7.w
+    mad r3.xyz, r4, c0.z, r3
     
-    add r3.xyz, r9, -r0
-    max r3.xyz, r3, c7.w
-    mad r3.xyz, r3, c0.w, r2
+    add r4.xyz, r9, -r0
+    max r4.xyz, r4, c7.w
+    mad r3.xyz, r4, c0.w, r3
+    
+    add r4.xyz, r2, -r0
+    max r4.xyz, r4, c7.w
+    mad r3.xyz, r4, c0.w, r3
+    
+    add r4.xyz, r10, -r0
+    max r4.xyz, r4, c7.w
+    mad r3.xyz, r4, c7.y, r3 // also include center sample, unlike vanilla
     
     mad r2.xy, r1.xy, c4.yw, v0.xy
     texld r2.xyz, r2, s0
@@ -177,10 +184,6 @@
     add r2.xyz, r2, -r0
     max r2.xyz, r2, c7.w
     mad r3.xyz, r2, c2.w, r3
-    
-    add r2.xyz, r10, -r0
-    max r2.xyz, r2, c7.w
-    mad r3.xyz, r2, c7.y, r3 // also include center sample
     
     add oC0.xyz, r3, r0
     mov oC0.w, c7.w
