@@ -71,38 +71,8 @@
     max r0.z, r0.x, r0.z // cutscene
     mul r1.w, r0.z, r0.z
     
-    mov r0.xy, c76
-    mad r0.xy, r0.xy, c4.w, v0.xy // fix pixel offset
+    texld r3, v0, s8
     
-    // fill kernel gaps
-    
-    mad r4, c76.xyxy, r3.xyzx, r0.xyxy
-    mad r6, c76.xyxy, r3.wzyw, r0.xyxy
-    texld r3.xyz, r4.xy, s8
-    texld r4.xyz, r4.zw, s8
-    texld r5.xyz, r6.xy, s8
-    texld r6.xyz, r6.zw, s8
-    add r2.xyz, r3, r4
-    add r2.xyz, r2, r5
-    add r2.xyz, r2, r6
-    mul r2.xyz, r2, c2.x
-    
-    add r3.xyz, r3, -r2
-    max r3.xyz, r3, c1.x
-    
-    add r4.xyz, r4, -r2
-    max r4.xyz, r4, c1.x
-    add r3.xyz, r3, r4
-    
-    add r5.xyz, r5, -r2
-    max r5.xyz, r5, c1.x
-    add r3.xyz, r3, r5
-    
-    add r6.xyz, r6, -r2
-    max r6.xyz, r6, c1.x
-    add r3.xyz, r3, r6
-    
-    mad r3.xyz, r3, c2.x, r2
     lrp oC0.xyz, r1.w, r3, r7
     mov oC0.w, c2.y
 
