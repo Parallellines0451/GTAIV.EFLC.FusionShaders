@@ -31,6 +31,7 @@
     mov r0.x, c44.y
     mad r0.x, r0.x, c3.y, c3.z
     mul_sat r0.xy, r0.x, c44.zw
+    mul r0.xy, r0, c221.z
     
     mad r0, r0.xyxy, c2.yyzz, r0.zwzw
     texld r1, r0.xy, s8
