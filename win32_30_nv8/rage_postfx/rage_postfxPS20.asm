@@ -145,7 +145,7 @@
       
       mov r20.x, c15.z
       mul r20.xy, r20.xz, c211.y     // hb, zb
-      mul r20.x, r20.x, c210.x       // high altitude density compensation
+      mul r20.x, r20.x, c211.w       // high altitude density compensation
       exp r20.x, -r20.x              // 2^(-hb)
       
       add r20.z, r20_abs.y, -c140.x
@@ -166,7 +166,6 @@
       
       cmp r20.y, -r1.x, c141.z, r20.x
       lrp r21.xyz, r20.y, r22, c43
-      lrp r21.xyz, c211.w, r21, r22
       lrp oC0.xyz, r20.x, r21, r1.yzw
     endif
     mov oC0.w, c1.y

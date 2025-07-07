@@ -480,7 +480,7 @@
       
       mov r20.x, c15.z
       mul r20.xy, r20.xz, c235.y
-      mul r20.x, r20.x, c236.x
+      mul r20.x, r20.x, c235.w
       exp r20.x, -r20.x
       
       sge r21.x, r20_abs.y, c140.x
@@ -500,7 +500,6 @@
       pow r20.x, r20.x, c235.z
       
       lrp r21.xyz, r20.x, r22, c43
-      lrp r21.xyz, c235.w, r21, r22
       mov o5.xyz, r21
       mov o5.w, r20.x
     endif

@@ -191,7 +191,7 @@
       
       mov r20.x, c15.z
       mul r20.xy, r20.xz, c235.y
-      mul r20.x, r20.x, c236.x
+      mul r20.x, r20.x, c235.w
       exp r20.x, -r20.x
       
       sge r21.x, r20_abs.y, c140.x

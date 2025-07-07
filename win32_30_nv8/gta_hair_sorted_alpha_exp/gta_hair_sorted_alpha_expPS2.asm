@@ -742,7 +742,7 @@
       
       mov r20.x, c15.z
       mul r20.xy, r20.xz, c211.y
-      mul r20.x, r20.x, c210.x
+      mul r20.x, r20.x, c211.w
       exp r20.x, -r20.x
       
       add r20.z, r20_abs.y, -c140.x
@@ -762,7 +762,6 @@
       pow r20.x, r20.x, c211.z
       
       lrp r21.xyz, r20.x, r22, c43
-      lrp r21.xyz, c211.w, r21, r22
       lrp r22.xyz, r20.x, r21, r0.xzw
       mov r0.xzw, r22.xxyz
     endif

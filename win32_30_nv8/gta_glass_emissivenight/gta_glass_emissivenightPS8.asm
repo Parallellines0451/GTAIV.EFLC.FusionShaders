@@ -143,7 +143,7 @@
       
       mov r20.x, -c15.z
       mul r20.xy, r20.xz, c211.y
-      mul r20.x, r20.x, c210.x
+      mul r20.x, r20.x, c211.w
       exp r20.x, -r20.x
       
       add r20.z, r20_abs.y, -c140.x
