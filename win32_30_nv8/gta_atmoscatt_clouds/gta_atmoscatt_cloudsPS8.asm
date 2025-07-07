@@ -155,9 +155,7 @@
     lrp_pp r2.yzw, r0.w, c75.xxyz, r1.xxyz
     mul_pp r0.w, r1.w, r2.x
     lrp_pp r1.xyz, r0.w, r2.yzww, r0
-    mul r2.xyz, r0, c81.x // r0.xyz = sky color + sun
-    min r2.xyz, r2, c83
-    mad oC1.xyz, -r0.w, r2, r2 // (1.0 - cloudmask) * skycolor
+    add oC1.xyz, c1.y, -r0.w // output cloud mask for sun shafts
     mov oC1.w, c1.y
     mul_pp r0.xyz, r1, c81.x
     min_pp r1.xyz, r0, c83
