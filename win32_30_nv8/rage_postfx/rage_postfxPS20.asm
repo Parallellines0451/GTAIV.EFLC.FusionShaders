@@ -58,9 +58,13 @@
     add r0.x, -r0.x, c1.y
     cmp r1.x, r0.w, c1.z, c1.y
     mov r2.xz, c1
+    
     mad r20.x, v1.z, -r0.y, c15.z
+    cmp r20.y, r20.x, c1.y, c1.z
+    cmp r20.y, -r1.x, r20.y, c1.y // make sky underground black
     mul r20.x, r20.x, c210.y
-    cmp r0.w, r20.x, r0.w, c1.x // don't touch sky pixels below the horizon
+    cmp r0.w, r20.x, r0.w, c1.x // disable near fog factor influence on the sky under the map if vol fog is enabled
+    
     cmp r0.w, r0.w, c41.w, r2.z
     mul r0.x, r0.x, r1.x
     add r1.yz, r2.x, c16.xxyw
@@ -94,6 +98,8 @@
       mul r0.x, r1.x, r0.x
       mad oC0.xyz, r0.x, r2, r1.yzww
     else // https://www.desmos.com/calculator/8zvekzvd3j
+      mul r1.yzw, r1, r20.y
+    
       mad r20.xyz, v1, -r0.y, c140.x
       add r21.x, r20.z, c15.z
       dp3 r20.w, r20, r20
