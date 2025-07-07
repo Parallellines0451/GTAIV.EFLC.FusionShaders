@@ -411,7 +411,22 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_atmoscatt_clouds\gta_atmoscatt_cloudsPS1.asm</File>
-				<Variables value="24" >
+				<Variables value="27" >
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalFogParams</Name>
+						<Index value="41" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalFogColorN</Name>
+						<Index value="43" />
+					</Item>
 					<Item>
 						<Type>float</Type>
 						<Name>CloudBias</Name>
@@ -862,7 +877,22 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_atmoscatt_clouds\gta_atmoscatt_cloudsPS7.asm</File>
-				<Variables value="33" >
+				<Variables value="36" >
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalFogParams</Name>
+						<Index value="41" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalFogColorN</Name>
+						<Index value="43" />
+					</Item>
 					<Item>
 						<Type>float</Type>
 						<Name>CloudBias</Name>
@@ -1033,7 +1063,22 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_atmoscatt_clouds\gta_atmoscatt_cloudsPS8.asm</File>
-				<Variables value="25" >
+				<Variables value="28" >
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalFogParams</Name>
+						<Index value="41" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalFogColorN</Name>
+						<Index value="43" />
+					</Item>
 					<Item>
 						<Type>float</Type>
 						<Name>CloudBias</Name>
@@ -1164,7 +1209,22 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>gta_atmoscatt_clouds\gta_atmoscatt_cloudsPS9.asm</File>
-				<Variables value="34" >
+				<Variables value="37" >
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScreenSize</Name>
+						<Index value="44" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalFogParams</Name>
+						<Index value="41" />
+					</Item>
+					<Item>
+						<Type>float4</Type>
+						<Name>globalFogColorN</Name>
+						<Index value="43" />
+					</Item>
 					<Item>
 						<Type>float</Type>
 						<Name>CloudBias</Name>
