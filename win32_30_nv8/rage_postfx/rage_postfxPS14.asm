@@ -64,6 +64,7 @@
     def c4, -0.5, -1.5, 1.5, 0.5
     def c5, 2, -1, 0.125, 0
     def c6, 1.10000002, 0, 0, 0
+    def c7, 0.299, 0.587, 0.114, 0
     
     def c10, 31, 0.5, 0.0009765625, 0.03125
     def c11, 0.003921568627, 0.0019607843137, 0.996078, 0.00196078
@@ -294,7 +295,8 @@
     dp2add r1.x, r1.xy, c118.xy, c118.w
     frc r1.x, r1.x
     mad r1.x, r1.x, c11.x, -c11.y
-    add oC0.xyz, r0, r1.x
-    mov oC0.w, c2.y
+    add r0.xyz, r0, r1.x
+    mov oC0.xyz, r0
+    dp3 oC0.w, r0, c7 // compute luma for FXAA
 
 // approximately 176 instruction slots used (14 texture, 162 arithmetic)
