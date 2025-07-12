@@ -38,7 +38,6 @@
     
     mul r0.xy, c44.y, c44.zw
     mul r0.xy, r0, c14.y
-    mul r0.xy, r0, c221.z
     
     texld r27.xyz, r0.zw, s8
     
