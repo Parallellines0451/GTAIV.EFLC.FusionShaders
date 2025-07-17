@@ -69,8 +69,8 @@
     mad r1.xyz, r1, c39.z, r2
     mov r1.w, c1.y
     mul r1, r0, r1
-    add r20.x, r1.w, -c151.x
-    texkill r20.x
+    add r20, r1.w, -c151.x
+    texkill r20
     mul r0.w, r1.w, c39.x
     mul r0.xyz, r0, v2
     mad r0.xyz, r0, c66.x, r1
@@ -150,8 +150,8 @@
     
     // LogDepth Write - Emissive
     mul r19.z, c209.z, c209.w
-    mad r19.z, r19.z, c11.x, -v9.w
-    texkill r19.z
+    mad r19, r19.z, c11.x, -v9.w
+    texkill r19
     mul r19.x, v9.w, v9.x
     log r19.x, r19.x
     mul r19.x, r19.x, c209.y

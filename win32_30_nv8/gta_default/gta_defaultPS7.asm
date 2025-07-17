@@ -61,8 +61,8 @@
     mad r1.xyz, r1, v3.x, r2
     mov r1.w, c1.z
     mul r2, r0, r1
-    add r20.x, r2.w, -c151.x
-    texkill r20.x
+    add r20, r2.w, -c151.x
+    texkill r20
     mul r0.w, r2.w, c39.x
     add r1.w, -c41.x, v1.w
     add r2.w, -c41.x, c41.y

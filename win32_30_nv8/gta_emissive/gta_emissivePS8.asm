@@ -46,8 +46,8 @@
     dcl_2d s10
     texld r0, v0, s0
     mul r0.w, r0.w, v2.w
-    add r20.x, r0.w, -c151.x
-    texkill r20.x
+    add r20, r0.w, -c151.x
+    texkill r20
     mul r0.w, r0.w, c39.x
     mul r0.xyz, r0, v2
     mul r1.xyz, r0, c66.x
@@ -128,8 +128,8 @@
     
     // LogDepth Write - Emissive
     mul r19.z, c209.z, c209.w
-    mad r19.z, r19.z, c11.x, -v9.w
-    texkill r19.z
+    mad r19, r19.z, c11.x, -v9.w
+    texkill r19
     mul r19.x, v9.w, v9.x
     log r19.x, r19.x
     mul r19.x, r19.x, c209.y

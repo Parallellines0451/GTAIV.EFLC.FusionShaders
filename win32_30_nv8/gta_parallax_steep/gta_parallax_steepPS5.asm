@@ -34,8 +34,8 @@
     mul r20.x, r20.x, c118.z
     frc r20.x, r20.x
     mad r20.y, r20.x, c150.x, c150.y
-    add r20.y, -r20.y, r0.x
-    texkill r20.y
+    add r20, -r20.y, r0.x
+    texkill r20
     mov oC0.xyz, v0.x
     mov oC0.w, r0.x
 

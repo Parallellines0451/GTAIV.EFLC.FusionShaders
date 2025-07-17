@@ -65,8 +65,8 @@
     mad r1.xyz, r1, v3.x, r4
     mov r1.w, c1.z
     mul r0, r0, r1
-    add r20.x, r0.w, -c151.x
-    texkill r20.x
+    add r20, r0.w, -c151.x
+    texkill r20
     mul r0.w, r0.w, c39.x
     add r1.xyz, c0.y, v2
     nrm r4.xyz, r1

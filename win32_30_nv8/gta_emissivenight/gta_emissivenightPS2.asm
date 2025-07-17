@@ -50,8 +50,8 @@
     
     // LogDepth Write - Emissive
     mul r19.z, c209.z, c209.w
-    mad r19.z, r19.z, c11.x, -v9.w
-    texkill r19.z
+    mad r19, r19.z, c11.x, -v9.w
+    texkill r19
     mul r19.x, v9.w, v9.x
     log r19.x, r19.x
     mul r19.x, r19.x, c209.y

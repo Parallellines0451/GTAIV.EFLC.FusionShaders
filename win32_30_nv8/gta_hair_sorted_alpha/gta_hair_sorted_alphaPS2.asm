@@ -628,8 +628,8 @@
     mad r20, r20.xxyy, -c153.y, c153.zwzw
     mul r20, r20.xxyy, r20.zwzw
     dp4 r20.x, r20_abs, c152.xzwy
-    add r20.y, -r20.x, r0.y
-    texkill r20.y
+    add r20, -r20.x, r0.y
+    texkill r20
     add r3.xyz, c0.z, v2
     nrm r15.xyz, r3
     dp3 r1.w, -r15, r2

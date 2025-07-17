@@ -74,8 +74,8 @@
     mad r20, r20.xxyy, -c153.y, c153.zwzw
     mul r20, r20.xxyy, r20.zwzw
     dp4 r20.x, r20_abs, c152.xzwy
-    add r20.y, -r20.x, c39.x
-    texkill r20.y
+    add r20, -r20.x, c39.x
+    texkill r20
     texld r0, r3.yzzw, s0
     add r1.xy, r2, c1.z
     mul r1.xy, r1, c74.x

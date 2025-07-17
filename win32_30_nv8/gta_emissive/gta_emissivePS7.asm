@@ -40,8 +40,8 @@
     texkill r0
     texld r0, v0, s0
     mul r0.w, r0.w, v3.w
-    add r20.x, r0.w, -c151.x
-    texkill r20.x
+    add r20, r0.w, -c151.x
+    texkill r20
     mul r0.w, r0.w, c39.x
     mul r0.xyz, r0, v3
     mul r1.xyz, r0, c66.x

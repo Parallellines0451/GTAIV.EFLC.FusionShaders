@@ -66,8 +66,8 @@
     mad r1.xyz, r1, v2.x, r2
     mov r1.w, c1.y
     mul r2, r0, r1
-    add r20.x, r2.w, -c151.x
-    texkill r20.x
+    add r20, r2.w, -c151.x
+    texkill r20
     mul r0.w, r2.w, c39.x
     if_eq -c210_abs.y, c210_abs.y
       add r1.w, -c41.x, v1.w

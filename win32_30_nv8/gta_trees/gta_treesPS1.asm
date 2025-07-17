@@ -41,8 +41,8 @@
     mad r20, r20.xxyy, -c153.y, c153.zwzw
     mul r20, r20.xxyy, r20.zwzw
     dp4 r20.x, r20_abs, c152.xzwy
-    add r20.y, -r20.x, r0.w
-    texkill r20.y
+    add r20, -r20.x, r0.w
+    texkill r20
     mov oC0, r0
     mad oC1, v1.xyzx, c1.wwwx, c1.wwwz
     mov oC2, c1.xwwx
