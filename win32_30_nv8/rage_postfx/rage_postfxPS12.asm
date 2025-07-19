@@ -64,7 +64,6 @@
     def c4, -0.5, -1.5, 1.5, 0.5
     def c5, 2, -1, 0.125, 0
     def c6, 1.10000002, 0, 0, 0
-    def c7, 0.299, 0.587, 0.114, 0
     
     def c10, 31, 0.5, 0.0009765625, 0.03125
     def c11, 0.003921568627, 0.0019607843137, 0.996078, 0.00196078
@@ -82,6 +81,7 @@
     def c24, -0.10208, 1.10813, -0.00605, 0
     def c25, -0.00327, -0.07276, 1.07602, 0
     def c26, 0.983729, 0.4329510, 1.8, 0
+    def c27, -3.0826817113, 0.544567105331, -0.532, 0
     
     def c118, 0.75487766, 0.56984029, 0, 0
     
@@ -167,7 +167,7 @@
     rcp r1.x, r0.w
     mul r1.x, r1.x, c81.x
     texld r2, v0, s4
-    if_ge -c217.z, c217.z // bloom threshold color shift removal
+    if_eq -c217_abs.w, c217_abs.w // bloom threshold color shift removal
       mad r1.xyz, r2, c66.x, -r1.x
       mul r2.xyz, r1, c81.z
       mul r2.xyz, r2, c2.x
@@ -204,9 +204,9 @@
     
     if_ne -c217_abs.z, c217_abs.z
       mad r1.xyz, r0, c14.x, c14.y
-      log r1.x, r1.x
-      log r1.y, r1.y
-      log r1.z, r1.z
+      log r1.x, r1_abs.x
+      log r1.y, r1_abs.y
+      log r1.z, r1_abs.z
       mul r1.xyz, r1, c14.z
       exp r1.x, r1.x
       exp r1.y, r1.y
@@ -214,16 +214,14 @@
       mul r2.xyz, r0, c14.w
       add r0.xyz, r0, c15.x
       cmp r0.xyz, r0, r1, r2
-      if_gt -c217.z, c217.z // jodieRoboTonemap from: https://www.shadertoy.com/view/4dBcD1
-        dp3 r0.w, r0, c1.yzw
-        mad r1, r0, r0, c2.y
-        rsq r1.x, r1.x
-        rsq r1.y, r1.y
-        rsq r1.z, r1.z
-        rsq r1.w, r1.w
-        mul r2.xyz, r0, r1
-        mul r1.xyz, r0, r1.w
-        lrp_sat r0.xyz, r2, r2, r1
+      if_gt -c217.z, c217.z // Modified Uchimura from: https://github.com/dmnsgn/glsl-tone-map/blob/main/uchimura.glsl
+        mad r1.xyz, r0, c27.x, c27.y
+        exp r1.x, r1.x
+        exp r1.y, r1.y
+        exp r1.z, r1.z
+        add r1.xyz, c2.y, -r1
+        add r2.xyz, r0, c27.z
+        cmp r0.xyz, r2, r1, r0
       else // ACES from: https://github.com/TheRealMJP/BakingLab/blob/master/BakingLab/ACES.hlsl
         mul r0.xyz, r0.xyz, c26.z
         m3x3 r1.xyz, r0, c20
@@ -235,11 +233,11 @@
         rcp r1.y, r1.y
         rcp r1.z, r1.z
         mul r1.xyz, r0, r1
-        m3x3_sat r0.xyz, r1, c23
+        m3x3 r0.xyz, r1, c23
       endif
-      log r1.x, r0.x
-      log r1.y, r0.y
-      log r1.z, r0.z
+      log r1.x, r0_abs.x
+      log r1.y, r0_abs.y
+      log r1.z, r0_abs.z
       mul r1.xyz, r1, c15.y
       exp r1.x, r1.x
       exp r1.y, r1.y
@@ -250,13 +248,11 @@
       cmp r0.xyz, r0, r1, r2
     endif
     
-    mov_sat r0.xyz, r0
-    
     // XBOX Color Curve: https://www.desmos.com/calculator/z1ezuvkg9v
     if_ne -c222_abs.z, c222_abs.z
-      log r1.x, r0.x
-      log r1.y, r0.y
-      log r1.z, r0.z
+      log r1.x, r0_abs.x
+      log r1.y, r0_abs.y
+      log r1.z, r0_abs.z
       mul r1.xyz, r1, c12.x
       exp r1.x, r1.x
       exp r1.y, r1.y
@@ -268,17 +264,11 @@
       mad r1.xyz, r1, -r2, r1
       mad_sat r2.xyz, r0, c12.z, c12.w
       mul r3.xyz, r0, c13.x
-      lrp_sat r0.xyz, r2, r1, r3
-      
-      // 1D Lookup table
-      // mov r1.w, c1.x
-      // mad r1.xyz, r0, c11.z, c11.w
-      // texldl r0.x, r1.xwww, s10.x
-      // texldl r0.y, r1.ywww, s10.x
-      // texldl r0.z, r1.zwww, s10.x
+      lrp r0.xyz, r2, r1, r3
     endif
     
     // 3D Lookup table, requires changing StippleTexture to linear clamp in gta_im
+    // mov_sat r0.xyz, r0
     // mad r1.xy, r0, c10.x, c10.y
     // mul r1.xy, r1, c10.zw
     // mul r1.z, r0.z, c10.x
@@ -297,6 +287,6 @@
     mad r1.x, r1.x, c11.x, -c11.y
     add r0.xyz, r0, r1.x
     mov oC0.xyz, r0
-    dp3 oC0.w, r0, c7 // compute luma for FXAA
+    dp3 oC0.w, r0, c1.yzw // compute luma for FXAA
 
 // approximately 176 instruction slots used (14 texture, 162 arithmetic)
