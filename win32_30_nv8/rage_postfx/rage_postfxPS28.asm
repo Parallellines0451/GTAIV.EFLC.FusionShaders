@@ -81,7 +81,7 @@
     def c24, -0.10208, 1.10813, -0.00605, 0
     def c25, -0.00327, -0.07276, 1.07602, 0
     def c26, 0.983729, 0.4329510, 1.8, 0
-    def c27, -3.0826817113, 0.544567105331, -0.532, 0
+    def c27, -1.80336880111, 0.0387456653349, -0.2, 0
     
     def c118, 0.75487766, 0.56984029, 0, 0
     
@@ -192,14 +192,20 @@
       mul r2.xyz, r0, c14.w
       add r0.xyz, r0, c15.x
       cmp r0.xyz, r0, r1, r2
-      if_gt -c217.z, c217.z // Modified Uchimura from: https://github.com/dmnsgn/glsl-tone-map/blob/main/uchimura.glsl
-        mad r1.xyz, r0, c27.x, c27.y
+      if_gt -c217.z, c217.z // Custom operator: https://www.desmos.com/calculator/7aeid7ven9
+        dp3 r0.w, r0, c1.yzw
+        mad r1, r0, c27.x, c27.y
         exp r1.x, r1.x
         exp r1.y, r1.y
         exp r1.z, r1.z
-        add r1.xyz, c2.y, -r1
-        add r2.xyz, r0, c27.z
-        cmp r0.xyz, r2, r1, r0
+        exp r1.w, r1.w
+        add r1, c2.y, -r1
+        add r2, r0, c27.z
+        cmp r1, r2, r1, r0
+        rcp r0.w, r0.w
+        mul r0.w, r0.w, r1.w
+        mul r2.xyz, r0, r0.w
+        lrp r0.xyz, r1.w, r1, r2
       else // ACES from: https://github.com/TheRealMJP/BakingLab/blob/master/BakingLab/ACES.hlsl
         mul r0.xyz, r0.xyz, c26.z
         m3x3 r1.xyz, r0, c20
