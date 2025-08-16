@@ -3,6 +3,7 @@
 //
 // Parameters:
 //
+//   sampler2D StippleTexture;
 //   sampler2D AdapLumSampler;
 //   sampler2D BloomSampler;
 //   sampler2D BlurSampler;
@@ -53,6 +54,7 @@
 //   AdapLumSampler               s5       1
 //   JitterSampler                s6       1
 //   StencilCopySampler           s7       1
+//   StippleTexture               s10      1
 //
 
     ps_3_0
@@ -71,17 +73,10 @@
     def c13, 0.546024, 0, 0, 0
     
     def c14, 0.94786729, 0.0521327, 2.4, 0.07739938
-    def c15, -0.04045, 0.41666666, 1.055, -0.055
-    def c16, 12.92, -0.0031308, 0, 0
+    def c15, -0.04045, 0, 0, 0
     
-    def c20, 0.59719, 0.35458, 0.04823, 0.0245786
-    def c21, 0.07600, 0.90834, 0.01566, -0.000090537
-    def c22, 0.02840, 0.13383, 0.83777, 0.238081
-    def c23, 1.60475, -0.53108, -0.07367, 0
-    def c24, -0.10208, 1.10813, -0.00605, 0
-    def c25, -0.00327, -0.07276, 1.07602, 0
-    def c26, 0.983729, 0.4329510, 1.8, 0
-    def c27, -1.80336880111, 0.0387456653349, -0.2, 0
+    def c20, 0.01, 0.159301757813, 18.8515625, 0.8359375
+    def c21, 18.6875, 1, 78.84375, 0
     
     def c118, 0.75487766, 0.56984029, 0, 0
     
@@ -95,7 +90,7 @@
     dcl_2d s5
     dcl_2d s6
     dcl_2d s7
-    // dcl_2d s10 // StippleTexture
+    dcl_2d s10 // StippleTexture set to linear clamp in gta_im
     texld r3, v0, s2
     
     // motion blur
@@ -158,7 +153,7 @@
       cmp r3.xyz, r1.w, r3, r0
     endif
     
-    // tonemap and color correction
+    // color correction
     texld r1, c1.x, s5
     rcp r0.w, r1.x
     mul r0.w, r0.w, c81.y
@@ -184,7 +179,7 @@
     endif
     mad r0.xyz, r3, c66.x, r1
     
-    // tonemap and color correction
+    // color correction
     mul r1.xyz, r0.w, r0
     dp3 r1.x, r1, c1.yzww
     mad r0.xyz, r0, r0.w, -r1.x
@@ -202,7 +197,9 @@
     pow r2.x, r1.x, r0.w
     mul r0.xyz, r0, r2.x
     
+    // Tone mapping
     if_ne -c217_abs.z, c217_abs.z
+      // SRGB -> Linear
       mad r1.xyz, r0, c14.x, c14.y
       log r1.x, r1_abs.x
       log r1.y, r1_abs.y
@@ -214,44 +211,43 @@
       mul r2.xyz, r0, c14.w
       add r0.xyz, r0, c15.x
       cmp r0.xyz, r0, r1, r2
-      if_gt -c217.z, c217.z // Custom operator: https://www.desmos.com/calculator/7aeid7ven9
-        dp3 r0.w, r0, c1.yzw
-        mad r1, r0, c27.x, c27.y
-        exp r1.x, r1.x
-        exp r1.y, r1.y
-        exp r1.z, r1.z
-        exp r1.w, r1.w
-        add r1, c2.y, -r1
-        add r2, r0, c27.z
-        cmp r1, r2, r1, r0
-        rcp r0.w, r0.w
-        mul r0.w, r0.w, r1.w
-        mul r2.xyz, r0, r0.w
-        lrp r0.xyz, r1.w, r1, r2
-      else // ACES from: https://github.com/TheRealMJP/BakingLab/blob/master/BakingLab/ACES.hlsl
-        mul r0.xyz, r0.xyz, c26.z
-        m3x3 r1.xyz, r0, c20
-        add r0.xyz, r1, c20.w
-        mad r0.xyz, r0, r1, c21.w
-        mad r2.xyz, r1, c26.x, c26.y
-        mad r1.xyz, r1, r2, c22.w
-        rcp r1.x, r1.x
-        rcp r1.y, r1.y
-        rcp r1.z, r1.z
-        mul r1.xyz, r0, r1
-        m3x3 r0.xyz, r1, c23
-      endif
-      log r1.x, r0_abs.x
-      log r1.y, r0_abs.y
-      log r1.z, r0_abs.z
-      mul r1.xyz, r1, c15.y
+
+      // Linear -> PQ
+      mul r1.xyz, r0, c210.x
+      log r1.x, r1_abs.x
+      log r1.y, r1_abs.y
+      log r1.z, r1_abs.z
+      mul r1.xyz, r1, c20.y
       exp r1.x, r1.x
       exp r1.y, r1.y
       exp r1.z, r1.z
-      mad r1.xyz, r1, c15.z, c15.w
-      mul r2.xyz, r0, c16.x
-      add r0.xyz, r0, c16.y
-      cmp r0.xyz, r0, r1, r2
+      mad r2.xyz, r1, c20.z, c20.w
+      mad r1.xyz, r1, c21.x, c21.y
+      rcp r1.x, r1.x
+      rcp r1.y, r1.y
+      rcp r1.z, r1.z
+      mul r1.xyz, r1, r2
+      log r1.x, r1_abs.x
+      log r1.y, r1_abs.y
+      log r1.z, r1_abs.z
+      mul r1.xyz, r1, c21.z
+      exp r0.x, r1.x
+      exp r0.y, r1.y
+      exp r0.z, r1.z
+
+      // LUT
+      mov_sat r0.xyz, r0
+      mad r1.xy, r0, c10.x, c10.y
+      mul r1.xy, r1, c10.zw
+      mul r1.z, r0.z, c10.x
+      frc r2.w, r1.z
+      add r1.z, r1.z, -r2.w
+      mad r1.x, r1.z, c10.w, r1.x
+      mov r1.zw, c1.x
+      texldl r2.xyz, r1, s10
+      add r1.x, r1.x, c10.w
+      texldl r1.xyz, r1, s10
+      lrp r0.xyz, r2.w, r1, r2
     endif
     
     // XBOX Color Curve: https://www.desmos.com/calculator/z1ezuvkg9v
@@ -272,19 +268,6 @@
       mul r3.xyz, r0, c13.x
       lrp r0.xyz, r2, r1, r3
     endif
-    
-    // 3D Lookup table, requires changing StippleTexture to linear clamp in gta_im
-    // mov_sat r0.xyz, r0
-    // mad r1.xy, r0, c10.x, c10.y
-    // mul r1.xy, r1, c10.zw
-    // mul r1.z, r0.z, c10.x
-    // frc r1.w, r1.z
-    // add r1.z, r1.z, -r1.w
-    // mad r1.x, r1.z, c10.w, r1.x
-    // texld r2.xyz, r1.xy, s10
-    // add r1.x, r1.x, c10.w
-    // texld r1.xyz, r1.xy, s10
-    // lrp r0.xyz, r1.w, r1, r2
     
     // dithering
     mul r1.xy, v0.xy, c44.xy

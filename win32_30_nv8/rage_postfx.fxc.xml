@@ -231,7 +231,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rage_postfx\rage_postfxPS11.asm</File>
-				<Variables value="23" >
+				<Variables value="24" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>AdapLumSampler</Name>
@@ -352,7 +357,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rage_postfx\rage_postfxPS12.asm</File>
-				<Variables value="23" >
+				<Variables value="24" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>AdapLumSampler</Name>
@@ -554,7 +564,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rage_postfx\rage_postfxPS14.asm</File>
-				<Variables value="23" >
+				<Variables value="24" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>AdapLumSampler</Name>
@@ -1279,7 +1294,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rage_postfx\rage_postfxPS24.asm</File>
-				<Variables value="23" >
+				<Variables value="24" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>AdapLumSampler</Name>
@@ -1491,7 +1511,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rage_postfx\rage_postfxPS26.asm</File>
-				<Variables value="23" >
+				<Variables value="24" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>AdapLumSampler</Name>
@@ -1663,7 +1688,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>rage_postfx\rage_postfxPS28.asm</File>
-				<Variables value="23" >
+				<Variables value="24" >
+					<Item>
+						<Type>sampler</Type>
+						<Name>StippleTexture</Name>
+						<Index value="10" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>AdapLumSampler</Name>

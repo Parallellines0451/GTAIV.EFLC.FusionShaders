@@ -493,11 +493,11 @@
 			<Name2>stippletexture</Name2>
 			<Annotation />
 			<Values value="10" >
-			MinFilter Point
-			MagFilter Point
-			MipFilter Point
-			AddressU Wrap
-			AddressV Wrap
+			MinFilter Linear
+			MagFilter Linear
+			MipFilter Linear
+			AddressU Clamp
+			AddressV Clamp
 		</Values>
 		</Item>
 		<Item>
