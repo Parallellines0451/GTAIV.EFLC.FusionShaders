@@ -181,10 +181,10 @@
     mov r5.xyz, c38
     mad r5.xyz, r5, r2.w, c37
     mul r6.xyz, c18.w, c18
-    dp3 r2.x, r2, -c17
     mul r22.xyz, r2.y, c61.xyww
     mad r22.xyz, r2.x, c60.xyww, r22
     mad r22.xyz, r2.z, c62.xyww, r22
+    dp3 r2.x, r2, -c17
     // add r2.x, r2.x, c3.w
     // mul_sat r2.x, r2.x, c0.x
     mad_sat r2.x, r2.x, c220.z, c220.w
