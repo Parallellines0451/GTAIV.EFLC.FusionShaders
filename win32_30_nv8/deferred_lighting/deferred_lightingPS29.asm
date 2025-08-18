@@ -15,6 +15,7 @@
 //   float3 gDeferredLightTangent;
 //   float4 gDeferredProjParams;
 //   row_major float4x4 gViewInverse;
+//   float4 globalScalars2;
 //   float4 gooDeferredLightScreenSize;
 //
 //
@@ -23,6 +24,7 @@
 //   Name                             Reg   Size
 //   -------------------------------- ----- ----
 //   gViewInverse                     c12      4
+//   globalScalars2                   c40      1
 //   gDeferredLightPosition           c66      1
 //   gDeferredLightDirection          c72      1
 //   gDeferredLightTangent            c73      1
@@ -93,7 +95,8 @@
     mad_sat r0.y, r0.z, -r0.y, c1.w
     mul r0.y, r0.y, r0.y
     mul r0.x, r0.x, r0.y
-    mul oC0.w, r0.x, c77.w
+    mul r0.x, r0.x, c77.w
+    mul oC0.w, r0.x, c40.z
     mov oC0.xyz, c1.z
     
     // LogDepth Write

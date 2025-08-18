@@ -2557,7 +2557,12 @@
 			<Item>
 				<DataType>asm</DataType>
 				<File>deferred_lighting\deferred_lightingPS29.asm</File>
-				<Variables value="14" >
+				<Variables value="15" >
+					<Item>
+						<Type>float4</Type>
+						<Name>globalScalars2</Name>
+						<Index value="40" />
+					</Item>
 					<Item>
 						<Type>sampler</Type>
 						<Name>GBufferTextureSampler1</Name>
