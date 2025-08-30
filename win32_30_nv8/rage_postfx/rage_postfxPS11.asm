@@ -161,8 +161,7 @@
       mul r2.xyz, r2, c2.x
       cmp r1.xyz, r1, r2, c1.x
     else
-      max r1.y, r2.x, r2.y
-      max r1.y, r1.y, r2.z
+      dp3 r1.y, r2, c1.yzw
       mad r1.x, r1.y, c66.x, -r1.x
       rcp r1.y, r1.y
       mul r1.x, r1.x, r1.y
