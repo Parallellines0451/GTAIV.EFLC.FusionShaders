@@ -168,9 +168,11 @@
       mul r2.xyz, r2, c2.x
       cmp r1.xyz, r1, r2, c1.x
     else
-      dp3 r1.y, r2, c1.yzw
-      mad r1.x, r1.y, c66.x, -r1.x
-      rcp r1.y, r1.y
+      mul r4.xyz, r2, r2
+      dp3 r1.y, r4, c1.yzw
+      rsq r1.y, r1.y
+      rcp r1.z, r1.y
+      mad r1.x, r1.z, c66.x, -r1.x
       mul r1.x, r1.x, r1.y
       mul r1.x, r1.x, c81.z
       mul r1.x, r1.x, c2.x
