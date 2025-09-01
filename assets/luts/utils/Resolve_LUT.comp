@@ -1,0 +1,396 @@
+Composition {
+	CurrentTime = 0,
+	RenderRange = { 0, 119 },
+	GlobalRange = { 0, 119 },
+	CurrentID = 43,
+	HiQ = true,
+	PlaybackUpdateMode = 0,
+	StereoMode = false,
+	Version = "DaVinci Resolve 20.1.0.0020",
+	SavedOutputs = 0,
+	HeldTools = 0,
+	DisabledTools = 0,
+	LockedTools = 0,
+	AudioOffset = 0,
+	Resumable = true,
+	OutputClips = {
+	},
+	Tools = {
+		ACESTransform1 = AcesTransform {
+			Inputs = {
+				InputTransform130 = Input { Value = FuID { "IDT_ACESCG" }, },
+				OutputTransform130 = Input { Value = FuID { "ODT_SRGB" }, },
+				GamutCompressType = Input { Value = FuID { "ACES_GAMUT_COMPRESS_REFERENCE" }, },
+				Input = Input {
+					SourceOp = "ColorSpaceTransform1_1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 715, 49.5 } },
+		},
+		Left = AudioDisplay {
+			CtrlWZoom = false,
+		},
+		Right = AudioDisplay {
+			CtrlWZoom = false,
+		},
+		MediaIn1 = Loader {
+			ExtentSet = true,
+			CustomData = {
+				MediaProps = {
+					MEDIA_AUDIO_TRACKS_DESC = {
+						{
+							MEDIA_AUDIO_BIT_DEPTH = 32,
+							MEDIA_AUDIO_FRAME_RATE = 24,
+							MEDIA_AUDIO_NUM_CHANNELS = 2,
+							MEDIA_AUDIO_SAMPLE_RATE = 48000,
+							MEDIA_AUDIO_START_TIME = 0,
+							MEDIA_AUDIO_TRACK_ID = "Timeline Audio",
+							MEDIA_AUDIO_TRACK_NAME = "Timeline Audio [Timeline 1]"
+						}
+					},
+					MEDIA_AUDIO_TRACKS_NUM = 1,
+					MEDIA_FORMAT_TYPE = "PNG",
+					MEDIA_HAS_AUDIO = true,
+					MEDIA_HEIGHT = 32,
+					MEDIA_IS_SOURCE_RES = true,
+					MEDIA_LAYER_DESC = {
+					},
+					MEDIA_MARK_IN = 0,
+					MEDIA_MARK_OUT = 119,
+					MEDIA_NAME = "mylut.png",
+					MEDIA_NUM_FRAMES = 120,
+					MEDIA_NUM_LAYERS = 0,
+					MEDIA_PAR = 1,
+					MEDIA_PATH = "C:\\Users\\Admin\\Desktop\\neutral\\mylut.png",
+					MEDIA_SRC_FRAME_RATE = 24,
+					MEDIA_START_FRAME = 0,
+					MEDIA_WIDTH = 1024
+				},
+			},
+			Inputs = {
+				GlobalOut = Input { Value = 119, },
+				AudioTrack = Input { Value = FuID { "Timeline Audio" }, },
+				Layer = Input { Value = "0", },
+				ClipTimeEnd = Input { Value = 119, },
+				["Gamut.SLogVersion"] = Input { Value = FuID { "SLog2" }, },
+				DeepOutputMode = Input {
+					Value = 0,
+					Disabled = true,
+				},
+				LeftAudio = Input {
+					SourceOp = "Left",
+					Source = "Data",
+				},
+				RightAudio = Input {
+					SourceOp = "Right",
+					Source = "Data",
+				},
+			},
+			ViewInfo = OperatorInfo { Pos = { 55, 49.5 } },
+			Version = 1,
+			Clips = {
+				Clip {
+					ID = "Clip1",
+					Multiframe = true,
+					Filename = "C:\\Users\\Admin\\Desktop\\neutral\\mylut.png",
+					Length = 120,
+					LengthSetManually = true,
+					GlobalEnd = 119,
+					TrimOut = 119,
+				}
+			}
+		},
+		BrightnessContrast1 = BrightnessContrast {
+			CtrlWZoom = false,
+			Inputs = {
+				Input = Input {
+					SourceOp = "ColorSpaceTransform1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 385, 49.5 } },
+		},
+		MediaOut1 = Saver {
+			Inputs = {
+				Index = Input { Value = "0", },
+				Input = Input {
+					SourceOp = "ACESTransform1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 880, 49.5 } },
+		},
+		ColorSpaceTransform1_1 = ColorSpaceTransform {
+			Inputs = {
+				InputColorSpace = Input { Value = FuID { "SRGB_COLORSPACE" }, },
+				OutputColorSpace = Input { Value = FuID { "ACES_AP1_COLORSPACE" }, },
+				ToneMappingMethod = Input { Value = FuID { "TM_NONE" }, },
+				SrcLumMax = Input { Disabled = true, },
+				DstLumMax = Input { Disabled = true, },
+				Input = Input {
+					SourceOp = "BrightnessContrast1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 550, 49.5 } },
+			Version = 1
+		},
+		ColorSpaceTransform1 = ColorSpaceTransform {
+			Inputs = {
+				InputColorSpace = Input { Value = FuID { "SRGB_COLORSPACE" }, },
+				InputGamma = Input { Value = FuID { "PQ_GAMMA" }, },
+				OutputColorSpace = Input { Value = FuID { "SRGB_COLORSPACE" }, },
+				ToneMappingMethod = Input { Value = FuID { "TM_NONE" }, },
+				SrcLumMax = Input { Disabled = true, },
+				DstLumMax = Input { Disabled = true, },
+				Input = Input {
+					SourceOp = "MediaIn1",
+					Source = "Output",
+				}
+			},
+			ViewInfo = OperatorInfo { Pos = { 220, 49.5 } },
+			Version = 1
+		}
+	},
+	Frames = {
+		{
+			FrameTypeID = "ChildFrame",
+			Mode = 3,
+			LayoutPreset = 0,
+			PresetName = "Default",
+			Left = 0,
+			Top = 0,
+			Width = 2563,
+			Height = 1257,
+			ZoneInfo = { AuxRight = { Expanded = true }, ["!Left"] = {
+				}, AuxLeft = { Expanded = true }, Right = { Expanded = true, }, Left = { Expanded = false, }, ["!Right"] = {
+				} },
+			ViewInfo = { Viewer1 = { Show = true, RatioX = 1.00046750818139, RatioY = 0.01, }, InnerLeft = {
+				}, MainSplit = { RatioX = 100, RatioY = 0.996677740863786, }, CenterSplit = { RatioX = 1, RatioY = 100, }, Viewer2 = { Show = true, RatioX = 0.999532491818604, RatioY = 0.01, }, Comments = { Show = false }, Time = { Show = true, RatioX = 100, }, InnerColumns = { RatioX = 100, RatioY = 2.00332225913621, }, Keyframes = { Show = false, }, LayoutStrip = { Show = true, }, Inspector = { Show = true, RatioX = 100, RatioY = 1, }, InnerRight = {
+				}, MediaPool = { Show = false, }, OuterColumns = { RatioX = 100, RatioY = 1, }, Effects = { Show = false, }, Clips = { Show = false, }, Metadata = { Show = false, }, OuterLeft = {
+				}, ViewerSplit = { RatioX = 100, RatioY = 1, }, Nodes = { Show = true, RatioX = 1, RatioY = 100, }, OuterRight = { PixelX = 420, RatioY = 100, }, ActionStrip = { Show = true, RatioX = 100, }, Spline = { Show = false, } },
+			Views = ordered() {
+				MediaPool = "MediaPoolView",
+				Effects = MultiView {
+					Active = "EffectView",
+					ViewList = ordered() {
+						EffectView = "EffectView"
+					},
+				},
+				Nodes = MultiView {
+					Active = "FlowView",
+					ViewList = ordered() {
+						FlowView = "FlowView"
+					},
+					FlowView = FlowView {
+						Flags = {
+							AutoHideNavigator = true,
+							AutoSnap = true,
+							RemoveRouters = true
+						},
+						NavigatorSize = { 200, 140 },
+						Direction = "Horizontal",
+						PipeStyle = "Direct",
+						RootScale = 1,
+						RootOffset = { 347.333, 29.6061 }
+					}
+				},
+				Keyframes = MultiView {
+					Active = "TimelineView",
+					ViewList = ordered() {
+						TimelineView = "TimelineView"
+					},
+					TimelineView = TimelineView {
+						TreeControlState = {
+						},
+						DisplayMode = "All Tools",
+						ShowCurrentTimeTools = false,
+						Filter = "Show All",
+						ShowSelectedTools = false,
+						ShowAnimatedToolsOnly = false,
+						ShowEditBoxes = false,
+						KeyFrameView = {
+							Position = { Left = 232, Bottom = 324 },
+							ScaleX = 2.12765957446809,
+							OffsetX = -48.9361702127661,
+							OffsetY = 0,
+							AutoScaling = "scroll",
+							AutoSnapTo = "frame",
+							AutoSnapToGuidelines = true,
+							GuidelinesGrabEnabled = true,
+							GuidelinesSnapTo = "none"
+						},
+						Spreadsheet = { LeftPos = 232, Visible = false }
+					}
+				},
+				Spline = MultiView {
+					Active = "SplineView",
+					ViewList = ordered() {
+						SplineView = "SplineEditorView"
+					},
+					SplineView = SplineEditorView {
+						LeftPos = 264,
+						ScaleX = 0.2,
+						ScaleY = 0.00334448160535117,
+						OffsetX = -3.4,
+						OffsetY = 0,
+						AutoScaling = "scroll",
+						AutoSnapTo = "frame",
+						AutoSnapToGuidelines = true,
+						GuidelinesSnapTo = "frame",
+						ShowKeyMarkers = false,
+						IndependentHandles = false,
+						ShowNonSplineModifiers = false,
+						GuidelinesGrabEnabled = true,
+						ShowOneToolOnly = false,
+						ShowSelectedTools = false,
+						ShowAllInputs = false,
+						Filter = "Show All"
+					}
+				},
+				Inspector = MultiView {
+					Active = "Tools",
+					ViewList = ordered() {
+						Tools = "ControlView",
+						Modifiers = "ModifierView"
+					},
+				},
+				Viewer1 = MultiView {
+					Active = "LeftView",
+					ViewList = ordered() {
+						LeftView = "PreviewContainer"
+					},
+				},
+				Viewer2 = MultiView {
+					Active = "RightView",
+					ViewList = ordered() {
+						RightView = "PreviewContainer"
+					},
+				},
+				Time = "TimeView",
+				ActionStrip = "ActionStripView",
+				LayoutStrip = "LayoutStripView",
+				Clips = "ClipsView",
+				Metadata = "MetadataView"
+			},
+			Layout = {
+				{ ID = "LayoutStrip", FixedY = 36, Resolve = false, Flat = true },
+				{
+					{
+						{ ID = "MediaPool", Fusion = false, RatioX = 1 },
+						{ ID = "Effects", RatioX = 1 },
+						Zone = "Left",
+						Rows = 2,
+						PaneID = "OuterLeft",
+						PixelX = 420
+					},
+					{
+						{
+							{
+								{ ID = "MediaPool", Fusion = false, RatioX = 1 },
+								{ ID = "Effects", RatioX = 1 },
+								PaneID = "InnerLeft",
+								MaxViews = 1,
+								PixelX = 420,
+								Rows = 2,
+								Zone = "!Left"
+							},
+							{
+								{
+									{ ID = "Viewer1", RatioY = 0.01, RatioX = 1 },
+									{ ID = "Viewer2", RatioX = 1 },
+									RatioY = 1,
+									Columns = 2,
+									PaneID = "ViewerSplit"
+								},
+								{ ID = "Time", FixedY = 83, Flat = true },
+								RatioX = 1,
+								Rows = 2
+							},
+							{
+								{ ID = "Inspector", RatioY = 1 },
+								{ ID = "Metadata", RatioY = 1, Fusion = false },
+								PaneID = "InnerRight",
+								MaxViews = 1,
+								PixelX = 420,
+								Rows = 2,
+								Zone = "!Right"
+							},
+							RatioY = 2,
+							Columns = 3,
+							PaneID = "InnerColumns"
+						},
+						{ ID = "ActionStrip", FixedY = 50, Flat = true },
+						{
+							{ ID = "Nodes", RatioX = 1 },
+							{ ID = "Spline", RatioX = 1 },
+							{ ID = "Keyframes", RatioX = 1 },
+							RatioY = 1,
+							Columns = 3,
+							PaneID = "MainSplit"
+						},
+						{ Fusion = false, ID = "Clips", LARGE_FixedY = 160, MEDIUM_FixedY = 138, SMALL_FixedY = 110 },
+						RatioX = 1,
+						Rows = 4,
+						PaneID = "CenterSplit"
+					},
+					{
+						{ ID = "Inspector", RatioY = 1 },
+						{ ID = "Metadata", RatioY = 1, Fusion = false },
+						Zone = "Right",
+						Rows = 2,
+						PaneID = "OuterRight",
+						PixelX = 420
+					},
+					RatioY = 1,
+					Columns = 3,
+					PaneID = "OuterColumns"
+				},
+				RatioX = 1,
+				Rows = 2,
+				RatioY = 1
+			},
+			TopBar = {
+				Left = { "Left", "MediaPool", "Effects", "Clips", "Nodes", "Console" },
+				Right = { "Spline", "Keyframes", "Metadata", "Inspector", "Right" }
+			}
+		}
+	},
+	Prefs = {
+		Comp = {
+			Interactive = {
+				Proxy = {
+					Scale = 1,
+				},
+			},
+			Views = {
+				RightView = {
+					Viewer = {
+						Layer = ":Default",
+					},
+				},
+				LeftView = {
+				},
+			},
+			Paths = {
+				Map = {
+					["ResolveCaches:"] = "D:\\Resolve\\CacheClip\\880bfbfd-37e0-4254-9cee-9f314b1694f4\\69059695-ad73-42a6-9dd0-426c6686afcd\\9b766a04-9af4-4eea-8cc8-03702c6eec23\\Fusion",
+				},
+			},
+			FrameFormat = {
+				Width = 1024,
+				Height = 32,
+				Rate = 24,
+				GuideRatio = 1.77777777777778,
+				DepthFull = 3,
+				DepthPreview = 3,
+				DepthInteractive = 3,
+			},
+			LastFile = "C:\\Users\\Admin\\Desktop\\fasdfas.png",
+			Unsorted = {
+				GlobalEnd = 119
+			},
+		}
+	},
+}
