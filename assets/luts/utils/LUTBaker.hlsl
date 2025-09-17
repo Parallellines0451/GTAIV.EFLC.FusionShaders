@@ -1,3 +1,22 @@
+// Draw LUT
+
+// https://github.com/Fubaxiusz/shadron-shaders/blob/master/Shaders/Neutral%20LUT.shadron
+#define Size 32.0
+float3 DisplayLutPS(float2 TexCoord)
+{
+	// Generate pattern UV
+	float2 Gradient;
+	Gradient.x = TexCoord.x * Size;
+	Gradient.y = TexCoord.y;
+	// Convert pattern to RGB LUT
+	float3 LUT;
+	LUT.rg = frac(Gradient) - 0.5 / Size;
+	LUT.rg /= 1.0 - 1.0 / Size;
+	LUT.b = floor(Gradient.r) / (Size - 1.0);
+	// Display LUT texture
+	return LUT;
+}
+
 // Linear <-> SRGB
 
 float LinearToSRGB( float v )
@@ -20,8 +39,33 @@ float3 SRGBToLinear( float3 v )
     return float3( SRGBToLinear( v.x ), SRGBToLinear( v.y ), SRGBToLinear( v.z ) );
 }
 
-// Linear <-> PQ
-// https://www.ea.com/frostbite/news/high-dynamic-range-color-grading-and-display-in-frostbite
+// Source: https://www.ea.com/frostbite/news/high-dynamic-range-color-grading-and-display-in-frostbite
+
+// Note: this function is expensive.
+// This is why we bake it down into a LUT (ideally the same LUT we use for grading, to make it free).
+// This is the hue-preserving version used for screenshots in this article, it’s very ad-hoc but hopefully interesting to play with.
+
+// Aplies exponential ("Photographic") luma compression
+float rangeCompress(float x)
+{
+    return 1.0 - exp(-x);
+}
+
+float rangeCompress(float val, float threshold)
+{
+    float v1 = val;
+    float v2 = threshold + (1 - threshold) * rangeCompress((val - threshold) / (1 - threshold));
+    return val < threshold ? v1 : v2;
+}
+
+float3 rangeCompress(float3 val, float threshold)
+{
+    return float3(
+        rangeCompress(val.x, threshold),
+        rangeCompress(val.y, threshold),
+        rangeCompress(val.z, threshold));
+}
+
 
 static const float PQ_constant_N = (2610.0 / 4096.0 / 4.0);
 static const float PQ_constant_M = (2523.0 / 4096.0 * 128.0);
@@ -54,63 +98,121 @@ float3 PQtoLinear(float3 linearCol, const float maxPqValue)
     return linearColor;
 }
 
-// Draw LUT
-// https://github.com/Fubaxiusz/shadron-shaders/blob/master/Shaders/Neutral%20LUT.shadron
-#define Size 32.0
-float3 DisplayLutPS(float2 TexCoord)
+
+// RGB with sRGB/Rec.709 primaries to CIE XYZ
+float3 RGBToXYZ(float3 c)
 {
-	// Generate pattern UV
-	float2 Gradient;
-	Gradient.x = TexCoord.x * Size;
-	Gradient.y = TexCoord.y;
-	// Convert pattern to RGB LUT
-	float3 LUT;
-	LUT.rg = frac(Gradient) - 0.5 / Size;
-	LUT.rg /= 1.0 - 1.0 / Size;
-	LUT.b = floor(Gradient.r) / (Size - 1.0);
-	// Display LUT texture
-	return LUT;
+    float3x3 mat = float3x3(
+        0.4124564,  0.3575761,  0.1804375,
+        0.2126729,  0.7151522,  0.0721750,
+        0.0193339,  0.1191920,  0.9503041
+    );
+    return mul(mat, c);
+}
+float3 XYZToRGB(float3 c)
+{
+    float3x3 mat = float3x3(
+         3.24045483602140870, -1.53713885010257510, -0.49853154686848090,
+        -0.96926638987565370,  1.87601092884249100,  0.04155608234667354,
+         0.05564341960421366, -0.20402585426769815,  1.05722516245792870
+    );
+    return mul(mat, c);
+}
+// Converts XYZ tristimulus values into cone responses for the three types of cones in the human visual system, matching long, medium, and short wavelengths.
+// Note that there are many LMS color spaces; this one follows the ICtCp color space specification.
+float3 XYZToLMS(float3 c)
+{
+    float3x3 mat = float3x3(
+        0.3592,  0.6976, -0.0358,
+        -0.1922, 1.1004,  0.0755,
+        0.0070,  0.0749,  0.8434
+    ); 
+    return mul(mat, c);
+}
+float3 LMSToXYZ(float3 c)
+{
+    float3x3 mat = float3x3(
+         2.07018005669561320, -1.32645687610302100,  0.206616006847855170,
+         0.36498825003265756,  0.68046736285223520, -0.045421753075853236,
+        -0.04959554223893212, -0.04942116118675749,  1.187995941732803400
+    );
+    return mul(mat, c);
 }
 
-// Example tonemap: ACES fit by Stephen Hill
-// https://github.com/TheRealMJP/BakingLab/blob/master/BakingLab/ACES.hlsl
 
-// sRGB => XYZ => D65_2_D60 => AP1 => RRT_SAT
-static const float3x3 ACESInputMat =
+// RGB with sRGB/Rec.709 primaries to ICtCp
+float3 RGBToICtCp(float3 col)
 {
-    {0.59719, 0.35458, 0.04823},
-    {0.07600, 0.90834, 0.01566},
-    {0.02840, 0.13383, 0.83777}
-};
+    col = RGBToXYZ(col);
+    col = XYZToLMS(col);
+    // 1.0f = 100 nits, 100.0f = 10k nits
+    col = linearToPQ(max(0.0.xxx, col), 100.0);
 
-// ODT_SAT => XYZ => D60_2_D65 => sRGB
-static const float3x3 ACESOutputMat =
-{
-    { 1.60475, -0.53108, -0.07367},
-    {-0.10208,  1.10813, -0.00605},
-    {-0.00327, -0.07276,  1.07602}
-};
+    // Convert PQ-LMS into ICtCp. Note that the "S" channel is not used,
+    // but overlap between the cone responses for long, medium, and short wavelengths
+    // ensures that the corresponding part of the spectrum contributes to luminance.
 
-float3 RRTAndODTFit(float3 v)
-{
-    float3 a = v * (v + 0.0245786f) - 0.000090537f;
-    float3 b = v * (0.983729f * v + 0.4329510f) + 0.238081f;
-    return a / b;
+    float3x3 mat = float3x3(
+        0.5000,  0.5000,  0.0000,
+        1.6137, -3.3234,  1.7097,
+        4.3780, -4.2455, -0.1325
+    );
+
+    return mul(mat, col);
 }
 
-float3 ACESFitted(float3 color)
+float3 ICtCpToRGB(float3 col)
 {
-    color = mul(ACESInputMat, color);
+    float3x3 mat = float3x3(
+        1.0,  0.00860514569398152,  0.11103560447547328,
+        1.0, -0.00860514569398152, -0.11103560447547328,
+        1.0,  0.56004885956263900, -0.32063747023212210
+    );
+    col = mul(mat, col);
 
-    // Apply RRT and ODT
-    color = RRTAndODTFit(color);
+    // 1.0f = 100 nits, 100.0f = 10k nits
+    col = PQtoLinear(col, 100.0);
+    col = LMSToXYZ(col);
+    return XYZToRGB(col);
+}
 
-    color = mul(ACESOutputMat, color);
 
-    // Clamp to [0, 1]
-    color = saturate(color);
+float3 applyHuePreservingShoulder(float3 col)
+{
+    float3 ictcp = RGBToICtCp(col);
 
-    return color;
+    // Hue-preserving range compression requires desaturation in order to achieve a natural look. We adaptively desaturate the input based on its luminance.
+    float saturationAmount = pow(smoothstep(1.0, 0.3, ictcp.x), 1.3);
+    col = ICtCpToRGB(ictcp * float3(1, saturationAmount.xx));
+
+    // Only compress luminance starting at a certain point. Dimmer inputs are passed through without modification.
+    float linearSegmentEnd = 0.25;
+
+    // Hue-preserving mapping
+    float maxCol = max(col.x, max(col.y, col.z));
+    float mappedMax = rangeCompress(maxCol, linearSegmentEnd);
+    float3 compressedHuePreserving = col * mappedMax / maxCol;
+
+    // Non-hue preserving mapping
+    float3 perChannelCompressed = rangeCompress(col, linearSegmentEnd);
+
+    // Combine hue-preserving and non-hue-preserving colors. Absolute hue preservation looks unnatural, as bright colors *appear* to have been hue shifted.
+    // Actually doing some amount of hue shifting looks more pleasing
+    col = lerp(perChannelCompressed, compressedHuePreserving, 0.6);
+
+    float3 ictcpMapped = RGBToICtCp(col);
+
+    // Smoothly ramp off saturation as brightness increases, but keep some even for very bright input
+    float postCompressionSaturationBoost = 0.3 * smoothstep(1.0, 0.5, ictcp.x);
+
+    // Re-introduce some hue from the pre-compression color. Something similar could be accomplished by delaying the luma-dependent desaturation before range compression.
+    // Doing it here however does a better job of preserving perceptual luminance of highly saturated colors. Because in the hue-preserving path we only range-compress the max channel,
+    // saturated colors lose luminance. By desaturating them more aggressively first, compressing, and then re-adding some saturation, we can preserve their brightness to a greater extent.
+    ictcpMapped.yz = lerp(ictcpMapped.yz, ictcp.yz * ictcpMapped.x / max(1e-3, ictcp.x), postCompressionSaturationBoost);
+
+    col = ICtCpToRGB(ictcpMapped);
+
+    return col;
 }
 
 // Main function
@@ -121,9 +223,10 @@ float4 main(float4 pos : SV_Position, float4 uv : TEXCOORD0) : SV_Target0
 
 	color = PQtoLinear(color, 100);
     
-	color = ACESFitted(color);
+	color = applyHuePreservingShoulder(color);
     
-    color = LinearToSRGB(color);
+    // color = LinearToSRGB(color);
+    color = pow(color, 1.0f / 2.2f);
 
     return float4(color, 1.0);
 }

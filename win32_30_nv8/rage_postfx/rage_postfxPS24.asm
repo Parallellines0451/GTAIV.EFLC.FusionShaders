@@ -70,10 +70,7 @@
     def c10, 31, 0.5, 0.0009765625, 0.03125
     def c11, 0.003921568627, 0.0019607843137, 0.996078, 0.00196078
     def c12, 1.13813, 13.74594, 6.60102, 0.315889
-    def c13, 0.546024, 0, 0, 0
-    
-    def c14, 0.94786729, 0.0521327, 2.4, 0.07739938
-    def c15, -0.04045, 0, 0, 0
+    def c13, 0.546024, 2.2, 0, 0
     
     def c20, 0.01, 0.159301757813, 18.8515625, 0.8359375
     def c21, 18.6875, 1, 78.84375, 0
@@ -210,23 +207,40 @@
     pow r2.x, r1.x, r0.w
     mul r0.xyz, r0, r2.x
     
-    // Tone mapping
-    if_ne -c217_abs.z, c217_abs.z
-      // SRGB -> Linear
-      mad r1.xyz, r0, c14.x, c14.y
-      log r1.x, r1_abs.x
-      log r1.y, r1_abs.y
-      log r1.z, r1_abs.z
-      mul r1.xyz, r1, c14.z
+    max r0.xyz, r0, c1.x
+    
+    // X360 gamma ramp: https://www.desmos.com/calculator/1orvoz5ttf
+    if_ne -c222_abs.z, c222_abs.z
+      log r1.x, r0_abs.x
+      log r1.y, r0_abs.y
+      log r1.z, r0_abs.z
+      mul r1.xyz, r1, c12.x
       exp r1.x, r1.x
       exp r1.y, r1.y
       exp r1.z, r1.z
-      mul r2.xyz, r0, c14.w
-      add r0.xyz, r0, c15.x
-      cmp r0.xyz, r0, r1, r2
+      mul r2.xyz, r0, -c12.y
+      exp r2.x, r2.x
+      exp r2.y, r2.y
+      exp r2.z, r2.z
+      mad r1.xyz, r1, -r2, r1
+      mad_sat r2.xyz, r0, c12.z, c12.w
+      mul r3.xyz, r0, c13.x
+      lrp r0.xyz, r2, r1, r3
+    endif
+    
+    // Tone mapping
+    if_ne -c217_abs.z, c217_abs.z
+      // Assume that input is gamma 2.2
+      log r0.x, r0_abs.x
+      log r0.y, r0_abs.y
+      log r0.z, r0_abs.z
+      mul r0.xyz, r0, c13.y
+      exp r0.x, r0.x
+      exp r0.y, r0.y
+      exp r0.z, r0.z
 
       // Linear -> PQ
-      mul r1.xyz, r0, c210.x
+      mul r1.xyz, r0, c20.x
       log r1.x, r1_abs.x
       log r1.y, r1_abs.y
       log r1.z, r1_abs.z
@@ -263,32 +277,13 @@
       lrp r0.xyz, r2.w, r1, r2
     endif
     
-    // XBOX Color Curve: https://www.desmos.com/calculator/z1ezuvkg9v
-    if_ne -c222_abs.z, c222_abs.z
-      log r1.x, r0_abs.x
-      log r1.y, r0_abs.y
-      log r1.z, r0_abs.z
-      mul r1.xyz, r1, c12.x
-      exp r1.x, r1.x
-      exp r1.y, r1.y
-      exp r1.z, r1.z
-      mul r2.xyz, r0, -c12.y
-      exp r2.x, r2.x
-      exp r2.y, r2.y
-      exp r2.z, r2.z
-      mad r1.xyz, r1, -r2, r1
-      mad_sat r2.xyz, r0, c12.z, c12.w
-      mul r3.xyz, r0, c13.x
-      lrp r0.xyz, r2, r1, r3
-    endif
-    
     // dithering
     mul r1.xy, v0.xy, c44.xy
     dp2add r1.x, r1.xy, c118.xy, c118.w
     frc r1.x, r1.x
     mad r1.x, r1.x, c11.x, -c11.y
     add r0.xyz, r0, r1.x
-    mov oC0.xyz, r0
+    max oC0.xyz, r0, c1.x
     dp3 oC0.w, r0, c1.yzw // compute luma for FXAA
 
 // approximately 176 instruction slots used (14 texture, 162 arithmetic)
