@@ -259,6 +259,16 @@
       lrp r0.xyz, r2.w, r1, r2
     endif
     
+    if_ne -c210_abs.x, c210_abs.x
+      log r0.x, r0_abs.x
+      log r0.y, r0_abs.y
+      log r0.z, r0_abs.z
+      mul r0.xyz, r0, c13.y
+      exp r0.x, r0.x
+      exp r0.y, r0.y
+      exp r0.z, r0.z
+    endif
+    
     mov oC0.xyz, r0
     mov oC0.w, c2.y
 
