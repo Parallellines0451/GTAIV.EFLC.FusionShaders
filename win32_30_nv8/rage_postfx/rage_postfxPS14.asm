@@ -69,8 +69,11 @@
     
     def c10, 31, 0.5, 0.0009765625, 0.03125
     def c11, 0.003921568627, 0.0019607843137, 0.996078, 0.00196078
-    def c12, 1.13813, 13.74594, 6.60102, 0.315889
-    def c13, 0.546024, 2.2, 1e-5, 0
+    def c13, 0, 2.2, 1e-5, 0
+    
+    def c16, 0.0773993808049536, 0.9478672985781991, 0.0521327014218009, 2.4
+    def c17, -0.04045, -0.018, 0, 0
+    def c18, 4.5, 0.45, 1.099, -0.099
     
     def c20, 0.01, 0.159301757813, 18.8515625, 0.8359375
     def c21, 18.6875, 1, 78.84375, 0
@@ -200,23 +203,32 @@
     
     max r0.xyz, r0, c1.x
     
-    // X360 gamma ramp: https://www.desmos.com/calculator/1orvoz5ttf
+    // X360 gamma ramp
     if_ne -c222_abs.z, c222_abs.z
-      log r1.x, r0_abs.x
-      log r1.y, r0_abs.y
-      log r1.z, r0_abs.z
-      mul r1.xyz, r1, c12.x
-      exp r1.x, r1.x
-      exp r1.y, r1.y
-      exp r1.z, r1.z
-      mul r2.xyz, r0, -c12.y
+      // sRGB Decode
+      mul r1.xyz, r0, c16.x
+      mad r2.xyz, r0, c16.y, c16.z
+      log r2.x, r2.x
+      log r2.y, r2.y
+      log r2.z, r2.z
+      mul r2.xyz, r2, c16.w
       exp r2.x, r2.x
       exp r2.y, r2.y
       exp r2.z, r2.z
-      mad r1.xyz, r1, -r2, r1
-      mad_sat r2.xyz, r0, c12.z, c12.w
-      mul r3.xyz, r0, c13.x
-      lrp r0.xyz, r2, r1, r3
+      add r0.xyz, r0, c17.x
+      cmp r0.xyz, r0, r2, r1
+      // Rec. 709 Encode
+      mul r1.xyz, r0, c18.x
+      log r2.x, r0.x
+      log r2.y, r0.y
+      log r2.z, r0.z
+      mul r2.xyz, r2, c18.y
+      exp r2.x, r2.x
+      exp r2.y, r2.y
+      exp r2.z, r2.z
+      mad r2.xyz, r2, c18.z, c18.w
+      add r0.xyz, r0, c17.y
+      cmp r0.xyz, r0, r2, r1
     endif
     
     // Tone mapping
