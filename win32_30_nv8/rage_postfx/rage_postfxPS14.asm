@@ -204,32 +204,32 @@
     max r0.xyz, r0, c1.x
     
     // X360 gamma ramp
-    if_ne -c222_abs.z, c222_abs.z
-      // sRGB Decode
-      mul r1.xyz, r0, c16.x
-      mad r2.xyz, r0, c16.y, c16.z
-      log r2.x, r2.x
-      log r2.y, r2.y
-      log r2.z, r2.z
-      mul r2.xyz, r2, c16.w
-      exp r2.x, r2.x
-      exp r2.y, r2.y
-      exp r2.z, r2.z
-      add r0.xyz, r0, c17.x
-      cmp r0.xyz, r0, r2, r1
-      // Rec. 709 Encode
-      mul r1.xyz, r0, c18.x
-      log r2.x, r0.x
-      log r2.y, r0.y
-      log r2.z, r0.z
-      mul r2.xyz, r2, c18.y
-      exp r2.x, r2.x
-      exp r2.y, r2.y
-      exp r2.z, r2.z
-      mad r2.xyz, r2, c18.z, c18.w
-      add r0.xyz, r0, c17.y
-      cmp r0.xyz, r0, r2, r1
-    endif
+    // if_ne -c222_abs.z, c222_abs.z
+    //   // sRGB Decode
+    //   mul r1.xyz, r0, c16.x
+    //   mad r2.xyz, r0, c16.y, c16.z
+    //   log r2.x, r2.x
+    //   log r2.y, r2.y
+    //   log r2.z, r2.z
+    //   mul r2.xyz, r2, c16.w
+    //   exp r2.x, r2.x
+    //   exp r2.y, r2.y
+    //   exp r2.z, r2.z
+    //   add r0.xyz, r0, c17.x
+    //   cmp r0.xyz, r0, r2, r1
+    //   // Rec. 709 Encode
+    //   mul r1.xyz, r0, c18.x
+    //   log r2.x, r0.x
+    //   log r2.y, r0.y
+    //   log r2.z, r0.z
+    //   mul r2.xyz, r2, c18.y
+    //   exp r2.x, r2.x
+    //   exp r2.y, r2.y
+    //   exp r2.z, r2.z
+    //   mad r2.xyz, r2, c18.z, c18.w
+    //   add r0.xyz, r0, c17.y
+    //   cmp r0.xyz, r0, r2, r1
+    // endif
     
     // Tone mapping
     if_ne -c217_abs.z, c217_abs.z
